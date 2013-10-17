@@ -1,2 +1,1 @@
-import lodash from './modern/lodash';
-export default = lodash;
+export * from './modern/lodash';

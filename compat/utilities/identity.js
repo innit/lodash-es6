@@ -18,7 +18,7 @@
  * @example
  *
  * var object = { 'name': 'fred' };
- * _.identity(object) === object;
+ * object === _.identity(object);
  * // => true
  */
 function identity(value) {

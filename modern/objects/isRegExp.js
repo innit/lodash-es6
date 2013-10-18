@@ -6,7 +6,6 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import objectTypes from '../internals/objectTypes';
 
 /** `Object#toString` result shortcuts */
 var regexpClass = '[object RegExp]';
@@ -31,7 +30,7 @@ var toString = objectProto.toString;
  * // => true
  */
 function isRegExp(value) {
-  return value ? (typeof value == 'object' && toString.call(value) == regexpClass) : false;
+  return value && typeof value == 'object' && toString.call(value) == regexpClass || false;
 }
 
 export default = isRegExp;

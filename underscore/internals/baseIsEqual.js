@@ -10,6 +10,7 @@ import forIn from '../objects/forIn';
 import indicatorObject from './indicatorObject';
 import isFunction from '../objects/isFunction';
 import objectTypes from './objectTypes';
+import reNative from './reNative';
 
 /** `Object#toString` result shortcuts */
 var arrayClass = '[object Array]',
@@ -26,6 +27,9 @@ var objectProto = Object.prototype;
 /** Native method shortcuts */
 var hasOwnProperty = objectProto.hasOwnProperty,
     toString = objectProto.toString;
+
+/* Native method shortcuts for methods with the same name as other `lodash` methods */
+var nativeCreate = reNative.test(nativeCreate = Object.create) && nativeCreate;
 
 /**
  * The base implementation of `_.isEqual`, without support for `thisArg` binding,
@@ -86,10 +90,10 @@ function baseIsEqual(a, b, stackA, stackB) {
     var ctorA = a.constructor,
         ctorB = b.constructor;
 
-    if (ctorA != ctorB && !(
-          isFunction(ctorA) && ctorA instanceof ctorA &&
-          isFunction(ctorB) && ctorB instanceof ctorB
-        )) {
+    if (ctorA != ctorB &&
+          !(isFunction(ctorA) && ctorA instanceof ctorA && isFunction(ctorB) && ctorB instanceof ctorB) &&
+          (!nativeCreate || ('constructor' in a && 'constructor' in b))
+        ) {
       return false;
     }
   }

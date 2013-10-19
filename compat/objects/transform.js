@@ -6,9 +6,9 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCreate from '../internals/baseCreate';
 import baseCreateCallback from '../internals/baseCreateCallback';
 import baseEach from '../internals/baseEach';
-import create from './create';
 import forOwn from './forOwn';
 import isArray from './isArray';
 
@@ -52,7 +52,7 @@ function transform(object, callback, accumulator, thisArg) {
       var ctor = object && object.constructor,
           proto = ctor && ctor.prototype;
 
-      accumulator = create(proto);
+      accumulator = baseCreate(proto);
     }
   }
   if (callback) {

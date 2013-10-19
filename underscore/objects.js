@@ -9,6 +9,7 @@
 
 export assign from './objects/assign';
 export clone from './objects/clone';
+export create from './objects/create';
 export defaults from './objects/defaults';
 export forIn from './objects/forIn';
 export forOwn from './objects/forOwn';

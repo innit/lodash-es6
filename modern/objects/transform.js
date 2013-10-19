@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import createObject from '../internals/createObject';
+import create from './create';
 import forEach from '../collections/forEach';
 import forOwn from './forOwn';
 import isArray from './isArray';
@@ -23,7 +23,7 @@ import isArray from './isArray';
  * @static
  * @memberOf _
  * @category Objects
- * @param {Array|Object} collection The collection to iterate over.
+ * @param {Array|Object} object The object to iterate over.
  * @param {Function} [callback=identity] The function called per iteration.
  * @param {*} [accumulator] The custom accumulator value.
  * @param {*} [thisArg] The `this` binding of `callback`.
@@ -45,8 +45,6 @@ import isArray from './isArray';
  */
 function transform(object, callback, accumulator, thisArg) {
   var isArr = isArray(object);
-  callback = baseCreateCallback(callback, thisArg, 4);
-
   if (accumulator == null) {
     if (isArr) {
       accumulator = [];
@@ -54,12 +52,15 @@ function transform(object, callback, accumulator, thisArg) {
       var ctor = object && object.constructor,
           proto = ctor && ctor.prototype;
 
-      accumulator = createObject(proto);
+      accumulator = create(proto);
     }
   }
-  (isArr ? forEach : forOwn)(object, function(value, index, object) {
-    return callback(accumulator, value, index, object);
-  });
+  if (callback) {
+    callback = baseCreateCallback(callback, thisArg, 4);
+    (isArr ? forEach : forOwn)(object, function(value, index, object) {
+      return callback(accumulator, value, index, object);
+    });
+  }
   return accumulator;
 }
 

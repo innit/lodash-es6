@@ -10,6 +10,7 @@
 export assign from './objects/assign';
 export clone from './objects/clone';
 export cloneDeep from './objects/cloneDeep';
+export create from './objects/create';
 export defaults from './objects/defaults';
 export findKey from './objects/findKey';
 export findLastKey from './objects/findLastKey';

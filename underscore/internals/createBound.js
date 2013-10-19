@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createObject from './createObject';
+import create from '../objects/create';
 import isFunction from '../objects/isFunction';
 import isObject from '../objects/isObject';
 import reNative from './reNative';
@@ -111,7 +111,7 @@ function createBound(func, bitmask, partialArgs, partialRightArgs, thisArg, arit
       }
       if (this instanceof bound) {
         // ensure `new bound` is an instance of `func`
-        thisBinding = createObject(func.prototype);
+        thisBinding = create(func.prototype);
 
         // mimic the constructor's `return` behavior
         // http://es5.github.io/#x13.2.2

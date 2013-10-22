@@ -4,7 +4,8 @@ A collection of [Lo-Dash](http://lodash.com/) methods as [ES6](http://wiki.ecmas
 
 ## Warning
 
-lodash-es6 is currently untested & considered experimental.
+lodash-es6 is untested & considered experimental.<br>
+We’re currently waiting for [es6-module-transpiler](https://github.com/square/es6-module-transpiler) & [esprima](https://github.com/ariya/esprima) to catch-up to the latest draft specification.
 
 ## Author
 

@@ -7,31 +7,19 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/** `Object#toString` result shortcuts */
-var boolClass = '[object Boolean]';
-
 /** Used for native method references */
 var objectProto = Object.prototype;
 
 /** Used to resolve the internal [[Class]] of values */
 var toString = objectProto.toString;
 
-/**
- * Checks if `value` is a boolean value.
- *
- * @static
- * @memberOf _
- * @category Objects
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if the `value` is a boolean value, else `false`.
- * @example
- *
- * _.isBoolean(null);
- * // => false
- */
-function isBoolean(value) {
-  return value === true || value === false ||
-    value && typeof value == 'object' && toString.call(value) == boolClass || false;
-}
+var nativeBind = (function() {
+  // Narwhal doesn't accept `undefined` as the `thisArg`
+  try {
+    var result = toString.bind;
+    return reNative.test(result) && result.bind() && result;
+  } catch(e) { }
+  return false;
+}());
 
-export default = isBoolean;
+export default = nativeBind;

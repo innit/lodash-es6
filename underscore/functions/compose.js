@@ -22,7 +22,7 @@ import isFunction from '../objects/isFunction';
  * @example
  *
  * var realNameMap = {
- *   'pebbles': 'jerome'
+ *   'pebbles': 'penelope'
  * };
  *
  * var format = function(name) {
@@ -36,7 +36,7 @@ import isFunction from '../objects/isFunction';
  *
  * var welcome = _.compose(greet, format);
  * welcome('pebbles');
- * // => 'Hiya Jerome!'
+ * // => 'Hiya Penelope!'
  */
 function compose() {
   var funcs = arguments,

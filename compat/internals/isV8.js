@@ -6,18 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import nativeBind from './nativeBind';
+import reNative from './reNative';
 
-/** Used for native method references */
-var objectProto = Object.prototype;
+/** Used to enable optimizations for V8 */
+var isV8 = nativeBind && !/\n/.test(nativeBind) && !reNative.test(root.attachEvent);
 
-/** Used to resolve the internal [[Class]] of values */
-var toString = objectProto.toString;
-
-/** Used to detect if a method is native */
-var reNative = RegExp('^' +
-  String(toString)
-    .replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    .replace(/toString| for [^\]]+/g, '.*?') + '$'
-);
-
-export default = reNative;
+export default = isV8;

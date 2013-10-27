@@ -7,17 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isFunction from '../objects/isFunction';
-
-/**
- * Used for `Array` method references.
- *
- * Normally `Array.prototype` would suffice, however, using an array literal
- * avoids issues in Narwhal.
- */
-var arrayRef = [];
-
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeSlice = arrayRef.slice;
+import slice from '../internals/slice';
 
 /**
  * Executes the `func` function after `wait` milliseconds. Additional arguments
@@ -40,7 +30,7 @@ function delay(func, wait) {
   if (!isFunction(func)) {
     throw new TypeError;
   }
-  var args = nativeSlice.call(arguments, 2);
+  var args = slice(arguments, 2);
   return setTimeout(function() { func.apply(undefined, args); }, wait);
 }
 

@@ -7,19 +7,11 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createCallback from '../functions/createCallback';
-
-/**
- * Used for `Array` method references.
- *
- * Normally `Array.prototype` would suffice, however, using an array literal
- * avoids issues in Narwhal.
- */
-var arrayRef = [];
+import slice from '../internals/slice';
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
 var nativeMax = Math.max,
-    nativeMin = Math.min,
-    nativeSlice = arrayRef.slice;
+    nativeMin = Math.min;
 
 /**
  * Gets the first element or first `n` elements of an array. If a callback
@@ -88,7 +80,7 @@ function first(array, callback, thisArg) {
       return array ? array[0] : undefined;
     }
   }
-  return nativeSlice.call(array, 0, nativeMin(nativeMax(0, n), length));
+  return slice(array, 0, nativeMin(nativeMax(0, n), length));
 }
 
 export default = first;

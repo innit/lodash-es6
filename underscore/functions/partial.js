@@ -7,17 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createBound from '../internals/createBound';
-
-/**
- * Used for `Array` method references.
- *
- * Normally `Array.prototype` would suffice, however, using an array literal
- * avoids issues in Narwhal.
- */
-var arrayRef = [];
-
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeSlice = arrayRef.slice;
+import slice from '../internals/slice';
 
 /**
  * Creates a function that, when called, invokes `func` with any additional
@@ -38,7 +28,7 @@ var nativeSlice = arrayRef.slice;
  * // => 'hi fred'
  */
 function partial(func) {
-  return createBound(func, 16, nativeSlice.call(arguments, 1));
+  return createBound(func, 16, slice(arguments, 1));
 }
 
 export default = partial;

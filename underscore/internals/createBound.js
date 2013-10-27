@@ -9,7 +9,9 @@
 import baseCreate from './baseCreate';
 import isFunction from '../objects/isFunction';
 import isObject from '../objects/isObject';
+import nativeBind from './nativeBind';
 import reNative from './reNative';
+import slice from './slice';
 import support from '../support';
 
 /**
@@ -20,17 +22,9 @@ import support from '../support';
  */
 var arrayRef = [];
 
-/** Used for native method references */
-var objectProto = Object.prototype;
-
 /** Native method shortcuts */
 var push = arrayRef.push,
-    toString = objectProto.toString,
     unshift = arrayRef.unshift;
-
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeBind = reNative.test(nativeBind = toString.bind) && nativeBind,
-    nativeSlice = arrayRef.slice;
 
 /**
  * Creates a function that, when called, either curries or invokes `func`
@@ -94,7 +88,7 @@ function createBound(func, bitmask, partialArgs, partialRightArgs, thisArg, arit
           thisBinding = isBind ? thisArg : this;
 
       if (isCurry || isPartial || isPartialRight) {
-        args = nativeSlice.call(args);
+        args = slice(args);
         if (isPartial) {
           unshift.apply(args, partialArgs);
         }

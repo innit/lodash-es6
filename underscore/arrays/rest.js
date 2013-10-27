@@ -7,18 +7,10 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createCallback from '../functions/createCallback';
-
-/**
- * Used for `Array` method references.
- *
- * Normally `Array.prototype` would suffice, however, using an array literal
- * avoids issues in Narwhal.
- */
-var arrayRef = [];
+import slice from '../internals/slice';
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeMax = Math.max,
-    nativeSlice = arrayRef.slice;
+var nativeMax = Math.max;
 
 /**
  * The opposite of `_.initial` this method gets all but the first element or
@@ -85,7 +77,7 @@ function rest(array, callback, thisArg) {
   } else {
     n = (callback == null || thisArg) ? 1 : nativeMax(0, callback);
   }
-  return nativeSlice.call(array, n);
+  return slice(array, n);
 }
 
 export default = rest;

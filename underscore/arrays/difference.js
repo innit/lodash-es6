@@ -27,7 +27,7 @@ import baseIndexOf from '../internals/baseIndexOf';
 function difference(array) {
   var index = -1,
       indexOf = baseIndexOf,
-      length = array.length,
+      length = array ? array.length : 0,
       flattened = baseFlatten(arguments, true, true, 1),
       result = [];
 

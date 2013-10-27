@@ -7,20 +7,9 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isArray from '../objects/isArray';
-import isString from '../objects/isString';
 import map from './map';
+import slice from '../internals/slice';
 import values from '../objects/values';
-
-/**
- * Used for `Array` method references.
- *
- * Normally `Array.prototype` would suffice, however, using an array literal
- * avoids issues in Narwhal.
- */
-var arrayRef = [];
-
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeSlice = arrayRef.slice;
 
 /**
  * Converts the `collection` to an array.
@@ -37,7 +26,7 @@ var nativeSlice = arrayRef.slice;
  */
 function toArray(collection) {
   if (isArray(collection)) {
-    return nativeSlice.call(collection);
+    return slice(collection);
   }
   if (collection && typeof collection.length == 'number') {
     return map(collection);

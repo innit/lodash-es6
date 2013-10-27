@@ -7,30 +7,19 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/** `Object#toString` result shortcuts */
-var dateClass = '[object Date]';
-
 /** Used for native method references */
 var objectProto = Object.prototype;
 
 /** Used to resolve the internal [[Class]] of values */
 var toString = objectProto.toString;
 
-/**
- * Checks if `value` is a date.
- *
- * @static
- * @memberOf _
- * @category Objects
- * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if the `value` is a date, else `false`.
- * @example
- *
- * _.isDate(new Date);
- * // => true
- */
-function isDate(value) {
-  return value && typeof value == 'object' && toString.call(value) == dateClass || false;
-}
+var nativeBind = (function() {
+  // Narwhal doesn't accept `undefined` as the `thisArg`
+  try {
+    var result = toString.bind;
+    return reNative.test(result) && result.bind() && result;
+  } catch(e) { }
+  return false;
+}());
 
-export default = isDate;
+export default = nativeBind;

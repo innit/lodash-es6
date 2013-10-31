@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isFunction from '../objects/isFunction';
-import isV8 from '../internals/isV8';
 import slice from '../internals/slice';
 
 /**

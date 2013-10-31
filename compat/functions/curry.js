@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createBound from '../internals/createBound';
+import createWrapper from '../internals/createWrapper';
 
 /**
  * Creates a function which accepts one or more arguments of `func` that when
@@ -38,7 +38,7 @@ import createBound from '../internals/createBound';
  */
 function curry(func, arity) {
   arity = typeof arity == 'number' ? arity : (+arity || func.length);
-  return createBound(func, 4, null, null, null, arity);
+  return createWrapper(func, 4, null, null, null, arity);
 }
 
 export default = curry;

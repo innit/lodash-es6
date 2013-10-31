@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import forEach from '../collections/forEach';
+import support from '../support';
 
 /**
  * Extracts the wrapped value.

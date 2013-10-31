@@ -18,6 +18,7 @@ import isArray from './objects/isArray';
 import lodashWrapper from './internals/lodashWrapper';
 import mixin from './utilities/mixin';
 import support from './support';
+import templateSettings from './utilities/templateSettings';
 
 /**
  * Used for `Array` method references.
@@ -238,6 +239,7 @@ lodash.isUndefined = objects.isUndefined;
 lodash.lastIndexOf = arrays.lastIndexOf;
 lodash.mixin = mixin;
 lodash.noConflict = utilities.noConflict;
+lodash.noop = utilities.noop;
 lodash.parseInt = utilities.parseInt;
 lodash.random = utilities.random;
 lodash.reduce = collections.reduce;

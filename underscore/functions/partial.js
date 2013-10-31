@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createBound from '../internals/createBound';
+import createWrapper from '../internals/createWrapper';
 import slice from '../internals/slice';
 
 /**
@@ -28,7 +28,7 @@ import slice from '../internals/slice';
  * // => 'hi fred'
  */
 function partial(func) {
-  return createBound(func, 16, slice(arguments, 1));
+  return createWrapper(func, 16, slice(arguments, 1));
 }
 
 export default = partial;

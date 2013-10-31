@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internals/baseFlatten';
-import createBound from '../internals/createBound';
+import createWrapper from '../internals/createWrapper';
 import functions from '../objects/functions';
 
 /**
@@ -41,7 +41,7 @@ function bindAll(object) {
 
   while (++index < length) {
     var key = funcs[index];
-    object[key] = createBound(object[key], 1, null, null, object);
+    object[key] = createWrapper(object[key], 1, null, null, object);
   }
   return object;
 }

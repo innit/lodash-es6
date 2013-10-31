@@ -7,20 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isFunction from '../objects/isFunction';
-import isV8 from '../internals/isV8';
-import nativeBind from '../internals/nativeBind';
-import objectTypes from '../internals/objectTypes';
-import reNative from '../internals/reNative';
 import slice from '../internals/slice';
-
-/** Detect free variable `exports` */
-var freeExports = objectTypes[typeof exports] && exports && !exports.nodeType && exports;
-
-/** Detect free variable `module` */
-var freeModule = objectTypes[typeof module] && module && !module.nodeType && module;
-
-/** Detect the popular CommonJS extension `module.exports` */
-var moduleExports = freeModule && freeModule.exports === freeExports && freeExports;
 
 /**
  * Defers executing the `func` function until the current call stack has cleared.
@@ -43,15 +30,6 @@ function defer(func) {
   }
   var args = slice(arguments, 1);
   return setTimeout(function() { func.apply(undefined, args); }, 1);
-}
-// use `setImmediate` if available in Node.js
-if (isV8 && moduleExports && typeof setImmediate == 'function') {
-  defer = function(func) {
-    if (!isFunction(func)) {
-      throw new TypeError;
-    }
-    return setImmediate.apply(root, arguments);
-  };
 }
 
 export default = defer;

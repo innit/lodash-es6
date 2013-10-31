@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isObject from '../objects/isObject';
-import noop from './noop';
+import noop from '../utilities/noop';
 import reNative from './reNative';
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
@@ -26,14 +26,17 @@ function baseCreate(prototype, properties) {
 }
 // fallback for browsers without `Object.create`
 if (!nativeCreate) {
-  baseCreate = function(prototype) {
-    if (isObject(prototype)) {
-      noop.prototype = prototype;
-      var result = new noop;
-      noop.prototype = null;
-    }
-    return result || {};
-  };
+  baseCreate = (function() {
+    function Object() {}
+    return function(prototype) {
+      if (isObject(prototype)) {
+        Object.prototype = prototype;
+        var result = new Object;
+        Object.prototype = null;
+      }
+      return result || root.Object();
+    };
+  }());
 }
 
 export default = baseCreate;

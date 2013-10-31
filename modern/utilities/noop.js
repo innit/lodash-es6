@@ -10,7 +10,14 @@
 /**
  * A no-operation function.
  *
- * @private
+ * @static
+ * @memberOf _
+ * @category Utilities
+ * @example
+ *
+ * var object = { 'name': 'fred' };
+ * _.noop(object) === undefined;
+ * // => true
  */
 function noop() {
   // no operation performed

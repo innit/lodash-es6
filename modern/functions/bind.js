@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createBound from '../internals/createBound';
+import createWrapper from '../internals/createWrapper';
 import reNative from '../internals/reNative';
 import slice from '../internals/slice';
 
@@ -34,8 +34,8 @@ import slice from '../internals/slice';
  */
 function bind(func, thisArg) {
   return arguments.length > 2
-    ? createBound(func, 17, slice(arguments, 2), null, thisArg)
-    : createBound(func, 1, null, null, thisArg);
+    ? createWrapper(func, 17, slice(arguments, 2), null, thisArg)
+    : createWrapper(func, 1, null, null, thisArg);
 }
 
 export default = bind;

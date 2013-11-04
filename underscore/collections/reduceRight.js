@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import baseCreateCallback from '../internals/baseCreateCallback';
+import createCallback from '../functions/createCallback';
 import forEachRight from './forEachRight';
 
 /**
@@ -30,7 +30,7 @@ import forEachRight from './forEachRight';
  */
 function reduceRight(collection, callback, accumulator, thisArg) {
   var noaccum = arguments.length < 3;
-  callback = baseCreateCallback(callback, thisArg, 4);
+  callback = createCallback(callback, thisArg, 4);
   forEachRight(collection, function(value, index, collection) {
     accumulator = noaccum
       ? (noaccum = false, value)

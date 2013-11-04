@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import baseCreateCallback from '../internals/baseCreateCallback';
 import baseEach from '../internals/baseEach';
+import createCallback from '../functions/createCallback';
 import isArray from '../objects/isArray';
 
 /**
@@ -42,7 +42,7 @@ import isArray from '../objects/isArray';
  */
 function reduce(collection, callback, accumulator, thisArg) {
   var noaccum = arguments.length < 3;
-  callback = baseCreateCallback(callback, thisArg, 4);
+  callback = createCallback(callback, thisArg, 4);
 
   if (isArray(collection)) {
     var index = -1,

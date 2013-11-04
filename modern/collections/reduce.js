@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import baseCreateCallback from '../internals/baseCreateCallback';
+import createCallback from '../functions/createCallback';
 import forOwn from '../objects/forOwn';
 
 /**
@@ -42,7 +42,7 @@ import forOwn from '../objects/forOwn';
 function reduce(collection, callback, accumulator, thisArg) {
   if (!collection) return accumulator;
   var noaccum = arguments.length < 3;
-  callback = baseCreateCallback(callback, thisArg, 4);
+  callback = createCallback(callback, thisArg, 4);
 
   var index = -1,
       length = collection.length;

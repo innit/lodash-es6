@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internals/baseFlatten';
-import baseIndexOf from '../internals/baseIndexOf';
+import difference from '../arrays/difference';
 import forIn from './forIn';
 
 /**
@@ -37,15 +37,20 @@ import forIn from './forIn';
  * // => { 'name': 'fred' }
  */
 function omit(object) {
-  var indexOf = baseIndexOf,
-      props = baseFlatten(arguments, true, false, 1),
+  var props = [];
+  forIn(object, function(value, key) {
+    props.push(key);
+  });
+  props = difference(props, baseFlatten(arguments, true, false, 1));
+
+  var index = -1,
+      length = props.length,
       result = {};
 
-  forIn(object, function(value, key) {
-    if (indexOf(props, key) < 0) {
-      result[key] = value;
-    }
-  });
+  while (++index < length) {
+    var key = props[index];
+    result[key] = object[key];
+  }
   return result;
 }
 

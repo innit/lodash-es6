@@ -34,7 +34,7 @@ import indicatorObject from '../internals/indicatorObject';
  * _.contains({ 'name': 'fred', 'age': 40 }, 'fred');
  * // => true
  *
- * _.contains('pebbles', 'ur');
+ * _.contains('pebbles', 'eb');
  * // => true
  */
 function contains(collection, target) {

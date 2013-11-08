@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import difference from './difference';
+import baseDifference from '../internals/baseDifference';
 import slice from '../internals/slice';
 
 /**
@@ -25,7 +25,7 @@ import slice from '../internals/slice';
  * // => [2, 3, 4]
  */
 function without(array) {
-  return difference(array, slice(arguments, 1));
+  return baseDifference(array, slice(arguments, 1));
 }
 
 export default = without;

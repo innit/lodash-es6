@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseDifference from '../internals/baseDifference';
 import baseFlatten from '../internals/baseFlatten';
-import difference from '../arrays/difference';
 import forIn from './forIn';
 
 /**
@@ -41,7 +41,7 @@ function omit(object) {
   forIn(object, function(value, key) {
     props.push(key);
   });
-  props = difference(props, baseFlatten(arguments, true, false, 1));
+  props = baseDifference(props, baseFlatten(arguments, true, false, 1));
 
   var index = -1,
       length = props.length,

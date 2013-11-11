@@ -12,7 +12,7 @@ import setBindData from './setBindData';
 import support from '../support';
 
 /** Used to detected named functions */
-var reFuncName = /^function[ \n\r\t]+\w/;
+var reFuncName = /^\s*function[ \n\r\t]+\w/;
 
 /** Used to detect functions containing a `this` reference */
 var reThis = /\bthis\b/;

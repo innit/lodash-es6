@@ -19,4 +19,4 @@ function unescapeHtmlChar(match) {
   return htmlUnescapes[match];
 }
 
-export default = unescapeHtmlChar;
+export default unescapeHtmlChar;

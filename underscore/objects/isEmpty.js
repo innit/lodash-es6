@@ -51,4 +51,4 @@ function isEmpty(value) {
   return true;
 }
 
-export default = isEmpty;
+export default isEmpty;

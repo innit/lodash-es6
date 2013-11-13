@@ -49,4 +49,4 @@ function baseFlatten(array, isShallow, isStrict, fromIndex) {
   return result;
 }
 
-export default = baseFlatten;
+export default baseFlatten;

@@ -26,4 +26,4 @@ function baseRandom(min, max) {
   return min + floor(nativeRandom() * (max - min + 1));
 }
 
-export default = baseRandom;
+export default baseRandom;

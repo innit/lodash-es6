@@ -49,4 +49,4 @@ function shimIsPlainObject(value) {
   return typeof result == 'undefined' || hasOwnProperty.call(value, result);
 }
 
-export default = shimIsPlainObject;
+export default shimIsPlainObject;

@@ -73,4 +73,4 @@ function intersection(array) {
   return result;
 }
 
-export default = intersection;
+export default intersection;

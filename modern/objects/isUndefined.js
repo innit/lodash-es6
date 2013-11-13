@@ -24,4 +24,4 @@ function isUndefined(value) {
   return typeof value == 'undefined';
 }
 
-export default = isUndefined;
+export default isUndefined;

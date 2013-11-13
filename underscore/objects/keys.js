@@ -33,4 +33,4 @@ var keys = !nativeKeys ? shimKeys : function(object) {
   return nativeKeys(object);
 };
 
-export default = keys;
+export default keys;

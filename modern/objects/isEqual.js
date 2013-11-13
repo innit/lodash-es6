@@ -51,4 +51,4 @@ function isEqual(a, b, callback, thisArg) {
   return baseIsEqual(a, b, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 2));
 }
 
-export default = isEqual;
+export default isEqual;

@@ -52,4 +52,4 @@ var assign = createIterator(defaultsIteratorOptions, {
   'loop': 'result[index] = callback ? callback(result[index], iterable[index]) : iterable[index]'
 });
 
-export default = assign;
+export default assign;

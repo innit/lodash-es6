@@ -36,4 +36,4 @@ function isObject(value) {
   return !!(value && objectTypes[typeof value]);
 }
 
-export default = isObject;
+export default isObject;

@@ -41,4 +41,4 @@ function curry(func, arity) {
   return createWrapper(func, 4, null, null, null, arity);
 }
 
-export default = curry;
+export default curry;

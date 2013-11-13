@@ -39,4 +39,4 @@ function bind(func, thisArg) {
     : createWrapper(func, 1, null, null, thisArg);
 }
 
-export default = bind;
+export default bind;

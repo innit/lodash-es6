@@ -33,4 +33,4 @@ function isDate(value) {
   return value && typeof value == 'object' && toString.call(value) == dateClass || false;
 }
 
-export default = isDate;
+export default isDate;

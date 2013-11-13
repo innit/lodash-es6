@@ -47,4 +47,4 @@ function at(collection) {
   return result;
 }
 
-export default = at;
+export default at;

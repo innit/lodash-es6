@@ -32,4 +32,4 @@ function defer(func) {
   return setTimeout(function() { func.apply(undefined, args); }, 1);
 }
 
-export default = defer;
+export default defer;

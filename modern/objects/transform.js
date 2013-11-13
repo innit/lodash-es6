@@ -64,4 +64,4 @@ function transform(object, callback, accumulator, thisArg) {
   return accumulator;
 }
 
-export default = transform;
+export default transform;

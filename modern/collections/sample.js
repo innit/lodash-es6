@@ -46,4 +46,4 @@ function sample(collection, n, guard) {
   return result;
 }
 
-export default = sample;
+export default sample;

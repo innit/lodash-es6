@@ -41,4 +41,4 @@ function forOwnRight(object, callback, thisArg) {
   return object;
 }
 
-export default = forOwnRight;
+export default forOwnRight;

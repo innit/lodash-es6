@@ -88,4 +88,4 @@ function min(collection, callback, thisArg) {
   return result;
 }
 
-export default = min;
+export default min;

@@ -62,4 +62,4 @@ function findKey(object, callback, thisArg) {
   return result;
 }
 
-export default = findKey;
+export default findKey;

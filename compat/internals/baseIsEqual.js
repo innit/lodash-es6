@@ -206,4 +206,4 @@ function baseIsEqual(a, b, callback, isWhere, stackA, stackB) {
   return result;
 }
 
-export default = baseIsEqual;
+export default baseIsEqual;

@@ -60,4 +60,4 @@ function findLastIndex(array, callback, thisArg) {
   return -1;
 }
 
-export default = findLastIndex;
+export default findLastIndex;

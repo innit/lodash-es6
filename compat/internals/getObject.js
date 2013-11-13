@@ -32,4 +32,4 @@ function getObject() {
   };
 }
 
-export default = getObject;
+export default getObject;

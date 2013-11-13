@@ -42,4 +42,4 @@ function createCache(array) {
   return result;
 }
 
-export default = createCache;
+export default createCache;

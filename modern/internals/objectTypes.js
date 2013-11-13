@@ -17,4 +17,4 @@ var objectTypes = {
   'undefined': false
 };
 
-export default = objectTypes;
+export default objectTypes;

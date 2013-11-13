@@ -38,4 +38,4 @@ function chain(value) {
   return value;
 }
 
-export default = chain;
+export default chain;

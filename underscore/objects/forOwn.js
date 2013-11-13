@@ -50,4 +50,4 @@ var forOwn = function(collection, callback) {
   return result
 };
 
-export default = forOwn;
+export default forOwn;

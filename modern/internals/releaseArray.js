@@ -22,4 +22,4 @@ function releaseArray(array) {
   }
 }
 
-export default = releaseArray;
+export default releaseArray;

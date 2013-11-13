@@ -10,4 +10,4 @@
 /** Used to prefix keys to avoid issues with `__proto__` and properties on `Object.prototype` */
 var keyPrefix = +new Date + '';
 
-export default = keyPrefix;
+export default keyPrefix;

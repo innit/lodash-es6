@@ -64,4 +64,4 @@ function reduce(collection, callback, accumulator, thisArg) {
   return accumulator;
 }
 
-export default = reduce;
+export default reduce;

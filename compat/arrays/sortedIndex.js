@@ -74,4 +74,4 @@ function sortedIndex(array, value, callback, thisArg) {
   return low;
 }
 
-export default = sortedIndex;
+export default sortedIndex;

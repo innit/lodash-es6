@@ -151,4 +151,4 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
   return result;
 }
 
-export default = baseClone;
+export default baseClone;

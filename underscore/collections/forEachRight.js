@@ -48,4 +48,4 @@ function forEachRight(collection, callback) {
   }
 }
 
-export default = forEachRight;
+export default forEachRight;

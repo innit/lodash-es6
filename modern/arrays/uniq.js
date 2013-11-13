@@ -66,4 +66,4 @@ function uniq(array, isSorted, callback, thisArg) {
   return baseUniq(array, isSorted, callback);
 }
 
-export default = uniq;
+export default uniq;

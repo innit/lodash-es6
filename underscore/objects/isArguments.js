@@ -48,4 +48,4 @@ if (!isArguments(arguments)) {
   };
 }
 
-export default = isArguments;
+export default isArguments;

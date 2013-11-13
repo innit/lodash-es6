@@ -58,4 +58,4 @@ function compose() {
   };
 }
 
-export default = compose;
+export default compose;

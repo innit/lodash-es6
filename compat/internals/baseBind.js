@@ -55,4 +55,4 @@ function baseBind(bindData) {
   return bound;
 }
 
-export default = baseBind;
+export default baseBind;

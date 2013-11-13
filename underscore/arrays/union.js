@@ -27,4 +27,4 @@ function union(array) {
   return baseUniq(baseFlatten(arguments, true, true));
 }
 
-export default = union;
+export default union;

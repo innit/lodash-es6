@@ -55,4 +55,4 @@ function random(min, max) {
   return min + floor(nativeRandom() * (max - min + 1));
 }
 
-export default = random;
+export default random;

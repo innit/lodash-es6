@@ -26,4 +26,4 @@ function wrapperValueOf() {
   return this.__wrapped__;
 }
 
-export default = wrapperValueOf;
+export default wrapperValueOf;

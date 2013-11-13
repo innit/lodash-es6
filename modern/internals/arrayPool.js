@@ -10,4 +10,4 @@
 /** Used to pool arrays and objects used internally */
 var arrayPool = [];
 
-export default = arrayPool;
+export default arrayPool;

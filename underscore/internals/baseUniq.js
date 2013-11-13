@@ -42,4 +42,4 @@ function baseUniq(array, isSorted, callback) {
   return result;
 }
 
-export default = baseUniq;
+export default baseUniq;

@@ -72,4 +72,4 @@ function every(collection, callback, thisArg) {
   return result;
 }
 
-export default = every;
+export default every;

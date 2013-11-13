@@ -49,4 +49,4 @@ function baseDifference(array, values) {
   return result;
 }
 
-export default = baseDifference;
+export default baseDifference;

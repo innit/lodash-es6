@@ -64,4 +64,4 @@ function omit(object, callback, thisArg) {
   return result;
 }
 
-export default = omit;
+export default omit;

@@ -56,4 +56,4 @@ function createWrapper(func, bitmask, partialArgs, partialRightArgs, thisArg, ar
   return creater([func, bitmask, partialArgs, partialRightArgs, thisArg, arity]);
 }
 
-export default = createWrapper;
+export default createWrapper;

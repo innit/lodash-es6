@@ -10,4 +10,4 @@
 /** Used as the size when optimizations are enabled for large arrays */
 var largeArraySize = 75;
 
-export default = largeArraySize;
+export default largeArraySize;

@@ -23,4 +23,4 @@ var defaultsIteratorOptions = {
   'bottom': '  }\n}'
 };
 
-export default = defaultsIteratorOptions;
+export default defaultsIteratorOptions;

@@ -43,4 +43,4 @@ function times(n, callback, thisArg) {
   return result;
 }
 
-export default = times;
+export default times;

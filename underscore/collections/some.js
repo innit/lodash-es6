@@ -74,4 +74,4 @@ function some(collection, callback, thisArg) {
   return !!result;
 }
 
-export default = some;
+export default some;

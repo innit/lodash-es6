@@ -20,4 +20,4 @@ var reNative = RegExp('^' +
     .replace(/toString| for [^\]]+/g, '.*?') + '$'
 );
 
-export default = reNative;
+export default reNative;

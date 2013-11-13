@@ -50,4 +50,4 @@ var parseInt = nativeParseInt(whitespace + '08') == 8 ? nativeParseInt : functio
   return nativeParseInt(isString(value) ? value.replace(reLeadingSpacesAndZeros, '') : value, radix || 0);
 };
 
-export default = parseInt;
+export default parseInt;

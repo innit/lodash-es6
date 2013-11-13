@@ -30,4 +30,4 @@ function toArray(collection) {
   return values(collection);
 }
 
-export default = toArray;
+export default toArray;

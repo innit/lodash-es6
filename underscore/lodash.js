@@ -278,4 +278,4 @@ lodash.prototype.value = chaining.wrapperValueOf;
     };
   });
 
-export default = lodash;
+export default lodash;

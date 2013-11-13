@@ -24,4 +24,4 @@ var shimKeys = createIterator({
   'loop': 'result.push(index)'
 });
 
-export default = shimKeys;
+export default shimKeys;

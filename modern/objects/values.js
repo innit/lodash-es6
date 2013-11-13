@@ -33,4 +33,4 @@ function values(object) {
   return result;
 }
 
-export default = values;
+export default values;

@@ -36,4 +36,4 @@ function isNumber(value) {
     value && typeof value == 'object' && toString.call(value) == numberClass || false;
 }
 
-export default = isNumber;
+export default isNumber;

@@ -10,4 +10,4 @@
 /** Used to match "interpolate" template delimiters */
 var reInterpolate = /<%=([\s\S]+?)%>/g;
 
-export default = reInterpolate;
+export default reInterpolate;

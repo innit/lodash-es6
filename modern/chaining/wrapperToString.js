@@ -23,4 +23,4 @@ function wrapperToString() {
   return String(this.__wrapped__);
 }
 
-export default = wrapperToString;
+export default wrapperToString;

@@ -54,4 +54,4 @@ function cloneDeep(value, callback, thisArg) {
   return baseClone(value, true, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1));
 }
 
-export default = cloneDeep;
+export default cloneDeep;

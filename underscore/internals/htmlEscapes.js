@@ -23,4 +23,4 @@ var htmlEscapes = {
   "'": '&#x27;'
 };
 
-export default = htmlEscapes;
+export default htmlEscapes;

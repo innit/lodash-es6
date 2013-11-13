@@ -160,4 +160,4 @@ function template(text, data, options) {
   return result;
 }
 
-export default = template;
+export default template;

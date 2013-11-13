@@ -41,4 +41,4 @@ function where(collection, properties, first) {
     : (first ? find : filter)(collection, properties);
 }
 
-export default = where;
+export default where;

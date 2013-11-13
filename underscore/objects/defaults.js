@@ -46,4 +46,4 @@ function defaults(object) {
   return object;
 }
 
-export default = defaults;
+export default defaults;

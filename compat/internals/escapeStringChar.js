@@ -30,4 +30,4 @@ function escapeStringChar(match) {
   return '\\' + stringEscapes[match];
 }
 
-export default = escapeStringChar;
+export default escapeStringChar;

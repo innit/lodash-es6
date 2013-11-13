@@ -51,4 +51,4 @@ function contains(collection, target) {
   return result;
 }
 
-export default = contains;
+export default contains;

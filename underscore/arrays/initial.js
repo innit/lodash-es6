@@ -79,4 +79,4 @@ function initial(array, callback, thisArg) {
   return slice(array, 0, nativeMin(nativeMax(0, length - n), length));
 }
 
-export default = initial;
+export default initial;

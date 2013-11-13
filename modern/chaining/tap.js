@@ -32,4 +32,4 @@ function tap(value, interceptor) {
   return value;
 }
 
-export default = tap;
+export default tap;

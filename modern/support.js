@@ -37,4 +37,4 @@ support.funcDecomp = !reNative.test(root.WinRTError) && reThis.test(function() {
  */
 support.funcNames = typeof Function.name == 'string';
 
-export default = support;
+export default support;

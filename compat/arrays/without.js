@@ -28,4 +28,4 @@ function without(array) {
   return baseDifference(array, slice(arguments, 1));
 }
 
-export default = without;
+export default without;

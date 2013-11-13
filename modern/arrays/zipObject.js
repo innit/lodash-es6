@@ -41,4 +41,4 @@ function zipObject(keys, values) {
   return result;
 }
 
-export default = zipObject;
+export default zipObject;

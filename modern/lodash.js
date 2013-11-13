@@ -345,4 +345,4 @@ forEach(['concat', 'slice', 'splice'], function(methodName) {
   };
 });
 
-export default = lodash;
+export default lodash;

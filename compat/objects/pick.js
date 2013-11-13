@@ -62,4 +62,4 @@ function pick(object, callback, thisArg) {
   return result;
 }
 
-export default = pick;
+export default pick;

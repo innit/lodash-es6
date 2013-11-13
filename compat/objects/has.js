@@ -32,4 +32,4 @@ function has(object, property) {
   return object ? hasOwnProperty.call(object, property) : false;
 }
 
-export default = has;
+export default has;

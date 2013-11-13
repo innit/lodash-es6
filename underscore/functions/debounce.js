@@ -156,4 +156,4 @@ function debounce(func, wait, options) {
   };
 }
 
-export default = debounce;
+export default debounce;

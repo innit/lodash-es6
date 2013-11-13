@@ -106,4 +106,4 @@ var iteratorTemplate = function(obj) {
   return __p
 };
 
-export default = iteratorTemplate;
+export default iteratorTemplate;

@@ -51,4 +51,4 @@ var defaults = function(object, source, guard) {
   return result
 };
 
-export default = defaults;
+export default defaults;

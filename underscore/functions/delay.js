@@ -34,4 +34,4 @@ function delay(func, wait) {
   return setTimeout(function() { func.apply(undefined, args); }, wait);
 }
 
-export default = delay;
+export default delay;

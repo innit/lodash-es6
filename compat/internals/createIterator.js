@@ -124,4 +124,4 @@ function createIterator() {
   );
 }
 
-export default = createIterator;
+export default createIterator;

@@ -62,4 +62,4 @@ function memoize(func, resolver) {
   };
 }
 
-export default = memoize;
+export default memoize;

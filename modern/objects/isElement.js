@@ -24,4 +24,4 @@ function isElement(value) {
   return value && value.nodeType === 1 || false;
 }
 
-export default = isElement;
+export default isElement;

@@ -95,4 +95,4 @@ function merge(object) {
   return object;
 }
 
-export default = merge;
+export default merge;

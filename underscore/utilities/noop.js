@@ -23,4 +23,4 @@ function noop() {
   // no operation performed
 }
 
-export default = noop;
+export default noop;

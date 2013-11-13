@@ -49,4 +49,4 @@ if (!support.argsClass) {
   };
 }
 
-export default = isArguments;
+export default isArguments;

@@ -28,4 +28,4 @@ function difference(array) {
   return baseDifference(array, baseFlatten(arguments, true, true, 1));
 }
 
-export default = difference;
+export default difference;

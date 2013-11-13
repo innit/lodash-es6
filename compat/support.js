@@ -174,4 +174,4 @@ var support = {};
   }
 }(1));
 
-export default = support;
+export default support;

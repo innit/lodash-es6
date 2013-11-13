@@ -58,4 +58,4 @@ function clone(value) {
     : value;
 }
 
-export default = clone;
+export default clone;

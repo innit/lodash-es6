@@ -35,4 +35,4 @@ function findWhere(object, properties) {
   return where(object, properties, true);
 }
 
-export default = findWhere;
+export default findWhere;

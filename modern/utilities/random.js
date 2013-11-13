@@ -70,4 +70,4 @@ function random(min, max, floating) {
   return baseRandom(min, max);
 }
 
-export default = random;
+export default random;

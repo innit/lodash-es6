@@ -44,4 +44,4 @@ function invoke(collection, methodName) {
   return result;
 }
 
-export default = invoke;
+export default invoke;

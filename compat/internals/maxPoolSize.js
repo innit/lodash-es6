@@ -10,4 +10,4 @@
 /** Used as the max size of the `arrayPool` and `objectPool` */
 var maxPoolSize = 40;
 
-export default = maxPoolSize;
+export default maxPoolSize;

@@ -81,4 +81,4 @@ function last(array, callback, thisArg) {
   return slice(array, nativeMax(0, length - n));
 }
 
-export default = last;
+export default last;

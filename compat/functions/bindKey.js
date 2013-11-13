@@ -49,4 +49,4 @@ function bindKey(object, key) {
     : createWrapper(key, 3, null, null, object);
 }
 
-export default = bindKey;
+export default bindKey;

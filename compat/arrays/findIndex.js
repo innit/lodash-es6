@@ -62,4 +62,4 @@ function findIndex(array, callback, thisArg) {
   return -1;
 }
 
-export default = findIndex;
+export default findIndex;

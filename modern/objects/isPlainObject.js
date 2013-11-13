@@ -57,4 +57,4 @@ var isPlainObject = function(value) {
     : shimIsPlainObject(value);
 };
 
-export default = isPlainObject;
+export default isPlainObject;

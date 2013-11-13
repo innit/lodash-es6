@@ -43,4 +43,4 @@ function after(n, func) {
   };
 }
 
-export default = after;
+export default after;

@@ -39,4 +39,4 @@ function reduceRight(collection, callback, accumulator, thisArg) {
   return accumulator;
 }
 
-export default = reduceRight;
+export default reduceRight;

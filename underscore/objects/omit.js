@@ -54,4 +54,4 @@ function omit(object) {
   return result;
 }
 
-export default = omit;
+export default omit;

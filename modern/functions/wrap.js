@@ -33,4 +33,4 @@ function wrap(value, wrapper) {
   return createWrapper(wrapper, 16, [value]);
 }
 
-export default = wrap;
+export default wrap;

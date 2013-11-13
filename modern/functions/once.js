@@ -45,4 +45,4 @@ function once(func) {
   };
 }
 
-export default = once;
+export default once;

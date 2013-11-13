@@ -18,4 +18,4 @@ function getArray() {
   return arrayPool.pop() || [];
 }
 
-export default = getArray;
+export default getArray;

@@ -80,4 +80,4 @@ function rest(array, callback, thisArg) {
   return slice(array, n);
 }
 
-export default = rest;
+export default rest;

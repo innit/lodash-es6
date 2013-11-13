@@ -54,4 +54,4 @@ function forInRight(object, callback, thisArg) {
   return object;
 }
 
-export default = forInRight;
+export default forInRight;

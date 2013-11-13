@@ -33,4 +33,4 @@ import forOwnIteratorOptions from '../internals/forOwnIteratorOptions';
  */
 var forOwn = createIterator(eachIteratorOptions, forOwnIteratorOptions);
 
-export default = forOwn;
+export default forOwn;

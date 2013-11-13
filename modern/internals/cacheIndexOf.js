@@ -36,4 +36,4 @@ function cacheIndexOf(cache, value) {
     : (cache ? 0 : -1);
 }
 
-export default = cacheIndexOf;
+export default cacheIndexOf;

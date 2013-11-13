@@ -67,4 +67,4 @@ var assign = function(object, source, guard) {
   return result
 };
 
-export default = assign;
+export default assign;

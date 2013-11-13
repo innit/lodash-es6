@@ -75,4 +75,4 @@ function baseCreateWrapper(bindData) {
   return bound;
 }
 
-export default = baseCreateWrapper;
+export default baseCreateWrapper;

@@ -73,4 +73,4 @@ function filter(collection, callback, thisArg) {
   return result;
 }
 
-export default = filter;
+export default filter;

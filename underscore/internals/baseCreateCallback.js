@@ -44,4 +44,4 @@ function baseCreateCallback(func, thisArg, argCount) {
   return bind(func, thisArg);
 }
 
-export default = baseCreateCallback;
+export default baseCreateCallback;

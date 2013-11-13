@@ -45,4 +45,4 @@ var forIn = createIterator(eachIteratorOptions, forOwnIteratorOptions, {
   'useHas': false
 });
 
-export default = forIn;
+export default forIn;

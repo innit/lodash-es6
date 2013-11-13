@@ -77,4 +77,4 @@ function find(collection, callback, thisArg) {
   }
 }
 
-export default = find;
+export default find;

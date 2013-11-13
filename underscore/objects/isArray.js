@@ -42,4 +42,4 @@ var isArray = nativeIsArray || function(value) {
     toString.call(value) == arrayClass || false;
 };
 
-export default = isArray;
+export default isArray;

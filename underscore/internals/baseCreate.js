@@ -39,4 +39,4 @@ if (!nativeCreate) {
   }());
 }
 
-export default = baseCreate;
+export default baseCreate;

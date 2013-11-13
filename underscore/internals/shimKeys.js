@@ -35,4 +35,4 @@ var shimKeys = function(object) {
   return result
 };
 
-export default = shimKeys;
+export default shimKeys;

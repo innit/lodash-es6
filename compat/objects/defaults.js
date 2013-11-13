@@ -31,4 +31,4 @@ import defaultsIteratorOptions from '../internals/defaultsIteratorOptions';
  */
 var defaults = createIterator(defaultsIteratorOptions);
 
-export default = defaults;
+export default defaults;

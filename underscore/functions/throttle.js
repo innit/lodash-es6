@@ -62,4 +62,4 @@ function throttle(func, wait, options) {
   return debounce(func, wait, options);
 }
 
-export default = throttle;
+export default throttle;

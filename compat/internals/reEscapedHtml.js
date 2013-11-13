@@ -12,4 +12,4 @@ import keys from '../objects/keys';
 /** Used to match HTML entities and HTML characters */
 var reEscapedHtml = RegExp('(' + keys(htmlUnescapes).join('|') + ')', 'g');
 
-export default = reEscapedHtml;
+export default reEscapedHtml;

@@ -52,4 +52,4 @@ var countBy = createAggregator(function(result, value, key) {
   (hasOwnProperty.call(result, key) ? result[key]++ : result[key] = 1);
 });
 
-export default = countBy;
+export default countBy;

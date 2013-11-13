@@ -40,4 +40,4 @@ var setBindData = !defineProperty ? noop : function(func, value) {
   defineProperty(func, '__bindData__', descriptor);
 };
 
-export default = setBindData;
+export default setBindData;

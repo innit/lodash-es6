@@ -51,4 +51,4 @@ var forIn = function(collection, callback) {
   return result
 };
 
-export default = forIn;
+export default forIn;

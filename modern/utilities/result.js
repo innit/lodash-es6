@@ -42,4 +42,4 @@ function result(object, property) {
   }
 }
 
-export default = result;
+export default result;

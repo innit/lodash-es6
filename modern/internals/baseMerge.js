@@ -76,4 +76,4 @@ function baseMerge(object, source, callback, stackA, stackB) {
   });
 }
 
-export default = baseMerge;
+export default baseMerge;

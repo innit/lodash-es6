@@ -35,4 +35,4 @@ import filter from './filter';
  */
 var where = filter;
 
-export default = where;
+export default where;

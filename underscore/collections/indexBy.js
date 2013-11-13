@@ -51,4 +51,4 @@ var indexBy = createAggregator(function(result, value, key) {
   result[key] = value;
 });
 
-export default = indexBy;
+export default indexBy;

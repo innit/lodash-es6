@@ -67,4 +67,4 @@ function sortBy(collection, callback, thisArg) {
   return result;
 }
 
-export default = sortBy;
+export default sortBy;

@@ -37,4 +37,4 @@ function wrapperChain() {
   return this;
 }
 
-export default = wrapperChain;
+export default wrapperChain;

@@ -66,4 +66,4 @@ function range(start, end, step) {
   return result;
 }
 
-export default = range;
+export default range;

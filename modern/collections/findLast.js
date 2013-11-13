@@ -41,4 +41,4 @@ function findLast(collection, callback, thisArg) {
   return result;
 }
 
-export default = findLast;
+export default findLast;

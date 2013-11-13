@@ -68,4 +68,4 @@ function mixin(object, source) {
   });
 }
 
-export default = mixin;
+export default mixin;

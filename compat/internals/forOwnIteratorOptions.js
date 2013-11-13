@@ -14,4 +14,4 @@ var forOwnIteratorOptions = {
   'array': false
 };
 
-export default = forOwnIteratorOptions;
+export default forOwnIteratorOptions;

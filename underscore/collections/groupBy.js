@@ -53,4 +53,4 @@ var groupBy = createAggregator(function(result, value, key) {
   (hasOwnProperty.call(result, key) ? result[key] : result[key] = []).push(value);
 });
 
-export default = groupBy;
+export default groupBy;

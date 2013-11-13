@@ -55,4 +55,4 @@ function assign(object) {
   return object;
 }
 
-export default = assign;
+export default assign;

@@ -20,4 +20,4 @@ function lodashWrapper(value, chainAll) {
   this.__wrapped__ = value;
 }
 
-export default = lodashWrapper;
+export default lodashWrapper;

@@ -70,4 +70,4 @@ var templateSettings = {
   }
 };
 
-export default = templateSettings;
+export default templateSettings;

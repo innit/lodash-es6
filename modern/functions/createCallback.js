@@ -79,4 +79,4 @@ function createCallback(func, thisArg, argCount) {
   };
 }
 
-export default = createCallback;
+export default createCallback;

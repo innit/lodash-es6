@@ -35,4 +35,4 @@ function compact(array) {
   return result;
 }
 
-export default = compact;
+export default compact;

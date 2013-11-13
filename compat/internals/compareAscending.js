@@ -37,4 +37,4 @@ function compareAscending(a, b) {
   return a.index - b.index;
 }
 
-export default = compareAscending;
+export default compareAscending;

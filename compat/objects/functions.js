@@ -34,4 +34,4 @@ function functions(object) {
   return result.sort();
 }
 
-export default = functions;
+export default functions;

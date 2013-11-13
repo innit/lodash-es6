@@ -68,4 +68,4 @@ function memoize(func, resolver) {
   return memoized;
 }
 
-export default = memoize;
+export default memoize;

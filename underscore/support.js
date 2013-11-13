@@ -43,4 +43,4 @@ var support = {};
   support.spliceObjects = (arrayRef.splice.call(object, 0, 1), !object[0]);
 }(1));
 
-export default = support;
+export default support;

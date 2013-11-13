@@ -50,4 +50,4 @@ function pick(object) {
   return result;
 }
 
-export default = pick;
+export default pick;

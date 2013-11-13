@@ -34,4 +34,4 @@ function isString(value) {
     value && typeof value == 'object' && toString.call(value) == stringClass || false;
 }
 
-export default = isString;
+export default isString;

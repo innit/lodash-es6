@@ -43,4 +43,4 @@ function isFinite(value) {
   return nativeIsFinite(value) && !nativeIsNaN(parseFloat(value));
 }
 
-export default = isFinite;
+export default isFinite;

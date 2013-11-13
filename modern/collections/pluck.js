@@ -41,4 +41,4 @@ function pluck(collection, property) {
   return result || map(collection, property);
 }
 
-export default = pluck;
+export default pluck;

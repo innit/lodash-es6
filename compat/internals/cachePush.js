@@ -35,4 +35,4 @@ function cachePush(value) {
   }
 }
 
-export default = cachePush;
+export default cachePush;

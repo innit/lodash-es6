@@ -26,11 +26,11 @@ import keys from '../objects/keys';
  * // => 3
  *
  * _.size('pebbles');
- * // => 5
+ * // => 7
  */
 function size(collection) {
   var length = collection ? collection.length : 0;
   return typeof length == 'number' ? length : keys(collection).length;
 }
 
-export default = size;
+export default size;

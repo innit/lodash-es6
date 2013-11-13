@@ -62,4 +62,4 @@ function contains(collection, target, fromIndex) {
   return result;
 }
 
-export default = contains;
+export default contains;

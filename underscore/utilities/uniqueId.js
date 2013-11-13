@@ -31,4 +31,4 @@ function uniqueId(prefix) {
   return prefix ? prefix + id : id;
 }
 
-export default = uniqueId;
+export default uniqueId;

@@ -29,4 +29,4 @@ function baseIndexOf(array, value, fromIndex) {
   return -1;
 }
 
-export default = baseIndexOf;
+export default baseIndexOf;

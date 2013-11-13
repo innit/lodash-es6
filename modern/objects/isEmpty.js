@@ -60,4 +60,4 @@ function isEmpty(value) {
   return result;
 }
 
-export default = isEmpty;
+export default isEmpty;

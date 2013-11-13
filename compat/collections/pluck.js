@@ -30,4 +30,4 @@ import map from './map';
  */
 var pluck = map;
 
-export default = pluck;
+export default pluck;

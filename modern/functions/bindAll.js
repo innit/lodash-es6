@@ -46,4 +46,4 @@ function bindAll(object) {
   return object;
 }
 
-export default = bindAll;
+export default bindAll;

@@ -20,4 +20,4 @@ function isNode(value) {
   return typeof value.toString != 'function' && typeof (value + '') == 'string';
 }
 
-export default = isNode;
+export default isNode;

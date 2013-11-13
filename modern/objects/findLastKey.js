@@ -62,4 +62,4 @@ function findLastKey(object, callback, thisArg) {
   return result;
 }
 
-export default = findLastKey;
+export default findLastKey;

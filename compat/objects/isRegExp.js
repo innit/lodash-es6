@@ -34,4 +34,4 @@ function isRegExp(value) {
   return value && objectTypes[typeof value] && toString.call(value) == regexpClass || false;
 }
 
-export default = isRegExp;
+export default isRegExp;

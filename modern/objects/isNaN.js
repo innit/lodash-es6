@@ -39,4 +39,4 @@ function isNaN(value) {
   return isNumber(value) && value != +value;
 }
 
-export default = isNaN;
+export default isNaN;

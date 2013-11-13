@@ -10,4 +10,4 @@
 /** Used internally to indicate various things */
 var indicatorObject = {};
 
-export default = indicatorObject;
+export default indicatorObject;

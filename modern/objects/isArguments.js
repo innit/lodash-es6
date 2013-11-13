@@ -37,4 +37,4 @@ function isArguments(value) {
     toString.call(value) == argsClass || false;
 }
 
-export default = isArguments;
+export default isArguments;

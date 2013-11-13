@@ -53,4 +53,4 @@ function flatten(array, isShallow) {
   return baseFlatten(array, isShallow);
 }
 
-export default = flatten;
+export default flatten;

@@ -47,4 +47,4 @@ var forOwn = function(collection, callback, thisArg) {
   return result
 };
 
-export default = forOwn;
+export default forOwn;

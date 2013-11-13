@@ -83,4 +83,4 @@ function max(collection, callback, thisArg) {
   return result;
 }
 
-export default = max;
+export default max;

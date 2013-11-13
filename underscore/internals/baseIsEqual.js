@@ -143,4 +143,4 @@ function baseIsEqual(a, b, stackA, stackB) {
   return result;
 }
 
-export default = baseIsEqual;
+export default baseIsEqual;

@@ -35,4 +35,4 @@ function pairs(object) {
   return result;
 }
 
-export default = pairs;
+export default pairs;

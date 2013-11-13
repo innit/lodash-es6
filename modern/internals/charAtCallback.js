@@ -19,4 +19,4 @@ function charAtCallback(value) {
   return value.charCodeAt(0);
 }
 
-export default = charAtCallback;
+export default charAtCallback;

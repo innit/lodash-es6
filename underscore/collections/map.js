@@ -67,4 +67,4 @@ function map(collection, callback, thisArg) {
   return result;
 }
 
-export default = map;
+export default map;

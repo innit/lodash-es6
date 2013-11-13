@@ -39,4 +39,4 @@ if (isFunction(/x/)) {
   };
 }
 
-export default = isFunction;
+export default isFunction;

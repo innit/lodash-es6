@@ -36,4 +36,4 @@ function shuffle(collection) {
   return result;
 }
 
-export default = shuffle;
+export default shuffle;

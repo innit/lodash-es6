@@ -56,4 +56,4 @@ function forEachRight(collection, callback, thisArg) {
   return collection;
 }
 
-export default = forEachRight;
+export default forEachRight;

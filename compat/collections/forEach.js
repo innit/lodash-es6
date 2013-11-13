@@ -52,4 +52,4 @@ function forEach(collection, callback, thisArg) {
   return collection;
 }
 
-export default = forEach;
+export default forEach;

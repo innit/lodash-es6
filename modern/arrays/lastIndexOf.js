@@ -51,4 +51,4 @@ function lastIndexOf(array, value, fromIndex) {
   return -1;
 }
 
-export default = lastIndexOf;
+export default lastIndexOf;

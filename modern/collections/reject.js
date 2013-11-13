@@ -54,4 +54,4 @@ function reject(collection, callback, thisArg) {
   });
 }
 
-export default = reject;
+export default reject;

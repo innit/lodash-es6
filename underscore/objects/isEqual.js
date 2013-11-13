@@ -50,4 +50,4 @@ function isEqual(a, b) {
   return baseIsEqual(a, b);
 }
 
-export default = isEqual;
+export default isEqual;

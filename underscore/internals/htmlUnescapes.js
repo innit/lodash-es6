@@ -12,4 +12,4 @@ import invert from '../objects/invert';
 /** Used to convert HTML entities to characters */
 var htmlUnescapes = invert(htmlEscapes);
 
-export default = htmlUnescapes;
+export default htmlUnescapes;

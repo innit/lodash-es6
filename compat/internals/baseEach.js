@@ -25,4 +25,4 @@ import eachIteratorOptions from './eachIteratorOptions';
  */
 var baseEach = createIterator(eachIteratorOptions);
 
-export default = baseEach;
+export default baseEach;

@@ -36,4 +36,4 @@ function zip() {
   return result;
 }
 
-export default = zip;
+export default zip;

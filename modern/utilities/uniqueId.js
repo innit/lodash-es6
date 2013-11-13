@@ -31,4 +31,4 @@ function uniqueId(prefix) {
   return String(prefix == null ? '' : prefix) + id;
 }
 
-export default = uniqueId;
+export default uniqueId;

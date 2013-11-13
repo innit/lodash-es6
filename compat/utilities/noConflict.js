@@ -20,8 +20,7 @@
  * var lodash = _.noConflict();
  */
 function noConflict() {
-
   return this;
 }
 
-export default = noConflict;
+export default noConflict;

@@ -68,4 +68,4 @@ function remove(array, callback, thisArg) {
   return result;
 }
 
-export default = remove;
+export default remove;

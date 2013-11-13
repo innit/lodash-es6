@@ -17,4 +17,4 @@ var eachIteratorOptions = {
   'loop': 'if (callback(iterable[index], index, collection) === false) return result'
 };
 
-export default = eachIteratorOptions;
+export default eachIteratorOptions;

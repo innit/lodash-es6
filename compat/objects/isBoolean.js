@@ -34,4 +34,4 @@ function isBoolean(value) {
     value && typeof value == 'object' && toString.call(value) == boolClass || false;
 }
 
-export default = isBoolean;
+export default isBoolean;

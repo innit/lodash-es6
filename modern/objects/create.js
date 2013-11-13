@@ -45,4 +45,4 @@ function create(prototype, properties) {
   return properties ? assign(result, properties) : result;
 }
 
-export default = create;
+export default create;

@@ -54,4 +54,4 @@ function pull(array) {
   return array;
 }
 
-export default = pull;
+export default pull;

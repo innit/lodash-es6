@@ -34,4 +34,4 @@ function invert(object) {
   return result;
 }
 
-export default = invert;
+export default invert;

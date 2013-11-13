@@ -26,4 +26,4 @@ function releaseObject(object) {
   }
 }
 
-export default = releaseObject;
+export default releaseObject;

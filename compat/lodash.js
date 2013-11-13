@@ -367,4 +367,4 @@ if (!support.spliceObjects) {
   });
 }
 
-export default = lodash;
+export default lodash;

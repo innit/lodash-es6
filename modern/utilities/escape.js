@@ -28,4 +28,4 @@ function escape(string) {
   return string == null ? '' : String(string).replace(reUnescapedHtml, escapeHtmlChar);
 }
 
-export default = escape;
+export default escape;

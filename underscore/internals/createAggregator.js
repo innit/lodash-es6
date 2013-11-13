@@ -42,4 +42,4 @@ function createAggregator(setter) {
   };
 }
 
-export default = createAggregator;
+export default createAggregator;

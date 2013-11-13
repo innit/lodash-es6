@@ -63,4 +63,4 @@ function flatten(array, isShallow, callback, thisArg) {
   return baseFlatten(array, isShallow);
 }
 
-export default = flatten;
+export default flatten;

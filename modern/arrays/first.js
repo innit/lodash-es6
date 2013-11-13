@@ -83,4 +83,4 @@ function first(array, callback, thisArg) {
   return slice(array, 0, nativeMin(nativeMax(0, n), length));
 }
 
-export default = first;
+export default first;

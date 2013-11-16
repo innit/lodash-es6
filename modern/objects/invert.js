@@ -18,7 +18,7 @@ import keys from './keys';
  * @returns {Object} Returns the created inverted object.
  * @example
  *
- *  _.invert({ 'first': 'fred', 'second': 'barney' });
+ * _.invert({ 'first': 'fred', 'second': 'barney' });
  * // => { 'fred': 'first', 'barney': 'second' }
  */
 function invert(object) {

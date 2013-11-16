@@ -26,8 +26,8 @@ import functions from '../objects/functions';
  * @example
  *
  * var view = {
- *  'label': 'docs',
- *  'onClick': function() { console.log('clicked ' + this.label); }
+ *   'label': 'docs',
+ *   'onClick': function() { console.log('clicked ' + this.label); }
  * };
  *
  * _.bindAll(view);

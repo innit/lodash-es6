@@ -10,6 +10,7 @@ import baseCreateCallback from '../internals/baseCreateCallback';
 import baseIsEqual from '../internals/baseIsEqual';
 import isObject from '../objects/isObject';
 import keys from '../objects/keys';
+import property from './property';
 
 /**
  * Produces a callback bound to an optional `thisArg`. If `func` is a property
@@ -49,9 +50,7 @@ function createCallback(func, thisArg, argCount) {
   }
   // handle "_.pluck" style callback shorthands
   if (type != 'object') {
-    return function(object) {
-      return object[func];
-    };
+    return property(func);
   }
   var props = keys(func),
       key = props[0],

@@ -18,5 +18,6 @@ export delay from './functions/delay';
 export memoize from './functions/memoize';
 export once from './functions/once';
 export partial from './functions/partial';
+export property from './functions/property';
 export throttle from './functions/throttle';
 export wrap from './functions/wrap';

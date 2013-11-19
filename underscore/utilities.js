@@ -12,6 +12,7 @@ export identity from './utilities/identity';
 export mixin from './utilities/mixin';
 export noConflict from './utilities/noConflict';
 export noop from './utilities/noop';
+export now from './utilities/now';
 export random from './utilities/random';
 export result from './utilities/result';
 export template from './utilities/template';

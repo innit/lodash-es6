@@ -8,10 +8,8 @@
  */
 import isFunction from '../objects/isFunction';
 import isObject from '../objects/isObject';
+import now from '../utilities/now';
 import reNative from '../internals/reNative';
-
-/** Native method shortcuts */
-var now = reNative.test(now = Date.now) && now || function() { return +new Date; };
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
 var nativeMax = Math.max;

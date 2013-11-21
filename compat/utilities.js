@@ -7,6 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
+export constant from './utilities/constant';
+export createCallback from './functions/createCallback';
 export escape from './utilities/escape';
 export identity from './utilities/identity';
 export mixin from './utilities/mixin';
@@ -14,6 +16,7 @@ export noConflict from './utilities/noConflict';
 export noop from './utilities/noop';
 export now from './utilities/now';
 export parseInt from './utilities/parseInt';
+export property from './utilities/property';
 export random from './utilities/random';
 export result from './utilities/result';
 export template from './utilities/template';

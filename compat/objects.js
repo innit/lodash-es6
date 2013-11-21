@@ -39,6 +39,7 @@ export isRegExp from './objects/isRegExp';
 export isString from './objects/isString';
 export isUndefined from './objects/isUndefined';
 export keys from './objects/keys';
+export mapValues from './objects/mapValues';
 export merge from './objects/merge';
 export omit from './objects/omit';
 export pairs from './objects/pairs';

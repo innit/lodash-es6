@@ -26,5 +26,6 @@ export sortedIndex from './arrays/sortedIndex';
 export union from './arrays/union';
 export uniq from './arrays/uniq';
 export without from './arrays/without';
+export xor from './arrays/xor';
 export zip from './arrays/zip';
 export zipObject from './arrays/zipObject';

@@ -7,6 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseIndexOf from '../internals/baseIndexOf';
+import isArguments from '../objects/isArguments';
+import isArray from '../objects/isArray';
 
 /**
  * Creates an array of unique values present in all provided arrays using
@@ -16,15 +18,24 @@ import baseIndexOf from '../internals/baseIndexOf';
  * @memberOf _
  * @category Arrays
  * @param {...Array} [array] The arrays to inspect.
- * @returns {Array} Returns an array of composite values.
+ * @returns {Array} Returns an array of shared values.
  * @example
  *
- * _.intersection([1, 2, 3], [101, 2, 1, 10], [2, 1]);
+ * _.intersection([1, 2, 3], [5, 2, 1, 4], [2, 1]);
  * // => [1, 2]
  */
-function intersection(array) {
-  var args = arguments,
-      argsLength = args.length,
+function intersection() {
+  var args = [],
+      argsIndex = -1,
+      argsLength = arguments.length;
+
+  while (++argsIndex < argsLength) {
+    var value = arguments[argsIndex];
+     if (isArray(value) || isArguments(value)) {
+       args.push(value);
+     }
+  }
+  var array = args[0],
       index = -1,
       indexOf = baseIndexOf,
       length = array ? array.length : 0,
@@ -32,7 +43,7 @@ function intersection(array) {
 
   outer:
   while (++index < length) {
-    var value = array[index];
+    value = array[index];
     if (indexOf(result, value) < 0) {
       var argsIndex = argsLength;
       while (--argsIndex) {

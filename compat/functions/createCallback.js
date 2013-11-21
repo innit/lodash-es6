@@ -10,7 +10,7 @@ import baseCreateCallback from '../internals/baseCreateCallback';
 import baseIsEqual from '../internals/baseIsEqual';
 import isObject from '../objects/isObject';
 import keys from '../objects/keys';
-import property from './property';
+import property from '../utilities/property';
 
 /**
  * Produces a callback bound to an optional `thisArg`. If `func` is a property
@@ -20,7 +20,7 @@ import property from './property';
  *
  * @static
  * @memberOf _
- * @category Functions
+ * @category Utilities
  * @param {*} [func=identity] The value to convert to a callback.
  * @param {*} [thisArg] The `this` binding of the created callback.
  * @param {number} [argCount] The number of arguments the callback accepts.

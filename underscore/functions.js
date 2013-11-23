@@ -7,16 +7,16 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export after from './functions/after';
-export bind from './functions/bind';
-export bindAll from './functions/bindAll';
-export compose from './functions/compose';
-export createCallback from './functions/createCallback';
-export debounce from './functions/debounce';
-export defer from './functions/defer';
-export delay from './functions/delay';
-export memoize from './functions/memoize';
-export once from './functions/once';
-export partial from './functions/partial';
-export throttle from './functions/throttle';
-export wrap from './functions/wrap';
+export after from 'after';
+export bind from 'bind';
+export bindAll from 'bindAll';
+export compose from 'compose';
+export createCallback from 'createCallback';
+export debounce from 'debounce';
+export defer from 'defer';
+export delay from 'delay';
+export memoize from 'memoize';
+export once from 'once';
+export partial from 'partial';
+export throttle from 'throttle';
+export wrap from 'wrap';

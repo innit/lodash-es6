@@ -7,20 +7,20 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export constant from './utilities/constant';
-export createCallback from './functions/createCallback';
-export escape from './utilities/escape';
-export identity from './utilities/identity';
-export mixin from './utilities/mixin';
-export noConflict from './utilities/noConflict';
-export noop from './utilities/noop';
-export now from './utilities/now';
-export parseInt from './utilities/parseInt';
-export property from './utilities/property';
-export random from './utilities/random';
-export result from './utilities/result';
-export template from './utilities/template';
-export templateSettings from './utilities/templateSettings';
-export times from './utilities/times';
-export unescape from './utilities/unescape';
-export uniqueId from './utilities/uniqueId';
+export constant from 'constant';
+export createCallback from 'createCallback';
+export escape from 'escape';
+export identity from 'identity';
+export mixin from 'mixin';
+export noConflict from 'noConflict';
+export noop from 'noop';
+export now from 'now';
+export parseInt from 'parseInt';
+export property from 'property';
+export random from 'random';
+export result from 'result';
+export template from 'template';
+export templateSettings from 'templateSettings';
+export times from 'times';
+export unescape from 'unescape';
+export uniqueId from 'uniqueId';

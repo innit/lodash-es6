@@ -7,7 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export chain from './chaining/chain';
-export tap from './chaining/tap';
-export wrapperChain from './chaining/wrapperChain';
-export wrapperValueOf from './chaining/wrapperValueOf';
+export chain from 'chain';
+export tap from 'tap';
+export value from 'wrapperValueOf';
+export wrapperChain from 'wrapperChain';
+export wrapperValueOf from 'wrapperValueOf';

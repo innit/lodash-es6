@@ -12,7 +12,7 @@ import isArguments from '../objects/isArguments';
 import isArray from '../objects/isArray';
 
 /**
- * Creates an array that is the smymetric difference of the provided arrays.
+ * Creates an array that is the symmetric difference of the provided arrays.
  * See http://en.wikipedia.org/wiki/Symmetric_difference.
  *
  * @static

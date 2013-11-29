@@ -9,6 +9,7 @@
 import baseBind from './baseBind';
 import baseCreateWrapper from './baseCreateWrapper';
 import isFunction from '../objects/isFunction';
+import slice from './slice';
 
 /**
  * Creates a function that, when called, either curries or invokes `func`

@@ -8,6 +8,7 @@
  */
 import baseCreate from './baseCreate';
 import isObject from '../objects/isObject';
+import slice from './slice';
 
 /**
  * Used for `Array` method references.
@@ -37,7 +38,7 @@ function baseBind(bindData) {
     // `Function#bind` spec
     // http://es5.github.io/#x15.3.4.5
     if (partialArgs) {
-      var args = partialArgs.slice();
+      var args = slice(partialArgs);
       push.apply(args, arguments);
     }
     // mimic the constructor's `return` behavior

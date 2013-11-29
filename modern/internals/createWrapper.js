@@ -9,6 +9,7 @@
 import baseBind from './baseBind';
 import baseCreateWrapper from './baseCreateWrapper';
 import isFunction from '../objects/isFunction';
+import slice from './slice';
 
 /**
  * Used for `Array` method references.
@@ -19,7 +20,8 @@ import isFunction from '../objects/isFunction';
 var arrayRef = [];
 
 /** Native method shortcuts */
-var push = arrayRef.push;
+var push = arrayRef.push,
+    unshift = arrayRef.unshift;
 
 /**
  * Creates a function that, when called, either curries or invokes `func`
@@ -64,8 +66,14 @@ function createWrapper(func, bitmask, partialArgs, partialRightArgs, thisArg, ar
   }
   var bindData = func && func.__bindData__;
   if (bindData && bindData !== true) {
-    bindData = bindData.slice();
-
+    // clone `bindData`
+    bindData = slice(bindData);
+    if (bindData[2]) {
+      bindData[2] = slice(bindData[2]);
+    }
+    if (bindData[3]) {
+      bindData[3] = slice(bindData[3]);
+    }
     // set `thisBinding` is not previously bound
     if (isBind && !(bindData[1] & 1)) {
       bindData[4] = thisArg;
@@ -84,7 +92,7 @@ function createWrapper(func, bitmask, partialArgs, partialRightArgs, thisArg, ar
     }
     // append partial right arguments
     if (isPartialRight) {
-      push.apply(bindData[3] || (bindData[3] = []), partialRightArgs);
+      unshift.apply(bindData[3] || (bindData[3] = []), partialRightArgs);
     }
     // merge flags
     bindData[1] |= bitmask;

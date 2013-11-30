@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createWrapper from '../internals/createWrapper';
-import reNative from '../internals/reNative';
 import slice from '../internals/slice';
 
 /**

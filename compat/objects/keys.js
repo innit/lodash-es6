@@ -7,13 +7,13 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isArguments from './isArguments';
+import isNative from '../internals/isNative';
 import isObject from './isObject';
-import reNative from '../internals/reNative';
 import shimKeys from '../internals/shimKeys';
 import support from '../support';
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeKeys = reNative.test(nativeKeys = Object.keys) && nativeKeys;
+var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
 
 /**
  * Creates an array composed of the own enumerable property names of an object.

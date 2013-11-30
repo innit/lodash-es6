@@ -9,7 +9,6 @@
 import isFunction from '../objects/isFunction';
 import isObject from '../objects/isObject';
 import now from '../utilities/now';
-import reNative from '../internals/reNative';
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
 var nativeMax = Math.max;

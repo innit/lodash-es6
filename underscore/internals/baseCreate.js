@@ -6,12 +6,12 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import isNative from './isNative';
 import isObject from '../objects/isObject';
 import noop from '../utilities/noop';
-import reNative from './reNative';
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeCreate = reNative.test(nativeCreate = Object.create) && nativeCreate;
+var nativeCreate = isNative(nativeCreate = Object.create) && nativeCreate;
 
 /**
  * The base implementation of `_.create` without support for assigning

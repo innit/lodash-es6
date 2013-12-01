@@ -19,6 +19,4 @@ We’re currently waiting for [es6-module-transpiler](https://github.com/square/
 |---|---|---|
 | [Blaine Bublitz](http://www.iceddev.com/) | [Kit Cambridge](http://kitcambridge.be/) | [Mathias Bynens](http://mathiasbynens.be/) |
 
-
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/lodash/lodash-es6/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-

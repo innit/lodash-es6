@@ -13,6 +13,7 @@ import collections from './collections';
 import functions from './functions';
 import objects from './objects';
 import utilities from './utilities';
+import assign from './objects/assign';
 import forEach from './collections/forEach';
 import forOwn from './objects/forOwn';
 import lodashWrapper from './internals/lodashWrapper';
@@ -167,7 +168,7 @@ lodash.zip = arrays.zip;
 lodash.collect = collections.map;
 lodash.drop = arrays.rest;
 lodash.each = forEach;
-lodash.extend = objects.assign;
+lodash.extend = assign;
 lodash.methods = objects.functions;
 lodash.object = arrays.zipObject;
 lodash.select = collections.filter;
@@ -233,7 +234,7 @@ lodash.take = arrays.first;
 lodash.head = arrays.first;
 
 // add functions to `lodash.prototype`
-mixin(lodash);
+mixin(assign({}, lodash));
 
 /**
  * The semantic version number.

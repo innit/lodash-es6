@@ -7,9 +7,11 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import forIn from '../objects/forIn';
+import hasOwnProperty from './hasOwnProperty';
 import indicatorObject from './indicatorObject';
 import isFunction from '../objects/isFunction';
 import objectTypes from './objectTypes';
+import toString from './toString';
 
 /** `Object#toString` result shortcuts */
 var arrayClass = '[object Array]',
@@ -19,15 +21,6 @@ var arrayClass = '[object Array]',
     objectClass = '[object Object]',
     regexpClass = '[object RegExp]',
     stringClass = '[object String]';
-
-/** Used for native method references */
-var objectProto = Object.prototype;
-
-/** Used to resolve the internal [[Class]] of values */
-var toString = objectProto.toString;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * The base implementation of `_.isEqual`, without support for `thisArg` binding,

@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseRandom from '../internals/baseRandom';
-import isString from '../objects/isString';
 import shuffle from './shuffle';
 import values from '../objects/values';
 

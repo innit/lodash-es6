@@ -9,7 +9,6 @@
 import baseCreateCallback from '../internals/baseCreateCallback';
 import forOwn from '../objects/forOwn';
 import isArray from '../objects/isArray';
-import isString from '../objects/isString';
 import keys from '../objects/keys';
 
 /**

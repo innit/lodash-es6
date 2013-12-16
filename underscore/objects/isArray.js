@@ -7,15 +7,10 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isNative from '../internals/isNative';
+import toString from '../internals/toString';
 
 /** `Object#toString` result shortcuts */
 var arrayClass = '[object Array]';
-
-/** Used for native method references */
-var objectProto = Object.prototype;
-
-/** Used to resolve the internal [[Class]] of values */
-var toString = objectProto.toString;
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
 var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;

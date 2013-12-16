@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internals/baseFlatten';
-import isString from '../objects/isString';
 
 /**
  * Creates an array of elements from the specified indexes, or keys, of the

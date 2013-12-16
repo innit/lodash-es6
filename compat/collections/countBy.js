@@ -7,12 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createAggregator from '../internals/createAggregator';
-
-/** Used for native method references */
-var objectProto = Object.prototype;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
+import hasOwnProperty from '../internals/hasOwnProperty';
 
 /**
  * Creates an object composed of keys generated from the results of running

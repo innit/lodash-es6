@@ -11,9 +11,12 @@ import reEscapedHtml from '../internals/reEscapedHtml';
 import unescapeHtmlChar from '../internals/unescapeHtmlChar';
 
 /**
- * The inverse of `_.escape` this method converts the HTML entities
+ * The inverse of `_.escape`; this method converts the HTML entities
  * `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `string` to their
  * corresponding characters.
+ *
+ * Note: No other HTML entities are unescaped. To unescape additional HTML
+ * entities use a third-party library like [_he_](http://mths.be/he).
  *
  * @static
  * @memberOf _
@@ -26,7 +29,11 @@ import unescapeHtmlChar from '../internals/unescapeHtmlChar';
  * // => 'Fred, Barney & Pebbles'
  */
 function unescape(string) {
-  return string == null ? '' : String(string).replace(reEscapedHtml, unescapeHtmlChar);
+  if (string == null) {
+    return '';
+  }
+  string = String(string);
+  return string.indexOf(';') < 0 ? string : string.replace(reEscapedHtml, unescapeHtmlChar);
 }
 
 export default unescape;

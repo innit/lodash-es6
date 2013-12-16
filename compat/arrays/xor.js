@@ -13,7 +13,7 @@ import isArray from '../objects/isArray';
 
 /**
  * Creates an array that is the symmetric difference of the provided arrays.
- * See http://en.wikipedia.org/wiki/Symmetric_difference.
+ * See [Wikipedia](http://en.wikipedia.org/wiki/Symmetric_difference) for more details.
  *
  * @static
  * @memberOf _
@@ -36,11 +36,11 @@ function xor() {
     var array = arguments[index];
     if (isArray(array) || isArguments(array)) {
       var result = result
-        ? baseUniq(baseDifference(result, array).concat(baseDifference(array, result)))
+        ? baseDifference(result, array).concat(baseDifference(array, result))
         : array;
     }
   }
-  return result || [];
+  return result ? baseUniq(result) : [];
 }
 
 export default xor;

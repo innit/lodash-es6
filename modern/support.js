@@ -7,9 +7,14 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isNative from './internals/isNative';
+import reNative from './internals/reNative';
+import toString from './internals/toString';
 
 /** Used to detect functions containing a `this` reference */
 var reThis = /\bthis\b/;
+
+/** Used to detect DOM support */
+var document = (document = root.window) && document.document;
 
 /**
  * An object used to flag environments features.
@@ -19,6 +24,14 @@ var reThis = /\bthis\b/;
  * @type Object
  */
 var support = {};
+
+/**
+ * Detect if the DOM is supported.
+ *
+ * @memberOf _.support
+ * @type boolean
+ */
+support.dom = !!document && typeof document == 'object' && reNative.test(clearTimeout) && reNative.test(setTimeout);
 
 /**
  * Detect if functions can be decompiled by `Function#toString`

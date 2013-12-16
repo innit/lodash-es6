@@ -7,6 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isNative from './internals/isNative';
+import reNative from './internals/reNative';
+import toString from './internals/toString';
 
 /** Used to detect functions containing a `this` reference */
 var reThis = /\bthis\b/;
@@ -27,8 +29,8 @@ var arrayRef = [];
 var errorProto = Error.prototype,
     objectProto = Object.prototype;
 
-/** Used to resolve the internal [[Class]] of values */
-var toString = objectProto.toString;
+/** Used to detect DOM support */
+var document = (document = root.window) && document.document;
 
 /** Native method shortcuts */
 var propertyIsEnumerable = objectProto.propertyIsEnumerable;
@@ -66,6 +68,14 @@ var support = {};
    * @type boolean
    */
   support.argsObject = arguments.constructor == Object && !(arguments instanceof Array);
+
+  /**
+   * Detect if the DOM is supported.
+   *
+   * @memberOf _.support
+   * @type boolean
+   */
+  support.dom = !!document && typeof document == 'object' && reNative.test(clearTimeout) && reNative.test(setTimeout);
 
   /**
    * Detect if `name` or `message` properties of `Error.prototype` are

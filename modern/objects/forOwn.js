@@ -8,7 +8,6 @@
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
 import keys from './keys';
-import objectTypes from '../internals/objectTypes';
 
 /**
  * Iterates over own enumerable properties of an object, executing the callback
@@ -18,7 +17,6 @@ import objectTypes from '../internals/objectTypes';
  *
  * @static
  * @memberOf _
- * @type Function
  * @category Objects
  * @param {Object} object The object to iterate over.
  * @param {Function} [callback=identity] The function called per iteration.
@@ -31,20 +29,19 @@ import objectTypes from '../internals/objectTypes';
  * });
  * // => logs '0', '1', and 'length' (property order is not guaranteed across environments)
  */
-var forOwn = function(collection, callback, thisArg) {
-  var index, iterable = collection, result = iterable;
-  if (!iterable) return result;
-  if (!objectTypes[typeof iterable]) return result;
-  callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-    var ownIndex = -1,
-        ownProps = objectTypes[typeof iterable] && keys(iterable),
-        length = ownProps ? ownProps.length : 0;
+function forOwn(object, callback, thisArg) {
+  var index = -1,
+      props = keys(object),
+      length = props.length;
 
-    while (++ownIndex < length) {
-      index = ownProps[ownIndex];
-      if (callback(iterable[index], index, collection) === false) return result;
+  callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
+  while (++index < length) {
+    var key = props[index];
+    if (callback(object[key], key, object) === false) {
+      break;
     }
-  return result
-};
+  }
+  return object;
+}
 
 export default forOwn;

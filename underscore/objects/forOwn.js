@@ -9,13 +9,6 @@
 import baseCreateCallback from '../internals/baseCreateCallback';
 import indicatorObject from '../internals/indicatorObject';
 import keys from './keys';
-import objectTypes from '../internals/objectTypes';
-
-/** Used for native method references */
-var objectProto = Object.prototype;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * Iterates over own enumerable properties of an object, executing the callback
@@ -25,7 +18,6 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  *
  * @static
  * @memberOf _
- * @type Function
  * @category Objects
  * @param {Object} object The object to iterate over.
  * @param {Function} [callback=identity] The function called per iteration.
@@ -38,16 +30,18 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  * });
  * // => logs '0', '1', and 'length' (property order is not guaranteed across environments)
  */
-var forOwn = function(collection, callback) {
-  var index, iterable = collection, result = iterable;
-  if (!iterable) return result;
-  if (!objectTypes[typeof iterable]) return result;
-    for (index in iterable) {
-      if (hasOwnProperty.call(iterable, index)) {
-        if (callback(iterable[index], index, collection) === indicatorObject) return result;
-      }
+function forOwn(object, callback) {
+  var index = -1,
+      props = keys(object),
+      length = props.length;
+
+  while (++index < length) {
+    var key = props[index];
+    if (callback(object[key], key, object) === indicatorObject) {
+      break;
     }
-  return result
-};
+  }
+  return object;
+}
 
 export default forOwn;

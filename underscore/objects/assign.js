@@ -7,8 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
+import isObject from './isObject';
 import keys from './keys';
-import objectTypes from '../internals/objectTypes';
 
 /**
  * Assigns own enumerable properties of source object(s) to the destination
@@ -19,7 +19,6 @@ import objectTypes from '../internals/objectTypes';
  *
  * @static
  * @memberOf _
- * @type Function
  * @alias extend
  * @category Objects
  * @param {Object} object The destination object.
@@ -45,10 +44,10 @@ function assign(object) {
     return object;
   }
   for (var argsIndex = 1, argsLength = arguments.length; argsIndex < argsLength; argsIndex++) {
-    var iterable = arguments[argsIndex];
-    if (iterable) {
-      for (var key in iterable) {
-        object[key] = iterable[key];
+    var source = arguments[argsIndex];
+    if (source) {
+      for (var key in source) {
+        object[key] = source[key];
       }
     }
   }

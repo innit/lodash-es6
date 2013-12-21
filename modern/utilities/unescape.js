@@ -6,7 +6,6 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import keys from '../objects/keys';
 import reEscapedHtml from '../internals/reEscapedHtml';
 import unescapeHtmlChar from '../internals/unescapeHtmlChar';
 

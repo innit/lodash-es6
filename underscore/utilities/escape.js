@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import escapeHtmlChar from '../internals/escapeHtmlChar';
-import keys from '../objects/keys';
 import reUnescapedHtml from '../internals/reUnescapedHtml';
 
 /**

@@ -6,10 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import htmlEscapes from './htmlEscapes';
-import keys from '../objects/keys';
 
 /** Used to match HTML entities and HTML characters */
-var reUnescapedHtml = RegExp('[' + keys(htmlEscapes).join('') + ']', 'g');
+var reUnescapedHtml = /[&<>"']/g;
 
 export default reUnescapedHtml;

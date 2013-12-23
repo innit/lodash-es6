@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import keys from '../objects/keys';
+import match from '../utilities/match';
 import property from '../utilities/property';
 
 /**
@@ -46,22 +46,8 @@ function createCallback(func, thisArg, argCount) {
   if (func == null || type == 'function') {
     return baseCreateCallback(func, thisArg, argCount);
   }
-  // handle "_.pluck" style callback shorthands
-  if (type != 'object') {
-    return property(func);
-  }
-  var props = keys(func);
-  return function(object) {
-    var length = props.length,
-        result = false;
-
-    while (length--) {
-      if (!(result = object[props[length]] === func[props[length]])) {
-        break;
-      }
-    }
-    return result;
-  };
+  // handle "_.pluck" and "_.where" style callback shorthands
+  return type != 'object' ? property(func) : match(func);
 }
 
 export default createCallback;

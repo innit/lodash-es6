@@ -11,6 +11,7 @@ export constant from 'constant';
 export createCallback from 'createCallback';
 export escape from 'escape';
 export identity from 'identity';
+export match from 'match';
 export mixin from 'mixin';
 export noConflict from 'noConflict';
 export noop from 'noop';

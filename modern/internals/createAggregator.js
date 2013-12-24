@@ -8,7 +8,6 @@
  */
 import createCallback from '../functions/createCallback';
 import forOwn from '../objects/forOwn';
-import isArray from '../objects/isArray';
 
 /**
  * Creates a function that aggregates a collection, creating an object composed

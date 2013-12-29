@@ -7,13 +7,12 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import compareAscending from '../internals/compareAscending';
+import compareMultipleAscending from '../internals/compareMultipleAscending';
 import createCallback from '../functions/createCallback';
 import forEach from './forEach';
-import getArray from '../internals/getArray';
 import getObject from '../internals/getObject';
 import isArray from '../objects/isArray';
 import map from './map';
-import releaseArray from '../internals/releaseArray';
 import releaseObject from '../internals/releaseObject';
 
 /**
@@ -67,32 +66,27 @@ import releaseObject from '../internals/releaseObject';
  */
 function sortBy(collection, callback, thisArg) {
   var index = -1,
-      isArr = isArray(callback),
+      multi = callback && isArray(callback),
       length = collection ? collection.length : 0,
       result = Array(typeof length == 'number' ? length : 0);
 
-  if (!isArr) {
+  if (!multi) {
     callback = createCallback(callback, thisArg, 3);
   }
   forEach(collection, function(value, key, collection) {
     var object = result[++index] = getObject();
-    if (isArr) {
-      object.criteria = map(callback, function(key) { return value[key]; });
-    } else {
-      (object.criteria = getArray())[0] = callback(value, key, collection);
-    }
     object.index = index;
     object.value = value;
+    object.criteria = multi
+      ? map(callback, function(key) { return value[key]; })
+      : callback(value, key, collection);
   });
 
   length = result.length;
-  result.sort(compareAscending);
+  result.sort(multi ? compareMultipleAscending : compareAscending);
   while (length--) {
     var object = result[length];
     result[length] = object.value;
-    if (!isArr) {
-      releaseArray(object.criteria);
-    }
     releaseObject(object);
   }
   return result;

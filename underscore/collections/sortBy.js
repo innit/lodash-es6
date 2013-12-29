@@ -9,8 +9,6 @@
 import compareAscending from '../internals/compareAscending';
 import createCallback from '../functions/createCallback';
 import forEach from './forEach';
-import isArray from '../objects/isArray';
-import map from './map';
 
 /**
  * Creates an array of elements, sorted in ascending order by the results of
@@ -69,7 +67,7 @@ function sortBy(collection, callback, thisArg) {
   callback = createCallback(callback, thisArg, 3);
   forEach(collection, function(value, key, collection) {
     result[++index] = {
-      'criteria': [callback(value, key, collection)],
+      'criteria': callback(value, key, collection),
       'index': index,
       'value': value
     };

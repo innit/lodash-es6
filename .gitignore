@@ -1,6 +1,7 @@
 .coveralls.yml
 .DS_Store
 *.log
+package.json
 coverage
 legacy
 mobile

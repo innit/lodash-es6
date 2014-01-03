@@ -12,6 +12,7 @@ import chaining from './chaining';
 import collections from './collections';
 import functions from './functions';
 import objects from './objects';
+import strings from './strings';
 import utilities from './utilities';
 import assign from './objects/assign';
 import baseEach from './internals/baseEach';
@@ -251,6 +252,9 @@ lodash.size = collections.size;
 lodash.some = collections.some;
 lodash.sortedIndex = arrays.sortedIndex;
 lodash.template = utilities.template;
+lodash.trim = strings.trim;
+lodash.trimLeft = strings.trimLeft;
+lodash.trimRight = strings.trimRight;
 lodash.unescape = utilities.unescape;
 lodash.uniqueId = utilities.uniqueId;
 

@@ -6,9 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from './isNative';
-import trimmedLeftIndex from './trimmedLeftIndex';
-import trimmedRightIndex from './trimmedRightIndex';
+import isNative from '../internals/isNative';
+import trimmedLeftIndex from '../internals/trimmedLeftIndex';
 
 /** Used to detect and test whitespace (unicode 6.3.0) */
 var whitespace = (
@@ -26,26 +25,32 @@ var whitespace = (
 var stringProto = String.prototype;
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeTrim = isNative(nativeTrim = stringProto.trim) && nativeTrim;
+var nativeTrimLeft = isNative(nativeTrimLeft = stringProto.trimLeft) && nativeTrimLeft;
 
 /**
- * Removes leading and trailing whitespace from a given string.
+ * Removes leading whitespace from a given string.
  *
- * @private
+ * @static
+ * @memberOf _
+ * @category Strings
  * @param {string} string The string to trim.
  * @returns {string} Returns the trimmed string.
+ * @example
+ *
+ * _.trimLeft('  fred  ');
+ * // => 'fred  '
  */
-function trim(string) {
-  return string == null ? '' : nativeTrim.call(string);
+function trimLeft(string) {
+  return string == null ? '' : nativeTrimLeft.call(string);
 }
-// fallback for environments without a proper `String#trim`
-if (!nativeTrim || nativeTrim.call(whitespace)) {
-  trim = function(string) {
+// fallback for environments without a proper `String#trimLeft`
+if (!nativeTrimLeft || nativeTrimLeft.call(whitespace)) {
+  trimLeft = function(string) {
     string = string == null ? '' : String(string);
     return string
-      ? string.slice(trimmedLeftIndex(string), trimmedRightIndex(string) + 1)
+      ? string.slice(trimmedLeftIndex(string))
       : string;
   };
 }
 
-export default trim;
+export default trimLeft;

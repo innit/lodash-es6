@@ -6,9 +6,9 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from './isNative';
-import trimmedLeftIndex from './trimmedLeftIndex';
-import trimmedRightIndex from './trimmedRightIndex';
+import isNative from '../internals/isNative';
+import trimmedLeftIndex from '../internals/trimmedLeftIndex';
+import trimmedRightIndex from '../internals/trimmedRightIndex';
 
 /** Used to detect and test whitespace (unicode 6.3.0) */
 var whitespace = (
@@ -31,9 +31,15 @@ var nativeTrim = isNative(nativeTrim = stringProto.trim) && nativeTrim;
 /**
  * Removes leading and trailing whitespace from a given string.
  *
- * @private
+ * @static
+ * @memberOf _
+ * @category Strings
  * @param {string} string The string to trim.
  * @returns {string} Returns the trimmed string.
+ * @example
+ *
+ * _.trim('  fred  ');
+ * // => 'fred'
  */
 function trim(string) {
   return string == null ? '' : nativeTrim.call(string);

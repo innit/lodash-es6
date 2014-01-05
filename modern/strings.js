@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
+export capitalize from 'capitalize';
 export escape from 'escape';
 export template from 'template';
 export templateSettings from 'templateSettings';

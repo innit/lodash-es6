@@ -10,7 +10,7 @@ import isNative from '../internals/isNative';
 import trimmedLeftIndex from '../internals/trimmedLeftIndex';
 import trimmedRightIndex from '../internals/trimmedRightIndex';
 
-/** Used to detect and test whitespace (unicode 6.3.0) */
+/** Used to detect and test whitespace */
 var whitespace = (
   // whitespace
   ' \t\x0B\f\xA0\ufeff' +
@@ -29,7 +29,7 @@ var stringProto = String.prototype;
 var nativeTrim = isNative(nativeTrim = stringProto.trim) && nativeTrim;
 
 /**
- * Removes leading and trailing whitespace from a given string.
+ * Removes leading and trailing whitespace from `string`.
  *
  * @static
  * @memberOf _

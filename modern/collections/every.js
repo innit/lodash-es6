@@ -10,8 +10,8 @@ import createCallback from '../functions/createCallback';
 import forOwn from '../objects/forOwn';
 
 /**
- * Checks if the given callback returns truey value for **all** elements of
- * a collection. The callback is bound to `thisArg` and invoked with three
+ * Checks if the callback returns truey value for **all** elements of a
+ * collection. The callback is bound to `thisArg` and invoked with three
  * arguments; (value, index|key, collection).
  *
  * If a property name is provided for `callback` the created "_.pluck" style

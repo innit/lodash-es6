@@ -10,8 +10,8 @@ import escapeHtmlChar from '../internals/escapeHtmlChar';
 import reUnescapedHtml from '../internals/reUnescapedHtml';
 
 /**
- * Converts the characters `&`, `<`, `>`, `"`, and `'` in `string` to their
- * corresponding HTML entities.
+ * Converts the characters `&`, `<`, `>`, `"`, and `'` in `string` to
+ * their corresponding HTML entities.
  *
  * Note: No other characters are escaped. To escape additional characters
  * use a third-party library like [_he_](http://mths.be/he).

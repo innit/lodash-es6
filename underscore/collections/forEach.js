@@ -8,7 +8,9 @@
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
 import forOwn from '../objects/forOwn';
-import indicatorObject from '../internals/indicatorObject';
+
+/** Used by methods to exit iteration */
+var breakIndicator = '__lodash_break_1335248838000__';
 
 /**
  * Iterates over elements of a collection, executing the callback for each
@@ -43,7 +45,7 @@ function forEach(collection, callback, thisArg) {
   callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
   if (typeof length == 'number') {
     while (++index < length) {
-      if (callback(collection[index], index, collection) === indicatorObject) {
+      if (callback(collection[index], index, collection) === breakIndicator) {
         break;
       }
     }

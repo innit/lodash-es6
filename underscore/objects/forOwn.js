@@ -7,8 +7,10 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import indicatorObject from '../internals/indicatorObject';
 import keys from './keys';
+
+/** Used by methods to exit iteration */
+var breakIndicator = '__lodash_break_1335248838000__';
 
 /**
  * Iterates over own enumerable properties of an object, executing the callback
@@ -37,7 +39,7 @@ function forOwn(object, callback) {
 
   while (++index < length) {
     var key = props[index];
-    if (callback(object[key], key, object) === indicatorObject) {
+    if (callback(object[key], key, object) === breakIndicator) {
       break;
     }
   }

@@ -8,8 +8,10 @@
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
 import forOwn from '../objects/forOwn';
-import indicatorObject from '../internals/indicatorObject';
 import keys from '../objects/keys';
+
+/** Used by methods to exit iteration */
+var breakIndicator = '__lodash_break_1335248838000__';
 
 /**
  * This method is like `_.forEach` except that it iterates over elements
@@ -41,7 +43,7 @@ function forEachRight(collection, callback) {
     length = props.length;
     forOwn(collection, function(value, key, collection) {
       key = props ? props[--length] : --length;
-      return callback(collection[key], key, collection) === false && indicatorObject;
+      return callback(collection[key], key, collection) === false && breakIndicator;
     });
   }
 }

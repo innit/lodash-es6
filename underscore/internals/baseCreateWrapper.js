@@ -8,7 +8,7 @@
  */
 import baseCreate from './baseCreate';
 import isObject from '../objects/isObject';
-import slice from './slice';
+import slice from '../arrays/slice';
 
 /** Used for native method references */
 var arrayRef = Array.prototype;

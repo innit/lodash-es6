@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isString from '../objects/isString';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 import support from '../support';
 import values from '../objects/values';
 

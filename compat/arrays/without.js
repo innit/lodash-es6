@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseDifference from '../internals/baseDifference';
-import slice from '../internals/slice';
+import slice from './slice';
 
 /**
  * Creates an array excluding all provided values using strict equality for

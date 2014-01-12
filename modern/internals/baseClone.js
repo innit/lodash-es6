@@ -14,7 +14,7 @@ import hasOwnProperty from './hasOwnProperty';
 import isArray from '../objects/isArray';
 import isObject from '../objects/isObject';
 import releaseArray from './releaseArray';
-import slice from './slice';
+import slice from '../arrays/slice';
 import toString from './toString';
 
 /** Used to match regexp flags from their coerced string values */

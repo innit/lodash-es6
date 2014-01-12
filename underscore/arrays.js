@@ -21,6 +21,7 @@ export lastIndexOf from 'lastIndexOf';
 export object from 'zipObject';
 export range from 'range';
 export rest from 'rest';
+export slice from 'slice';
 export sortedIndex from 'sortedIndex';
 export tail from 'rest';
 export take from 'first';

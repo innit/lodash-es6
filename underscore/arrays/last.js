@@ -7,10 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createCallback from '../functions/createCallback';
-import slice from '../internals/slice';
-
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeMax = Math.max;
+import slice from './slice';
 
 /**
  * Gets the last element or last `n` elements of an array. If a callback is
@@ -80,7 +77,8 @@ function last(array, callback, thisArg) {
       return array ? array[length - 1] : undefined;
     }
   }
-  return slice(array, nativeMax(0, length - n));
+  n = length - n;
+  return slice(array,  n > 0 ? n : 0);
 }
 
 export default last;

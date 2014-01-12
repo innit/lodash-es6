@@ -7,11 +7,14 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createWrapper from '../internals/createWrapper';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 
 /**
  * This method is like `_.partial` except that `partial` arguments are
  * appended to those provided to the new function.
+ *
+ * Note: This method does not set the `length` property of partially applied
+ * functions.
  *
  * @static
  * @memberOf _

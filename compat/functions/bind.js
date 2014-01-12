@@ -7,13 +7,16 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createWrapper from '../internals/createWrapper';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 import support from '../support';
 
 /**
  * Creates a function that, when called, invokes `func` with the `this`
  * binding of `thisArg` and prepends any additional `bind` arguments to those
  * provided to the bound function.
+ *
+ * Note: Unlike native `Function#bind` this method does not set the `length`
+ * property of bound functions.
  *
  * @static
  * @memberOf _

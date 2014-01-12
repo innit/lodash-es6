@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import forEach from './forEach';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 
 /**
  * Invokes the method named by `methodName` on each element in the `collection`

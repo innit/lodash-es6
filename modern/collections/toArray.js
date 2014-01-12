@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 import values from '../objects/values';
 
 /**

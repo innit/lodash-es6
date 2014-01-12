@@ -15,7 +15,7 @@ import isArray from '../objects/isArray';
 import isNode from './isNode';
 import isObject from '../objects/isObject';
 import releaseArray from './releaseArray';
-import slice from './slice';
+import slice from '../arrays/slice';
 import support from '../support';
 import toString from './toString';
 

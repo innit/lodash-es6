@@ -8,7 +8,7 @@
  */
 import isArray from '../objects/isArray';
 import map from './map';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 import values from '../objects/values';
 
 /**

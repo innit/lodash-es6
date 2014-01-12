@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isFunction from '../objects/isFunction';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 
 /**
  * Defers executing the `func` function until the current call stack has cleared.

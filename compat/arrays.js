@@ -25,6 +25,7 @@ export pull from 'pull';
 export range from 'range';
 export remove from 'remove';
 export rest from 'rest';
+export slice from 'slice';
 export sortedIndex from 'sortedIndex';
 export tail from 'rest';
 export take from 'first';

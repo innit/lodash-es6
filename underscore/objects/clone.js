@@ -10,7 +10,7 @@ import assign from './assign';
 import baseCreateCallback from '../internals/baseCreateCallback';
 import isArray from './isArray';
 import isObject from './isObject';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 
 /**
  * Creates a clone of `value`. If `isDeep` is `true` nested objects will also

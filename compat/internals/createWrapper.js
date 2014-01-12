@@ -9,7 +9,7 @@
 import baseBind from './baseBind';
 import baseCreateWrapper from './baseCreateWrapper';
 import isFunction from '../objects/isFunction';
-import slice from './slice';
+import slice from '../arrays/slice';
 
 /** Used for native method references */
 var arrayRef = Array.prototype;

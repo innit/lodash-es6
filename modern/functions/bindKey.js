@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createWrapper from '../internals/createWrapper';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 
 /**
  * Creates a function that, when called, invokes the method at `object[key]`

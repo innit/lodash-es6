@@ -12,9 +12,11 @@ import createCache from '../internals/createCache';
 import getArray from '../internals/getArray';
 import isArguments from '../objects/isArguments';
 import isArray from '../objects/isArray';
-import largeArraySize from '../internals/largeArraySize';
 import releaseArray from '../internals/releaseArray';
 import releaseObject from '../internals/releaseObject';
+
+/** Used as the size when optimizations are enabled for large arrays */
+var largeArraySize = 75;
 
 /**
  * Creates an array of unique values present in all provided arrays using

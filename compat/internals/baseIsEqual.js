@@ -8,14 +8,12 @@
  */
 import forIn from '../objects/forIn';
 import getArray from './getArray';
-import hasOwnProperty from './hasOwnProperty';
 import isArguments from '../objects/isArguments';
 import isFunction from '../objects/isFunction';
 import isNode from './isNode';
 import objectTypes from './objectTypes';
 import releaseArray from './releaseArray';
 import support from '../support';
-import toString from './toString';
 
 /** `Object#toString` result shortcuts */
 var argsClass = '[object Arguments]',
@@ -26,6 +24,15 @@ var argsClass = '[object Arguments]',
     objectClass = '[object Object]',
     regexpClass = '[object RegExp]',
     stringClass = '[object String]';
+
+/** Used for native method references */
+var objectProto = Object.prototype;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
+
+/** Native method shortcuts */
+var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * The base implementation of `_.isEqual`, without support for `thisArg` binding,

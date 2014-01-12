@@ -8,7 +8,9 @@
  */
 import createCallback from '../functions/createCallback';
 import forOwn from '../objects/forOwn';
-import indicatorObject from '../internals/indicatorObject';
+
+/** Used by methods to exit iteration */
+var breakIndicator = '__lodash_break_1335248838000__';
 
 /**
  * Iterates over elements of a collection, returning the first element that
@@ -71,7 +73,7 @@ function find(collection, callback, thisArg) {
     forOwn(collection, function(value, index, collection) {
       if (callback(value, index, collection)) {
         result = value;
-        return indicatorObject;
+        return breakIndicator;
       }
     });
     return result;

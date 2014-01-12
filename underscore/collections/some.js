@@ -8,8 +8,10 @@
  */
 import createCallback from '../functions/createCallback';
 import forOwn from '../objects/forOwn';
-import indicatorObject from '../internals/indicatorObject';
 import isArray from '../objects/isArray';
+
+/** Used by methods to exit iteration */
+var breakIndicator = '__lodash_break_1335248838000__';
 
 /**
  * Checks if the callback returns a truey value for **any** element of a
@@ -68,7 +70,7 @@ function some(collection, callback, thisArg) {
     }
   } else {
     forOwn(collection, function(value, index, collection) {
-      return (result = callback(value, index, collection)) && indicatorObject;
+      return (result = callback(value, index, collection)) && breakIndicator;
     });
   }
   return !!result;

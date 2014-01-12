@@ -16,7 +16,6 @@ import utilities from './utilities';
 import assign from './objects/assign';
 import forEach from './collections/forEach';
 import forOwn from './objects/forOwn';
-import hasOwnProperty from './internals/hasOwnProperty';
 import lodashWrapper from './internals/lodashWrapper';
 import mixin from './utilities/mixin';
 import support from './support';

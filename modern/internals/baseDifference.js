@@ -9,8 +9,10 @@
 import baseIndexOf from './baseIndexOf';
 import cacheIndexOf from './cacheIndexOf';
 import createCache from './createCache';
-import largeArraySize from './largeArraySize';
 import releaseObject from './releaseObject';
+
+/** Used as the size when optimizations are enabled for large arrays */
+var largeArraySize = 75;
 
 /**
  * The base implementation of `_.difference` that accepts a single array

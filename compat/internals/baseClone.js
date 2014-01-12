@@ -10,14 +10,12 @@ import assign from '../objects/assign';
 import baseEach from './baseEach';
 import forOwn from '../objects/forOwn';
 import getArray from './getArray';
-import hasOwnProperty from './hasOwnProperty';
 import isArray from '../objects/isArray';
 import isNode from './isNode';
 import isObject from '../objects/isObject';
 import releaseArray from './releaseArray';
 import slice from '../arrays/slice';
 import support from '../support';
-import toString from './toString';
 
 /** Used to match regexp flags from their coerced string values */
 var reFlags = /\w*$/;
@@ -40,6 +38,15 @@ cloneableClasses[argsClass] = cloneableClasses[arrayClass] =
 cloneableClasses[boolClass] = cloneableClasses[dateClass] =
 cloneableClasses[numberClass] = cloneableClasses[objectClass] =
 cloneableClasses[regexpClass] = cloneableClasses[stringClass] = true;
+
+/** Used for native method references */
+var objectProto = Object.prototype;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
+
+/** Native method shortcuts */
+var hasOwnProperty = objectProto.hasOwnProperty;
 
 /** Used to lookup a built-in constructor by [[Class]] */
 var ctorByClass = {};

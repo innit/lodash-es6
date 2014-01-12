@@ -7,8 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isNative from './internals/isNative';
-import reNative from './internals/reNative';
-import toString from './internals/toString';
 
 /** Used for native method references */
 var arrayRef = Array.prototype;

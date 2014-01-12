@@ -7,7 +7,9 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import escapeHtmlChar from '../internals/escapeHtmlChar';
-import reUnescapedHtml from '../internals/reUnescapedHtml';
+
+/** Used to match HTML entities and HTML characters */
+var reUnescapedHtml = /[&<>"']/g;
 
 /**
  * Converts the characters `&`, `<`, `>`, `"`, and `'` in `string` to

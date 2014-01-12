@@ -17,7 +17,6 @@ import utilities from './utilities';
 import assign from './objects/assign';
 import baseEach from './internals/baseEach';
 import forOwn from './objects/forOwn';
-import hasOwnProperty from './internals/hasOwnProperty';
 import isArray from './objects/isArray';
 import lodashWrapper from './internals/lodashWrapper';
 import mixin from './utilities/mixin';
@@ -25,7 +24,11 @@ import support from './support';
 import templateSettings from './utilities/templateSettings';
 
 /** Used for native method references */
-var arrayRef = Array.prototype;
+var arrayRef = Array.prototype,
+    objectProto = Object.prototype;
+
+/** Native method shortcuts */
+var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * Creates a `lodash` object which wraps the given value to enable intuitive

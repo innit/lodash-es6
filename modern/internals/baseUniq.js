@@ -10,9 +10,11 @@ import baseIndexOf from './baseIndexOf';
 import cacheIndexOf from './cacheIndexOf';
 import createCache from './createCache';
 import getArray from './getArray';
-import largeArraySize from './largeArraySize';
 import releaseArray from './releaseArray';
 import releaseObject from './releaseObject';
+
+/** Used as the size when optimizations are enabled for large arrays */
+var largeArraySize = 75;
 
 /**
  * The base implementation of `_.uniq` without support for callback shorthands

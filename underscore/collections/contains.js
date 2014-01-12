@@ -8,7 +8,9 @@
  */
 import baseIndexOf from '../internals/baseIndexOf';
 import forOwn from '../objects/forOwn';
-import indicatorObject from '../internals/indicatorObject';
+
+/** Used by methods to exit iteration */
+var breakIndicator = '__lodash_break_1335248838000__';
 
 /**
  * Checks if a given value is present in a collection using strict equality
@@ -45,7 +47,7 @@ function contains(collection, target) {
     result = indexOf(collection, target) > -1;
   } else {
     forOwn(collection, function(value) {
-      return (result = value === target) && indicatorObject;
+      return (result = value === target) && breakIndicator;
     });
   }
   return result;

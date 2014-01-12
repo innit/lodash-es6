@@ -8,10 +8,15 @@
  */
 import isNative from '../internals/isNative';
 import shimIsPlainObject from '../internals/shimIsPlainObject';
-import toString from '../internals/toString';
 
 /** `Object#toString` result shortcuts */
 var objectClass = '[object Object]';
+
+/** Used for native method references */
+var objectProto = Object.prototype;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
 
 /** Native method shortcuts */
 var getPrototypeOf = isNative(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf;

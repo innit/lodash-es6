@@ -7,12 +7,9 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from './baseCreateCallback';
-import hasOwnProperty from './hasOwnProperty';
-import indicatorObject from './indicatorObject';
 import isArguments from '../objects/isArguments';
 import iteratorTemplate from './iteratorTemplate';
 import objectTypes from './objectTypes';
-import toString from './toString';
 
 /** Used to fix the JScript [[DontEnum]] bug */
 var shadowedProps = [
@@ -35,6 +32,12 @@ var arrayClass = '[object Array]',
 var errorProto = Error.prototype,
     objectProto = Object.prototype,
     stringProto = String.prototype;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
+
+/** Native method shortcuts */
+var hasOwnProperty = objectProto.hasOwnProperty;
 
 /** Used to avoid iterating non-enumerable properties in IE < 9 */
 var nonEnumProps = {};

@@ -6,8 +6,10 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import reEscapedHtml from '../internals/reEscapedHtml';
 import unescapeHtmlChar from '../internals/unescapeHtmlChar';
+
+/** Used to match HTML entities and HTML characters */
+var reEscapedHtml = /&(?:amp|lt|gt|quot|#39);/g;
 
 /**
  * The inverse of `_.escape`; this method converts the HTML entities

@@ -10,13 +10,18 @@ import forOwn from './forOwn';
 import isArguments from './isArguments';
 import isFunction from './isFunction';
 import support from '../support';
-import toString from '../internals/toString';
 
 /** `Object#toString` result shortcuts */
 var argsClass = '[object Arguments]',
     arrayClass = '[object Array]',
     objectClass = '[object Object]',
     stringClass = '[object String]';
+
+/** Used for native method references */
+var objectProto = Object.prototype;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
 
 /**
  * Checks if `value` is empty. Arrays, strings, or `arguments` objects with a

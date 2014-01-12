@@ -8,7 +8,6 @@
  */
 import baseClone from '../internals/baseClone';
 import baseCreateCallback from '../internals/baseCreateCallback';
-import indexTypes from '../internals/indexTypes';
 
 /**
  * Creates a clone of `value`. If `isDeep` is `true` nested objects will also

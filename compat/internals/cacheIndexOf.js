@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseIndexOf from './baseIndexOf';
-import keyPrefix from './keyPrefix';
 
 /**
  * An implementation of `_.contains` for cache objects that mimics the return
@@ -28,7 +27,7 @@ function cacheIndexOf(cache, value) {
   if (type != 'number' && type != 'string') {
     type = 'object';
   }
-  var key = type == 'number' ? value : keyPrefix + value;
+  var key = type == 'number' ? value : '_' + value;
   cache = (cache = cache[type]) && cache[key];
 
   return type == 'object'

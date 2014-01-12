@@ -9,7 +9,12 @@
 import isNode from '../internals/isNode';
 import isPlainObject from './isPlainObject';
 import support from '../support';
-import toString from '../internals/toString';
+
+/** Used for native method references */
+var objectProto = Object.prototype;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
 
 /**
  * Checks if `value` is a DOM element.

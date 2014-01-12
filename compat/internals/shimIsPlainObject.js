@@ -7,15 +7,22 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import forIn from '../objects/forIn';
-import hasOwnProperty from './hasOwnProperty';
 import isArguments from '../objects/isArguments';
 import isFunction from '../objects/isFunction';
 import isNode from './isNode';
 import support from '../support';
-import toString from './toString';
 
 /** `Object#toString` result shortcuts */
 var objectClass = '[object Object]';
+
+/** Used for native method references */
+var objectProto = Object.prototype;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
+
+/** Native method shortcuts */
+var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * A fallback implementation of `isPlainObject` which checks if a given value

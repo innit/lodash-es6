@@ -7,8 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isNative from './internals/isNative';
-import reNative from './internals/reNative';
-import toString from './internals/toString';
 
 /** Used to detect functions containing a `this` reference */
 var reThis = /\bthis\b/;

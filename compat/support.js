@@ -7,8 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isNative from './internals/isNative';
-import reNative from './internals/reNative';
-import toString from './internals/toString';
 
 /** Used to detect functions containing a `this` reference */
 var reThis = /\bthis\b/;
@@ -24,6 +22,9 @@ var arrayRef = Array.prototype,
 
 /** Used to detect DOM support */
 var document = (document = root.window) && document.document;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
 
 /** Native method shortcuts */
 var propertyIsEnumerable = objectProto.propertyIsEnumerable,

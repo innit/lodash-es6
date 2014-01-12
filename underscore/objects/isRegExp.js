@@ -7,10 +7,15 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import objectTypes from '../internals/objectTypes';
-import toString from '../internals/toString';
 
 /** `Object#toString` result shortcuts */
 var regexpClass = '[object RegExp]';
+
+/** Used for native method references */
+var objectProto = Object.prototype;
+
+/** Used to resolve the internal [[Class]] of values */
+var toString = objectProto.toString;
 
 /**
  * Checks if `value` is a regular expression.

@@ -9,9 +9,10 @@
 import baseCreateCallback from '../internals/baseCreateCallback';
 import baseMerge from '../internals/baseMerge';
 import getArray from '../internals/getArray';
+import indexTypes from '../internals/indexTypes';
 import isObject from './isObject';
 import releaseArray from '../internals/releaseArray';
-import slice from '../internals/slice';
+import slice from '../arrays/slice';
 
 /**
  * Recursively merges own enumerable properties of the source object(s), that
@@ -64,18 +65,14 @@ import slice from '../internals/slice';
  * });
  * // => { 'fruits': ['apple', 'banana'], 'vegetables': ['beet', 'carrot] }
  */
-function merge(object) {
-  var args = arguments,
-      length = 2;
-
+function merge(object, source, guard) {
   if (!isObject(object)) {
     return object;
   }
-  // allows working with `_.reduce` and `_.reduceRight` without using
-  // their `index` and `collection` arguments
-  if (typeof args[2] != 'number') {
-    length = args.length;
-  }
+  var args = arguments,
+      length = indexTypes[typeof guard] && args[3] && args[3][guard] === source ? 2 : args.length;
+
+  // juggle arguments
   if (length > 3 && typeof args[length - 2] == 'function') {
     var callback = baseCreateCallback(args[--length - 1], args[length--], 2);
   } else if (length > 2 && typeof args[length - 1] == 'function') {

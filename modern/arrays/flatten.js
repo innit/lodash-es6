@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internals/baseFlatten';
+import indexTypes from '../internals/indexTypes';
 import map from '../collections/map';
 
 /**
@@ -55,7 +56,7 @@ function flatten(array, isShallow, callback, thisArg) {
   // juggle arguments
   if (typeof isShallow != 'boolean' && isShallow != null) {
     thisArg = callback;
-    callback = (typeof isShallow != 'function' && thisArg && thisArg[isShallow] === array) ? null : isShallow;
+    callback = (indexTypes[typeof isShallow] && thisArg && thisArg[isShallow] === array) ? null : isShallow;
     isShallow = false;
   }
   if (callback != null) {

@@ -8,6 +8,7 @@
  */
 import baseUniq from '../internals/baseUniq';
 import createCallback from '../functions/createCallback';
+import indexTypes from '../internals/indexTypes';
 
 /**
  * Creates a duplicate-value-free version of an array using strict equality
@@ -60,7 +61,7 @@ function uniq(array, isSorted, callback, thisArg) {
   // juggle arguments
   if (typeof isSorted != 'boolean' && isSorted != null) {
     thisArg = callback;
-    callback = (typeof isSorted != 'function' && thisArg && thisArg[isSorted] === array) ? null : isSorted;
+    callback = (indexTypes[typeof isSorted] && thisArg && thisArg[isSorted] === array) ? null : isSorted;
     isSorted = false;
   }
   if (callback != null) {

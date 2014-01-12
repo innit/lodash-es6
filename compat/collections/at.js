@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internals/baseFlatten';
+import indexTypes from '../internals/indexTypes';
 import isString from '../objects/isString';
 import support from '../support';
 
@@ -31,11 +32,11 @@ import support from '../support';
  * _.at(['fred', 'barney', 'pebbles'], 0, 2);
  * // => ['fred', 'pebbles']
  */
-function at(collection) {
+function at(collection, guard) {
   var args = arguments,
       index = -1,
       props = baseFlatten(args, true, false, 1),
-      length = (args[2] && args[2][args[1]] === collection) ? 1 : props.length,
+      length = (indexTypes[typeof guard] && args[2] && args[2][guard] === collection) ? 1 : props.length,
       result = Array(length);
 
   if (support.unindexedChars && isString(collection)) {

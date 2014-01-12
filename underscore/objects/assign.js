@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
+import indexTypes from '../internals/indexTypes';
 import isObject from './isObject';
 import keys from './keys';
 
@@ -39,12 +40,16 @@ import keys from './keys';
  * defaults(object, { 'name': 'fred', 'employer': 'slate' });
  * // => { 'name': 'barney', 'employer': 'slate' }
  */
-function assign(object) {
+function assign(object, source, guard) {
   if (!object) {
     return object;
   }
-  for (var argsIndex = 1, argsLength = arguments.length; argsIndex < argsLength; argsIndex++) {
-    var source = arguments[argsIndex];
+  var args = arguments,
+      argsIndex = 0,
+      argsLength = indexTypes[typeof guard] && args[3] && args[3][guard] === source ? 2 : args.length;
+
+  while (++argsIndex < argsLength) {
+    source = args[argsIndex];
     if (source) {
       for (var key in source) {
         object[key] = source[key];

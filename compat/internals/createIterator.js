@@ -8,8 +8,8 @@
  */
 import baseCreateCallback from './baseCreateCallback';
 import isArguments from '../objects/isArguments';
+import isObject from '../objects/isObject';
 import iteratorTemplate from './iteratorTemplate';
-import objectTypes from './objectTypes';
 
 /** Used to fix the JScript [[DontEnum]] bug */
 var shadowedProps = [
@@ -76,14 +76,14 @@ function createIterator(options) {
   // create the function factory
   var factory = Function(
       'baseCreateCallback, errorClass, errorProto, hasOwnProperty, isArguments, ' +
-      'objectProto, objectTypes, nonEnumProps, stringClass, stringProto, toString',
+      'isObject, objectProto, nonEnumProps, stringClass, stringProto, toString',
     'return function(' + options.args + ') {\n' + iteratorTemplate(options) + '\n}'
   );
 
   // return the compiled function
   return factory(
     baseCreateCallback, errorClass, errorProto, hasOwnProperty, isArguments,
-    objectProto, objectTypes, nonEnumProps, stringClass, stringProto, toString
+    isObject, objectProto, nonEnumProps, stringClass, stringProto, toString
   );
 }
 

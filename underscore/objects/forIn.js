@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import objectTypes from '../internals/objectTypes';
+import isObject from './isObject';
 
 /** Used by methods to exit iteration */
 var breakIndicator = '__lodash_break_1335248838000__';
@@ -45,7 +45,7 @@ var breakIndicator = '__lodash_break_1335248838000__';
  */
 var forIn = function(object, callback) {
   var result = object;
-  if (!(object && objectTypes[typeof object])) {
+  if (!isObject(object)) {
     return result;
   }
   for (var key in object) {

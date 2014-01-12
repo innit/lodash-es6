@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import indexTypes from '../internals/indexTypes';
 import isObject from './isObject';
 import keys from './keys';
 
@@ -43,8 +42,14 @@ import keys from './keys';
 function assign(object, source, guard) {
   var args = arguments,
       argsIndex = 0,
-      argsLength = indexTypes[typeof guard] && args[3] && args[3][guard] === source ? 2 : args.length;
+      argsLength = args.length,
+      type = typeof guard;
 
+  // allows working with functions like `_.reduce` without using their
+  // `key` and `object` arguments as sources
+  if ((type == 'number' || type == 'string') && args[3] && args[3][guard] === source) {
+    argsLength = 2;
+  }
   // juggle arguments
   if (argsLength > 3 && typeof args[argsLength - 2] == 'function') {
     var callback = baseCreateCallback(args[--argsLength - 1], args[argsLength--], 2);

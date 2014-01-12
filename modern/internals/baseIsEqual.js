@@ -9,7 +9,6 @@
 import forIn from '../objects/forIn';
 import getArray from './getArray';
 import isFunction from '../objects/isFunction';
-import objectTypes from './objectTypes';
 import releaseArray from './releaseArray';
 
 /** `Object#toString` result shortcuts */
@@ -62,8 +61,8 @@ function baseIsEqual(a, b, callback, isWhere, stackA, stackB) {
 
   // exit early for unlike primitive values
   if (a === a &&
-      !(a && objectTypes[type]) &&
-      !(b && objectTypes[otherType])) {
+      !(a && (type == 'function' || type == 'object')) &&
+      !(b && (otherType == 'function' || otherType == 'object'))) {
     return false;
   }
   // exit early for `null` and `undefined` avoiding ES3's Function#call behavior

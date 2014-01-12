@@ -9,7 +9,6 @@
 import baseEach from '../internals/baseEach';
 import charAtCallback from '../internals/charAtCallback';
 import createCallback from '../functions/createCallback';
-import indexTypes from '../internals/indexTypes';
 import isArray from '../objects/isArray';
 import isString from '../objects/isString';
 
@@ -55,11 +54,12 @@ import isString from '../objects/isString';
  */
 function min(collection, callback, thisArg) {
   var computed = Infinity,
-      result = computed;
+      result = computed,
+      type = typeof callback;
 
   // allows working with functions like `_.map` without using
   // their `index` argument as a callback
-  if (indexTypes[typeof callback] && thisArg && thisArg[callback] === collection) {
+  if ((type == 'number' || type == 'string') && thisArg && thisArg[callback] === collection) {
     callback = null;
   }
   if (callback == null && isArray(collection)) {

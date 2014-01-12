@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import objectTypes from '../internals/objectTypes';
+import isObject from './isObject';
 
 /**
  * Iterates over own and inherited enumerable properties of an object,
@@ -42,7 +42,7 @@ import objectTypes from '../internals/objectTypes';
  */
 var forIn = function(object, callback, thisArg) {
   var result = object;
-  if (!(object && objectTypes[typeof object])) {
+  if (!isObject(object)) {
     return result;
   }
   callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);

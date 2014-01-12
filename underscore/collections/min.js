@@ -9,7 +9,6 @@
 import createCallback from '../functions/createCallback';
 import forEach from './forEach';
 import forOwn from '../objects/forOwn';
-import indexTypes from '../internals/indexTypes';
 
 /**
  * Retrieves the minimum value of a collection. If the collection is empty or
@@ -53,11 +52,12 @@ import indexTypes from '../internals/indexTypes';
  */
 function min(collection, callback, thisArg) {
   var computed = Infinity,
-      result = computed;
+      result = computed,
+      type = typeof callback;
 
   // allows working with functions like `_.map` without using
   // their `index` argument as a callback
-  if (indexTypes[typeof callback] && thisArg && thisArg[callback] === collection) {
+  if ((type == 'number' || type == 'string') && thisArg && thisArg[callback] === collection) {
     callback = null;
   }
   var index = -1,

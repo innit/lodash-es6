@@ -8,7 +8,6 @@
  */
 import baseClone from '../internals/baseClone';
 import baseCreateCallback from '../internals/baseCreateCallback';
-import indexTypes from '../internals/indexTypes';
 
 /**
  * Creates a clone of `value`. If `isDeep` is `true` nested objects will also
@@ -51,11 +50,19 @@ import indexTypes from '../internals/indexTypes';
  * // => 0
  */
 function clone(value, isDeep, callback, thisArg) {
+  var type = typeof isDeep;
+
   // juggle arguments
-  if (typeof isDeep != 'boolean' && isDeep != null) {
+  if (type != 'boolean' && isDeep != null) {
     thisArg = callback;
-    callback = (indexTypes[typeof isDeep] && thisArg && thisArg[isDeep] === value) ? null : isDeep;
+    callback = isDeep;
     isDeep = false;
+
+    // allows working with functions like `_.map` without using
+    // their `index` argument as a callback
+    if ((type == 'number' || type == 'string') && thisArg && thisArg[callback] === value) {
+      callback = null;
+    }
   }
   return baseClone(value, isDeep, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1));
 }

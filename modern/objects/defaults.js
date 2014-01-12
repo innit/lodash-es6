@@ -6,7 +6,6 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import indexTypes from '../internals/indexTypes';
 import isObject from './isObject';
 import keys from './keys';
 
@@ -20,8 +19,8 @@ import keys from './keys';
  * @category Objects
  * @param {Object} object The destination object.
  * @param {...Object} [source] The source objects.
- * @param- {Object} [guard] Allows working with `_.reduce` without using its
- *  `key` and `object` arguments as sources.
+ * @param- {Object} [guard] Allows working with functions like `_.reduce`
+ *   without using their `key` and `object` arguments as sources.
  * @returns {Object} Returns the destination object.
  * @example
  *
@@ -32,8 +31,14 @@ import keys from './keys';
 function defaults(object, source, guard) {
   var args = arguments,
       argsIndex = 0,
-      argsLength = indexTypes[typeof guard] && args[3] && args[3][guard] === source ? 2 : args.length;
+      argsLength = args.length,
+      type = typeof guard;
 
+  // allows working with functions like `_.reduce` without using their
+  // `key` and `object` arguments as sources
+  if ((type == 'number' || type == 'string') && args[3] && args[3][guard] === source) {
+    argsLength = 2;
+  }
   while (++argsIndex < argsLength) {
     source = args[argsIndex];
     if (isObject(source)) {

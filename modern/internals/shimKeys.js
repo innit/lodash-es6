@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import objectTypes from './objectTypes';
+import isObject from '../objects/isObject';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
@@ -25,7 +25,7 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  */
 var shimKeys = function(object) {
   var result = [];
-  if (!(object && objectTypes[typeof object])) {
+  if (!isObject(object)) {
     return result;
   }
   for (var key in object) {

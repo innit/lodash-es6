@@ -9,6 +9,9 @@
 import createWrapper from '../internals/createWrapper';
 import slice from '../arrays/slice';
 
+/** Used to compose bitmasks for `__bindData__` */
+var PARTIAL_FLAG = 16;
+
 /**
  * Creates a function that, when called, invokes `func` with any additional
  * `partial` arguments prepended to those provided to the new function. This
@@ -31,7 +34,7 @@ import slice from '../arrays/slice';
  * // => 'hi fred'
  */
 function partial(func) {
-  return createWrapper(func, 16, slice(arguments, 1));
+  return createWrapper(func, PARTIAL_FLAG, slice(arguments, 1));
 }
 
 export default partial;

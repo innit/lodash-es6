@@ -8,6 +8,9 @@
  */
 import createWrapper from '../internals/createWrapper';
 
+/** Used to compose bitmasks for `__bindData__` */
+var CURRY_FLAG = 4;
+
 /**
  * Creates a function which accepts one or more arguments of `func` that when
  * invoked either executes `func` returning its result, if all `func` arguments
@@ -40,7 +43,7 @@ import createWrapper from '../internals/createWrapper';
  */
 function curry(func, arity) {
   arity = typeof arity == 'number' ? arity : (+arity || func.length);
-  return createWrapper(func, 4, null, null, null, arity);
+  return createWrapper(func, CURRY_FLAG, null, null, null, arity);
 }
 
 export default curry;

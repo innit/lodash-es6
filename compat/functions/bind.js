@@ -10,6 +10,10 @@ import createWrapper from '../internals/createWrapper';
 import slice from '../arrays/slice';
 import support from '../support';
 
+/** Used to compose bitmasks for `__bindData__` */
+var BIND_FLAG = 1,
+    PARTIAL_FLAG = 16;
+
 /**
  * Creates a function that, when called, invokes `func` with the `this`
  * binding of `thisArg` and prepends any additional `bind` arguments to those
@@ -37,8 +41,8 @@ import support from '../support';
  */
 function bind(func, thisArg) {
   return arguments.length > 2
-    ? createWrapper(func, 17, slice(arguments, 2), null, thisArg)
-    : createWrapper(func, 1, null, null, thisArg);
+    ? createWrapper(func, BIND_FLAG | PARTIAL_FLAG, slice(arguments, 2), null, thisArg)
+    : createWrapper(func, BIND_FLAG, null, null, thisArg);
 }
 
 export default bind;

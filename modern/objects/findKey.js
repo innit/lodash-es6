@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseForOwn from '../internals/baseForOwn';
 import createCallback from '../functions/createCallback';
-import forOwn from './forOwn';
 
 /**
  * This method is like `_.findIndex` except that it returns the key of the
@@ -53,7 +53,7 @@ import forOwn from './forOwn';
 function findKey(object, callback, thisArg) {
   var result;
   callback = createCallback(callback, thisArg, 3);
-  forOwn(object, function(value, key, object) {
+  baseForOwn(object, function(value, key, object) {
     if (callback(value, key, object)) {
       result = key;
       return false;

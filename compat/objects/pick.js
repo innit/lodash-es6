@@ -7,8 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internals/baseFlatten';
+import baseForIn from '../internals/baseForIn';
 import createCallback from '../functions/createCallback';
-import forIn from './forIn';
 import isObject from './isObject';
 
 /**
@@ -53,7 +53,7 @@ function pick(object, callback, thisArg) {
     }
   } else {
     callback = createCallback(callback, thisArg, 3);
-    forIn(object, function(value, key, object) {
+    baseForIn(object, function(value, key, object) {
       if (callback(value, key, object)) {
         result[key] = value;
       }

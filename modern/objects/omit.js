@@ -8,8 +8,8 @@
  */
 import baseDifference from '../internals/baseDifference';
 import baseFlatten from '../internals/baseFlatten';
+import baseForIn from '../internals/baseForIn';
 import createCallback from '../functions/createCallback';
-import forIn from './forIn';
 
 /**
  * Creates a shallow clone of `object` excluding the specified properties.
@@ -41,7 +41,7 @@ function omit(object, callback, thisArg) {
   var result = {};
   if (typeof callback != 'function') {
     var props = [];
-    forIn(object, function(value, key) {
+    baseForIn(object, function(value, key) {
       props.push(key);
     });
     props = baseDifference(props, baseFlatten(arguments, true, false, 1));
@@ -55,7 +55,7 @@ function omit(object, callback, thisArg) {
     }
   } else {
     callback = createCallback(callback, thisArg, 3);
-    forIn(object, function(value, key, object) {
+    baseForIn(object, function(value, key, object) {
       if (!callback(value, key, object)) {
         result[key] = value;
       }

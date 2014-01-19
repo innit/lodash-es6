@@ -8,7 +8,7 @@
  */
 import assign from '../objects/assign';
 import baseEach from './baseEach';
-import forOwn from '../objects/forOwn';
+import baseForOwn from './baseForOwn';
 import getArray from './getArray';
 import isArray from '../objects/isArray';
 import isNode from './isNode';
@@ -140,7 +140,7 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
   stackB.push(result);
 
   // recursively populate clone (susceptible to call stack limits)
-  (isArr ? baseEach : forOwn)(value, function(objValue, key) {
+  (isArr ? baseEach : baseForOwn)(value, function(objValue, key) {
     result[key] = baseClone(objValue, isDeep, callback, stackA, stackB);
   });
 

@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import forIn from './forIn';
+import baseForIn from '../internals/baseForIn';
 import isFunction from './isFunction';
 
 /**
@@ -26,7 +26,7 @@ import isFunction from './isFunction';
  */
 function functions(object) {
   var result = [];
-  forIn(object, function(value, key) {
+  baseForIn(object, function(value, key) {
     if (isFunction(value)) {
       result.push(key);
     }

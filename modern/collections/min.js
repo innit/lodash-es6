@@ -6,10 +6,9 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseEach from '../internals/baseEach';
 import charAtCallback from '../internals/charAtCallback';
 import createCallback from '../functions/createCallback';
-import forEach from './forEach';
-import forOwn from '../objects/forOwn';
 import isArray from '../objects/isArray';
 import isString from '../objects/isString';
 
@@ -78,7 +77,7 @@ function min(collection, callback, thisArg) {
       ? charAtCallback
       : createCallback(callback, thisArg, 3);
 
-    forEach(collection, function(value, index, collection) {
+    baseEach(collection, function(value, index, collection) {
       var current = callback(value, index, collection);
       if (current < computed) {
         computed = current;

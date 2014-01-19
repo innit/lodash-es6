@@ -7,9 +7,9 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreate from '../internals/baseCreate';
+import baseEach from '../internals/baseEach';
+import baseForOwn from '../internals/baseForOwn';
 import createCallback from '../functions/createCallback';
-import forEach from '../collections/forEach';
-import forOwn from './forOwn';
 import isArray from './isArray';
 
 /**
@@ -57,7 +57,7 @@ function transform(object, callback, accumulator, thisArg) {
   }
   if (callback) {
     callback = createCallback(callback, thisArg, 4);
-    (isArr ? forEach : forOwn)(object, function(value, index, object) {
+    (isArr ? baseEach : baseForOwn)(object, function(value, index, object) {
       return callback(accumulator, value, index, object);
     });
   }

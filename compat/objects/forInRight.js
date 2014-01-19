@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import forIn from './forIn';
+import baseForIn from '../internals/baseForIn';
 
 /**
  * This method is like `_.forIn` except that it iterates over elements
@@ -40,7 +40,7 @@ import forIn from './forIn';
 function forInRight(object, callback, thisArg) {
   var pairs = [];
 
-  forIn(object, function(value, key) {
+  baseForIn(object, function(value, key) {
     pairs.push(key, value);
   });
 

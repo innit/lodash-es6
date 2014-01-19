@@ -7,8 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import forEach from '../collections/forEach';
-import forOwn from './forOwn';
+import baseEach from '../internals/baseEach';
+import baseForOwn from '../internals/baseForOwn';
 import getArray from '../internals/getArray';
 import isArray from './isArray';
 import isObject from './isObject';
@@ -28,7 +28,7 @@ import slice from '../arrays/slice';
  * @param {Array} [stackB=[]] Associates values with source counterparts.
  */
 function baseMerge(object, source, callback, stackA, stackB) {
-  (isArray(source) ? forEach : forOwn)(source, function(source, key) {
+  (isArray(source) ? baseEach : baseForOwn)(source, function(source, key) {
     var found,
         isArr,
         result = source,

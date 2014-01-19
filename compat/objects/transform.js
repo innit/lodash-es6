@@ -8,8 +8,8 @@
  */
 import baseCreate from '../internals/baseCreate';
 import baseEach from '../internals/baseEach';
+import baseForOwn from '../internals/baseForOwn';
 import createCallback from '../functions/createCallback';
-import forOwn from './forOwn';
 import isArray from './isArray';
 
 /**
@@ -57,7 +57,7 @@ function transform(object, callback, accumulator, thisArg) {
   }
   if (callback) {
     callback = createCallback(callback, thisArg, 4);
-    (isArr ? baseEach : forOwn)(object, function(value, index, object) {
+    (isArr ? baseEach : baseForOwn)(object, function(value, index, object) {
       return callback(accumulator, value, index, object);
     });
   }

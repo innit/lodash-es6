@@ -11,8 +11,6 @@ export assign from 'assign';
 export clone from 'clone';
 export defaults from 'defaults';
 export extend from 'assign';
-export forIn from 'forIn';
-export forOwn from 'forOwn';
 export functions from 'functions';
 export has from 'has';
 export invert from 'invert';

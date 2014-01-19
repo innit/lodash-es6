@@ -8,7 +8,7 @@
  */
 import baseDifference from '../internals/baseDifference';
 import baseFlatten from '../internals/baseFlatten';
-import forIn from './forIn';
+import baseForIn from '../internals/baseForIn';
 
 /**
  * Creates a shallow clone of `object` excluding the specified properties.
@@ -38,7 +38,7 @@ import forIn from './forIn';
  */
 function omit(object) {
   var props = [];
-  forIn(object, function(value, key) {
+  baseForIn(object, function(value, key) {
     props.push(key);
   });
   props = baseDifference(props, baseFlatten(arguments, true, false, 1));

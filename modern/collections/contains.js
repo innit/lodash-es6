@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseEach from '../internals/baseEach';
 import baseIndexOf from '../internals/baseIndexOf';
-import forOwn from '../objects/forOwn';
 import isArray from '../objects/isArray';
 import isNative from '../internals/isNative';
 import isString from '../objects/isString';
@@ -66,7 +66,7 @@ function contains(collection, target, fromIndex) {
   var index = -1,
       result = false;
 
-  forOwn(collection, function(value) {
+  baseEach(collection, function(value) {
     if (++index >= fromIndex) {
       return !(result = value === target);
     }

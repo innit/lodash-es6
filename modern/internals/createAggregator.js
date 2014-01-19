@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseEach from './baseEach';
 import createCallback from '../functions/createCallback';
-import forOwn from '../objects/forOwn';
 
 /**
  * Creates a function that aggregates a collection, creating an object composed
@@ -33,7 +33,7 @@ function createAggregator(setter) {
         setter(result, value, callback(value, index, collection), collection);
       }
     } else {
-      forOwn(collection, function(value, key, collection) {
+      baseEach(collection, function(value, key, collection) {
         setter(result, value, callback(value, key, collection), collection);
       });
     }

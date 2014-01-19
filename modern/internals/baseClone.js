@@ -7,8 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import assign from '../objects/assign';
-import forEach from '../collections/forEach';
-import forOwn from '../objects/forOwn';
+import baseEach from './baseEach';
+import baseForOwn from './baseForOwn';
 import getArray from './getArray';
 import isArray from '../objects/isArray';
 import isObject from '../objects/isObject';
@@ -138,7 +138,7 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
   stackB.push(result);
 
   // recursively populate clone (susceptible to call stack limits)
-  (isArr ? forEach : forOwn)(value, function(objValue, key) {
+  (isArr ? baseEach : baseForOwn)(value, function(objValue, key) {
     result[key] = baseClone(objValue, isDeep, callback, stackA, stackB);
   });
 

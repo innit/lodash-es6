@@ -6,7 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import forOwn from './forOwn';
+import baseForOwn from '../internals/baseForOwn';
 import isArguments from './isArguments';
 import isFunction from './isFunction';
 import support from '../support';
@@ -57,7 +57,7 @@ function isEmpty(value) {
       (className == objectClass && typeof length == 'number' && isFunction(value.splice))) {
     return !length;
   }
-  forOwn(value, function() {
+  baseForOwn(value, function() {
     return (result = false);
   });
   return result;

@@ -14,8 +14,8 @@ import functions from './functions';
 import objects from './objects';
 import utilities from './utilities';
 import assign from './objects/assign';
-import forEach from './collections/forEach';
-import forOwn from './objects/forOwn';
+import baseEach from './internals/baseEach';
+import baseForOwn from './internals/baseForOwn';
 import lodashWrapper from './internals/lodashWrapper';
 import mixin from './utilities/mixin';
 import support from './support';
@@ -125,7 +125,7 @@ lodash.delay = functions.delay;
 lodash.difference = arrays.difference;
 lodash.filter = collections.filter;
 lodash.flatten = arrays.flatten;
-lodash.forEach = forEach;
+lodash.forEach = collections.forEach;
 lodash.functions = objects.functions;
 lodash.groupBy = collections.groupBy;
 lodash.indexBy = collections.indexBy;
@@ -164,7 +164,7 @@ lodash.zip = arrays.zip;
 // add aliases
 lodash.collect = collections.map;
 lodash.drop = arrays.rest;
-lodash.each = forEach;
+lodash.each = collections.forEach;
 lodash.extend = assign;
 lodash.methods = objects.functions;
 lodash.object = arrays.zipObject;
@@ -247,7 +247,7 @@ lodash.prototype.chain = chaining.wrapperChain;
 lodash.prototype.value = chaining.wrapperValueOf;
 
   // add `Array` mutator functions to the wrapper
-  forEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
+  baseEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
     var func = arrayRef[methodName];
     lodash.prototype[methodName] = function() {
       var value = this.__wrapped__;
@@ -263,7 +263,7 @@ lodash.prototype.value = chaining.wrapperValueOf;
   });
 
   // add `Array` accessor functions to the wrapper
-  forEach(['concat', 'join', 'slice'], function(methodName) {
+  baseEach(['concat', 'join', 'slice'], function(methodName) {
     var func = arrayRef[methodName];
     lodash.prototype[methodName] = function() {
       var value = this.__wrapped__,

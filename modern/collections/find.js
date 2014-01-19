@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseEach from '../internals/baseEach';
 import createCallback from '../functions/createCallback';
-import forOwn from '../objects/forOwn';
 
 /**
  * Iterates over elements of a collection, returning the first element that
@@ -67,7 +67,7 @@ function find(collection, callback, thisArg) {
     }
   } else {
     var result;
-    forOwn(collection, function(value, index, collection) {
+    baseEach(collection, function(value, index, collection) {
       if (callback(value, index, collection)) {
         result = value;
         return false;

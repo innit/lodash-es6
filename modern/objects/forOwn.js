@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import keys from './keys';
+import baseForOwn from '../internals/baseForOwn';
 
 /**
  * Iterates over own enumerable properties of an object, executing the callback
@@ -30,18 +30,8 @@ import keys from './keys';
  * // => logs '0', '1', and 'length' (property order is not guaranteed across environments)
  */
 function forOwn(object, callback, thisArg) {
-  var index = -1,
-      props = keys(object),
-      length = props.length;
-
   callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
-  while (++index < length) {
-    var key = props[index];
-    if (callback(object[key], key, object) === false) {
-      break;
-    }
-  }
-  return object;
+  return baseForOwn(object, callback);
 }
 
 export default forOwn;

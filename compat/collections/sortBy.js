@@ -10,7 +10,9 @@ import baseEach from '../internals/baseEach';
 import createCallback from '../functions/createCallback';
 import isArray from '../objects/isArray';
 import map from './map';
-import objectPool from '../internals/objectPool';
+
+/** Used to pool arrays and objects used internally */
+var objectPool = [];
 
 /** Used as the max size of the `arrayPool` and `objectPool` */
 var MAX_POOL_SIZE = 40;

@@ -11,11 +11,11 @@ import createCallback from '../functions/createCallback';
 import isArray from '../objects/isArray';
 import map from './map';
 
-/** Used to pool arrays and objects used internally */
-var objectPool = [];
-
 /** Used as the max size of the `arrayPool` and `objectPool` */
 var MAX_POOL_SIZE = 40;
+
+/** Used to pool arrays and objects used internally */
+var objectPool = [];
 
 /**
  * The base implementation of `compareAscending` used to compare values and

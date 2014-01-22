@@ -12,7 +12,7 @@ import createCache from './createCache';
 import getArray from './getArray';
 import releaseArray from './releaseArray';
 
-/** Used as the size when optimizations are enabled for large arrays */
+/** Used as the size when optimizations are enabled for arrays */
 var LARGE_ARRAY_SIZE = 75;
 
 /**

@@ -8,7 +8,7 @@
  */
 import createWrapper from '../internals/createWrapper';
 
-/** Used to compose bitmasks for `__bindData__` */
+/** Used to compose bitmasks for wrapper metadata */
 var PARTIAL_FLAG = 16;
 
 /**
@@ -33,7 +33,7 @@ var PARTIAL_FLAG = 16;
  * // => '<p>fred, barney, &amp; pebbles</p>'
  */
 function wrap(value, wrapper) {
-  return createWrapper(wrapper, PARTIAL_FLAG, [value]);
+  return createWrapper(wrapper, PARTIAL_FLAG, null, null, [value]);
 }
 
 export default wrap;

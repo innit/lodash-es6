@@ -11,6 +11,7 @@ export after from 'after';
 export bind from 'bind';
 export bindAll from 'bindAll';
 export bindKey from 'bindKey';
+export callback from 'createCallback';
 export compose from 'compose';
 export createCallback from 'createCallback';
 export curry from 'curry';

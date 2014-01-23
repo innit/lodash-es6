@@ -10,6 +10,7 @@
 export after from 'after';
 export bind from 'bind';
 export bindAll from 'bindAll';
+export callback from 'createCallback';
 export compose from 'compose';
 export createCallback from 'createCallback';
 export debounce from 'debounce';

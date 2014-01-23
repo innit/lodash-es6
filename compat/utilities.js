@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
+export callback from 'createCallback';
 export constant from 'constant';
 export createCallback from 'createCallback';
 export escape from 'escape';

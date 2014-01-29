@@ -11,7 +11,7 @@ import cacheIndexOf from './cacheIndexOf';
 import createCache from './createCache';
 
 /** Used as the size when optimizations are enabled for arrays */
-var LARGE_ARRAY_SIZE = 75;
+var LARGE_ARRAY_SIZE = 40;
 
 /**
  * The base implementation of `_.difference` that accepts a single array

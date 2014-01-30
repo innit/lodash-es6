@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseEachRight from '../internals/baseEachRight';
 import createCallback from '../functions/createCallback';
-import forEachRight from './forEachRight';
 
 /**
  * This method is like `_.reduce` except that it iterates over elements
@@ -31,7 +31,8 @@ import forEachRight from './forEachRight';
 function reduceRight(collection, callback, accumulator, thisArg) {
   var noaccum = arguments.length < 3;
   callback = createCallback(callback, thisArg, 4);
-  forEachRight(collection, function(value, index, collection) {
+
+  baseEachRight(collection, function(value, index, collection) {
     accumulator = noaccum
       ? (noaccum = false, value)
       : callback(accumulator, value, index, collection);

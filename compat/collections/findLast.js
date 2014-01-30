@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseEachRight from '../internals/baseEachRight';
 import createCallback from '../functions/createCallback';
-import forEachRight from './forEachRight';
 
 /**
  * This method is like `_.find` except that it iterates over elements
@@ -32,7 +32,8 @@ import forEachRight from './forEachRight';
 function findLast(collection, callback, thisArg) {
   var result;
   callback = createCallback(callback, thisArg, 3);
-  forEachRight(collection, function(value, index, collection) {
+
+  baseEachRight(collection, function(value, index, collection) {
     if (callback(value, index, collection)) {
       result = value;
       return false;

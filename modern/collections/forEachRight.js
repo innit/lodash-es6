@@ -7,8 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import baseEach from '../internals/baseEach';
-import keys from '../objects/keys';
+import baseEachRight from '../internals/baseEachRight';
 
 /**
  * This method is like `_.forEach` except that it iterates over elements
@@ -30,6 +29,7 @@ import keys from '../objects/keys';
 function forEachRight(collection, callback, thisArg) {
   var length = collection ? collection.length : 0;
   callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
+
   if (typeof length == 'number') {
     while (length--) {
       if (callback(collection[length], length, collection) === false) {
@@ -37,12 +37,7 @@ function forEachRight(collection, callback, thisArg) {
       }
     }
   } else {
-    var props = keys(collection);
-    length = props.length;
-    baseEach(collection, function(value, key, collection) {
-      key = props ? props[--length] : --length;
-      return callback(collection[key], key, collection);
-    });
+    baseEachRight(collection, callback);
   }
   return collection;
 }

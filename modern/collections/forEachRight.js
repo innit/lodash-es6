@@ -28,8 +28,8 @@ import baseEachRight from '../internals/baseEachRight';
  */
 function forEachRight(collection, callback, thisArg) {
   var length = collection ? collection.length : 0;
-  callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
 
+  callback = callback && typeof thisArg == 'undefined' ? callback : baseCreateCallback(callback, thisArg, 3);
   if (typeof length == 'number') {
     while (length--) {
       if (callback(collection[length], length, collection) === false) {

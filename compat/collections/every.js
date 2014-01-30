@@ -53,8 +53,8 @@ import isArray from '../objects/isArray';
  */
 function every(collection, callback, thisArg) {
   var result = true;
-  callback = createCallback(callback, thisArg, 3);
 
+  callback = createCallback(callback, thisArg, 3);
   if (isArray(collection)) {
     var index = -1,
         length = collection.length;

@@ -40,6 +40,7 @@ function baseEach(collection, callback) {
   } else {
     baseForOwn(collection, callback);
   }
+  return collection;
 }
 
 export default baseEach;

@@ -33,6 +33,7 @@ export invoke from 'invoke';
 export map from 'map';
 export max from 'max';
 export min from 'min';
+export partition from 'partition';
 export pluck from 'pluck';
 export reduce from 'reduce';
 export reduceRight from 'reduceRight';

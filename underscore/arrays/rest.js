@@ -50,9 +50,9 @@ import slice from './slice';
  * // => [3]
  *
  * var characters = [
- *   { 'name': 'barney',  'blocked': true,  'employer': 'slate' },
- *   { 'name': 'fred',    'blocked': false,  'employer': 'slate' },
- *   { 'name': 'pebbles', 'blocked': true, 'employer': 'na' }
+ *   { 'name': 'barney',  'employer': 'slate', 'blocked': true },
+ *   { 'name': 'fred',    'employer': 'slate' },
+ *   { 'name': 'pebbles', 'employer': 'na',    'blocked': true }
  * ];
  *
  * // using "_.pluck" callback shorthand
@@ -61,7 +61,7 @@ import slice from './slice';
  *
  * // using "_.where" callback shorthand
  * _.rest(characters, { 'employer': 'slate' });
- * // => [{ 'name': 'pebbles', 'blocked': true, 'employer': 'na' }]
+ * // => [{ 'name': 'pebbles', 'employer': 'na', 'blocked': true }]
  */
 function rest(array, callback, thisArg) {
   if (typeof callback != 'number' && callback != null) {

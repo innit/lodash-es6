@@ -12,12 +12,6 @@ import createCallback from '../functions/createCallback';
 import isObject from './isObject';
 import slice from '../arrays/slice';
 
-/** Used for native method references */
-var arrayRef = Array.prototype;
-
-/** Native method shortcuts */
-var splice = arrayRef.splice;
-
 /**
  * Creates a shallow clone of `object` composed of the specified properties.
  * Property names may be specified as individual arguments or as arrays of
@@ -46,19 +40,11 @@ var splice = arrayRef.splice;
  * // => { 'name': 'fred' }
  */
 function pick(object, callback, thisArg) {
-  var result = {},
-      type = typeof callback;
+  var result = {};
 
-  if (type != 'function') {
-    // enables use as a callback for functions like `_.map`
-    // when combined with `_.partialRight`
-    var args = arguments;
-    if ((type == 'number' || type == 'string') && thisArg && thisArg[callback] === object) {
-      args = slice(args);
-      splice.call(args, 1, 2);
-    }
+  if (typeof callback != 'function') {
     var index = -1,
-        props = baseFlatten(args, true, false, 1),
+        props = baseFlatten(arguments, true, false, 1),
         length = isObject(object) ? props.length : 0;
 
     while (++index < length) {

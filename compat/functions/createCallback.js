@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import match from '../utilities/match';
+import matches from '../utilities/matches';
 import property from '../utilities/property';
 
 /**
@@ -49,7 +49,7 @@ function createCallback(func, thisArg, argCount) {
       func || baseCreateCallback(func, thisArg, argCount);
   }
   // handle "_.pluck" and "_.where" style callback shorthands
-  return type != 'object' ? property(func) : match(func);
+  return type != 'object' ? property(func) : matches(func);
 }
 
 export default createCallback;

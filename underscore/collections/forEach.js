@@ -58,6 +58,7 @@ function forEach(collection, callback, thisArg) {
   } else {
     baseEach(collection, callback);
   }
+  return collection;
 }
 
 export default forEach;

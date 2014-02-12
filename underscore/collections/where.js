@@ -7,8 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import filter from './filter';
-import find from './find';
-import isEmpty from '../objects/isEmpty';
 
 /**
  * Performs a deep comparison between each element in `collection` and the
@@ -35,10 +33,6 @@ import isEmpty from '../objects/isEmpty';
  * _.where(characters, { 'pets': ['dino'] });
  * // => [{ 'name': 'fred', 'age': 40, 'pets': ['baby puss', 'dino'] }]
  */
-function where(collection, properties, first) {
-  return (first && isEmpty(properties))
-    ? undefined
-    : (first ? find : filter)(collection, properties);
-}
+var where = filter;
 
 export default where;

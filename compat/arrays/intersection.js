@@ -9,10 +9,8 @@
 import baseIndexOf from '../internals/baseIndexOf';
 import cacheIndexOf from '../internals/cacheIndexOf';
 import createCache from '../internals/createCache';
-import getArray from '../internals/getArray';
 import isArguments from '../objects/isArguments';
 import isArray from '../objects/isArray';
-import releaseArray from '../internals/releaseArray';
 
 /** Used as the size when optimizations are enabled for arrays */
 var LARGE_ARRAY_SIZE = 40;
@@ -35,10 +33,10 @@ function intersection() {
   var args = [],
       argsIndex = -1,
       argsLength = arguments.length,
-      caches = getArray(),
+      caches = [],
       indexOf = baseIndexOf,
       largePrereq = createCache,
-      seen = getArray();
+      seen = [];
 
   while (++argsIndex < argsLength) {
     var value = arguments[argsIndex];
@@ -70,8 +68,6 @@ function intersection() {
       result.push(value);
     }
   }
-  releaseArray(caches);
-  releaseArray(seen);
   return result;
 }
 

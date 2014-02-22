@@ -9,11 +9,9 @@
 import baseCreateCallback from '../internals/baseCreateCallback';
 import baseEach from '../internals/baseEach';
 import baseForOwn from '../internals/baseForOwn';
-import getArray from '../internals/getArray';
 import isArray from './isArray';
 import isObject from './isObject';
 import isPlainObject from './isPlainObject';
-import releaseArray from '../internals/releaseArray';
 import slice from '../arrays/slice';
 
 /**
@@ -152,14 +150,12 @@ function merge(object, source, guard) {
   }
   var sources = slice(arguments, 1, length),
       index = -1,
-      stackA = getArray(),
-      stackB = getArray();
+      stackA = [],
+      stackB = [];
 
   while (++index < length) {
     baseMerge(object, sources[index], callback, stackA, stackB);
   }
-  releaseArray(stackA);
-  releaseArray(stackB);
   return object;
 }
 

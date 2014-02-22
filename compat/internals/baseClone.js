@@ -9,11 +9,9 @@
 import assign from '../objects/assign';
 import baseEach from './baseEach';
 import baseForOwn from './baseForOwn';
-import getArray from './getArray';
 import isArray from '../objects/isArray';
 import isNode from './isNode';
 import isObject from '../objects/isObject';
-import releaseArray from './releaseArray';
 import slice from '../arrays/slice';
 import support from '../support';
 
@@ -107,8 +105,8 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
   if (isDeep) {
     // check for circular references and return corresponding clone
     var initedStack = !stackA;
-    stackA || (stackA = getArray());
-    stackB || (stackB = getArray());
+    stackA || (stackA = []);
+    stackB || (stackB = []);
 
     var length = stackA.length;
     while (length--) {
@@ -144,10 +142,6 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
     result[key] = baseClone(objValue, isDeep, callback, stackA, stackB);
   });
 
-  if (initedStack) {
-    releaseArray(stackA);
-    releaseArray(stackB);
-  }
   return result;
 }
 

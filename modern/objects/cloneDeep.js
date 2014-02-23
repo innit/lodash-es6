@@ -52,7 +52,8 @@ import baseCreateCallback from '../internals/baseCreateCallback';
  * // => false
  */
 function cloneDeep(value, callback, thisArg) {
-  return baseClone(value, true, typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1));
+  callback = typeof callback == 'function' && baseCreateCallback(callback, thisArg, 1);
+  return baseClone(value, true, callback);
 }
 
 export default cloneDeep;

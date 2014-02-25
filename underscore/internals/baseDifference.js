@@ -18,9 +18,12 @@ import baseIndexOf from './baseIndexOf';
  * @returns {Array} Returns a new array of filtered values.
  */
 function baseDifference(array, values) {
+  var length = array ? array.length : 0;
+  if (!length) {
+    return [];
+  }
   var index = -1,
       indexOf = baseIndexOf,
-      length = array ? array.length : 0,
       result = [];
 
   while (++index < length) {

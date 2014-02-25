@@ -6,7 +6,6 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createCallback from '../functions/createCallback';
 import slice from './slice';
 
 /**
@@ -61,24 +60,13 @@ import slice from './slice';
  * _.last(characters, { 'employer': 'na' });
  * // => [{ 'name': 'pebbles', 'employer': 'na', 'blocked': true }]
  */
-function last(array, callback, thisArg) {
-  var n = 0,
-      length = array ? array.length : 0;
-
-  if (typeof callback != 'number' && callback != null) {
-    var index = length;
-    callback = createCallback(callback, thisArg, 3);
-    while (index-- && callback(array[index], index, array)) {
-      n++;
-    }
-  } else {
-    n = callback;
-    if (n == null || thisArg) {
-      return array ? array[length - 1] : undefined;
-    }
+function last(array, n, guard) {
+  var length = array ? array.length : 0;
+  if (n == null || guard) {
+    return array ? array[length - 1] : undefined;
   }
   n = length - n;
-  return slice(array,  n > 0 ? n : 0);
+  return slice(array, n > 0 ? n : 0);
 }
 
 export default last;

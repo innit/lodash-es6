@@ -54,8 +54,8 @@ import isArray from '../objects/isArray';
  */
 function some(collection, callback, thisArg) {
   var result;
-
   callback = createCallback(callback, thisArg, 3);
+
   var index = -1,
       length = collection ? collection.length : 0;
 

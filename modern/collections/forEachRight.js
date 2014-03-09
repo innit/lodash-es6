@@ -10,8 +10,8 @@ import baseCreateCallback from '../internals/baseCreateCallback';
 import baseEachRight from '../internals/baseEachRight';
 
 /**
- * This method is like `_.forEach` except that it iterates over elements
- * of a `collection` from right to left.
+ * This method is like `_.forEach` except that it iterates over elements of
+ * a collection from right to left.
  *
  * @static
  * @memberOf _

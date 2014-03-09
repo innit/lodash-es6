@@ -11,8 +11,8 @@ import baseEachRight from '../internals/baseEachRight';
 import isArray from '../objects/isArray';
 
 /**
- * This method is like `_.forEach` except that it iterates over elements
- * of a `collection` from right to left.
+ * This method is like `_.forEach` except that it iterates over elements of
+ * a collection from right to left.
  *
  * @static
  * @memberOf _

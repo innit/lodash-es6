@@ -10,8 +10,8 @@ import baseEachRight from '../internals/baseEachRight';
 import createCallback from '../functions/createCallback';
 
 /**
- * This method is like `_.reduce` except that it iterates over elements
- * of a `collection` from right to left.
+ * This method is like `_.reduce` except that it iterates over elements of a
+ * collection from right to left.
  *
  * @static
  * @memberOf _

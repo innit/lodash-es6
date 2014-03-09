@@ -7,11 +7,22 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export capitalize from 'capitalize';
-export escape from 'escape';
-export template from 'template';
-export templateSettings from 'templateSettings';
-export trim from 'trim';
-export trimLeft from 'trimLeft';
-export trimRight from 'trimRight';
-export unescape from 'unescape';
+export { default as camelCase } from 'camelCase';
+export { default as capitalize } from 'capitalize';
+export { default as endsWith } from 'endsWith';
+export { default as escape } from 'escape';
+export { default as escapeRegExp } from 'escapeRegExp';
+export { default as kebabCase } from 'kebabCase';
+export { default as pad } from 'pad';
+export { default as padLeft } from 'padLeft';
+export { default as padRight } from 'padRight';
+export { default as repeat } from 'repeat';
+export { default as snakeCase } from 'snakeCase';
+export { default as startsWith } from 'startsWith';
+export { default as template } from 'template';
+export { default as templateSettings } from 'templateSettings';
+export { default as trim } from 'trim';
+export { default as trimLeft } from 'trimLeft';
+export { default as trimRight } from 'trimRight';
+export { default as truncate } from 'truncate';
+export { default as unescape } from 'unescape';

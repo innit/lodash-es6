@@ -7,21 +7,21 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export callback from 'createCallback';
-export constant from 'constant';
-export createCallback from 'createCallback';
-export escape from 'escape';
-export identity from 'identity';
-export matches from 'matches';
-export mixin from 'mixin';
-export noConflict from 'noConflict';
-export noop from 'noop';
-export now from 'now';
-export property from 'property';
-export random from 'random';
-export result from 'result';
-export template from 'template';
-export templateSettings from 'templateSettings';
-export times from 'times';
-export unescape from 'unescape';
-export uniqueId from 'uniqueId';
+export { default as callback } from 'createCallback';
+export { default as constant } from 'constant';
+export { default as createCallback } from 'createCallback';
+export { default as escape } from 'escape';
+export { default as identity } from 'identity';
+export { default as matches } from 'matches';
+export { default as mixin } from 'mixin';
+export { default as noConflict } from 'noConflict';
+export { default as noop } from 'noop';
+export { default as now } from 'now';
+export { default as property } from 'property';
+export { default as random } from 'random';
+export { default as result } from 'result';
+export { default as template } from 'template';
+export { default as templateSettings } from 'templateSettings';
+export { default as times } from 'times';
+export { default as unescape } from 'unescape';
+export { default as uniqueId } from 'uniqueId';

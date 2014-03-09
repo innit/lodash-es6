@@ -7,20 +7,21 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export after from 'after';
-export bind from 'bind';
-export bindAll from 'bindAll';
-export bindKey from 'bindKey';
-export callback from 'createCallback';
-export compose from 'compose';
-export createCallback from 'createCallback';
-export curry from 'curry';
-export debounce from 'debounce';
-export defer from 'defer';
-export delay from 'delay';
-export memoize from 'memoize';
-export once from 'once';
-export partial from 'partial';
-export partialRight from 'partialRight';
-export throttle from 'throttle';
-export wrap from 'wrap';
+export { default as after } from 'after';
+export { default as bind } from 'bind';
+export { default as bindAll } from 'bindAll';
+export { default as bindKey } from 'bindKey';
+export { default as callback } from 'createCallback';
+export { default as compose } from 'compose';
+export { default as createCallback } from 'createCallback';
+export { default as curry } from 'curry';
+export { default as debounce } from 'debounce';
+export { default as defer } from 'defer';
+export { default as delay } from 'delay';
+export { default as memoize } from 'memoize';
+export { default as negate } from 'negate';
+export { default as once } from 'once';
+export { default as partial } from 'partial';
+export { default as partialRight } from 'partialRight';
+export { default as throttle } from 'throttle';
+export { default as wrap } from 'wrap';

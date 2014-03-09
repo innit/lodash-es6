@@ -6,6 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseFor from './baseFor';
 import keys from '../objects/keys';
 
 /**
@@ -18,17 +19,7 @@ import keys from '../objects/keys';
  * @returns {Object} Returns `object`.
  */
 function baseForOwn(object, callback) {
-  var index = -1,
-      props = keys(object),
-      length = props.length;
-
-  while (++index < length) {
-    var key = props[index];
-    if (callback(object[key], key, object) === false) {
-      break;
-    }
-  }
-  return object;
+  return baseFor(object, callback, keys);
 }
 
 export default baseForOwn;

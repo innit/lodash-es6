@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCreateCallback from '../internals/baseCreateCallback';
-import isObject from './isObject';
 import keys from './keys';
 
 /**
@@ -52,10 +51,8 @@ function assign(object, source, guard) {
   }
   while (++argsIndex < argsLength) {
     source = args[argsIndex];
-    if (source) {
-      for (var key in source) {
-        object[key] = source[key];
-      }
+    for (var key in source) {
+      object[key] = source[key];
     }
   }
   return object;

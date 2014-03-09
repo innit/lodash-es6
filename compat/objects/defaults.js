@@ -6,7 +6,6 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isObject from './isObject';
 import keys from './keys';
 
 /**
@@ -27,6 +26,9 @@ import keys from './keys';
  * // => { 'name': 'barney', 'employer': 'slate' }
  */
 function defaults(object, source, guard) {
+  if (!object) {
+    return object;
+  }
   var args = arguments,
       argsIndex = 0,
       argsLength = args.length,
@@ -38,16 +40,14 @@ function defaults(object, source, guard) {
   }
   while (++argsIndex < argsLength) {
     source = args[argsIndex];
-    if (isObject(source)) {
-      var index = -1,
-          props = keys(source),
-          length = props.length;
+    var index = -1,
+        props = keys(source),
+        length = props.length;
 
-      while (++index < length) {
-        var key = props[index];
-        if (typeof object[key] == 'undefined') {
-          object[key] = source[key];
-        }
+    while (++index < length) {
+      var key = props[index];
+      if (typeof object[key] == 'undefined') {
+        object[key] = source[key];
       }
     }
   }

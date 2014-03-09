@@ -6,6 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseForRight from './baseForRight';
 import keys from '../objects/keys';
 
 /**
@@ -18,16 +19,7 @@ import keys from '../objects/keys';
  * @returns {Object} Returns `object`.
  */
 function baseForOwnRight(object, callback) {
-  var props = keys(object),
-      length = props.length;
-
-  while (length--) {
-    var key = props[length];
-    if (callback(object[key], key, object) === false) {
-      break;
-    }
-  }
-  return object;
+  return baseForRight(object, callback, keys);
 }
 
 export default baseForOwnRight;

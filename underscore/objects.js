@@ -11,6 +11,7 @@ export { default as assign } from 'assign';
 export { default as clone } from 'clone';
 export { default as defaults } from 'defaults';
 export { default as extend } from 'assign';
+export { default as findKey } from 'findKey';
 export { default as functions } from 'functions';
 export { default as has } from 'has';
 export { default as invert } from 'invert';

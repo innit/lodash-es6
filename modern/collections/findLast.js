@@ -6,8 +6,8 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import baseEachRight from '../internals/baseEachRight';
-import createCallback from '../functions/createCallback';
+import findLastIndex from '../arrays/findLastIndex';
+import findLastKey from '../objects/findLastKey';
 
 /**
  * This method is like `_.find` except that it iterates over elements of a
@@ -30,16 +30,13 @@ import createCallback from '../functions/createCallback';
  * // => 3
  */
 function findLast(collection, predicate, thisArg) {
-  var result;
-
-  predicate = createCallback(predicate, thisArg, 3);
-  baseEachRight(collection, function(value, index, collection) {
-    if (predicate(value, index, collection)) {
-      result = value;
-      return false;
-    }
-  });
-  return result;
+  var length = (collection && collection.length) | 0;
+  if (length > 0) {
+    var index = findLastIndex(collection, predicate, thisArg);
+    return index > -1 ? collection[index] : undefined;
+  }
+  var key = findLastKey(collection, predicate, thisArg);
+  return typeof key == 'string' ? collection[key] : undefined;
 }
 
 export default findLast;

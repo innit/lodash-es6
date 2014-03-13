@@ -10,6 +10,7 @@
 export { default as compact } from 'compact';
 export { default as difference } from 'difference';
 export { default as drop } from 'drop';
+export { default as findIndex } from 'findIndex';
 export { default as first } from 'first';
 export { default as flatten } from 'flatten';
 export { default as head } from 'first';

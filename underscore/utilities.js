@@ -19,6 +19,7 @@ export { default as noop } from 'noop';
 export { default as now } from 'now';
 export { default as property } from 'property';
 export { default as random } from 'random';
+export { default as range } from 'range';
 export { default as result } from 'result';
 export { default as template } from 'template';
 export { default as templateSettings } from 'templateSettings';

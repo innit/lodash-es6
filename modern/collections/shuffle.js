@@ -26,8 +26,8 @@ import baseRandom from '../internals/baseRandom';
  */
 function shuffle(collection) {
   var index = -1,
-      length = collection ? collection.length : 0,
-      result = Array(typeof length == 'number' ? length : 0);
+      length = (collection && collection.length) | 0,
+      result = Array(length < 0 ? 0 : length);
 
   baseEach(collection, function(value) {
     var rand = baseRandom(0, ++index);

@@ -30,7 +30,7 @@ import keys from '../objects/keys';
  */
 function size(collection) {
   var length = collection ? collection.length : 0;
-  return typeof length == 'number' ? length : keys(collection).length;
+  return typeof length == 'number' && length > -1 ? length : keys(collection).length;
 }
 
 export default size;

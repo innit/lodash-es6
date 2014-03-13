@@ -24,7 +24,7 @@ import slice from './slice';
 function initial(array, n, guard) {
   var length = array ? array.length : 0;
   n = length - ((n == null || guard) ? 1 : n);
-  return slice(array, 0, n > 0 ? n : 0);
+  return slice(array, 0, n < 0 ? 0 : n);
 }
 
 export default initial;

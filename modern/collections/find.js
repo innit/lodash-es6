@@ -6,8 +6,17 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseEach from '../internals/baseEach';
+import baseFind from '../internals/baseFind';
+import createCallback from '../functions/createCallback';
 import findIndex from '../arrays/findIndex';
-import findKey from '../objects/findKey';
+
+/**
+ * Used as the maximum length an array-like object.
+ * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
+ */
+var maxSafeInteger = Math.pow(2, 53) - 1;
 
 /**
  * Iterates over elements of a collection, returning the first element that
@@ -53,13 +62,14 @@ import findKey from '../objects/findKey';
  * // => { 'name': 'fred', 'age': 40, 'blocked': true }
  */
 function find(collection, predicate, thisArg) {
-  var length = (collection && collection.length) | 0;
-  if (length > 0) {
+  var length = collection ? collection.length : 0;
+
+  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
     var index = findIndex(collection, predicate, thisArg);
     return index > -1 ? collection[index] : undefined;
   }
-  var key = findKey(collection, predicate, thisArg);
-  return typeof key == 'string' ? collection[key] : undefined;
+  predicate = createCallback(predicate, thisArg, 3);
+  return baseFind(collection, predicate, baseEach);
 }
 
 export default find;

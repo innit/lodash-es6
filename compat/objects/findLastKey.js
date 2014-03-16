@@ -6,6 +6,7 @@
  * Copyright 2009-2013 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseFind from '../internals/baseFind';
 import baseForOwnRight from '../internals/baseForOwnRight';
 import createCallback from '../functions/createCallback';
 
@@ -51,16 +52,8 @@ import createCallback from '../functions/createCallback';
  * // => 'pebbles'
  */
 function findLastKey(object, predicate, thisArg) {
-  var result;
-
   predicate = createCallback(predicate, thisArg, 3);
-  baseForOwnRight(object, function(value, key, object) {
-    if (predicate(value, key, object)) {
-      result = key;
-      return false;
-    }
-  });
-  return result;
+  return baseFind(object, predicate, baseForOwnRight, true);
 }
 
 export default findLastKey;

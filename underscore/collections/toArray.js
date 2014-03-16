@@ -12,7 +12,7 @@ import slice from '../arrays/slice';
 import values from '../objects/values';
 
 /**
- * Converts the `collection` to an array.
+ * Converts `collection` to an array.
  *
  * @static
  * @memberOf _

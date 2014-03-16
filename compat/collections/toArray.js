@@ -12,7 +12,14 @@ import support from '../support';
 import values from '../objects/values';
 
 /**
- * Converts the `collection` to an array.
+ * Used as the maximum length an array-like object.
+ * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
+ */
+var maxSafeInteger = Math.pow(2, 53) - 1;
+
+/**
+ * Converts `collection` to an array.
  *
  * @static
  * @memberOf _
@@ -26,7 +33,7 @@ import values from '../objects/values';
  */
 function toArray(collection) {
   var length = collection && collection.length;
-  if (typeof length == 'number' && length > -1) {
+  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
     return (support.unindexedChars && isString(collection))
       ? collection.split('')
       : slice(collection);

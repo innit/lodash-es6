@@ -7,8 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as escape } from 'escape';
-export { default as escapeRegExp } from 'escapeRegExp';
-export { default as template } from 'template';
-export { default as templateSettings } from 'templateSettings';
-export { default as unescape } from 'unescape';
+export { default as escape } from './utilities/escape';
+export { default as escapeRegExp } from './strings/escapeRegExp';
+export { default as template } from './utilities/template';
+export { default as templateSettings } from './utilities/templateSettings';
+export { default as unescape } from './utilities/unescape';

@@ -7,9 +7,9 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as chain } from 'chain';
-export { default as tap } from 'tap';
-export { default as value } from 'wrapperValueOf';
-export { default as wrapperChain } from 'wrapperChain';
-export { default as wrapperToString } from 'wrapperToString';
-export { default as wrapperValueOf } from 'wrapperValueOf';
+export { default as chain } from './chaining/chain';
+export { default as tap } from './chaining/tap';
+export { default as value } from './chaining/wrapperValueOf';
+export { default as wrapperChain } from './chaining/wrapperChain';
+export { default as wrapperToString } from './chaining/wrapperToString';
+export { default as wrapperValueOf } from './chaining/wrapperValueOf';

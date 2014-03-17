@@ -7,23 +7,23 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as callback } from 'createCallback';
-export { default as constant } from 'constant';
-export { default as createCallback } from 'createCallback';
-export { default as escape } from 'escape';
-export { default as identity } from 'identity';
-export { default as matches } from 'matches';
-export { default as mixin } from 'mixin';
-export { default as noConflict } from 'noConflict';
-export { default as noop } from 'noop';
-export { default as now } from 'now';
-export { default as parseInt } from 'parseInt';
-export { default as property } from 'property';
-export { default as random } from 'random';
-export { default as range } from 'range';
-export { default as result } from 'result';
-export { default as template } from 'template';
-export { default as templateSettings } from 'templateSettings';
-export { default as times } from 'times';
-export { default as unescape } from 'unescape';
-export { default as uniqueId } from 'uniqueId';
+export { default as callback } from './functions/createCallback';
+export { default as constant } from './utilities/constant';
+export { default as createCallback } from './functions/createCallback';
+export { default as escape } from './utilities/escape';
+export { default as identity } from './utilities/identity';
+export { default as matches } from './utilities/matches';
+export { default as mixin } from './utilities/mixin';
+export { default as noConflict } from './utilities/noConflict';
+export { default as noop } from './utilities/noop';
+export { default as now } from './utilities/now';
+export { default as parseInt } from './utilities/parseInt';
+export { default as property } from './utilities/property';
+export { default as random } from './utilities/random';
+export { default as range } from './arrays/range';
+export { default as result } from './utilities/result';
+export { default as template } from './utilities/template';
+export { default as templateSettings } from './utilities/templateSettings';
+export { default as times } from './utilities/times';
+export { default as unescape } from './utilities/unescape';
+export { default as uniqueId } from './utilities/uniqueId';

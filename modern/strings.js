@@ -7,22 +7,22 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as camelCase } from 'camelCase';
-export { default as capitalize } from 'capitalize';
-export { default as endsWith } from 'endsWith';
-export { default as escape } from 'escape';
-export { default as escapeRegExp } from 'escapeRegExp';
-export { default as kebabCase } from 'kebabCase';
-export { default as pad } from 'pad';
-export { default as padLeft } from 'padLeft';
-export { default as padRight } from 'padRight';
-export { default as repeat } from 'repeat';
-export { default as snakeCase } from 'snakeCase';
-export { default as startsWith } from 'startsWith';
-export { default as template } from 'template';
-export { default as templateSettings } from 'templateSettings';
-export { default as trim } from 'trim';
-export { default as trimLeft } from 'trimLeft';
-export { default as trimRight } from 'trimRight';
-export { default as truncate } from 'truncate';
-export { default as unescape } from 'unescape';
+export { default as camelCase } from './strings/camelCase';
+export { default as capitalize } from './strings/capitalize';
+export { default as endsWith } from './strings/endsWith';
+export { default as escape } from './utilities/escape';
+export { default as escapeRegExp } from './strings/escapeRegExp';
+export { default as kebabCase } from './strings/kebabCase';
+export { default as pad } from './strings/pad';
+export { default as padLeft } from './strings/padLeft';
+export { default as padRight } from './strings/padRight';
+export { default as repeat } from './strings/repeat';
+export { default as snakeCase } from './strings/snakeCase';
+export { default as startsWith } from './strings/startsWith';
+export { default as template } from './utilities/template';
+export { default as templateSettings } from './utilities/templateSettings';
+export { default as trim } from './strings/trim';
+export { default as trimLeft } from './strings/trimLeft';
+export { default as trimRight } from './strings/trimRight';
+export { default as truncate } from './strings/truncate';
+export { default as unescape } from './utilities/unescape';

@@ -3,6 +3,4 @@
 *.log
 package.json
 coverage
-legacy
-mobile
 node_modules

@@ -13,7 +13,7 @@ import isArray from '../objects/isArray';
 import isObject from '../objects/isObject';
 import slice from '../arrays/slice';
 
-/** Used to match regexp flags from their coerced string values */
+/** Used to match `RegExp` flags from their coerced string values */
 var reFlags = /\w*$/;
 
 /** `Object#toString` result shortcuts */
@@ -38,13 +38,13 @@ cloneableClasses[regexpClass] = cloneableClasses[stringClass] = true;
 /** Used for native method references */
 var objectProto = Object.prototype;
 
-/** Used to resolve the internal [[Class]] of values */
+/** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
 
 /** Native method shortcuts */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-/** Used to lookup a built-in constructor by [[Class]] */
+/** Used to lookup a built-in constructor by `[[Class]]` */
 var ctorByClass = {};
 ctorByClass[arrayClass] = Array;
 ctorByClass[boolClass] = Boolean;
@@ -74,7 +74,7 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
       return result;
     }
   }
-  // inspect [[Class]]
+  // inspect `[[Class]]`
   var isObj = isObject(value);
   if (isObj) {
     var className = toString.call(value);

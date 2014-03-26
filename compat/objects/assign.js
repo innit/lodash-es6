@@ -30,8 +30,8 @@ import keys from './keys';
  * _.assign({ 'name': 'fred' }, { 'employer': 'slate' });
  * // => { 'name': 'fred', 'employer': 'slate' }
  *
- * var defaults = _.partialRight(_.assign, function(a, b) {
- *   return typeof a == 'undefined' ? b : a;
+ * var defaults = _.partialRight(_.assign, function(value, other) {
+ *   return typeof value == 'undefined' ? other : value;
  * });
  *
  * defaults({ 'name': 'barney' }, { 'name': 'fred', 'employer': 'slate' });

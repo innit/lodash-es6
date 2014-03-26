@@ -22,7 +22,7 @@ import createCompounder from '../internals/createCompounder';
  * _.snakeCase('Hello world');
  * // => 'hello_world'
  *
- * _.snakeCase('hello-world');
+ * _.snakeCase('--hello-world');
  * // => 'hello_world'
  *
  * _.snakeCase('helloWorld');

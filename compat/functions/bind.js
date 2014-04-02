@@ -8,7 +8,6 @@
  */
 import createWrapper from '../internals/createWrapper';
 import slice from '../arrays/slice';
-import support from '../support';
 
 /** Used to compose bitmasks for wrapper metadata */
 var BIND_FLAG = 1,

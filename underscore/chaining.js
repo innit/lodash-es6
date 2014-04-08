@@ -9,6 +9,7 @@
 
 export { default as chain } from './chaining/chain';
 export { default as tap } from './chaining/tap';
+export { default as toJSON } from './chaining/wrapperValueOf';
 export { default as value } from './chaining/wrapperValueOf';
 export { default as wrapperChain } from './chaining/wrapperChain';
 export { default as wrapperValueOf } from './chaining/wrapperValueOf';

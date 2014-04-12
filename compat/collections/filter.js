@@ -52,8 +52,8 @@ import isArray from '../objects/isArray';
  */
 function filter(collection, predicate, thisArg) {
   var result = [];
-
   predicate = createCallback(predicate, thisArg, 3);
+
   if (isArray(collection)) {
     var index = -1,
         length = collection.length;

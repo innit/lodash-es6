@@ -42,8 +42,8 @@ import isArray from '../objects/isArray';
  */
 function reduce(collection, callback, accumulator, thisArg) {
   var noaccum = arguments.length < 3;
-
   callback = createCallback(callback, thisArg, 4);
+
   if (isArray(collection)) {
     var index = -1,
         length = collection.length;

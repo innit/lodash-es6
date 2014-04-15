@@ -6,8 +6,8 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import arrayEach from '../internals/arrayEach';
 import baseCreate from '../internals/baseCreate';
-import baseEach from '../internals/baseEach';
 import baseForOwn from '../internals/baseForOwn';
 import createCallback from '../functions/createCallback';
 import isArray from './isArray';
@@ -57,7 +57,7 @@ function transform(object, callback, accumulator, thisArg) {
   }
   if (callback) {
     callback = createCallback(callback, thisArg, 4);
-    (isArr ? baseEach : baseForOwn)(object, function(value, index, object) {
+    (isArr ? arrayEach : baseForOwn)(object, function(value, index, object) {
       return callback(accumulator, value, index, object);
     });
   }

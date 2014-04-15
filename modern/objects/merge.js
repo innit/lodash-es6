@@ -6,8 +6,8 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import arrayEach from '../internals/arrayEach';
 import baseCreateCallback from '../internals/baseCreateCallback';
-import baseEach from '../internals/baseEach';
 import baseForOwn from '../internals/baseForOwn';
 import isArray from './isArray';
 import isPlainObject from './isPlainObject';
@@ -25,7 +25,7 @@ import slice from '../arrays/slice';
  * @param {Array} [stackB=[]] Associates values with source counterparts.
  */
 function baseMerge(object, source, callback, stackA, stackB) {
-  (isArray(source) ? baseEach : baseForOwn)(source, function(source, key) {
+  (isArray(source) ? arrayEach : baseForOwn)(source, function(source, key) {
     var found,
         isArr,
         result = source,

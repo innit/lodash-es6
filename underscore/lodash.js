@@ -14,8 +14,8 @@ import functions from './functions';
 import objects from './objects';
 import strings from './strings';
 import utilities from './utilities';
+import arrayEach from './internals/arrayEach';
 import assign from './objects/assign';
-import baseEach from './internals/baseEach';
 import baseForOwn from './internals/baseForOwn';
 import lodashWrapper from './internals/lodashWrapper';
 import mixin from './utilities/mixin';
@@ -257,7 +257,7 @@ lodash.prototype.chain = chaining.wrapperChain;
 lodash.prototype.value = chaining.wrapperValueOf;
 
   // add `Array` mutator functions to the wrapper
-  baseEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
+  arrayEach(['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'], function(methodName) {
     var func = arrayRef[methodName];
     lodash.prototype[methodName] = function() {
       var value = this.__wrapped__;
@@ -273,7 +273,7 @@ lodash.prototype.value = chaining.wrapperValueOf;
   });
 
   // add `Array` accessor functions to the wrapper
-  baseEach(['concat', 'join', 'slice'], function(methodName) {
+  arrayEach(['concat', 'join', 'slice'], function(methodName) {
     var func = arrayRef[methodName];
     lodash.prototype[methodName] = function() {
       var value = this.__wrapped__,

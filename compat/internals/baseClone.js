@@ -6,8 +6,8 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import arrayEach from './arrayEach';
 import assign from '../objects/assign';
-import baseEach from './baseEach';
 import baseForOwn from './baseForOwn';
 import isArray from '../objects/isArray';
 import isNode from './isNode';
@@ -136,7 +136,7 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
   stackB.push(result);
 
   // recursively populate clone (susceptible to call stack limits)
-  (isArr ? baseEach : baseForOwn)(value, function(valValue, key) {
+  (isArr ? arrayEach : baseForOwn)(value, function(valValue, key) {
     result[key] = baseClone(valValue, isDeep, callback, stackA, stackB);
   });
 

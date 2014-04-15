@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import find from './find';
-import isObject from '../objects/isObject';
 
 /**
  * Performs a deep comparison between each element in `collection` and the
@@ -34,7 +33,7 @@ import isObject from '../objects/isObject';
  * // =>  { 'name': 'fred', 'age': 40, 'employer': 'slate' }
  */
 function findWhere(collection, source) {
-  return find(collection, isObject(source) ? source : {});
+  return find(collection, Object(source));
 }
 
 export default findWhere;

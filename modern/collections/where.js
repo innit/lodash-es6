@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import filter from './filter';
-import isObject from '../objects/isObject';
 
 /**
  * Performs a deep comparison between each element in `collection` and the
@@ -37,7 +36,7 @@ import isObject from '../objects/isObject';
  * // => ['barney', 'fred']
  */
 function where(collection, source) {
-  return filter(collection, isObject(source) ? source : {});
+  return filter(collection, Object(source));
 }
 
 export default where;

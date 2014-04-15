@@ -17,7 +17,7 @@ export { default as each } from './collections/forEach';
 export { default as every } from './collections/every';
 export { default as filter } from './collections/filter';
 export { default as find } from './collections/find';
-export { default as findWhere } from './collections/find';
+export { default as findWhere } from './collections/findWhere';
 export { default as foldl } from './collections/reduce';
 export { default as foldr } from './collections/reduceRight';
 export { default as forEach } from './collections/forEach';

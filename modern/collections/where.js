@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import filter from './filter';
+import matches from '../utilities/matches';
 
 /**
  * Performs a deep comparison between each element in `collection` and the
@@ -36,7 +37,7 @@ import filter from './filter';
  * // => ['barney', 'fred']
  */
 function where(collection, source) {
-  return filter(collection, Object(source));
+  return filter(collection, matches(source));
 }
 
 export default where;

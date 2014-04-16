@@ -7,13 +7,13 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import map from './map';
+import property from '../utilities/property';
 
 /**
  * Retrieves the value of a specified property from all elements in the collection.
  *
  * @static
  * @memberOf _
- * @type Function
  * @category Collections
  * @param {Array|Object|string} collection The collection to iterate over.
  * @param {string} key The name of the property to pluck.
@@ -28,6 +28,8 @@ import map from './map';
  * _.pluck(characters, 'name');
  * // => ['barney', 'fred']
  */
-var pluck = map;
+function pluck(collection, key) {
+  return map(collection, property(key));
+}
 
 export default pluck;

@@ -8,6 +8,8 @@
  */
 import baseDifference from '../internals/baseDifference';
 import baseFlatten from '../internals/baseFlatten';
+import isArguments from '../objects/isArguments';
+import isArray from '../objects/isArray';
 
 /**
  * Creates an array excluding all values of the provided arrays using strict
@@ -25,7 +27,16 @@ import baseFlatten from '../internals/baseFlatten';
  * // => [1, 3]
  */
 function difference() {
-  return baseDifference(arguments[0], baseFlatten(arguments, true, true, 1));
+  var index = -1,
+      length = arguments.length;
+
+  while (++index < length) {
+    var value = arguments[index];
+    if (isArray(value) || isArguments(value)) {
+      break;
+    }
+  }
+  return baseDifference(arguments[index], baseFlatten(arguments, true, true, ++index));
 }
 
 export default difference;

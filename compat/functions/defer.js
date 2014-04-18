@@ -9,6 +9,9 @@
 import isFunction from '../objects/isFunction';
 import slice from '../arrays/slice';
 
+/** Used as the TypeError message for "Functions" methods */
+var funcErrorText = 'Expected a function';
+
 /**
  * Defers executing the `func` function until the current call stack has cleared.
  * Additional arguments will be provided to `func` when it is invoked.
@@ -26,7 +29,7 @@ import slice from '../arrays/slice';
  */
 function defer(func) {
   if (!isFunction(func)) {
-    throw new TypeError;
+    throw new TypeError(funcErrorText);
   }
   var args = slice(arguments, 1);
   return setTimeout(function() { func.apply(undefined, args); }, 1);

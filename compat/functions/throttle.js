@@ -10,6 +10,9 @@ import debounce from './debounce';
 import isFunction from '../objects/isFunction';
 import isObject from '../objects/isObject';
 
+/** Used as the TypeError message for "Functions" methods */
+var funcErrorText = 'Expected a function';
+
 /** Used as an internal `_.debounce` options object by `_.throttle` */
 var debounceOptions = {
   'leading': false,
@@ -53,7 +56,7 @@ function throttle(func, wait, options) {
       trailing = true;
 
   if (!isFunction(func)) {
-    throw new TypeError;
+    throw new TypeError(funcErrorText);
   }
   if (options === false) {
     leading = false;

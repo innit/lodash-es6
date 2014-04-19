@@ -29,6 +29,7 @@ export { default as isDate } from './objects/isDate';
 export { default as isElement } from './objects/isElement';
 export { default as isEmpty } from './objects/isEmpty';
 export { default as isEqual } from './objects/isEqual';
+export { default as isError } from './objects/isError';
 export { default as isFinite } from './objects/isFinite';
 export { default as isFunction } from './objects/isFunction';
 export { default as isNaN } from './objects/isNaN';

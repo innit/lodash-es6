@@ -11,7 +11,6 @@ import composeArgs from './composeArgs';
 import composeArgsRight from './composeArgsRight';
 import isObject from '../objects/isObject';
 import setData from './setData';
-import slice from '../arrays/slice';
 
 /** Used to compose bitmasks for wrapper metadata */
 var BIND_FLAG = 1,

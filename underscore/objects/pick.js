@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internals/baseFlatten';
-import slice from '../arrays/slice';
 
 /**
  * Creates a shallow clone of `object` composed of the specified properties.

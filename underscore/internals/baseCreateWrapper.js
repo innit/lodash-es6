@@ -9,7 +9,6 @@
 import baseCreate from './baseCreate';
 import composeArgs from './composeArgs';
 import isObject from '../objects/isObject';
-import slice from '../arrays/slice';
 
 /** Used to compose bitmasks for wrapper metadata */
 var BIND_FLAG = 1,

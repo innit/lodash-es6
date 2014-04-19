@@ -16,11 +16,9 @@ import strings from './strings';
 import utilities from './utilities';
 import arrayEach from './internals/arrayEach';
 import assign from './objects/assign';
-import baseForOwn from './internals/baseForOwn';
 import lodashWrapper from './internals/lodashWrapper';
 import mixin from './utilities/mixin';
 import support from './support';
-import templateSettings from './utilities/templateSettings';
 
 /** Used as the semantic version number */
 var version = '2.4.1';

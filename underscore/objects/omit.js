@@ -9,7 +9,6 @@
 import baseDifference from '../internals/baseDifference';
 import baseFlatten from '../internals/baseFlatten';
 import keysIn from './keysIn';
-import negate from '../functions/negate';
 import pick from './pick';
 
 /**

@@ -8,7 +8,6 @@
  */
 import baseCreateWrapper from './baseCreateWrapper';
 import isFunction from '../objects/isFunction';
-import slice from '../arrays/slice';
 
 /** Used to compose bitmasks for wrapper metadata */
 var BIND_FLAG = 1,

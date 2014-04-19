@@ -7,7 +7,6 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import assign from './assign';
-import baseCreateCallback from '../internals/baseCreateCallback';
 import isArray from './isArray';
 import isObject from './isObject';
 import slice from '../arrays/slice';

@@ -10,7 +10,6 @@ import baseCreate from './baseCreate';
 import composeArgs from './composeArgs';
 import isObject from '../objects/isObject';
 import setData from './setData';
-import slice from '../arrays/slice';
 
 /**
  * The base implementation of `_.bind` that creates the bound function and

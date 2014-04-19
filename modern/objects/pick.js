@@ -10,7 +10,6 @@ import baseFlatten from '../internals/baseFlatten';
 import baseForIn from '../internals/baseForIn';
 import createCallback from '../functions/createCallback';
 import isObject from './isObject';
-import slice from '../arrays/slice';
 
 /**
  * Creates a shallow clone of `object` composed of the specified properties.

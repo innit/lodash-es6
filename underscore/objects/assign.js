@@ -6,8 +6,6 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import baseCreateCallback from '../internals/baseCreateCallback';
-import keys from './keys';
 
 /**
  * Assigns own enumerable properties of source object(s) to the destination

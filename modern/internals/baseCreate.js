@@ -8,7 +8,6 @@
  */
 import isNative from './isNative';
 import isObject from '../objects/isObject';
-import noop from '../utilities/noop';
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
 var nativeCreate = isNative(nativeCreate = Object.create) && nativeCreate;

@@ -21,7 +21,6 @@ import isArray from './objects/isArray';
 import lodashWrapper from './internals/lodashWrapper';
 import mixin from './utilities/mixin';
 import support from './support';
-import templateSettings from './utilities/templateSettings';
 
 /** Used as the semantic version number */
 var version = '2.4.1';

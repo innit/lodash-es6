@@ -8,7 +8,6 @@
  */
 import defaults from '../objects/defaults';
 import escape from './escape';
-import reInterpolate from '../internals/reInterpolate';
 import templateSettings from './templateSettings';
 
 /** Used to ensure capturing order of template delimiters */

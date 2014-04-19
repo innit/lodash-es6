@@ -15,7 +15,6 @@ export { default as identity } from './utilities/identity';
 export { default as matches } from './utilities/matches';
 export { default as mixin } from './utilities/mixin';
 export { default as noConflict } from './utilities/noConflict';
-export { default as noop } from './utilities/noop';
 export { default as now } from './utilities/now';
 export { default as property } from './utilities/property';
 export { default as random } from './utilities/random';

@@ -40,6 +40,9 @@ import isString from '../objects/isString';
  * _.max([4, 2, 8, 6]);
  * // => 8
  *
+ * _.max([]);
+ * // => -Infinity
+ *
  * var characters = [
  *   { 'name': 'barney', 'age': 36 },
  *   { 'name': 'fred',   'age': 40 }

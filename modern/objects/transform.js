@@ -11,6 +11,7 @@ import baseCreate from '../internals/baseCreate';
 import baseForOwn from '../internals/baseForOwn';
 import createCallback from '../functions/createCallback';
 import isArray from './isArray';
+import isObject from './isObject';
 
 /**
  * An alternative to `_.reduce`; this method transforms `object` to a new
@@ -49,9 +50,10 @@ function transform(object, callback, accumulator, thisArg) {
     if (isArr) {
       accumulator = [];
     } else {
-      var ctor = object && object.constructor,
-          proto = ctor && ctor.prototype;
-
+      if (isObject(object)) {
+        var ctor = object.constructor,
+            proto = ctor && ctor.prototype;
+      }
       accumulator = baseCreate(proto);
     }
   }

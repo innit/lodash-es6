@@ -6,6 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseAt from '../internals/baseAt';
 import baseFlatten from '../internals/baseFlatten';
 import isString from '../objects/isString';
 import support from '../support';
@@ -21,7 +22,7 @@ import support from '../support';
  * @param {Array|Object|string} collection The collection to iterate over.
  * @param {...(number|number[]|string|string[])} [keys] The keys of elements
  *  to pick, specified as individual keys or arrays of keys.
- * @returns {Array} Returns the array of picked elements.
+ * @returns {Array} Returns the new array of picked elements.
  * @example
  *
  * _.at(['a', 'b', 'c', 'd', 'e'], [0, 2, 4]);
@@ -31,18 +32,10 @@ import support from '../support';
  * // => ['fred', 'pebbles']
  */
 function at(collection) {
-  var index = -1,
-      props = baseFlatten(arguments, true, false, 1),
-      length = props.length;
-
   if (support.unindexedChars && isString(collection)) {
     collection = collection.split('');
   }
-  var result = Array(length);
-  while(++index < length) {
-    result[index] = collection[props[index]];
-  }
-  return result;
+  return baseAt(collection, baseFlatten(arguments, true, false, 1));
 }
 
 export default at;

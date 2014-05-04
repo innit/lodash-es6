@@ -25,6 +25,7 @@ export { default as last } from './arrays/last';
 export { default as lastIndexOf } from './arrays/lastIndexOf';
 export { default as object } from './arrays/zipObject';
 export { default as pull } from './arrays/pull';
+export { default as pullAt } from './arrays/pullAt';
 export { default as range } from './arrays/range';
 export { default as remove } from './arrays/remove';
 export { default as rest } from './arrays/rest';

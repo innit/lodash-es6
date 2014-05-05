@@ -402,4 +402,6 @@ if (!support.spliceObjects) {
   });
 }
 
+lodash.support = support;
+(lodash.templateSettings = utilities.templateSettings).imports._ = lodash;
 export default lodash;

@@ -380,4 +380,6 @@ arrayEach(['concat', 'splice'], function(methodName) {
   };
 });
 
+lodash.support = support;
+(lodash.templateSettings = utilities.templateSettings).imports._ = lodash;
 export default lodash;

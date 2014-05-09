@@ -10,8 +10,8 @@ import baseForIn from '../internals/baseForIn';
 import isFunction from './isFunction';
 
 /**
- * Creates a sorted array of property names of all enumerable properties,
- * own and inherited, of `object` that have function values.
+ * Creates a sorted array of property names of all enumerable function
+ * properties, own and inherited, of `object`.
  *
  * @static
  * @memberOf _

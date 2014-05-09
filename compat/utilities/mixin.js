@@ -6,9 +6,10 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import functions from '../objects/functions';
+import baseFunctions from '../internals/baseFunctions';
 import isFunction from '../objects/isFunction';
 import isObject from '../objects/isObject';
+import keys from '../objects/keys';
 
 /** Used for native method references */
 var arrayRef = Array.prototype;
@@ -17,8 +18,9 @@ var arrayRef = Array.prototype;
 var push = arrayRef.push;
 
 /**
- * Adds function properties of a source object to the destination object.
- * If `object` is a function methods will be added to its prototype as well.
+ * Adds all own enumerable function properties of a source object to the
+ * destination object. If `object` is a function methods will be added to
+ * its prototype as well.
  *
  * @static
  * @memberOf _
@@ -50,7 +52,7 @@ var push = arrayRef.push;
  */
 function mixin(object, source, options) {
   var chain = true,
-      methodNames = source && functions(source);
+      methodNames = source && baseFunctions(source, keys);
 
   if (options === false) {
     chain = false;

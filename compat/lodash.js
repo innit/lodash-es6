@@ -17,7 +17,9 @@ import utilities from './utilities';
 import arrayEach from './internals/arrayEach';
 import assign from './objects/assign';
 import baseForOwn from './internals/baseForOwn';
+import baseFunctions from './internals/baseFunctions';
 import isArray from './objects/isArray';
+import keys from './objects/keys';
 import lodashWrapper from './internals/lodashWrapper';
 import mixin from './utilities/mixin';
 import support from './support';
@@ -111,9 +113,8 @@ lodashWrapper.prototype = lodash.prototype;
 
 // wrap `_.mixin` so it works when provided only one argument
 mixin = (function(func) {
-  var functions = objects.functions;
   return function(object, source, options) {
-    if (!source || (!options && !functions(source).length)) {
+    if (!source || (!options && !baseFunctions(source, keys).length)) {
       if (options == null) {
         options = source;
       }
@@ -163,7 +164,7 @@ lodash.initial = arrays.initial;
 lodash.intersection = arrays.intersection;
 lodash.invert = objects.invert;
 lodash.invoke = collections.invoke;
-lodash.keys = objects.keys;
+lodash.keys = keys;
 lodash.keysIn = objects.keysIn;
 lodash.map = collections.map;
 lodash.mapValues = objects.mapValues;
@@ -298,7 +299,7 @@ lodash.foldr = collections.reduceRight;
 lodash.include = collections.contains;
 lodash.inject = collections.reduce;
 
-mixin(lodash, function() {
+mixin(lodash, (function() {
   var source = {}
   baseForOwn(lodash, function(func, methodName) {
     if (!lodash.prototype[methodName]) {
@@ -306,7 +307,7 @@ mixin(lodash, function() {
     }
   });
   return source;
-}(), false);
+}()), false);
 
 // add functions capable of returning wrapped and unwrapped values when chaining
 lodash.first = arrays.first;

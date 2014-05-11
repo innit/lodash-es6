@@ -6,8 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import assign from './assign';
-import slice from '../arrays/slice';
+import createAssigner from '../internals/createAssigner';
 
 /**
  * Used by `_.defaults` to customize its `_.assign` use.
@@ -41,13 +40,6 @@ function assignDefaults(objectValue, sourceValue) {
  * _.defaults({ 'name': 'barney' }, { 'name': 'fred', 'employer': 'slate' });
  * // => { 'name': 'barney', 'employer': 'slate' }
  */
-function defaults(object) {
-  if (!object) {
-    return object;
-  }
-  var args = slice(arguments);
-  args.push(assignDefaults);
-  return assign.apply(null, args);
-}
+var defaults = createAssigner(assignDefaults);
 
 export default defaults;

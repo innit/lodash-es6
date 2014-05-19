@@ -8,8 +8,9 @@
  */
 import baseDifference from '../internals/baseDifference';
 import baseFlatten from '../internals/baseFlatten';
+import basePick from '../internals/basePick';
+import isObject from './isObject';
 import keysIn from './keysIn';
-import pick from './pick';
 
 /**
  * Creates a shallow clone of `object` excluding the specified properties.
@@ -39,13 +40,16 @@ import pick from './pick';
  * // => { 'name': 'fred' }
  */
 function omit(object) {
+  if (!isObject(object)) {
+    return {};
+  }
   var omitProps = baseFlatten(arguments, true, false, 1),
       length = omitProps.length;
 
   while (length--) {
     omitProps[length] = String(omitProps[length]);
   }
-  return pick(object, baseDifference(keysIn(object), omitProps));
+  return basePick(object, baseDifference(keysIn(object), omitProps));
 }
 
 export default omit;

@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import assign from './assign';
+import baseAssign from '../internals/baseAssign';
 import baseCreate from '../internals/baseCreate';
 
 /**
@@ -42,7 +42,7 @@ import baseCreate from '../internals/baseCreate';
  */
 function create(prototype, properties) {
   var result = baseCreate(prototype);
-  return properties ? assign(result, properties) : result;
+  return properties ? baseAssign(result, properties) : result;
 }
 
 export default create;

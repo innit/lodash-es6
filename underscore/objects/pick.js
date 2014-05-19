@@ -7,6 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internals/baseFlatten';
+import basePick from '../internals/basePick';
+import isObject from './isObject';
 
 /**
  * Creates a shallow clone of `object` composed of the specified properties.
@@ -36,18 +38,9 @@ import baseFlatten from '../internals/baseFlatten';
  * // => { 'name': 'fred' }
  */
 function pick(object) {
-  var index = -1,
-      props = baseFlatten(arguments, true, false, 1),
-      length = props.length,
-      result = {};
-
-  while (++index < length) {
-    var key = props[index];
-    if (key in object) {
-      result[key] = object[key];
-    }
-  }
-  return result;
+  return isObject(object)
+    ? basePick(object, baseFlatten(arguments, true, false, 1))
+    : {};
 }
 
 export default pick;

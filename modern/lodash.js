@@ -15,7 +15,7 @@ import objects from './objects';
 import strings from './strings';
 import utilities from './utilities';
 import arrayEach from './internals/arrayEach';
-import assign from './objects/assign';
+import baseAssign from './internals/baseAssign';
 import baseForOwn from './internals/baseForOwn';
 import baseFunctions from './internals/baseFunctions';
 import isArray from './objects/isArray';
@@ -127,7 +127,7 @@ mixin = (function(func) {
 
 // add functions that return wrapped values when chaining
 lodash.after = functions.after;
-lodash.assign = assign;
+lodash.assign = objects.assign;
 lodash.at = collections.at;
 lodash.bind = functions.bind;
 lodash.bindAll = functions.bindAll;
@@ -214,7 +214,7 @@ lodash.callback = functions.createCallback;
 lodash.collect = collections.map;
 lodash.each = collections.forEach;
 lodash.eachRight = collections.forEachRight;
-lodash.extend = assign;
+lodash.extend = objects.assign;
 lodash.methods = objects.functions;
 lodash.object = arrays.zipObject;
 lodash.select = collections.filter;
@@ -223,7 +223,7 @@ lodash.unique = arrays.uniq;
 lodash.unzip = arrays.zip;
 
 // add functions to `lodash.prototype`
-mixin(lodash, assign({}, lodash));
+mixin(lodash, baseAssign({}, lodash));
 
 // add functions that return unwrapped values when chaining
 lodash.camelCase = strings.camelCase;

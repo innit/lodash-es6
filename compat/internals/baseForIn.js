@@ -11,7 +11,7 @@ import keysIn from '../objects/keysIn';
 
 /**
  * The base implementation of `_.forIn` without support for callback
- * shorthands or `this` binding.
+ * shorthands and `this` binding.
  *
  * @private
  * @param {Object} object The object to iterate over.

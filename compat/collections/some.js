@@ -54,8 +54,10 @@ import isArray from '../objects/isArray';
  */
 function some(collection, predicate, thisArg) {
   var result;
-  predicate = createCallback(predicate, thisArg, 3);
 
+  if (typeof predicate != 'function' || typeof thisArg != 'undefined') {
+    predicate = createCallback(predicate, thisArg, 3);
+  }
   if (isArray(collection)) {
     var index = -1,
         length = collection.length;
@@ -67,7 +69,8 @@ function some(collection, predicate, thisArg) {
     }
   } else {
     baseEach(collection, function(value, index, collection) {
-      return !(result = predicate(value, index, collection));
+      result = predicate(value, index, collection);
+      return !result;
     });
   }
   return !!result;

@@ -10,7 +10,7 @@ import arrayEach from '../internals/arrayEach';
 import baseCreate from '../internals/baseCreate';
 import baseForOwn from '../internals/baseForOwn';
 import createCallback from '../functions/createCallback';
-import isArray from './isArray';
+import isArrayLike from '../internals/isArrayLike';
 import isObject from './isObject';
 
 /**
@@ -45,14 +45,14 @@ import isObject from './isObject';
  * // => { 'a': 3, 'b': 6, 'c': 9 }
  */
 function transform(object, callback, accumulator, thisArg) {
-  var isArr = isArray(object);
+  var isArr = isArrayLike(object);
   if (accumulator == null) {
     if (isArr) {
       accumulator = [];
     } else {
       if (isObject(object)) {
-        var ctor = object.constructor,
-            proto = ctor && ctor.prototype;
+        var Ctor = object.constructor,
+            proto = Ctor && Ctor.prototype;
       }
       accumulator = baseCreate(proto);
     }

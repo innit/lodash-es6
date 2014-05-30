@@ -10,6 +10,7 @@ import arrayEach from '../internals/arrayEach';
 import baseForOwn from '../internals/baseForOwn';
 import createAssigner from '../internals/createAssigner';
 import isArray from './isArray';
+import isArrayLike from '../internals/isArrayLike';
 import isPlainObject from './isPlainObject';
 
 /**
@@ -28,8 +29,8 @@ function baseMerge(object, source, callback, stackA, stackB) {
   if (!object) {
     return object;
   }
-  (isArray(source) ? arrayEach : baseForOwn)(source, function(srcValue, key, source) {
-    var isArr = srcValue && isArray(srcValue),
+  (isArrayLike(source) ? arrayEach : baseForOwn)(source, function(srcValue, key, source) {
+    var isArr = srcValue && isArrayLike(srcValue),
         isObj = srcValue && isPlainObject(srcValue),
         value = object[key];
 

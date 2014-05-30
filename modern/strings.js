@@ -24,5 +24,5 @@ export { default as templateSettings } from './utilities/templateSettings';
 export { default as trim } from './strings/trim';
 export { default as trimLeft } from './strings/trimLeft';
 export { default as trimRight } from './strings/trimRight';
-export { default as truncate } from './strings/truncate';
+export { default as trunc } from './strings/trunc';
 export { default as unescape } from './utilities/unescape';

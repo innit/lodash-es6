@@ -1,6 +1,6 @@
 /**
  * @license
- * Lo-Dash 2.4.1 (Custom Build) <http://lodash.com/>
+ * Lo-Dash 2.5.0-pre (Custom Build) <http://lodash.com/>
  * Build: `lodash modularize underscore exports="es6" -o ./underscore/`
  * Copyright 2012-2014 The Dojo Foundation <http://dojofoundation.org/>
  * Based on Underscore.js 1.6.0 <http://underscorejs.org/LICENSE>
@@ -21,7 +21,7 @@ import mixin from './utilities/mixin';
 import support from './support';
 
 /** Used as the semantic version number */
-var version = '2.4.1';
+var version = '2.5.0-pre';
 
 /** Used for native method references */
 var arrayProto = Array.prototype;

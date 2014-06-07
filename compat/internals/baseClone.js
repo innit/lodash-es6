@@ -9,6 +9,7 @@
 import arrayEach from './arrayEach';
 import baseAssign from './baseAssign';
 import baseForOwn from './baseForOwn';
+import cloneBuffer from './cloneBuffer';
 import isArray from '../objects/isArray';
 import isFunction from '../objects/isFunction';
 import isNode from './isNode';
@@ -69,6 +70,18 @@ var toString = objectProto.toString;
 /** Native method shortcuts */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
+/** Used to lookup a built-in constructor by [[Class]] */
+var ctorByClass = {};
+ctorByClass[float32Class] = root.Float32Array;
+ctorByClass[float64Class] = root.Float64Array;
+ctorByClass[int8Class] = root.Int8Array;
+ctorByClass[int16Class] = root.Int16Array;
+ctorByClass[int32Class] = root.Int32Array;
+ctorByClass[uint8Class] = root.Uint8Array;
+ctorByClass[uint8ClampedClass] = root.Uint8ClampedArray;
+ctorByClass[uint16Class] = root.Uint16Array;
+ctorByClass[uint32Class] = root.Uint32Array;
+
 /**
  * The base implementation of `_.clone` without support for argument juggling
  * and `this` binding.
@@ -98,7 +111,7 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
     }
     switch (className) {
       case arrayBufferClass:
-        return value.slice(0);
+        return cloneBuffer(value);
 
       case boolClass:
       case dateClass:
@@ -110,7 +123,7 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
       case float32Class: case float64Class:
       case int8Class: case int16Class: case int32Class:
       case uint8Class: case uint8ClampedClass: case uint16Class: case uint32Class:
-        return value.subarray(0);
+        return new ctorByClass[className](cloneBuffer(value.buffer));
 
       case numberClass:
       case stringClass:
@@ -136,7 +149,7 @@ function baseClone(value, isDeep, callback, stackA, stackB) {
         return stackB[length];
       }
     }
-    result = isArr ? Ctor(value.length) : Ctor();
+    result = isArr ? Ctor(value.length) : new Ctor();
   }
   else {
     result = isArr ? slice(value) : baseAssign({}, value);

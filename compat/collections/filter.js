@@ -34,7 +34,7 @@ import isArray from '../objects/isArray';
  * @returns {Array} Returns the new filtered array.
  * @example
  *
- * var evens = _.filter([1, 2, 3, 4], function(num) { return num % 2 == 0; });
+ * var evens = _.filter([1, 2, 3, 4], function(n) { return n % 2 == 0; });
  * // => [2, 4]
  *
  * var characters = [

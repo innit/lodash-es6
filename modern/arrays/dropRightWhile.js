@@ -30,9 +30,7 @@ import initial from './initial';
  * @returns {Array} Returns the slice of `array`.
  * @example
  *
- * _.dropRightWhile([1, 2, 3], function(num) {
- *   return num > 1;
- * });
+ * _.dropRightWhile([1, 2, 3], function(n) { return n > 1; });
  * // => [1]
  *
  * var characters = [

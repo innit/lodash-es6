@@ -30,9 +30,7 @@ import last from './last';
  * @returns {Array} Returns the slice of `array`.
  * @example
  *
- * _.takeRightWhile([1, 2, 3], function(num) {
- *   return num > 1;
- * });
+ * _.takeRightWhile([1, 2, 3], function(n) { return n > 1; });
  * // => [2, 3]
  *
  * var characters = [

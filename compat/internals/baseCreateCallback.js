@@ -8,6 +8,7 @@
  */
 import bind from '../functions/bind';
 import identity from '../utilities/identity';
+import isNative from './isNative';
 import setData from './setData';
 import support from '../support';
 
@@ -43,8 +44,7 @@ function baseCreateCallback(func, thisArg, argCount) {
   if (typeof func != 'function') {
     return identity;
   }
-  // exit early for no `thisArg` or already bound by `Function#bind`
-  if (typeof thisArg == 'undefined' || !('prototype' in func)) {
+  if (typeof thisArg == 'undefined') {
     return func;
   }
   var data = func[expando];
@@ -60,7 +60,7 @@ function baseCreateCallback(func, thisArg, argCount) {
       }
       if (!data) {
         // checks if `func` references the `this` keyword and stores the result
-        data = reThis.test(source);
+        data = reThis.test(source) || isNative(func);
         setData(func, data);
       }
     }

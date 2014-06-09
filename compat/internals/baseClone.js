@@ -10,6 +10,7 @@ import arrayEach from './arrayEach';
 import baseAssign from './baseAssign';
 import baseForOwn from './baseForOwn';
 import cloneBuffer from './cloneBuffer';
+import isArguments from '../objects/isArguments';
 import isArray from '../objects/isArray';
 import isFunction from '../objects/isFunction';
 import isNode from './isNode';

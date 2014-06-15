@@ -6,6 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import arrayMap from '../internals/arrayMap';
 import baseDifference from '../internals/baseDifference';
 import baseFlatten from '../internals/baseFlatten';
 import basePick from '../internals/basePick';
@@ -48,13 +49,8 @@ function omit(object, predicate, thisArg) {
   if (typeof predicate == 'function') {
     return basePick(object, negate(createCallback(predicate, thisArg, 3)));
   }
-  var omitProps = baseFlatten(arguments, true, false, 1),
-      length = omitProps.length;
-
-  while (length--) {
-    omitProps[length] = String(omitProps[length]);
-  }
-  return basePick(object, baseDifference(keysIn(object), omitProps));
+  var omitProps = baseFlatten(arguments, true, false, 1);
+  return basePick(object, baseDifference(keysIn(object), arrayMap(omitProps, String)));
 }
 
 export default omit;

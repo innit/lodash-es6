@@ -6,29 +6,10 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import arrayMap from '../internals/arrayMap';
 import baseEach from '../internals/baseEach';
 import createCallback from '../functions/createCallback';
 import isArray from '../objects/isArray';
-
-/**
- * A specialized version of `_.map` for arrays without support for callback
- * shorthands or `this` binding.
- *
- * @private
- * @param {Array} array The array to iterate over.
- * @param {Function} callback The function called per iteration.
- * @returns {Array} Returns the new mapped array.
- */
-function arrayMap(array, callback) {
-  var index = -1,
-      length = array ? array.length >>> 0 : 0,
-      result = Array(length);
-
-  while (++index < length) {
-    result[index] = callback(array[index], index, array);
-  }
-  return result;
-}
 
 /**
  * Creates an array of values by running each element in the collection

@@ -7,18 +7,35 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as after } from './functions/after';
-export { default as bind } from './functions/bind';
-export { default as bindAll } from './functions/bindAll';
-export { default as callback } from './functions/createCallback';
-export { default as compose } from './functions/compose';
-export { default as createCallback } from './functions/createCallback';
-export { default as debounce } from './functions/debounce';
-export { default as defer } from './functions/defer';
-export { default as delay } from './functions/delay';
-export { default as memoize } from './functions/memoize';
-export { default as negate } from './functions/negate';
-export { default as once } from './functions/once';
-export { default as partial } from './functions/partial';
-export { default as throttle } from './functions/throttle';
-export { default as wrap } from './functions/wrap';
+import after from './functions/after';
+import bind from './functions/bind';
+import bindAll from './functions/bindAll';
+import compose from './functions/compose';
+import createCallback from './functions/createCallback';
+import debounce from './functions/debounce';
+import defer from './functions/defer';
+import delay from './functions/delay';
+import memoize from './functions/memoize';
+import negate from './functions/negate';
+import once from './functions/once';
+import partial from './functions/partial';
+import throttle from './functions/throttle';
+import wrap from './functions/wrap';
+
+export default {
+  'after': after,
+  'bind': bind,
+  'bindAll': bindAll,
+  'callback': createCallback,
+  'compose': compose,
+  'createCallback': createCallback,
+  'debounce': debounce,
+  'defer': defer,
+  'delay': delay,
+  'memoize': memoize,
+  'negate': negate,
+  'once': once,
+  'partial': partial,
+  'throttle': throttle,
+  'wrap': wrap
+};

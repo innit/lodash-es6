@@ -7,29 +7,53 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as compact } from './arrays/compact';
-export { default as difference } from './arrays/difference';
-export { default as drop } from './arrays/drop';
-export { default as findIndex } from './arrays/findIndex';
-export { default as first } from './arrays/first';
-export { default as flatten } from './arrays/flatten';
-export { default as head } from './arrays/first';
-export { default as indexOf } from './arrays/indexOf';
-export { default as initial } from './arrays/initial';
-export { default as intersection } from './arrays/intersection';
-export { default as last } from './arrays/last';
-export { default as lastIndexOf } from './arrays/lastIndexOf';
-export { default as object } from './arrays/zipObject';
-export { default as range } from './arrays/range';
-export { default as rest } from './arrays/rest';
-export { default as slice } from './arrays/slice';
-export { default as sortedIndex } from './arrays/sortedIndex';
-export { default as tail } from './arrays/rest';
-export { default as take } from './arrays/take';
-export { default as union } from './arrays/union';
-export { default as uniq } from './arrays/uniq';
-export { default as unique } from './arrays/uniq';
-export { default as unzip } from './arrays/zip';
-export { default as without } from './arrays/without';
-export { default as zip } from './arrays/zip';
-export { default as zipObject } from './arrays/zipObject';
+import compact from './arrays/compact';
+import difference from './arrays/difference';
+import drop from './arrays/drop';
+import findIndex from './arrays/findIndex';
+import first from './arrays/first';
+import flatten from './arrays/flatten';
+import indexOf from './arrays/indexOf';
+import initial from './arrays/initial';
+import intersection from './arrays/intersection';
+import last from './arrays/last';
+import lastIndexOf from './arrays/lastIndexOf';
+import range from './arrays/range';
+import rest from './arrays/rest';
+import slice from './arrays/slice';
+import sortedIndex from './arrays/sortedIndex';
+import take from './arrays/take';
+import union from './arrays/union';
+import uniq from './arrays/uniq';
+import without from './arrays/without';
+import zip from './arrays/zip';
+import zipObject from './arrays/zipObject';
+
+export default {
+  'compact': compact,
+  'difference': difference,
+  'drop': drop,
+  'findIndex': findIndex,
+  'first': first,
+  'flatten': flatten,
+  'head': first,
+  'indexOf': indexOf,
+  'initial': initial,
+  'intersection': intersection,
+  'last': last,
+  'lastIndexOf': lastIndexOf,
+  'object': zipObject,
+  'range': range,
+  'rest': rest,
+  'slice': slice,
+  'sortedIndex': sortedIndex,
+  'tail': rest,
+  'take': take,
+  'union': union,
+  'uniq': uniq,
+  'unique': uniq,
+  'unzip': zip,
+  'without': without,
+  'zip': zip,
+  'zipObject': zipObject
+};

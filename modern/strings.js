@@ -7,22 +7,44 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as camelCase } from './strings/camelCase';
-export { default as capitalize } from './strings/capitalize';
-export { default as endsWith } from './strings/endsWith';
-export { default as escape } from './utilities/escape';
-export { default as escapeRegExp } from './strings/escapeRegExp';
-export { default as kebabCase } from './strings/kebabCase';
-export { default as pad } from './strings/pad';
-export { default as padLeft } from './strings/padLeft';
-export { default as padRight } from './strings/padRight';
-export { default as repeat } from './strings/repeat';
-export { default as snakeCase } from './strings/snakeCase';
-export { default as startsWith } from './strings/startsWith';
-export { default as template } from './utilities/template';
-export { default as templateSettings } from './utilities/templateSettings';
-export { default as trim } from './strings/trim';
-export { default as trimLeft } from './strings/trimLeft';
-export { default as trimRight } from './strings/trimRight';
-export { default as trunc } from './strings/trunc';
-export { default as unescape } from './utilities/unescape';
+import camelCase from './strings/camelCase';
+import capitalize from './strings/capitalize';
+import endsWith from './strings/endsWith';
+import escape from './utilities/escape';
+import escapeRegExp from './strings/escapeRegExp';
+import kebabCase from './strings/kebabCase';
+import pad from './strings/pad';
+import padLeft from './strings/padLeft';
+import padRight from './strings/padRight';
+import repeat from './strings/repeat';
+import snakeCase from './strings/snakeCase';
+import startsWith from './strings/startsWith';
+import template from './utilities/template';
+import templateSettings from './utilities/templateSettings';
+import trim from './strings/trim';
+import trimLeft from './strings/trimLeft';
+import trimRight from './strings/trimRight';
+import trunc from './strings/trunc';
+import unescape from './utilities/unescape';
+
+export default {
+  'camelCase': camelCase,
+  'capitalize': capitalize,
+  'endsWith': endsWith,
+  'escape': escape,
+  'escapeRegExp': escapeRegExp,
+  'kebabCase': kebabCase,
+  'pad': pad,
+  'padLeft': padLeft,
+  'padRight': padRight,
+  'repeat': repeat,
+  'snakeCase': snakeCase,
+  'startsWith': startsWith,
+  'template': template,
+  'templateSettings': templateSettings,
+  'trim': trim,
+  'trimLeft': trimLeft,
+  'trimRight': trimRight,
+  'trunc': trunc,
+  'unescape': unescape
+};

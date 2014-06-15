@@ -7,21 +7,41 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as callback } from './functions/createCallback';
-export { default as constant } from './utilities/constant';
-export { default as createCallback } from './functions/createCallback';
-export { default as escape } from './utilities/escape';
-export { default as identity } from './utilities/identity';
-export { default as matches } from './utilities/matches';
-export { default as mixin } from './utilities/mixin';
-export { default as noConflict } from './utilities/noConflict';
-export { default as now } from './utilities/now';
-export { default as property } from './utilities/property';
-export { default as random } from './utilities/random';
-export { default as range } from './arrays/range';
-export { default as result } from './utilities/result';
-export { default as template } from './utilities/template';
-export { default as templateSettings } from './utilities/templateSettings';
-export { default as times } from './utilities/times';
-export { default as unescape } from './utilities/unescape';
-export { default as uniqueId } from './utilities/uniqueId';
+import constant from './utilities/constant';
+import createCallback from './functions/createCallback';
+import escape from './utilities/escape';
+import identity from './utilities/identity';
+import matches from './utilities/matches';
+import mixin from './utilities/mixin';
+import noConflict from './utilities/noConflict';
+import now from './utilities/now';
+import property from './utilities/property';
+import random from './utilities/random';
+import range from './arrays/range';
+import result from './utilities/result';
+import template from './utilities/template';
+import templateSettings from './utilities/templateSettings';
+import times from './utilities/times';
+import unescape from './utilities/unescape';
+import uniqueId from './utilities/uniqueId';
+
+export default {
+  'callback': createCallback,
+  'constant': constant,
+  'createCallback': createCallback,
+  'escape': escape,
+  'identity': identity,
+  'matches': matches,
+  'mixin': mixin,
+  'noConflict': noConflict,
+  'now': now,
+  'property': property,
+  'random': random,
+  'range': range,
+  'result': result,
+  'template': template,
+  'templateSettings': templateSettings,
+  'times': times,
+  'unescape': unescape,
+  'uniqueId': uniqueId
+};

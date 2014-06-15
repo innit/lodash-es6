@@ -7,38 +7,66 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as all } from './collections/every';
-export { default as any } from './collections/some';
-export { default as collect } from './collections/map';
-export { default as contains } from './collections/contains';
-export { default as countBy } from './collections/countBy';
-export { default as detect } from './collections/find';
-export { default as each } from './collections/forEach';
-export { default as every } from './collections/every';
-export { default as filter } from './collections/filter';
-export { default as find } from './collections/find';
-export { default as findWhere } from './collections/findWhere';
-export { default as foldl } from './collections/reduce';
-export { default as foldr } from './collections/reduceRight';
-export { default as forEach } from './collections/forEach';
-export { default as groupBy } from './collections/groupBy';
-export { default as include } from './collections/contains';
-export { default as indexBy } from './collections/indexBy';
-export { default as inject } from './collections/reduce';
-export { default as invoke } from './collections/invoke';
-export { default as map } from './collections/map';
-export { default as max } from './collections/max';
-export { default as min } from './collections/min';
-export { default as partition } from './collections/partition';
-export { default as pluck } from './collections/pluck';
-export { default as reduce } from './collections/reduce';
-export { default as reduceRight } from './collections/reduceRight';
-export { default as reject } from './collections/reject';
-export { default as sample } from './collections/sample';
-export { default as select } from './collections/filter';
-export { default as shuffle } from './collections/shuffle';
-export { default as size } from './collections/size';
-export { default as some } from './collections/some';
-export { default as sortBy } from './collections/sortBy';
-export { default as toArray } from './collections/toArray';
-export { default as where } from './collections/where';
+import contains from './collections/contains';
+import countBy from './collections/countBy';
+import every from './collections/every';
+import filter from './collections/filter';
+import find from './collections/find';
+import findWhere from './collections/findWhere';
+import forEach from './collections/forEach';
+import groupBy from './collections/groupBy';
+import indexBy from './collections/indexBy';
+import invoke from './collections/invoke';
+import map from './collections/map';
+import max from './collections/max';
+import min from './collections/min';
+import partition from './collections/partition';
+import pluck from './collections/pluck';
+import reduce from './collections/reduce';
+import reduceRight from './collections/reduceRight';
+import reject from './collections/reject';
+import sample from './collections/sample';
+import shuffle from './collections/shuffle';
+import size from './collections/size';
+import some from './collections/some';
+import sortBy from './collections/sortBy';
+import toArray from './collections/toArray';
+import where from './collections/where';
+
+export default {
+  'all': every,
+  'any': some,
+  'collect': map,
+  'contains': contains,
+  'countBy': countBy,
+  'detect': find,
+  'each': forEach,
+  'every': every,
+  'filter': filter,
+  'find': find,
+  'findWhere': findWhere,
+  'foldl': reduce,
+  'foldr': reduceRight,
+  'forEach': forEach,
+  'groupBy': groupBy,
+  'include': contains,
+  'indexBy': indexBy,
+  'inject': reduce,
+  'invoke': invoke,
+  'map': map,
+  'max': max,
+  'min': min,
+  'partition': partition,
+  'pluck': pluck,
+  'reduce': reduce,
+  'reduceRight': reduceRight,
+  'reject': reject,
+  'sample': sample,
+  'select': filter,
+  'shuffle': shuffle,
+  'size': size,
+  'some': some,
+  'sortBy': sortBy,
+  'toArray': toArray,
+  'where': where
+};

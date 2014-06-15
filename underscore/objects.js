@@ -7,33 +7,64 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as assign } from './objects/assign';
-export { default as clone } from './objects/clone';
-export { default as defaults } from './objects/defaults';
-export { default as extend } from './objects/assign';
-export { default as functions } from './objects/functions';
-export { default as has } from './objects/has';
-export { default as invert } from './objects/invert';
-export { default as isArguments } from './objects/isArguments';
-export { default as isArray } from './objects/isArray';
-export { default as isBoolean } from './objects/isBoolean';
-export { default as isDate } from './objects/isDate';
-export { default as isElement } from './objects/isElement';
-export { default as isEmpty } from './objects/isEmpty';
-export { default as isEqual } from './objects/isEqual';
-export { default as isFinite } from './objects/isFinite';
-export { default as isFunction } from './objects/isFunction';
-export { default as isNaN } from './objects/isNaN';
-export { default as isNull } from './objects/isNull';
-export { default as isNumber } from './objects/isNumber';
-export { default as isObject } from './objects/isObject';
-export { default as isRegExp } from './objects/isRegExp';
-export { default as isString } from './objects/isString';
-export { default as isUndefined } from './objects/isUndefined';
-export { default as keys } from './objects/keys';
-export { default as keysIn } from './objects/keysIn';
-export { default as methods } from './objects/functions';
-export { default as omit } from './objects/omit';
-export { default as pairs } from './objects/pairs';
-export { default as pick } from './objects/pick';
-export { default as values } from './objects/values';
+import assign from './objects/assign';
+import clone from './objects/clone';
+import defaults from './objects/defaults';
+import functions from './objects/functions';
+import has from './objects/has';
+import invert from './objects/invert';
+import isArguments from './objects/isArguments';
+import isArray from './objects/isArray';
+import isBoolean from './objects/isBoolean';
+import isDate from './objects/isDate';
+import isElement from './objects/isElement';
+import isEmpty from './objects/isEmpty';
+import isEqual from './objects/isEqual';
+import isFinite from './objects/isFinite';
+import isFunction from './objects/isFunction';
+import isNaN from './objects/isNaN';
+import isNull from './objects/isNull';
+import isNumber from './objects/isNumber';
+import isObject from './objects/isObject';
+import isRegExp from './objects/isRegExp';
+import isString from './objects/isString';
+import isUndefined from './objects/isUndefined';
+import keys from './objects/keys';
+import keysIn from './objects/keysIn';
+import omit from './objects/omit';
+import pairs from './objects/pairs';
+import pick from './objects/pick';
+import values from './objects/values';
+
+export default {
+  'assign': assign,
+  'clone': clone,
+  'defaults': defaults,
+  'extend': assign,
+  'functions': functions,
+  'has': has,
+  'invert': invert,
+  'isArguments': isArguments,
+  'isArray': isArray,
+  'isBoolean': isBoolean,
+  'isDate': isDate,
+  'isElement': isElement,
+  'isEmpty': isEmpty,
+  'isEqual': isEqual,
+  'isFinite': isFinite,
+  'isFunction': isFunction,
+  'isNaN': isNaN,
+  'isNull': isNull,
+  'isNumber': isNumber,
+  'isObject': isObject,
+  'isRegExp': isRegExp,
+  'isString': isString,
+  'isUndefined': isUndefined,
+  'keys': keys,
+  'keysIn': keysIn,
+  'methods': functions,
+  'omit': omit,
+  'pairs': pairs,
+  'pick': pick,
+  'values': values
+};

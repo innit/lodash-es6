@@ -7,41 +7,77 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-export { default as chunk } from './arrays/chunk';
-export { default as compact } from './arrays/compact';
-export { default as difference } from './arrays/difference';
-export { default as drop } from './arrays/drop';
-export { default as dropRight } from './arrays/dropRight';
-export { default as dropRightWhile } from './arrays/dropRightWhile';
-export { default as dropWhile } from './arrays/dropWhile';
-export { default as findIndex } from './arrays/findIndex';
-export { default as findLastIndex } from './arrays/findLastIndex';
-export { default as first } from './arrays/first';
-export { default as flatten } from './arrays/flatten';
-export { default as head } from './arrays/first';
-export { default as indexOf } from './arrays/indexOf';
-export { default as initial } from './arrays/initial';
-export { default as intersection } from './arrays/intersection';
-export { default as last } from './arrays/last';
-export { default as lastIndexOf } from './arrays/lastIndexOf';
-export { default as object } from './arrays/zipObject';
-export { default as pull } from './arrays/pull';
-export { default as pullAt } from './arrays/pullAt';
-export { default as range } from './arrays/range';
-export { default as remove } from './arrays/remove';
-export { default as rest } from './arrays/rest';
-export { default as slice } from './arrays/slice';
-export { default as sortedIndex } from './arrays/sortedIndex';
-export { default as tail } from './arrays/rest';
-export { default as take } from './arrays/take';
-export { default as takeRight } from './arrays/takeRight';
-export { default as takeRightWhile } from './arrays/takeRightWhile';
-export { default as takeWhile } from './arrays/takeWhile';
-export { default as union } from './arrays/union';
-export { default as uniq } from './arrays/uniq';
-export { default as unique } from './arrays/uniq';
-export { default as unzip } from './arrays/zip';
-export { default as without } from './arrays/without';
-export { default as xor } from './arrays/xor';
-export { default as zip } from './arrays/zip';
-export { default as zipObject } from './arrays/zipObject';
+import chunk from './arrays/chunk';
+import compact from './arrays/compact';
+import difference from './arrays/difference';
+import drop from './arrays/drop';
+import dropRight from './arrays/dropRight';
+import dropRightWhile from './arrays/dropRightWhile';
+import dropWhile from './arrays/dropWhile';
+import findIndex from './arrays/findIndex';
+import findLastIndex from './arrays/findLastIndex';
+import first from './arrays/first';
+import flatten from './arrays/flatten';
+import indexOf from './arrays/indexOf';
+import initial from './arrays/initial';
+import intersection from './arrays/intersection';
+import last from './arrays/last';
+import lastIndexOf from './arrays/lastIndexOf';
+import pull from './arrays/pull';
+import pullAt from './arrays/pullAt';
+import range from './arrays/range';
+import remove from './arrays/remove';
+import rest from './arrays/rest';
+import slice from './arrays/slice';
+import sortedIndex from './arrays/sortedIndex';
+import take from './arrays/take';
+import takeRight from './arrays/takeRight';
+import takeRightWhile from './arrays/takeRightWhile';
+import takeWhile from './arrays/takeWhile';
+import union from './arrays/union';
+import uniq from './arrays/uniq';
+import without from './arrays/without';
+import xor from './arrays/xor';
+import zip from './arrays/zip';
+import zipObject from './arrays/zipObject';
+
+export default {
+  'chunk': chunk,
+  'compact': compact,
+  'difference': difference,
+  'drop': drop,
+  'dropRight': dropRight,
+  'dropRightWhile': dropRightWhile,
+  'dropWhile': dropWhile,
+  'findIndex': findIndex,
+  'findLastIndex': findLastIndex,
+  'first': first,
+  'flatten': flatten,
+  'head': first,
+  'indexOf': indexOf,
+  'initial': initial,
+  'intersection': intersection,
+  'last': last,
+  'lastIndexOf': lastIndexOf,
+  'object': zipObject,
+  'pull': pull,
+  'pullAt': pullAt,
+  'range': range,
+  'remove': remove,
+  'rest': rest,
+  'slice': slice,
+  'sortedIndex': sortedIndex,
+  'tail': rest,
+  'take': take,
+  'takeRight': takeRight,
+  'takeRightWhile': takeRightWhile,
+  'takeWhile': takeWhile,
+  'union': union,
+  'uniq': uniq,
+  'unique': uniq,
+  'unzip': zip,
+  'without': without,
+  'xor': xor,
+  'zip': zip,
+  'zipObject': zipObject
+};

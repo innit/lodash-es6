@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isArray from '../objects/isArray';
+import isObject from '../objects/isObject';
 import max from '../collections/max';
 import pluck from '../collections/pluck';
 
@@ -32,7 +32,7 @@ import pluck from '../collections/pluck';
  */
 function zip() {
   var index = -1,
-      length = isArray(length = max(arguments, 'length')) && length.length || 0,
+      length = isObject(length = max(arguments, 'length')) && length.length || 0,
       result = Array(length);
 
   while (++index < length) {

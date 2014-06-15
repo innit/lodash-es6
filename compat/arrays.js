@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
+export { default as chunk } from './arrays/chunk';
 export { default as compact } from './arrays/compact';
 export { default as difference } from './arrays/difference';
 export { default as drop } from './arrays/drop';

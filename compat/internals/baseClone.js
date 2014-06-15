@@ -15,6 +15,7 @@ import isArray from '../objects/isArray';
 import isFunction from '../objects/isFunction';
 import isNode from './isNode';
 import isObject from '../objects/isObject';
+import root from './root';
 import slice from '../arrays/slice';
 import support from '../support';
 

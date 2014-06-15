@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isNative from './isNative';
+import root from './root';
 
 /** Native method shortcuts */
 var Set = isNative(Set = root.Set) && Set;

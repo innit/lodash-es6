@@ -8,6 +8,7 @@
  */
 import isNative from './isNative';
 import isObject from '../objects/isObject';
+import root from './root';
 
 /* Native method shortcuts for methods with the same name as other `lodash` methods */
 var nativeCreate = isNative(nativeCreate = Object.create) && nativeCreate;

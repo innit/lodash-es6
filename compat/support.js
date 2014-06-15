@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isNative from './internals/isNative';
+import root from './internals/root';
 
 /** Used to detect functions containing a `this` reference */
 var reThis = /\bthis\b/;

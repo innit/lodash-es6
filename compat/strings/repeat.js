@@ -6,6 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import root from '../internals/root';
 
 /** Native method shortcuts */
 var floor = Math.floor;

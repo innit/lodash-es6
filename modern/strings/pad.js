@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createPad from '../internals/createPad';
+import root from '../internals/root';
 
 /** Native method shortcuts */
 var ceil = Math.ceil,

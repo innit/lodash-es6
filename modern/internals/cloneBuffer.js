@@ -8,6 +8,7 @@
  */
 import identity from '../utilities/identity';
 import isNative from './isNative';
+import root from './root';
 
 /** Native method shortcuts */
 var ArrayBuffer = isNative(ArrayBuffer = root.ArrayBuffer) && ArrayBuffer,

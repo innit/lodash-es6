@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import repeat from '../strings/repeat';
+import root from './root';
 
 /** Native method shortcuts */
 var ceil = Math.ceil;

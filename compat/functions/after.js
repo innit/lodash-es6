@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import isFunction from '../objects/isFunction';
+import root from '../internals/root';
 
 /** Used as the TypeError message for "Functions" methods */
 var funcErrorText = 'Expected a function';

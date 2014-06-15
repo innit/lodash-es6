@@ -18,7 +18,7 @@ import isArray from '../objects/isArray';
  * @static
  * @memberOf _
  * @category Arrays
- * @param {Array} array The array to process.
+ * @param {Array} array The array to inspect.
  * @param {...Array} [values] The arrays of values to exclude.
  * @returns {Array} Returns the new array of filtered values.
  * @example

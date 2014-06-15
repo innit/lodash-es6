@@ -6,6 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import isArray from '../objects/isArray';
 import max from '../collections/max';
 import pluck from '../collections/pluck';
 
@@ -31,8 +32,8 @@ import pluck from '../collections/pluck';
  */
 function zip() {
   var index = -1,
-      length = max(pluck(arguments, 'length')),
-      result = Array(length < 0 ? 0 : length);
+      length = isArray(length = max(arguments, 'length')) && length.length || 0,
+      result = Array(length);
 
   while (++index < length) {
     result[index] = pluck(arguments, index);

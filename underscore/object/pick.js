@@ -39,7 +39,7 @@ import basePick from '../internal/basePick';
 function pick(object) {
   return object == null
     ? {}
-    : basePick(object, baseFlatten(arguments, false, false, 1));
+    : basePick(Object(object), baseFlatten(arguments, false, false, 1));
 }
 
 export default pick;

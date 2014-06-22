@@ -6,8 +6,8 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from './internals/isNative';
-import root from './internals/root';
+import isNative from './internal/isNative';
+import root from './internal/root';
 
 /** Used to detect functions containing a `this` reference */
 var reThis = /\bthis\b/;

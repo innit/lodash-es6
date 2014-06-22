@@ -49,6 +49,7 @@ function repeat(string, n) {
     n = floor(n / 2);
     string += string;
   } while (n);
+
   return result;
 }
 

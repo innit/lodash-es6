@@ -26,7 +26,7 @@ import isObject from './isObject';
  * Shape.prototype.z = 0;
  *
  * _.keysIn(new Shape);
- * // => ['x', 'y', 'z'] (property order is not guaranteed across environments)
+ * // => ['x', 'y', 'z'] (property order is not guaranteed)
  */
 function keysIn(object) {
   var result = [];

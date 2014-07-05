@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var argsClass = '[object Arguments]',
     arrayClass = '[object Array]',
     boolClass = '[object Boolean]',

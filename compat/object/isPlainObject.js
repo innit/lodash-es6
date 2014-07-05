@@ -9,22 +9,24 @@
 import baseForIn from '../internal/baseForIn';
 import isArguments from './isArguments';
 import isFunction from './isFunction';
-import isNative from '../internal/isNative';
-import isNode from '../internal/isNode';
+import isHostObject from '../internal/isHostObject';
+import isNative from './isNative';
 import support from '../support';
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var objectClass = '[object Object]';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
+/** Used to check objects for own properties */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
 
-/** Native method shortcuts */
-var getPrototypeOf = isNative(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf,
-    hasOwnProperty = objectProto.hasOwnProperty;
+/** Native method references */
+var getPrototypeOf = isNative(getPrototypeOf = Object.getPrototypeOf) && getPrototypeOf;
 
 /**
  * A fallback implementation of `_.isPlainObject` which checks if `value`
@@ -44,7 +46,7 @@ function shimIsPlainObject(value) {
       (!hasOwnProperty.call(value, 'constructor') &&
         (Ctor = value.constructor, isFunction(Ctor) && !(Ctor instanceof Ctor))) ||
       (!support.argsClass && isArguments(value)) ||
-      (!support.nodeClass && isNode(value))) {
+      (!support.nodeClass && isHostObject(value))) {
     return false;
   }
   // IE < 9 iterates inherited properties before own properties. If the first
@@ -70,7 +72,7 @@ function shimIsPlainObject(value) {
  * Checks if `value` is an object created by the `Object` constructor or has
  * a `[[Prototype]]` of `null`.
  *
- * Note: This method assumes objects created by the `Object` constructor
+ * **Note:** This method assumes objects created by the `Object` constructor
  * have no inherited enumerable properties.
  *
  * @static

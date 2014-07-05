@@ -6,10 +6,8 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isFunction from '../object/isFunction';
-
-/** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+import before from './before';
+import partial from './partial';
 
 /**
  * Creates a function that is restricted to execute `func` once. Repeat calls
@@ -18,6 +16,7 @@ var funcErrorText = 'Expected a function';
  *
  * @static
  * @memberOf _
+ * @type Function
  * @category Function
  * @param {Function} func The function to restrict.
  * @returns {Function} Returns the new restricted function.
@@ -28,24 +27,6 @@ var funcErrorText = 'Expected a function';
  * initialize();
  * // `initialize` executes `createApplication` once
  */
-function once(func) {
-  var ran,
-      result;
-
-  if (!isFunction(func)) {
-    throw new TypeError(funcErrorText);
-  }
-  return function() {
-    if (ran) {
-      return result;
-    }
-    ran = true;
-    result = func.apply(this, arguments);
-
-    // clear the `func` variable so the function may be garbage collected
-    func = null;
-    return result;
-  };
-}
+var once = partial(before, 2);
 
 export default once;

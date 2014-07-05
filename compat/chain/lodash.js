@@ -12,7 +12,7 @@ import lodashWrapper from '../internal/lodashWrapper';
 /** Used for native method references */
 var objectProto = Object.prototype;
 
-/** Native method shortcuts */
+/** Used to check objects for own properties */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
@@ -27,33 +27,34 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  * implicitly or explicitly included in the build.
  *
  * The chainable wrapper functions are:
- * `after`, `assign`, `at`, `bind`, `bindAll`, `bindKey`, `callback`, `chain`,
- * `chunk`, `compact`, `compose`, `concat`, `constant`, `countBy`, `create`,
- * `curry`, `debounce`, `defaults`, `defer`, `delay`, `difference`, `drop`,
- * `dropRight`, `dropRightWhile`, `dropWhile`, `filter`, `flatten`, `forEach`,
- * `forEachRight`, `forIn`, `forInRight`, `forOwn`, `forOwnRight`, `functions`,
- * `groupBy`, `indexBy`, `initial`, `intersection`, `invert`, `invoke`, `keys`,
- * `keysIn`, `map`, `mapValues`, `matches`, `memoize`, `merge`, `mixin`,
- * `negate`, `noop`, `omit`, `once`, `pairs`, `partial`, `partialRight`,
- * `partition`, `pick`, `pluck`, `property`, `pull`, `pullAt`, `push`, `range`,
- * `reject`, `remove`, `rest`, `reverse`, `shuffle`, `slice`, `sort`, `sortBy`,
- * `splice`, `take`, `takeRight`, `takeRightWhile`, `takeWhile`, `tap`,
- * `throttle`, `times`, `toArray`, `transform`, `union`, `uniq`, `unshift`,
+ * `after`, `assign`, `at`, `before`, `bind`, `bindAll`, `bindKey`, `callback`,
+ * `chain`, `chunk`, `compact`, `compose`, `concat`, `constant`, `countBy`,
+ * `create`, `curry`, `debounce`, `defaults`, `defer`, `delay`, `difference`,
+ * `drop`, `dropRight`, `dropRightWhile`, `dropWhile`, `filter`, `flatten`,
+ * `flattenDeep`, `forEach`, `forEachRight`, `forIn`, `forInRight`, `forOwn`,
+ * `forOwnRight`, `functions`, `groupBy`, `indexBy`, `initial`, `intersection`,
+ * `invert`, `invoke`, `keys`, `keysIn`, `map`, `mapValues`, `matches`, `memoize`,
+ * `merge`, `mixin`, `negate`, `noop`, `omit`, `once`, `pairs`, `partial`,
+ * `partialRight`, `partition`, `pick`, `pluck`, `property`, `pull`, `pullAt`,
+ * `push`, `range`, `reject`, `remove`, `rest`, `reverse`, `shuffle`, `slice`,
+ * `sort`, `sortBy`, `splice`, `take`, `takeRight`, `takeRightWhile`, `takeWhile`,
+ * `tap`, `throttle`, `times`, `toArray`, `transform`, `union`, `uniq`, `unshift`,
  * `unzip`, `values`, `valuesIn`, `where`, `without`, `wrap`, `xor`, `zip`,
  * and `zipObject`
  *
  * The non-chainable wrapper functions are:
- * `camelCase`, `capitalize`, `clone`, `cloneDeep`, `contains`, `endsWith`,
- * `escape`, `escapeRegExp`, `every`, `find`, `findIndex`, `findKey`,
- * `findLast`, `findLastIndex`, `findLastKey`, `findWhere`, `first`, `has`,
- * `identity`, `indexOf`, `isArguments`, `isArray`, `isBoolean`, `isDate`,
+ * `attempt`, `camelCase`, `capitalize`, `clone`, `cloneDeep`, `contains`,
+ * `endsWith`, `escape`, `escapeRegExp`, `every`, `find`, `findIndex`,
+ * `findKey`, `findLast`, `findLastIndex`, `findLastKey`, `findWhere`, `first`,
+ * `has`, `identity`, `indexOf`, `isArguments`, `isArray`, `isBoolean`, isDate`,
  * `isElement`, `isEmpty`, `isEqual`, `isError`, `isFinite`, `isFunction`,
- * `isNaN`, `isNull`, `isNumber`, `isObject`, `isPlainObject`, `isRegExp`,
- * `isString`, `isUndefined`, `join`, `kebabCase`, `last`, `lastIndexOf`,
- * `max`, `min`, `noConflict`, `now`, `pad`, `padLeft`, `padRight`, `parseInt`,
- * `pop`, `random`, `reduce`, `reduceRight`, `repeat`, `result`, `runInContext`,
- * `shift`, `size`, `snakeCase`, `some`, `sortedIndex`, `startsWith`, `template`,
- * `trim`, `trimLeft`, `trimRight`, `trunc`, `unescape`, `uniqueId`, and `value`
+ * `isNative`, `isNaN`, `isNull`, `isNumber`, `isObject`, `isPlainObject`,
+ * `isRegExp`, `isString`, `isUndefined`, `join`, `kebabCase`, `last`,
+ * `lastIndexOf`, `max`, `min`, `noConflict`, `now`, `pad`, `padLeft`,
+ * `padRight`, `parseInt`, `pop`, `random`, `reduce`, `reduceRight`, `repeat`,
+ * `result`, `runInContext`, `shift`, `size`, `snakeCase`, `some`, `sortedIndex`,
+ * `sortedLastIndex`, `startsWith`, `template`, `trim`, `trimLeft`, `trimRight`,
+ * `trunc`, `unescape`, `uniqueId`, and `value`
  *
  * The wrapper function `sample` will return a wrapped value when `n` is
  * provided, otherwise it will return an unwrapped value.

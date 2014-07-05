@@ -9,7 +9,7 @@
 import baseCompareAscending from './baseCompareAscending';
 
 /**
- * Used by `_.sortBy` to compare transformed elements of a collection and stable
+ * Used by `_.sortBy` to compare transformed elements of `collection` and stable
  * sort them in ascending order.
  *
  * @private
@@ -18,7 +18,7 @@ import baseCompareAscending from './baseCompareAscending';
  * @returns {number} Returns the sort order indicator for `object`.
  */
 function compareAscending(object, other) {
-  return baseCompareAscending(object.criteria, other.criteria) || object.index - other.index;
+  return baseCompareAscending(object.criteria, other.criteria) || (object.index - other.index);
 }
 
 export default compareAscending;

@@ -9,15 +9,15 @@
 import keys from '../object/keys';
 
 /**
- * Used as the maximum length of an array-like object.
+ * Used as the maximum length of an array-like value.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
- * Gets the size of the collection by returning `collection.length` for arrays
- * and array-like objects or the number of own enumerable properties for objects.
+ * Gets the size of the collection by returning `collection.length` for
+ * array-like values or the number of own enumerable properties for objects.
  *
  * @static
  * @memberOf _
@@ -37,7 +37,7 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  */
 function size(collection) {
   var length = collection ? collection.length : 0;
-  return (typeof length == 'number' && length > -1 && length <= maxSafeInteger)
+  return (typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER)
     ? length
     : keys(collection).length;
 }

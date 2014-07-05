@@ -6,13 +6,13 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from './internal/isNative';
+import isNative from './object/isNative';
 import root from './internal/root';
 
 /** Used to detect functions containing a `this` reference */
 var reThis = /\bthis\b/;
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var argsClass = '[object Arguments]',
     objectClass = '[object Object]';
 
@@ -27,13 +27,12 @@ var document = (document = root.window) && document.document;
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
 
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty,
-    propertyIsEnumerable = objectProto.propertyIsEnumerable,
+/** Native method references */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable,
     splice = arrayProto.splice;
 
 /**
- * An object used to flag environments features.
+ * An object environment feature flags.
  *
  * @static
  * @memberOf _
@@ -48,8 +47,6 @@ var support = {};
 
   Ctor.prototype = { 'valueOf': 1, 'y': 1 };
   for (var key in new Ctor) { props.push(key); }
-  for (var argsKey in arguments) { }
-  for (var strKey in 'x') { }
 
   /**
    * Detect if the `[[Class]]` of `arguments` objects is resolvable
@@ -108,7 +105,7 @@ var support = {};
    * @memberOf _.support
    * @type boolean
    */
-  support.nonEnumStrings = strKey != '0';
+  support.nonEnumStrings = !propertyIsEnumerable.call('x', 0);
 
   /**
    * Detect if properties shadowing those on `Object.prototype` are
@@ -124,7 +121,7 @@ var support = {};
 
   /**
    * Detect if own properties are iterated after inherited properties
-   * (all but IE < 9).
+   * (IE < 9).
    *
    * @memberOf _.support
    * @type boolean
@@ -171,18 +168,24 @@ var support = {};
   }
 
   /**
-   * Detect if the `[[Class]]` of DOM nodes is resolvable (all but IE < 9)
-   * and that the JS engine errors when attempting to coerce an object to a
-   * string without a `toString` function.
+   * Detect if the host objects are detectable (IE < 9).
    *
    * @memberOf _.support
    * @type boolean
    */
   try {
-    support.nodeClass = !(toString.call(document) == objectClass && !({ 'toString': 0 } + ''));
+    support.hostObject = !({ 'toString': 0 } + '');
   } catch(e) {
-    support.nodeClass = true;
+    support.hostObject = false;
   }
+
+  /**
+   * Detect if the `[[Class]]` of DOM nodes is resolvable (all but IE < 9).
+   *
+   * @memberOf _.support
+   * @type boolean
+   */
+  support.nodeClass = !(toString.call(document) == objectClass && support.hostObject);
 
   /**
    * Detect if `arguments` object indexes are non-enumerable.
@@ -197,8 +200,7 @@ var support = {};
    * @type boolean
    */
   try {
-    support.nonEnumArgs = !(argsKey == '1' && hasOwnProperty.call(arguments, argsKey) &&
-      propertyIsEnumerable.call(arguments, argsKey));
+    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
   } catch(e) {
     support.nonEnumArgs = true;
   }

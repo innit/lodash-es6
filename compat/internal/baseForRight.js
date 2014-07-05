@@ -13,17 +13,17 @@
  *
  * @private
  * @param {Object} object The object to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @param {Function} keysFunc The function to get the keys of `object`.
  * @returns {Object} Returns `object`.
  */
-function baseForRight(object, iterator, keysFunc) {
+function baseForRight(object, iteratee, keysFunc) {
   var props = keysFunc(object),
       length = props.length;
 
   while (length--) {
     var key = props[length];
-    if (iterator(object[key], key, object) === false) {
+    if (iteratee(object[key], key, object) === false) {
       break;
     }
   }

@@ -6,11 +6,11 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from './isNative';
+import isNative from '../object/isNative';
 import isObject from '../object/isObject';
 import root from './root';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeCreate = isNative(nativeCreate = Object.create) && nativeCreate;
 
 /**

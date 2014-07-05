@@ -7,18 +7,26 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseCallback from '../internal/baseCallback';
+import root from '../internal/root';
+
+/** Used as a reference for the max length of an array */
+var MAX_ARRAY_LENGTH = Math.pow(2, 32) - 1;
+
+/* Native method references for those with the same name as other `lodash` methods */
+var nativeIsFinite = root.isFinite,
+    nativeMin = Math.min;
 
 /**
- * Executes the iterator function `n` times, returning an array of the results
- * of each execution. The `iterator` is bound to `thisArg` and invoked with
+ * Executes the iteratee function `n` times, returning an array of the results
+ * of each execution. The `iteratee` is bound to `thisArg` and invoked with
  * one argument; (index).
  *
  * @static
  * @memberOf _
  * @category Utility
- * @param {number} n The number of times to execute `iterator`.
- * @param {Function} [iterator=identity] The function called per iteration.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {number} n The number of times to execute `iteratee`.
+ * @param {Function} [iteratee=identity] The function called per iteration.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Array} Returns the array of results.
  * @example
  *
@@ -31,15 +39,19 @@ import baseCallback from '../internal/baseCallback';
  * _.times(3, function(n) { this.cast(n); }, mage);
  * // => also calls `mage.castSpell(n)` three times
  */
-function times(n, iterator, thisArg) {
-  n = n < 0 ? 0 : n >>> 0;
-  iterator = baseCallback(iterator, thisArg, 1);
+function times(n, iteratee, thisArg) {
+  n = nativeIsFinite(n = +n) && n > -1 ? n : 0;
+  iteratee = baseCallback(iteratee, thisArg, 1);
 
   var index = -1,
-      result = Array(n);
+      result = Array(nativeMin(n, MAX_ARRAY_LENGTH));
 
   while (++index < n) {
-    result[index] = iterator(index);
+    if (index < MAX_ARRAY_LENGTH) {
+      result[index] = iteratee(index);
+    } else {
+      iteratee(index);
+    }
   }
   return result;
 }

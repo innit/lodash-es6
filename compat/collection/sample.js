@@ -7,12 +7,10 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseRandom from '../internal/baseRandom';
-import isString from '../object/isString';
 import shuffle from './shuffle';
-import support from '../support';
-import values from '../object/values';
+import toIterable from '../internal/toIterable';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeMin = Math.min;
 
 /**
@@ -34,13 +32,9 @@ var nativeMin = Math.min;
  * // => [3, 1]
  */
 function sample(collection, n, guard) {
-  if (collection && typeof collection.length != 'number') {
-    collection = values(collection);
-  } else if (support.unindexedChars && isString(collection)) {
-    collection = collection.split('');
-  }
   if (n == null || guard) {
-    var length = collection ? collection.length : 0;
+    collection = toIterable(collection);
+    var length = collection.length;
     return length > 0 ? collection[baseRandom(0, length - 1)] : undefined;
   }
   var result = shuffle(collection);

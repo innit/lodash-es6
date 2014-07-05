@@ -9,13 +9,18 @@
 import baseIndexOf from '../internal/baseIndexOf';
 import sortedIndex from './sortedIndex';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeMax = Math.max;
 
 /**
- * Gets the index at which the first occurrence of `value` is found using
- * strict equality for comparisons, i.e. `===`. If the array is already sorted
- * providing `true` for `fromIndex` performs a faster binary search.
+ * Gets the index at which the first occurrence of `value` is found in `array`
+ * using `SameValueZero` for equality comparisons. If `fromIndex` is negative,
+ * it is used as the offset from the end of the collection. If `array` is
+ * sorted providing `true` for `fromIndex` performs a faster binary search.
+ *
+ * **Note:** `SameValueZero` is like strict equality, e.g. `===`, except that
+ * `NaN` matches `NaN`. See the [ES6 spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+ * for more details.
  *
  * @static
  * @memberOf _
@@ -35,11 +40,12 @@ var nativeMax = Math.max;
  * // => 4
  *
  * // performing a binary search
- * _.indexOf([1, 1, 2, 2, 3, 3], 2, true);
+ * _.indexOf([4, 4, 5, 5, 6, 6], 5, true);
  * // => 2
  */
 function indexOf(array, value, fromIndex) {
   var length = array ? array.length : 0;
+
   if (typeof fromIndex == 'number') {
     fromIndex = fromIndex < 0 ? nativeMax(length + fromIndex, 0) : (fromIndex || 0);
   } else if (fromIndex) {

@@ -9,7 +9,7 @@
 import isFunction from '../object/isFunction';
 
 /** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+var FUNC_ERROR_TEXT = 'Expected a function';
 
 /**
  * Creates a function that is the composition of the provided functions,
@@ -43,20 +43,20 @@ var funcErrorText = 'Expected a function';
  */
 function compose() {
   var funcs = arguments,
-      funcsLength = funcs.length,
-      length = funcsLength;
+      length = funcs.length,
+      index = length - 1;
 
   if (!length) {
     return function() {};
   }
   while (length--) {
     if (!isFunction(funcs[length])) {
-      throw new TypeError(funcErrorText);
+      throw new TypeError(FUNC_ERROR_TEXT);
     }
   }
   return function() {
-    var length = funcsLength - 1,
-        result = funcs[length].apply(this, arguments);
+    length = index;
+    var result = funcs[length].apply(this, arguments);
 
     while (length--) {
       result = funcs[length].call(this, result);

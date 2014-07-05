@@ -6,20 +6,21 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import callback from '../utility/callback';
+import baseCallback from '../internal/baseCallback';
+import baseSortedIndex from '../internal/baseSortedIndex';
 import identity from '../utility/identity';
 
 /**
- * Uses a binary search to determine the smallest index at which a value
- * should be inserted into a given sorted array in order to maintain the sort
- * order of the array. If an iterator function is provided it is executed for
- * `value` and each element of `array` to compute their sort ranking. The
- * iterator function is bound to `thisArg` and invoked with one argument; (value).
+ * Uses a binary search to determine the lowest index at which a value should
+ * be inserted into a given sorted array in order to maintain the sort order
+ * of the array. If an iteratee function is provided it is executed for `value`
+ * and each element of `array` to compute their sort ranking. The iteratee
+ * function is bound to `thisArg` and invoked with one argument; (value).
  *
- * If a property name is provided for `iterator` the created "_.pluck" style
+ * If a property name is provided for `iteratee` the created "_.pluck" style
  * callback returns the property value of the given element.
  *
- * If an object is provided for `iterator` the created "_.where" style callback
+ * If an object is provided for `iteratee` the created "_.where" style callback
  * returns `true` for elements that have the properties of the given object,
  * else `false`.
  *
@@ -28,46 +29,35 @@ import identity from '../utility/identity';
  * @category Array
  * @param {Array} array The array to inspect.
  * @param {*} value The value to evaluate.
- * @param {Function|Object|string} [iterator=identity] The function called
+ * @param {Function|Object|string} [iteratee=identity] The function called
  *  per iteration. If a property name or object is provided it is used to
  *  create a "_.pluck" or "_.where" style callback respectively.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {number} Returns the index at which `value` should be inserted
  *  into `array`.
  * @example
  *
- * _.sortedIndex([20, 30, 50], 40);
+ * _.sortedIndex([30, 50], 40);
+ * // => 1
+ *
+ * _.sortedIndex([4, 4, 5, 5, 6, 6], 5);
  * // => 2
  *
- * var dict = {
- *   'wordToNumber': { 'twenty': 20, 'thirty': 30, 'forty': 40, 'fifty': 50 }
- * };
+ * var dict = { 'data': { 'thirty': 30, 'forty': 40, 'fifty': 50 } };
  *
- * // using an iterator function
- * _.sortedIndex(['twenty', 'thirty', 'fifty'], 'forty', function(word) {
- *   return this.wordToNumber[word];
+ * // using an iteratee function
+ * _.sortedIndex(['thirty', 'fifty'], 'forty', function(word) {
+ *   return this.data[word];
  * }, dict);
- * // => 2
+ * // => 1
  *
  * // using "_.pluck" callback shorthand
- * _.sortedIndex([{ 'x': 20 }, { 'x': 30 }, { 'x': 50 }], { 'x': 40 }, 'x');
- * // => 2
+ * _.sortedIndex([{ 'x': 30 }, { 'x': 50 }], { 'x': 40 }, 'x');
+ * // => 1
  */
-function sortedIndex(array, value, iterator, thisArg) {
-  var low = 0,
-      high = array ? array.length : low;
-
-  // explicitly reference `identity` for better inlining in Firefox
-  iterator = iterator ? callback(iterator, thisArg, 1) : identity;
-  value = iterator(value);
-
-  while (low < high) {
-    var mid = (low + high) >>> 1;
-    (iterator(array[mid]) < value)
-      ? (low = mid + 1)
-      : (high = mid);
-  }
-  return low;
+function sortedIndex(array, value, iteratee, thisArg) {
+  iteratee = iteratee == null ? identity : baseCallback(iteratee, thisArg, 1);
+  return baseSortedIndex(array, value, iteratee);
 }
 
 export default sortedIndex;

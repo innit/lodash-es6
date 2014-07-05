@@ -6,17 +6,17 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from '../internal/isNative';
+import isNative from './isNative';
 import isObject from './isObject';
 import keysIn from './keysIn';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
-/** Native method shortcuts */
+/** Used to check objects for own properties */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
 
 /**
@@ -60,7 +60,7 @@ function shimKeys(object) {
  * Shape.prototype.z = 0;
  *
  * _.keys(new Shape);
- * // => ['x', 'y'] (property order is not guaranteed across environments)
+ * // => ['x', 'y'] (property order is not guaranteed)
  */
 var keys = !nativeKeys ? shimKeys : function(object) {
   return isObject(object) ? nativeKeys(object) : [];

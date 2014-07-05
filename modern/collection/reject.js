@@ -6,12 +6,13 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import callback from '../utility/callback';
-import filter from './filter';
-import negate from '../function/negate';
+import arrayFilter from '../internal/arrayFilter';
+import baseCallback from '../internal/baseCallback';
+import baseFilter from '../internal/baseFilter';
+import isArray from '../object/isArray';
 
 /**
- * The opposite of `_.filter`; this method returns the elements of a collection
+ * The opposite of `_.filter`; this method returns the elements of `collection`
  * the predicate does **not** return truthy for.
  *
  * If a property name is provided for `predicate` the created "_.pluck" style
@@ -49,8 +50,12 @@ import negate from '../function/negate';
  * // => [{ 'name': 'fred', 'age': 40, 'blocked': true }]
  */
 function reject(collection, predicate, thisArg) {
-  predicate = callback(predicate, thisArg, 3);
-  return filter(collection, negate(predicate));
+  var func = isArray(collection) ? arrayFilter : baseFilter;
+
+  predicate = baseCallback(predicate, thisArg, 3);
+  return func(collection, function(value, index, collection) {
+    return !predicate(value, index, collection);
+  });
 }
 
 export default reject;

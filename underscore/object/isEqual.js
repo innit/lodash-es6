@@ -9,7 +9,7 @@
 import isFunction from './isFunction';
 import keys from './keys';
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var argsClass = '[object Arguments]',
     arrayClass = '[object Array]',
     boolClass = '[object Boolean]',
@@ -53,11 +53,11 @@ arrayLikeClasses[stringClass] = arrayLikeClasses[weakMapClass] = false;
 /** Used for native method references */
 var objectProto = Object.prototype;
 
+/** Used to check objects for own properties */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * The base implementation of `_.isEqual`, without support for `thisArg`
@@ -185,9 +185,9 @@ function baseIsEqual(value, other, stackA, stackB) {
  * instead. The `customizer` is bound to `thisArg` and invoked with three
  * arguments; (value, other, key).
  *
- * Note: This method supports comparing arrays, booleans, `Date` objects,
+ * **Note:** This method supports comparing arrays, booleans, `Date` objects,
  * numbers, `Object` objects, regexes, and strings. Functions and DOM nodes
- * are **not** supported. A customizer function may be used to extend support
+ * are **not** supported. Provide a customizer function to extend support
  * for comparing other values.
  *
  * @static

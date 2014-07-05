@@ -7,9 +7,9 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import assign from './assign';
+import baseSlice from '../internal/baseSlice';
 import isArray from './isArray';
 import isObject from './isObject';
-import slice from '../array/slice';
 
 /**
  * Creates a clone of `value`. If `isDeep` is `true` nested objects are cloned,
@@ -18,7 +18,7 @@ import slice from '../array/slice';
  * cloning is handled by the method instead. The `customizer` is bound to
  * `thisArg` and invoked with two argument; (value, index|key).
  *
- * Note: This method is loosely based on the structured clone algorithm. Functions
+ * **Note:** This method is loosely based on the structured clone algorithm. Functions
  * and DOM nodes are **not** cloned. The enumerable properties of `arguments` objects and
  * objects created by constructors other than `Object` are cloned to plain `Object` objects.
  * See the [HTML5 specification](http://www.w3.org/TR/html5/infrastructure.html#internal-structured-cloning-algorithm)
@@ -59,7 +59,7 @@ import slice from '../array/slice';
  */
 function clone(value) {
   return isObject(value)
-    ? (isArray(value) ? slice(value) : assign({}, value))
+    ? (isArray(value) ? baseSlice(value) : assign({}, value))
     : value;
 }
 

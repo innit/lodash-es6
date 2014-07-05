@@ -1,0 +1,28 @@
+language: node_js
+node_js:
+  - "0.10"
+env:
+  global:
+    - BIN="phantomjs" BUILD="compat" ISTANBUL=false TARGET_PATH=./transpiled
+    - secure: "iz94IlmCYZN1eonOg/uw85Q1oXwl7NGwOrvAxHyqHvtEOX8bTZo039agRS/6FWSHfphvYVEXcB0eSAe0qXgLTFsNuuTPlrwGp7tlRSJftUE33ep+NFM/CdjmXLpBk1kCVVTnjRDvuERnlJ3Qp49uhX+Cu9Heau4rWPoFLwSQ79c="
+  matrix:
+    - LOADER="requirejs"
+    - BUILD="modern"     LOADER="requirejs"
+    - BUILD="underscore" LOADER="requirejs"
+    - ISTANBUL=true      BUILD="modern" LOADER="requirejs"
+git:
+  depth: 10
+branches:
+  only:
+    - master
+before_install:
+  - "[ $ISTANBUL == false ] || npm i -g coveralls@\"^2.11.0\" istanbul@\"^0.3.0\""
+  - "git clone --depth=10 --branch=master git://github.com/lodash/lodash.git ./node_modules/lodash"
+  - "npm -i -g es6-module-transpiler@\"^0.5.0\"
+  - "compile-modules ./$BUILD --to $OUTPUT_PATH"
+script:
+  - "[ $ISTANBUL == false ]  || BUILD=\"modern-coverage\""
+  - "[ $ISTANBUL == false ]  || istanbul instrument --output ./$BUILD $OUTPUT_PATH"
+  - "[ $SAUCE_LABS == true ] || phantomjs --disk-cache=true ./node_modules/lodash/test/test.js \"node_modules/lodash/test/index.html?build=../../../$BUILD/main.js&loader=$LOADER&noglobals=true\""
+  - "[ $ISTANBUL == false ]  || istanbul report lcovonly"
+  - "[ $ISTANBUL == true ] && [ $TRAVIS_SECURE_ENV_VARS == true ] && cat ./coverage/lcov.info | coveralls || true"

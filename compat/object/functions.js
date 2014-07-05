@@ -18,14 +18,14 @@ import keysIn from './keysIn';
  * @alias methods
  * @category Object
  * @param {Object} object The object to inspect.
- * @returns {Array} Returns the new sorted array of property names.
+ * @returns {Array} Returns the new array of property names.
  * @example
  *
  * _.functions(_);
  * // => ['all', 'any', 'bind', 'bindAll', 'clone', 'compact', 'compose', ...]
  */
 function functions(object) {
-  return baseFunctions(object, keysIn);
+  return baseFunctions(object, keysIn(object));
 }
 
 export default functions;

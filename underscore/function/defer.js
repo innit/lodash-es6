@@ -10,7 +10,7 @@ import isFunction from '../object/isFunction';
 import slice from '../array/slice';
 
 /** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+var FUNC_ERROR_TEXT = 'Expected a function';
 
 /**
  * Defers executing the `func` function until the current call stack has
@@ -29,7 +29,7 @@ var funcErrorText = 'Expected a function';
  */
 function defer(func) {
   if (!isFunction(func)) {
-    throw new TypeError(funcErrorText);
+    throw new TypeError(FUNC_ERROR_TEXT);
   }
   var args = slice(arguments, 1);
   return setTimeout(function() { func.apply(undefined, args); }, 1);

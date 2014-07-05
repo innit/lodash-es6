@@ -6,12 +6,12 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import callback from '../utility/callback';
+import baseCallback from '../internal/baseCallback';
 
 /** Used for native method references */
 var arrayProto = Array.prototype;
 
-/** Native method shortcuts */
+/** Native method references */
 var splice = arrayProto.splice;
 
 /**
@@ -26,7 +26,7 @@ var splice = arrayProto.splice;
  * returns `true` for elements that have the properties of the given object,
  * else `false`.
  *
- * Note: Unlike `_.filter`, this method mutates `array`.
+ * **Note:** Unlike `_.filter`, this method mutates `array`.
  *
  * @static
  * @memberOf _
@@ -53,7 +53,7 @@ function remove(array, predicate, thisArg) {
       length = array ? array.length : 0,
       result = [];
 
-  predicate = callback(predicate, thisArg, 3);
+  predicate = baseCallback(predicate, thisArg, 3);
   while (++index < length) {
     var value = array[index];
     if (predicate(value, index, array)) {

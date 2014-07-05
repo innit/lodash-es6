@@ -10,8 +10,12 @@ import baseDifference from '../internal/baseDifference';
 import slice from './slice';
 
 /**
- * Creates an array excluding all provided values using strict equality for
- * comparisons, i.e. `===`.
+ * Creates an array excluding all provided values using `SameValueZero` for
+ * equality comparisons.
+ *
+ * **Note:** `SameValueZero` is like strict equality, e.g. `===`, except that
+ * `NaN` matches `NaN`. See the [ES6 spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+ * for more details.
  *
  * @static
  * @memberOf _
@@ -24,8 +28,8 @@ import slice from './slice';
  * _.without([1, 2, 1, 0, 3, 1, 4], 0, 1);
  * // => [2, 3, 4]
  */
-function without() {
-  return baseDifference(arguments[0], slice(arguments, 1));
+function without(array) {
+  return baseDifference(array, slice(arguments, 1));
 }
 
 export default without;

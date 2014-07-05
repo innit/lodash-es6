@@ -10,7 +10,7 @@ import keys from './keys';
 
 /**
  * Creates a two dimensional array of a given object's key-value pairs,
- * i.e. `[[key1, value1], [key2, value2]]`.
+ * e.g. `[[key1, value1], [key2, value2]]`.
  *
  * @static
  * @memberOf _
@@ -20,7 +20,7 @@ import keys from './keys';
  * @example
  *
  * _.pairs({ 'barney': 36, 'fred': 40 });
- * // => [['barney', 36], ['fred', 40]] (property order is not guaranteed across environments)
+ * // => [['barney', 36], ['fred', 40]] (property order is not guaranteed)
  */
 function pairs(object) {
   var index = -1,

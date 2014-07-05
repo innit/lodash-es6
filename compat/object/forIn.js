@@ -12,7 +12,7 @@ import keysIn from './keysIn';
 
 /**
  * Iterates over own and inherited enumerable properties of an object executing
- * `iterator` for each property. The `iterator` is bound to `thisArg` and invoked
+ * `iteratee` for each property. The `iteratee` is bound to `thisArg` and invoked
  * with three arguments; (value, key, object). Iterator functions may exit
  * iteration early by explicitly returning `false`.
  *
@@ -20,8 +20,8 @@ import keysIn from './keysIn';
  * @memberOf _
  * @category Object
  * @param {Object} object The object to iterate over.
- * @param {Function} [iterator=identity] The function called per iteration.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {Function} [iteratee=identity] The function called per iteration.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Object} Returns `object`.
  * @example
  *
@@ -35,13 +35,13 @@ import keysIn from './keysIn';
  * _.forIn(new Shape, function(value, key) {
  *   console.log(key);
  * });
- * // => logs 'x', 'y', and 'z' (property order is not guaranteed across environments)
+ * // => logs 'x', 'y', and 'z' (property order is not guaranteed)
  */
-function forIn(object, iterator, thisArg) {
-  if (typeof iterator != 'function' || typeof thisArg != 'undefined') {
-    iterator = baseCallback(iterator, thisArg, 3);
+function forIn(object, iteratee, thisArg) {
+  if (typeof iteratee != 'function' || typeof thisArg != 'undefined') {
+    iteratee = baseCallback(iteratee, thisArg, 3);
   }
-  return baseFor(object, iterator, keysIn);
+  return baseFor(object, iteratee, keysIn);
 }
 
 export default forIn;

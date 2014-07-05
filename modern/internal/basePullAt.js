@@ -12,7 +12,7 @@ import baseCompareAscending from './baseCompareAscending';
 /** Used for native method references */
 var arrayProto = Array.prototype;
 
-/** Native method shortcuts */
+/** Native method references */
 var splice = arrayProto.splice;
 
 /**

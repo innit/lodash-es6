@@ -15,11 +15,11 @@ import keysIn from '../object/keysIn';
  *
  * @private
  * @param {Object} object The object to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Object} Returns `object`.
  */
-function baseForIn(object, iterator) {
-  return baseFor(object, iterator, keysIn);
+function baseForIn(object, iteratee) {
+  return baseFor(object, iteratee, keysIn);
 }
 
 export default baseForIn;

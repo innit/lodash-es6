@@ -6,20 +6,14 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseEach from '../internal/baseEach';
 import baseFind from '../internal/baseFind';
-import callback from '../utility/callback';
 import findIndex from '../array/findIndex';
+import isArray from '../object/isArray';
 
 /**
- * Used as the maximum length of an array-like object.
- * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
- * for more details.
- */
-var maxSafeInteger = Math.pow(2, 53) - 1;
-
-/**
- * Iterates over elements of a collection, returning the first element that
+ * Iterates over elements of `collection`, returning the first element that
  * the predicate returns truthy for. The predicate is bound to `thisArg` and
  * invoked with three arguments; (value, index|key, collection).
  *
@@ -62,13 +56,11 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * // => { 'name': 'fred', 'age': 40, 'blocked': true }
  */
 function find(collection, predicate, thisArg) {
-  var length = collection ? collection.length : 0;
-
-  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
+  if (isArray(collection)) {
     var index = findIndex(collection, predicate, thisArg);
     return index > -1 ? collection[index] : undefined;
   }
-  predicate = callback(predicate, thisArg, 3);
+  predicate = baseCallback(predicate, thisArg, 3);
   return baseFind(collection, predicate, baseEach);
 }
 

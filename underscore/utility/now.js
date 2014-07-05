@@ -6,9 +6,9 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from '../internal/isNative';
+import isNative from '../object/isNative';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeNow = isNative(nativeNow = Date.now) && nativeNow;
 
 /**
@@ -20,8 +20,7 @@ var nativeNow = isNative(nativeNow = Date.now) && nativeNow;
  * @category Utility
  * @example
  *
- * var stamp = _.now();
- * _.defer(function() { console.log(_.now() - stamp); });
+ * _.defer(function(stamp) { console.log(_.now() - stamp); }, _.now());
  * // => logs the number of milliseconds it took for the deferred function to be called
  */
 var now = nativeNow || function() {

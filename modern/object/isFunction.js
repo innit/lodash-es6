@@ -8,13 +8,13 @@
  */
 
 /**
- * Checks if `value` is a function.
+ * Checks if `value` is classified as a `Function` object.
  *
  * @static
  * @memberOf _
  * @category Object
  * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
  * @example
  *
  * _.isFunction(_);

@@ -17,27 +17,27 @@ import baseCallback from './baseCallback';
  * @returns {Function} Returns the new assigner function.
  */
 function createAssigner(assigner) {
-  return function(object) {
-    var args = arguments,
-        length = args.length;
+  return function() {
+    var length = arguments.length,
+        object = arguments[0];
 
     if (object == null || length < 2) {
       return object;
     }
     // enables use as a callback for functions like `_.reduce`
-    var type = typeof args[2];
-    if ((type == 'number' || type == 'string') && args[3] && args[3][args[2]] === args[1]) {
+    var type = typeof arguments[2];
+    if ((type == 'number' || type == 'string') && arguments[3] && arguments[3][arguments[2]] === arguments[1]) {
       length = 2;
     }
     // juggle arguments
-    if (length > 3 && typeof args[length - 2] == 'function') {
-      var customizer = baseCallback(args[--length - 1], args[length--], 5);
-    } else if (length > 2 && typeof args[length - 1] == 'function') {
-      customizer = args[--length];
+    if (length > 3 && typeof arguments[length - 2] == 'function') {
+      var customizer = baseCallback(arguments[--length - 1], arguments[length--], 5);
+    } else if (length > 2 && typeof arguments[length - 1] == 'function') {
+      customizer = arguments[--length];
     }
     var index = 0;
     while (++index < length) {
-      assigner(object, args[index], customizer);
+      assigner(object, arguments[index], customizer);
     }
     return object;
   };

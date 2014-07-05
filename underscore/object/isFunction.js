@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var funcClass = '[object Function]';
 
 /** Used for native method references */
@@ -17,13 +17,13 @@ var objectProto = Object.prototype;
 var toString = objectProto.toString;
 
 /**
- * Checks if `value` is a function.
+ * Checks if `value` is classified as a `Function` object.
  *
  * @static
  * @memberOf _
  * @category Object
  * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a function, else `false`.
+ * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
  * @example
  *
  * _.isFunction(_);

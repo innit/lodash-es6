@@ -7,12 +7,13 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import arrayMap from '../internal/arrayMap';
+import baseCallback from '../internal/baseCallback';
 import baseDifference from '../internal/baseDifference';
 import baseFlatten from '../internal/baseFlatten';
-import basePick from '../internal/basePick';
-import callback from '../utility/callback';
 import keysIn from './keysIn';
-import negate from '../function/negate';
+import pickByArray from '../internal/pickByArray';
+import pickByCallback from '../internal/pickByCallback';
+import toObject from '../internal/toObject';
 
 /**
  * Creates a shallow clone of `object` excluding the specified properties.
@@ -45,11 +46,15 @@ function omit(object, predicate, thisArg) {
   if (object == null) {
     return {};
   }
-  if (typeof predicate == 'function') {
-    return basePick(object, negate(callback(predicate, thisArg, 3)));
+  var iterable = toObject(object);
+  if (typeof predicate != 'function') {
+    var props = arrayMap(baseFlatten(arguments, false, false, 1), String);
+    return pickByArray(iterable, baseDifference(keysIn(iterable), props));
   }
-  var omitProps = baseFlatten(arguments, false, false, 1);
-  return basePick(Object(object), baseDifference(keysIn(object), arrayMap(omitProps, String)));
+  predicate = baseCallback(predicate, thisArg, 3);
+  return pickByCallback(iterable, function(value, key, object) {
+    return !predicate(value, key, object);
+  });
 }
 
 export default omit;

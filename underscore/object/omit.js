@@ -9,8 +9,9 @@
 import arrayMap from '../internal/arrayMap';
 import baseDifference from '../internal/baseDifference';
 import baseFlatten from '../internal/baseFlatten';
-import basePick from '../internal/basePick';
 import keysIn from './keysIn';
+import pickByArray from '../internal/pickByArray';
+import toObject from '../internal/toObject';
 
 /**
  * Creates a shallow clone of `object` excluding the specified properties.
@@ -43,8 +44,10 @@ function omit(object) {
   if (object == null) {
     return {};
   }
-  var omitProps = baseFlatten(arguments, false, false, 1);
-  return basePick(Object(object), baseDifference(keysIn(object), arrayMap(omitProps, String)));
+  var iterable = toObject(object),
+      props = arrayMap(baseFlatten(arguments, false, false, 1), String);
+
+  return pickByArray(iterable, baseDifference(keysIn(iterable), props));
 }
 
 export default omit;

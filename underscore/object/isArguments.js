@@ -7,21 +7,30 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/** `Object#toString` result shortcuts */
+/**
+ * Used as the maximum length of an array-like value.
+ * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
+ */
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+/** `Object#toString` result references */
 var argsClass = '[object Arguments]';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
+/** Used to check objects for own properties */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
 
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty,
-    propertyIsEnumerable = objectProto.propertyIsEnumerable;
+/** Native method references */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
 
 /**
- * Checks if `value` is an `arguments` object.
+ * Checks if `value` is classified as an `arguments` object.
  *
  * @static
  * @memberOf _
@@ -43,7 +52,8 @@ function isArguments(value) {
 // fallback for environments without a `[[Class]]` for `arguments` objects
 if (!isArguments(arguments)) {
   isArguments = function(value) {
-    return (value && typeof value == 'object' && typeof value.length == 'number' &&
+    var length = (value && typeof value == 'object') ? value.length : undefined;
+    return (typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER &&
       hasOwnProperty.call(value, 'callee') && !propertyIsEnumerable.call(value, 'callee')) || false;
   };
 }

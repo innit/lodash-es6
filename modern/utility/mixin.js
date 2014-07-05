@@ -14,7 +14,7 @@ import keys from '../object/keys';
 /** Used for native method references */
 var arrayProto = Array.prototype;
 
-/** Native method shortcuts */
+/** Native method references */
 var push = arrayProto.push;
 
 /**
@@ -52,8 +52,12 @@ var push = arrayProto.push;
  */
 function mixin(object, source, options) {
   var chain = true,
-      methodNames = source && baseFunctions(source, keys);
+      isObj = isObject(source),
+      noOpts = options == null,
+      props = noOpts && isObj && keys(source),
+      methodNames = props && baseFunctions(source, props);
 
+  methodNames || (methodNames = baseFunctions(source, keys(source)));
   if (options === false) {
     chain = false;
   } else if (isObject(options) && 'chain' in options) {
@@ -61,7 +65,7 @@ function mixin(object, source, options) {
   }
   var index = -1,
       isFunc = isFunction(object),
-      length = methodNames ? methodNames.length : 0;
+      length = methodNames.length;
 
   while (++index < length) {
     var methodName = methodNames[index],

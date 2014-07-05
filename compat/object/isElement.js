@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNode from '../internal/isNode';
+import isHostObject from '../internal/isHostObject';
 import isPlainObject from './isPlainObject';
 import support from '../support';
 
@@ -34,7 +34,7 @@ var toString = objectProto.toString;
  */
 function isElement(value) {
   return (value && typeof value == 'object' && value.nodeType === 1 &&
-    (support.nodeClass ? toString.call(value).indexOf('Element') > -1 : isNode(value))) || false;
+    (support.nodeClass ? toString.call(value).indexOf('Element') > -1 : isHostObject(value))) || false;
 }
 // fallback for environments without DOM support
 if (!support.dom) {

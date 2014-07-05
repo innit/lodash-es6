@@ -8,12 +8,12 @@
  */
 
 /**
- * The base implementation of `_.at` without support for strings and
- * individual key arguments.
+ * The base implementation of `_.at` without support for strings and individual
+ * key arguments.
  *
  * @private
  * @param {Array|Object} collection The collection to iterate over.
- * @param {number[]|string[]} [props] The keys of elements to pick.
+ * @param {number[]|string[]} [props] The property names or indexes of elements to pick.
  * @returns {Array} Returns the new array of picked elements.
  */
 function baseAt(collection, props) {

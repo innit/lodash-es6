@@ -32,6 +32,7 @@ import isError from './object/isError';
 import isFinite from './object/isFinite';
 import isFunction from './object/isFunction';
 import isNaN from './object/isNaN';
+import isNative from './object/isNative';
 import isNull from './object/isNull';
 import isNumber from './object/isNumber';
 import isObject from './object/isObject';
@@ -77,6 +78,7 @@ export default {
   'isFinite': isFinite,
   'isFunction': isFunction,
   'isNaN': isNaN,
+  'isNative': isNative,
   'isNull': isNull,
   'isNumber': isNumber,
   'isObject': isObject,

@@ -13,15 +13,15 @@
  *
  * @private
  * @param {Array} array The array to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Array} Returns `array`.
  */
-function arrayEach(array, iterator) {
+function arrayEach(array, iteratee) {
   var index = -1,
-      length = array ? array.length : 0;
+      length = array.length;
 
   while (++index < length) {
-    if (iterator(array[index], index, array) === false) {
+    if (iteratee(array[index], index, array) === false) {
       break;
     }
   }

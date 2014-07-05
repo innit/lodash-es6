@@ -36,7 +36,7 @@ function unescapeHtmlChar(chr) {
  * `&amp;`, `&lt;`, `&gt;`, `&quot;`, and `&#39;` in `string` to their
  * corresponding characters.
  *
- * Note: No other HTML entities are unescaped. To unescape additional HTML
+ * **Note:** No other HTML entities are unescaped. To unescape additional HTML
  * entities use a third-party library like [_he_](http://mths.be/he).
  *
  * @static
@@ -50,11 +50,10 @@ function unescapeHtmlChar(chr) {
  * // => 'fred, barney & pebbles'
  */
 function unescape(string) {
-  if (string == null) {
-    return '';
-  }
-  string = String(string);
-  return string.indexOf(';') < 0 ? string : string.replace(reEscapedHtml, unescapeHtmlChar);
+  string = string == null ? '' : String(string);
+  return (reEscapedHtml.lastIndex = 0, reEscapedHtml.test(string))
+    ? string.replace(reEscapedHtml, unescapeHtmlChar)
+    : string;
 }
 
 export default unescape;

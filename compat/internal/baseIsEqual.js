@@ -8,11 +8,11 @@
  */
 import isArguments from '../object/isArguments';
 import isFunction from '../object/isFunction';
-import isNode from './isNode';
+import isHostObject from './isHostObject';
 import keys from '../object/keys';
 import support from '../support';
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var argsClass = '[object Arguments]',
     arrayClass = '[object Array]',
     boolClass = '[object Boolean]',
@@ -56,11 +56,11 @@ arrayLikeClasses[stringClass] = arrayLikeClasses[weakMapClass] = false;
 /** Used for native method references */
 var objectProto = Object.prototype;
 
+/** Used to check objects for own properties */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * The base implementation of `_.isEqual`, without support for `thisArg`
@@ -107,38 +107,18 @@ function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
   if (valClass != othClass) {
     return false;
   }
-  switch (valClass) {
-    case boolClass:
-    case dateClass:
-      // coerce dates and booleans to numbers, dates to milliseconds and booleans
-      // to `1` or `0` treating invalid dates coerced to `NaN` as not equal
-      return +value == +other;
-
-    case numberClass:
-      // treat `NaN` vs. `NaN` as equal
-      return (value != +value)
-        ? other != +other
-        // but treat `-0` vs. `+0` as not equal
-        : (value == 0 ? (1 / value == 1 / other) : value == +other);
-
-    case regexpClass:
-    case stringClass:
-      // coerce regexes to strings (http://es5.github.io/#x15.10.6.4) and
-      // treat strings primitives and string objects as equal
-      return value == String(other);
-  }
   var isArr = arrayLikeClasses[valClass],
       isErr = valClass == errorClass;
 
-  if (!support.argsClass) {
-    valIsArg = isArguments(value);
-    othIsArg = isArguments(other);
-  }
-  if (!isArr) {
-    // exit for things like functions and DOM nodes
-    if (!(isErr || valClass == objectClass) || (!support.nodeClass && (isNode(value) || isNode(other)))) {
+  if (isArr) {
+    var valLength = value.length,
+        othLength = other.length;
+
+    if (valLength != othLength && !(isWhere && othLength > valLength)) {
       return false;
     }
+  }
+  else if (isErr || (valClass == objectClass && (support.nodeClass || !(isHostObject(value) || isHostObject(other))))) {
     // unwrap any `lodash` wrapped values
     var valWrapped = hasOwnProperty.call(value, '__wrapped__'),
         othWrapped = hasOwnProperty.call(other, '__wrapped__');
@@ -146,80 +126,36 @@ function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
     if (valWrapped || othWrapped) {
       return baseIsEqual(valWrapped ? value.__wrapped__ : value, othWrapped ? other.__wrapped__ : other, customizer, isWhere, stackA, stackB);
     }
-    var hasValCtor = !valIsArg && hasOwnProperty.call(value, 'constructor'),
-        hasOthCtor = !othIsArg && hasOwnProperty.call(other, 'constructor');
-
-    if (hasValCtor != hasOthCtor) {
-      return false;
+    if (!support.argsClass) {
+      valIsArg = isArguments(value);
+      othIsArg = isArguments(other);
     }
-    if (!hasValCtor) {
-      // in older versions of Opera, `arguments` objects have `Array` constructors
-      var valCtor = valIsArg ? Object : value.constructor,
-          othCtor = othIsArg ? Object : other.constructor;
+    // in older versions of Opera, `arguments` objects have `Array` constructors
+    var valCtor = valIsArg ? Object : value.constructor,
+        othCtor = othIsArg ? Object : other.constructor;
 
+    if (isErr) {
       // error objects of different types are not equal
-      if (isErr && valCtor.prototype.name != othCtor.prototype.name) {
+      if (valCtor.prototype.name != othCtor.prototype.name) {
         return false;
       }
-      // non `Object` object instances with different constructors are not equal
-      if (valCtor != othCtor &&
-            !(isFunction(valCtor) && valCtor instanceof valCtor && isFunction(othCtor) && othCtor instanceof othCtor) &&
-            ('constructor' in value && 'constructor' in other)
-          ) {
+    } else {
+      var valHasCtor = !valIsArg && hasOwnProperty.call(value, 'constructor'),
+          othHasCtor = !othIsArg && hasOwnProperty.call(other, 'constructor');
+
+      if (valHasCtor != othHasCtor) {
         return false;
       }
-    }
-  }
-  // assume cyclic structures are equal
-  // the algorithm for detecting cyclic structures is adapted from ES 5.1
-  // section 15.12.3, abstract operation `JO` (http://es5.github.io/#x15.12.3)
-  stackA || (stackA = []);
-  stackB || (stackB = []);
-
-  var length = stackA.length;
-  while (length--) {
-    if (stackA[length] == value) {
-      return stackB[length] == other;
-    }
-  }
-  var index = -1;
-
-  // add `value` and `other` to the stack of traversed objects
-  stackA.push(value);
-  stackB.push(other);
-
-  // recursively compare objects and arrays (susceptible to call stack limits)
-  if (isArr) {
-    var othLength = other.length;
-    length = value.length;
-    result = length == othLength;
-
-    if (result || (isWhere && othLength > length)) {
-      // deep compare the contents, ignoring non-numeric properties
-      while (++index < length) {
-        var valValue = value[index];
-        if (isWhere) {
-          var othIndex = othLength;
-          while (othIndex--) {
-            result = baseIsEqual(valValue, other[othIndex], customizer, isWhere, stackA, stackB);
-            if (result) {
-              break;
-            }
-          }
-        } else {
-          var othValue = other[index];
-          result = customizer ? customizer(valValue, othValue, index) : undefined;
-          if (typeof result == 'undefined') {
-            result = baseIsEqual(valValue, othValue, customizer, isWhere, stackA, stackB);
-          }
-        }
-        if (!result) {
-          break;
+      if (!valHasCtor) {
+        // non `Object` object instances with different constructors are not equal
+        if (valCtor != othCtor &&
+              !(isFunction(valCtor) && valCtor instanceof valCtor && isFunction(othCtor) && othCtor instanceof othCtor) &&
+              ('constructor' in value && 'constructor' in other)
+            ) {
+          return false;
         }
       }
     }
-  }
-  else {
     var valProps = isErr ? ['message', 'name'] : keys(value),
         othProps = isErr ? valProps : keys(other);
 
@@ -229,24 +165,85 @@ function baseIsEqual(value, other, customizer, isWhere, stackA, stackB) {
     if (othIsArg) {
       othProps.push('length');
     }
-    length = valProps.length;
-    result = length == othProps.length;
+    valLength = valProps.length;
+    othLength = othProps.length;
+    if (valLength != othLength && !isWhere) {
+      return false;
+    }
+  }
+  else {
+    switch (valClass) {
+      case boolClass:
+      case dateClass:
+        // coerce dates and booleans to numbers, dates to milliseconds and booleans
+        // to `1` or `0` treating invalid dates coerced to `NaN` as not equal
+        return +value == +other;
 
-    if (result || isWhere) {
-      while (++index < length) {
-        var key = valProps[index];
-        result = isErr || hasOwnProperty.call(other, key);
+      case numberClass:
+        // treat `NaN` vs. `NaN` as equal
+        return (value != +value)
+          ? other != +other
+          // but treat `-0` vs. `+0` as not equal
+          : (value == 0 ? ((1 / value) == (1 / other)) : value == +other);
 
-        if (result) {
-          valValue = value[key];
-          othValue = other[key];
-          result = customizer ? customizer(valValue, othValue, key) : undefined;
-          if (typeof result == 'undefined') {
-            result = baseIsEqual(valValue, othValue, customizer, isWhere, stackA, stackB);
+      case regexpClass:
+      case stringClass:
+        // coerce regexes to strings (http://es5.github.io/#x15.10.6.4) and
+        // treat strings primitives and string objects as equal
+        return value == String(other);
+    }
+    return false;
+  }
+  // assume cyclic structures are equal
+  // the algorithm for detecting cyclic structures is adapted from ES 5.1
+  // section 15.12.3, abstract operation `JO` (http://es5.github.io/#x15.12.3)
+  stackA || (stackA = []);
+  stackB || (stackB = []);
+
+  var index = stackA.length;
+  while (index--) {
+    if (stackA[index] == value) {
+      return stackB[index] == other;
+    }
+  }
+  // add `value` and `other` to the stack of traversed objects
+  stackA.push(value);
+  stackB.push(other);
+
+  // recursively compare objects and arrays (susceptible to call stack limits)
+  result = true;
+  if (isArr) {
+    // deep compare the contents, ignoring non-numeric properties
+    while (result && ++index < valLength) {
+      var valValue = value[index];
+      if (isWhere) {
+        var othIndex = othLength;
+        while (othIndex--) {
+          result = baseIsEqual(valValue, other[othIndex], customizer, isWhere, stackA, stackB);
+          if (result) {
+            break;
           }
         }
-        if (!result) {
-          break;
+      } else {
+        var othValue = other[index];
+        result = customizer ? customizer(valValue, othValue, index) : undefined;
+        if (typeof result == 'undefined') {
+          result = baseIsEqual(valValue, othValue, customizer, isWhere, stackA, stackB);
+        }
+      }
+    }
+  }
+  else {
+    while (result && ++index < valLength) {
+      var key = valProps[index];
+      result = isErr || hasOwnProperty.call(other, key);
+
+      if (result) {
+        valValue = value[key];
+        othValue = other[key];
+        result = customizer ? customizer(valValue, othValue, key) : undefined;
+        if (typeof result == 'undefined') {
+          result = baseIsEqual(valValue, othValue, customizer, isWhere, stackA, stackB);
         }
       }
     }

@@ -11,9 +11,9 @@ import isObject from '../object/isObject';
 import now from '../utility/now';
 
 /** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+var FUNC_ERROR_TEXT = 'Expected a function';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeMax = Math.max;
 
 /**
@@ -24,9 +24,12 @@ var nativeMax = Math.max;
  * and/or trailing edge of the `wait` timeout. Subsequent calls to the
  * debounced function return the result of the last `func` call.
  *
- * Note: If `leading` and `trailing` options are `true`, `func` is called on
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is called on
  * the trailing edge of the timeout only if the the debounced function is
  * invoked more than once during the `wait` timeout.
+ *
+ * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+ * for details over the differences between `_.debounce` and `_.throttle`.
  *
  * @static
  * @memberOf _
@@ -88,7 +91,7 @@ function debounce(func, wait, options) {
       trailing = true;
 
   if (!isFunction(func)) {
-    throw new TypeError(funcErrorText);
+    throw new TypeError(FUNC_ERROR_TEXT);
   }
   wait = wait < 0 ? 0 : wait;
   if (options === true) {

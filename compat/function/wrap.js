@@ -6,10 +6,10 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createWrapper from '../internal/createWrapper';
+import basePartial from '../internal/basePartial';
 
 /** Used to compose bitmasks for wrapper metadata */
-var PARTIAL_FLAG = 16;
+var PARTIAL_FLAG = 32;
 
 /**
  * Creates a function that provides `value` to the wrapper function as its
@@ -33,7 +33,7 @@ var PARTIAL_FLAG = 16;
  * // => '<p>fred, barney, &amp; pebbles</p>'
  */
 function wrap(value, wrapper) {
-  return createWrapper(wrapper, PARTIAL_FLAG, null, null, [value]);
+  return basePartial(wrapper, PARTIAL_FLAG, [value], []);
 }
 
 export default wrap;

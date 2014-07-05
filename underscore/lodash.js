@@ -22,7 +22,7 @@ import mixin from './utility/mixin';
 import support from './support';
 
 /** Used as the semantic version number */
-var version = '3.0.0-pre';
+var VERSION = '3.0.0-pre';
 
 /** Used for native method references */
 var arrayProto = Array.prototype;
@@ -171,7 +171,7 @@ mixin(assign({}, lodash));
  * @memberOf _
  * @type string
  */
-lodash.VERSION = version;
+lodash.VERSION = VERSION;
 
 lodash.support = support;
 (lodash.templateSettings = strings.templateSettings).imports._ = lodash;

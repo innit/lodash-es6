@@ -6,9 +6,9 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from '../internal/isNative';
+import isNative from './isNative';
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var arrayClass = '[object Array]';
 
 /** Used for native method references */
@@ -17,17 +17,17 @@ var objectProto = Object.prototype;
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeIsArray = isNative(nativeIsArray = Array.isArray) && nativeIsArray;
 
 /**
- * Checks if `value` is an array.
+ * Checks if `value` is classified as an `Array` object.
  *
  * @static
  * @memberOf _
  * @category Object
  * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is an array, else `false`.
+ * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
  * @example
  *
  * _.isArray([1, 2, 3]);

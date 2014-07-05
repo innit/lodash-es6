@@ -7,6 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
+import attempt from './utility/attempt';
 import callback from './utility/callback';
 import constant from './utility/constant';
 import identity from './utility/identity';
@@ -24,9 +25,11 @@ import times from './utility/times';
 import uniqueId from './utility/uniqueId';
 
 export default {
+  'attempt': attempt,
   'callback': callback,
   'constant': constant,
   'identity': identity,
+  'iteratee': callback,
   'matches': matches,
   'mixin': mixin,
   'noConflict': noConflict,

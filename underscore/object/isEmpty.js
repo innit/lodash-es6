@@ -9,24 +9,19 @@
 import isArguments from './isArguments';
 import isArray from './isArray';
 import isString from './isString';
-
-/** Used for native method references */
-var objectProto = Object.prototype;
+import keys from './keys';
 
 /**
- * Used as the maximum length of an array-like object.
+ * Used as the maximum length of an array-like value.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
  * Checks if a collection is empty. A value is considered empty unless it is
- * an array, array-like object, or string with a length greater than `0` or
- * an object with own enumerable properties.
+ * an array-like value with a length greater than `0` or an object with own
+ * enumerable properties.
  *
  * @static
  * @memberOf _
@@ -55,16 +50,11 @@ function isEmpty(value) {
     return true;
   }
   var length = value.length;
-  if ((length > -1 && length <= maxSafeInteger) &&
+  if ((typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER) &&
       (isArray(value) || isString(value) || isArguments(value))) {
     return !length;
   }
-  for (var key in value) {
-    if (hasOwnProperty.call(value, key)) {
-      return false;
-    }
-  }
-  return true;
+  return !keys(value).length;
 }
 
 export default isEmpty;

@@ -13,14 +13,14 @@ var reUnescapedHtml = /[&<>"'`]/g;
 /**
  * Used to convert characters to HTML entities.
  *
- * Note: Though the ">" character is escaped for symmetry, characters like
+ * **Note:** Though the ">" character is escaped for symmetry, characters like
  * ">" and "/" don't require escaping in HTML and have no special meaning
  * unless they're part of a tag or unquoted attribute value.
  * See [Mathias' article](http://mathiasbynens.be/notes/ambiguous-ampersands)
  * (under "semi-related fun fact") for more details.
  *
- * Backticks are escaped because in Internet Explorer < 9, they can be used to
- * break out of attribute values or HTML comments. See [#102](http://html5sec.org/#102),
+ * Backticks are escaped because in Internet Explorer < 9, they can break out
+ * of attribute values or HTML comments. See [#102](http://html5sec.org/#102),
  * [#108](http://html5sec.org/#108), and [#133](http://html5sec.org/#133) of
  * the [HTML5 Security Cheatsheet](http://html5sec.org/) for more details.
  */
@@ -48,7 +48,7 @@ function escapeHtmlChar(chr) {
  * Converts the characters "&", "<", ">", '"', and "'" in `string` to
  * their corresponding HTML entities.
  *
- * Note: No other characters are escaped. To escape additional characters
+ * **Note:** No other characters are escaped. To escape additional characters
  * use a third-party library like [_he_](http://mths.be/he).
  *
  * When working with HTML you should always quote attribute values to reduce
@@ -66,7 +66,11 @@ function escapeHtmlChar(chr) {
  * // => 'fred, barney, &amp; pebbles'
  */
 function escape(string) {
-  return string == null ? '' : String(string).replace(reUnescapedHtml, escapeHtmlChar);
+  // reset `lastIndex` because in IE < 9 `String#replace` does not
+  string = string == null ? '' : String(string);
+  return (reUnescapedHtml.lastIndex = 0, reUnescapedHtml.test(string))
+    ? string.replace(reUnescapedHtml, escapeHtmlChar)
+    : string;
 }
 
 export default escape;

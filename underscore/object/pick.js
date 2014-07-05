@@ -7,7 +7,8 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseFlatten from '../internal/baseFlatten';
-import basePick from '../internal/basePick';
+import pickByArray from '../internal/pickByArray';
+import toObject from '../internal/toObject';
 
 /**
  * Creates a shallow clone of `object` composed of the specified properties.
@@ -39,7 +40,7 @@ import basePick from '../internal/basePick';
 function pick(object) {
   return object == null
     ? {}
-    : basePick(Object(object), baseFlatten(arguments, false, false, 1));
+    : pickByArray(toObject(object), baseFlatten(arguments, false, false, 1));
 }
 
 export default pick;

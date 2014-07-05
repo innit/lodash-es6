@@ -10,16 +10,20 @@ import baseIndexOf from '../internal/baseIndexOf';
 import values from '../object/values';
 
 /**
- * Used as the maximum length of an array-like object.
+ * Used as the maximum length of an array-like value.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
- * Checks if `value` is present in `collection` using strict equality for
- * comparisons, i.e. `===`. If `fromIndex` is negative, it is used as the
- * offset from the end of the collection.
+ * Checks if `value` is present in `collection` using  `SameValueZero` for
+ * equality comparisons. If `fromIndex` is negative, it is used as the offset
+ * from the end of the collection.
+ *
+ * **Note:** `SameValueZero` is like strict equality, e.g. `===`, except that
+ * `NaN` matches `NaN`. See the [ES6 spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+ * for more details.
  *
  * @static
  * @memberOf _
@@ -44,13 +48,12 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * // => true
  */
 function contains(collection, target) {
-  var indexOf = baseIndexOf,
-      length = collection ? collection.length : 0;
+  var length = collection ? collection.length : 0;
 
-  if (!(typeof length == 'number' && length > -1 && length <= maxSafeInteger)) {
+  if (!(typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER)) {
     collection = values(collection);
   }
-  return indexOf(collection, target) > -1;
+  return baseIndexOf(collection, target) > -1;
 }
 
 export default contains;

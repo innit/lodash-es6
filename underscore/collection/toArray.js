@@ -6,10 +6,15 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isArray from '../object/isArray';
-import map from './map';
-import slice from '../array/slice';
+import baseSlice from '../internal/baseSlice';
 import values from '../object/values';
+
+/**
+ * Used as the maximum length of an array-like value.
+ * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
+ */
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
  * Converts `collection` to an array.
@@ -25,11 +30,9 @@ import values from '../object/values';
  * // => [2, 3, 4]
  */
 function toArray(collection) {
-  if (isArray(collection)) {
-    return slice(collection);
-  }
-  if (collection && typeof collection.length == 'number') {
-    return map(collection);
+  var length = collection ? collection.length : 0;
+  if (typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER) {
+    return baseSlice(collection);
   }
   return values(collection);
 }

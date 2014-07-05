@@ -9,17 +9,17 @@
 import baseForIn from './baseForIn';
 import isFunction from '../object/isFunction';
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var objectClass = '[object Object]';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
+/** Used to check objects for own properties */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * A fallback implementation of `_.isPlainObject` which checks if `value`

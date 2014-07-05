@@ -21,7 +21,8 @@ function baseIndexOf(array, value, fromIndex) {
       length = array ? array.length : 0;
 
   while (++index < length) {
-    if (array[index] === value) {
+    var other = array[index];
+    if (other === value) {
       return index;
     }
   }

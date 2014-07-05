@@ -6,12 +6,12 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import keys from '../object/keys';
+import pairs from '../object/pairs';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
-/** Native method shortcuts */
+/** Used to check objects for own properties */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
@@ -40,17 +40,23 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  * // => { 'name': 'barney', 'age': 36 }
  */
 function matches(source) {
-  var props = keys(source),
-      propsLength = props.length;
+  var keyVals = pairs(source),
+      length = keyVals.length;
 
   return function(object) {
-    var length = propsLength;
-    if (length && object == null) {
-      return false;
+    var index = length;
+    if (object == null) {
+      return !index;
     }
-    while (length--) {
-      var key = props[length];
-      if (!(object[key] === source[key] && hasOwnProperty.call(object, key))) {
+    while (index--) {
+      var keyVal = keyVals[index];
+      if (object[keyVal[0]] !== keyVal[1]) {
+        return false
+      }
+    }
+    index = length;
+    while (index--) {
+      if (!hasOwnProperty.call(object, keyVals[index][0])) {
         return false
       }
     }

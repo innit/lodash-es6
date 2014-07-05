@@ -7,10 +7,10 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/** Native method shortcuts */
+/** Native method references */
 var ceil = Math.ceil;
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeMax = Math.max;
 
 /**
@@ -47,6 +47,12 @@ var nativeMax = Math.max;
  */
 function range(start, end, step) {
   start = +start || 0;
+
+  // enables use as a callback for functions like `_.map`
+  var type = typeof end;
+  if ((type == 'number' || type == 'string') && step && step[end] === start) {
+    end = step = null;
+  }
   step = step == null ? 1 : (+step || 0);
 
   if (end == null) {

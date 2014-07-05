@@ -9,7 +9,7 @@
 import isFunction from '../object/isFunction';
 import keys from '../object/keys';
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var argsClass = '[object Arguments]',
     arrayClass = '[object Array]',
     boolClass = '[object Boolean]',
@@ -53,11 +53,11 @@ arrayLikeClasses[stringClass] = arrayLikeClasses[weakMapClass] = false;
 /** Used for native method references */
 var objectProto = Object.prototype;
 
+/** Used to check objects for own properties */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * The base implementation of `_.isEqual`, without support for `thisArg`

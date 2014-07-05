@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import callback from '../utility/callback';
+import baseCallback from '../internal/baseCallback';
 
 /**
  * This method is like `_.find` except that it returns the index of the first
@@ -53,7 +53,7 @@ function findIndex(array, predicate, thisArg) {
   var index = -1,
       length = array ? array.length : 0;
 
-  predicate = callback(predicate, thisArg, 3);
+  predicate = baseCallback(predicate, thisArg, 3);
   while (++index < length) {
     if (predicate(array[index], index, array)) {
       return index;

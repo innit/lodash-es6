@@ -6,17 +6,17 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseSlice from '../internal/baseSlice';
 import isString from '../object/isString';
-import slice from '../array/slice';
 import support from '../support';
 import values from '../object/values';
 
 /**
- * Used as the maximum length of an array-like object.
+ * Used as the maximum length of an array-like value.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
  * Converts `collection` to an array.
@@ -32,11 +32,11 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * // => [2, 3, 4]
  */
 function toArray(collection) {
-  var length = collection && collection.length;
-  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
+  var length = collection ? collection.length : 0;
+  if (typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER) {
     return (support.unindexedChars && isString(collection))
       ? collection.split('')
-      : slice(collection);
+      : baseSlice(collection);
   }
   return values(collection);
 }

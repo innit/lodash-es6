@@ -6,22 +6,18 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import bind from '../function/bind';
+import baseSetData from './baseSetData';
+import getData from './getData';
 import identity from '../utility/identity';
-import isNative from './isNative';
-import setData from './setData';
+import isNative from '../object/isNative';
+import matches from '../utility/matches';
+import property from '../utility/property';
 import support from '../support';
 
 /** Used to compose bitmasks for wrapper metadata */
 var BIND_FLAG = 1;
 
-/** Used as the semantic version number */
-var version = '3.0.0-pre';
-
-/** Used as the property name for wrapper metadata */
-var expando = '__lodash@' + version + '__';
-
-/** Used to detected named functions */
+/** Used to detect named functions */
 var reFuncName = /^\s*function[ \n\r\t]+\w/;
 
 /** Used to detect functions containing a `this` reference */
@@ -41,49 +37,57 @@ var fnToString = Function.prototype.toString;
  * @returns {Function} Returns the new function.
  */
 function baseCallback(func, thisArg, argCount) {
-  if (typeof func != 'function') {
+  var type = typeof func;
+
+  if (type == 'function') {
+    if (typeof thisArg == 'undefined') {
+      return func;
+    }
+    var data = getData(func);
+    if (typeof data == 'undefined') {
+      if (support.funcNames) {
+        data = !func.name;
+      }
+      data = data || !support.funcDecomp;
+      if (!data) {
+        var source = fnToString.call(func);
+        if (!support.funcNames) {
+          data = !reFuncName.test(source);
+        }
+        if (!data) {
+          // checks if `func` references the `this` keyword and stores the result
+          data = reThis.test(source) || isNative(func);
+          baseSetData(func, data);
+        }
+      }
+    }
+    // exit early if there are no `this` references or `func` is bound
+    if (data === false || (data !== true && data[1] & BIND_FLAG)) {
+      return func;
+    }
+    switch (argCount) {
+      case 1: return function(value) {
+        return func.call(thisArg, value);
+      };
+      case 3: return function(value, index, collection) {
+        return func.call(thisArg, value, index, collection);
+      };
+      case 4: return function(accumulator, value, index, collection) {
+        return func.call(thisArg, accumulator, value, index, collection);
+      };
+      case 5: return function(value, other, key, object, source) {
+        return func.call(thisArg, value, other, key, object, source);
+      };
+    }
+    return function() {
+      return func.apply(thisArg, arguments);
+    };
+  }
+  if (func == null) {
     return identity;
   }
-  if (typeof thisArg == 'undefined') {
-    return func;
-  }
-  var data = func[expando];
-  if (typeof data == 'undefined') {
-    if (support.funcNames) {
-      data = !func.name;
-    }
-    data = data || !support.funcDecomp;
-    if (!data) {
-      var source = fnToString.call(func);
-      if (!support.funcNames) {
-        data = !reFuncName.test(source);
-      }
-      if (!data) {
-        // checks if `func` references the `this` keyword and stores the result
-        data = reThis.test(source) || isNative(func);
-        setData(func, data);
-      }
-    }
-  }
-  // exit early if there are no `this` references or `func` is bound
-  if (data === false || (data !== true && data[1] & BIND_FLAG)) {
-    return func;
-  }
-  switch (argCount) {
-    case 1: return function(value) {
-      return func.call(thisArg, value);
-    };
-    case 3: return function(value, index, collection) {
-      return func.call(thisArg, value, index, collection);
-    };
-    case 4: return function(accumulator, value, index, collection) {
-      return func.call(thisArg, accumulator, value, index, collection);
-    };
-    case 5: return function(value, other, key, object, source) {
-      return func.call(thisArg, value, other, key, object, source);
-    };
-  }
-  return bind(func, thisArg);
+  // handle "_.pluck" and "_.where" style callback shorthands
+  return type == 'object' ? matches(func) : property(func);
 }
 
 export default baseCallback;

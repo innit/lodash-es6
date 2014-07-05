@@ -8,8 +8,8 @@
  */
 
 /**
- * The base implementation of `compareAscending` used to compare values and
- * sort them in ascending order without guaranteeing a stable sort.
+ * The base implementation of `compareAscending` which compares values and
+ * sorts them in ascending order without guaranteeing a stable sort.
  *
  * @private
  * @param {*} value The value to compare to `other`.

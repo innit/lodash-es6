@@ -7,21 +7,21 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeMax = Math.max,
     nativeMin = Math.min;
 
 /**
- * Gets the index at which the last occurrence of `value` is found using
- * strict equality for comparisons, i.e. `===`. If `fromIndex` is negative,
- * it is used as the offset from the end of the collection.
+ * This method is like `_.indexOf` except that it iterates over elements of
+ * `array` from right to left.
  *
  * @static
  * @memberOf _
  * @category Array
  * @param {Array} array The array to search.
  * @param {*} value The value to search for.
- * @param {number} [fromIndex=array.length-1] The index to search from.
+ * @param {boolean|number} [fromIndex=array.length-1] The index to search from
+ *  or `true` to perform a binary search on a sorted array.
  * @returns {number} Returns the index of the matched value, else `-1`.
  * @example
  *
@@ -31,14 +31,21 @@ var nativeMax = Math.max,
  * // using `fromIndex`
  * _.lastIndexOf([1, 2, 3, 1, 2, 3], 2, 3);
  * // => 1
+ *
+ * // performing a binary search
+ * _.lastIndexOf([4, 4, 5, 5, 6, 6], 5, true);
+ * // => 3
  */
 function lastIndexOf(array, value, fromIndex) {
-  var index = array ? array.length : 0;
+  var length = array ? array.length : 0,
+      index = length;
+
   if (typeof fromIndex == 'number') {
     index = (fromIndex < 0 ? nativeMax(index + fromIndex, 0) : nativeMin(fromIndex || 0, index - 1)) + 1;
   }
   while (index--) {
-    if (array[index] === value) {
+    var other = array[index];
+    if (other === value) {
       return index;
     }
   }

@@ -8,13 +8,13 @@
  */
 
 /** Used as the semantic version number */
-var version = '3.0.0-pre';
+var VERSION = '3.0.0-pre';
 
 /** Used as the property name for wrapper metadata */
-var expando = '__lodash@' + version + '__';
+var EXPANDO = '__lodash_' + VERSION.replace(/[-.]/g, '_') + '__';
 
 /** Used by methods to exit iteration */
-var breakIndicator = expando + 'breaker__';
+var breakIndicator = EXPANDO + 'breaker__';
 
 /**
  * The base implementation of `_.find`, `_.findLast`, `_.findKey`, and `_.findLastKey`,
@@ -24,7 +24,7 @@ var breakIndicator = expando + 'breaker__';
  * @private
  * @param {Array|Object|string} collection The collection to search.
  * @param {Function} predicate The function called per iteration.
- * @param {Function} eachFunc The function to iterate over the collection.
+ * @param {Function} eachFunc The function to iterate over `collection`.
  * @param {boolean} [retKey=false] Specify returning the key of the found
  *  element instead of the element itself.
  * @returns {*} Returns the found element or its key, else `undefined`.

@@ -23,7 +23,7 @@ var reFlags = /\w*$/;
  * @param {string} [string=''] The string to truncate.
  * @param {Object|number} [options] The options object or maximum string length.
  * @param {number} [options.length=30] The maximum string length.
- * @param {string} [options.omission='...'] The string used to indicate text is omitted.
+ * @param {string} [options.omission='...'] The string to indicate text is omitted.
  * @param {RegExp|string} [options.separator] The separator pattern to truncate to.
  * @returns {string} Returns the truncated string.
  * @example

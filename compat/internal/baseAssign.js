@@ -25,7 +25,9 @@ function baseAssign(object, source, customizer) {
 
   while (++index < length) {
     var key = props[index];
-    object[key] = customizer ? customizer(object[key], source[key], key, object, source) : source[key];
+    object[key] = customizer
+      ? customizer(object[key], source[key], key, object, source)
+      : source[key];
   }
   return object;
 }

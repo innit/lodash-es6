@@ -28,7 +28,7 @@ import keysIn from './keysIn';
  * Shape.prototype.z = 0;
  *
  * _.valuesIn(new Shape(2, 1));
- * // => [2, 1, 0] (property order is not guaranteed across environments)
+ * // => [2, 1, 0] (property order is not guaranteed)
  */
 function valuesIn(object) {
   return baseValues(object, keysIn);

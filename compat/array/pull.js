@@ -6,18 +6,23 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseIndexOf from '../internal/baseIndexOf';
 
 /** Used for native method references */
 var arrayProto = Array.prototype;
 
-/** Native method shortcuts */
+/** Native method references */
 var splice = arrayProto.splice;
 
 /**
- * Removes all provided values from `array` using strict equality for
- * comparisons, i.e. `===`.
+ * Removes all provided values from `array` using `SameValueZero` for equality
+ * comparisons.
  *
- * Note: Unlike `_.without`, this method mutates `array`.
+ * **Note:** Unlike `_.without`, this method mutates `array`.
+ *
+ * `SameValueZero` is like strict equality, e.g. `===`, except that `NaN` matches
+ * `NaN`. See the [ES6 spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+ * for more details.
  *
  * @static
  * @memberOf _
@@ -32,20 +37,18 @@ var splice = arrayProto.splice;
  * console.log(array);
  * // => [1, 1]
  */
-function pull(array) {
-  var argsIndex = 0,
-      argsLength = arguments.length,
-      length = array ? array.length : 0;
+function pull() {
+  var array = arguments[0],
+      index = 0,
+      indexOf = baseIndexOf,
+      length = arguments.length;
 
-  while (++argsIndex < argsLength) {
-    var index = -1,
-        value = arguments[argsIndex];
+  while (++index < length) {
+    var fromIndex = 0,
+        value = arguments[index];
 
-    while (++index < length) {
-      if (array[index] === value) {
-        splice.call(array, index--, 1);
-        length--;
-      }
+    while ((fromIndex = indexOf(array, value, fromIndex)) > -1) {
+      splice.call(array, fromIndex, 1);
     }
   }
   return array;

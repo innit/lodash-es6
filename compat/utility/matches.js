@@ -6,14 +6,15 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseClone from '../internal/baseClone';
 import baseIsEqual from '../internal/baseIsEqual';
-import isObject from '../object/isObject';
+import isStrictComparable from '../internal/isStrictComparable';
 import keys from '../object/keys';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
-/** Native method shortcuts */
+/** Used to check objects for own properties */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
@@ -43,31 +44,42 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  */
 function matches(source) {
   var props = keys(source),
-      propsLength = props.length,
-      key = props[0],
-      value = propsLength && source[key];
+      length = props.length;
 
-  // fast path the common case of providing an object with a single
-  // property containing a primitive value
-  if (propsLength == 1 && value === value && !isObject(value)) {
-    return function(object) {
-      if (object == null) {
-        return false;
-      }
-      // treat `-0` vs. `+0` as not equal
-      var other = object[key];
-      return value === other && (value !== 0 || (1 / value == 1 / other)) && hasOwnProperty.call(object, key);
-    };
+  if (length == 1) {
+    var key = props[0],
+        value = source[key];
+
+    if (isStrictComparable(value)) {
+      return function(object) {
+        return object != null && value === object[key] && hasOwnProperty.call(object, key);
+      };
+    }
+  }
+  var index = length,
+      flags = Array(length),
+      vals = Array(length);
+
+  while (index--) {
+    value = source[props[index]];
+    var isStrict = isStrictComparable(value);
+
+    flags[index] = isStrict;
+    vals[index] = isStrict ? value : baseClone(value);
   }
   return function(object) {
-    var length = propsLength;
-    if (length && object == null) {
-      return false;
+    index = length;
+    if (object == null) {
+      return !index;
     }
-    while (length--) {
-      var key = props[length];
-      if (!(hasOwnProperty.call(object, key) &&
-            baseIsEqual(source[key], object[key], null, true))) {
+    while (index--) {
+      if (flags[index] ? vals[index] !== object[props[index]] : !hasOwnProperty.call(object, props[index])) {
+        return false;
+      }
+    }
+    index = length;
+    while (index--) {
+      if (flags[index] ? !hasOwnProperty.call(object, props[index]) : !baseIsEqual(vals[index], object[props[index]], null, true)) {
         return false;
       }
     }

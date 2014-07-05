@@ -6,8 +6,9 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import bind from '../function/bind';
 import identity from '../utility/identity';
+import matches from '../utility/matches';
+import property from '../utility/property';
 
 /**
  * The base implementation of `_.callback` without support for creating
@@ -20,27 +21,35 @@ import identity from '../utility/identity';
  * @returns {Function} Returns the new function.
  */
 function baseCallback(func, thisArg, argCount) {
-  if (typeof func != 'function') {
+  var type = typeof func;
+
+  if (type == 'function') {
+    if (typeof thisArg == 'undefined') {
+      return func;
+    }
+    switch (argCount) {
+      case 1: return function(value) {
+        return func.call(thisArg, value);
+      };
+      case 3: return function(value, index, collection) {
+        return func.call(thisArg, value, index, collection);
+      };
+      case 4: return function(accumulator, value, index, collection) {
+        return func.call(thisArg, accumulator, value, index, collection);
+      };
+      case 5: return function(value, other, key, object, source) {
+        return func.call(thisArg, value, other, key, object, source);
+      };
+    }
+    return function() {
+      return func.apply(thisArg, arguments);
+    };
+  }
+  if (func == null) {
     return identity;
   }
-  if (typeof thisArg == 'undefined') {
-    return func;
-  }
-  switch (argCount) {
-    case 1: return function(value) {
-      return func.call(thisArg, value);
-    };
-    case 3: return function(value, index, collection) {
-      return func.call(thisArg, value, index, collection);
-    };
-    case 4: return function(accumulator, value, index, collection) {
-      return func.call(thisArg, accumulator, value, index, collection);
-    };
-    case 5: return function(value, other, key, object, source) {
-      return func.call(thisArg, value, other, key, object, source);
-    };
-  }
-  return bind(func, thisArg);
+  // handle "_.pluck" and "_.where" style callback shorthands
+  return type == 'object' ? matches(func) : property(func);
 }
 
 export default baseCallback;

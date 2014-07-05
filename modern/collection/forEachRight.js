@@ -8,13 +8,7 @@
  */
 import baseCallback from '../internal/baseCallback';
 import baseEachRight from '../internal/baseEachRight';
-
-/**
- * Used as the maximum length of an array-like object.
- * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
- * for more details.
- */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+import isArray from '../object/isArray';
 
 /**
  * A specialized version of `_.forEachRight` for arrays without support for
@@ -22,14 +16,14 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  *
  * @private
  * @param {Array} array The array to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Array} Returns `array`.
  */
-function arrayEachRight(array, iterator) {
-  var length = array ? array.length : 0;
+function arrayEachRight(array, iteratee) {
+  var length = array.length;
 
   while (length--) {
-    if (iterator(array[length], length, array) === false) {
+    if (iteratee(array[length], length, array) === false) {
       break;
     }
   }
@@ -38,30 +32,25 @@ function arrayEachRight(array, iterator) {
 
 /**
  * This method is like `_.forEach` except that it iterates over elements of
- * a collection from right to left.
+ * `collection` from right to left.
  *
  * @static
  * @memberOf _
  * @alias eachRight
  * @category Collection
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function} [iterator=identity] The function called per iteration.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {Function} [iteratee=identity] The function called per iteration.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Array|Object|string} Returns `collection`.
  * @example
  *
  * _([1, 2, 3]).forEachRight(function(n) { console.log(n); }).join(',');
- * // => logs each number from right to left and returns '3,2,1'
+ * // => logs each value from right to left and returns the array
  */
-function forEachRight(collection, iterator, thisArg) {
-  var length = collection ? collection.length : 0;
-
-  if (typeof iterator != 'function' || typeof thisArg != 'undefined') {
-    iterator = baseCallback(iterator, thisArg, 3);
-  }
-  return (typeof length == 'number' && length > -1 && length <= maxSafeInteger)
-    ? arrayEachRight(collection, iterator)
-    : baseEachRight(collection, iterator);
+function forEachRight(collection, iteratee, thisArg) {
+  return (typeof iteratee == 'function' && typeof thisArg == 'undefined' && isArray(collection))
+    ? arrayEachRight(collection, iteratee)
+    : baseEachRight(collection, baseCallback(iteratee, thisArg, 3));
 }
 
 export default forEachRight;

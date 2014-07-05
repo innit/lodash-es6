@@ -15,7 +15,7 @@
  * @private
  * @param {Array|Object|string} collection The collection to search.
  * @param {Function} predicate The function called per iteration.
- * @param {Function} eachFunc The function to iterate over the collection.
+ * @param {Function} eachFunc The function to iterate over `collection`.
  * @param {boolean} [retKey=false] Specify returning the key of the found
  *  element instead of the element itself.
  * @returns {*} Returns the found element or its key, else `undefined`.

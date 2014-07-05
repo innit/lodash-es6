@@ -7,15 +7,14 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseForOwnRight from './baseForOwnRight';
-import isString from '../object/isString';
-import support from '../support';
+import toIterable from './toIterable';
 
 /**
- * Used as the maximum length of an array-like object.
+ * Used as the maximum length of an array-like value.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
  * The base implementation of `_.forEachRight` without support for callback
@@ -23,24 +22,19 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  *
  * @private
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Array|Object|string} Returns `collection`.
  */
-function baseEachRight(collection, iterator) {
-  var iterable = collection,
-      length = collection ? collection.length : 0;
-
-  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-    if (support.unindexedChars && isString(iterable)) {
-      iterable = iterable.split('');
+function baseEachRight(collection, iteratee) {
+  var length = collection ? collection.length : 0;
+  if (!(typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER)) {
+    return baseForOwnRight(collection, iteratee);
+  }
+  var iterable = toIterable(collection);
+  while (length--) {
+    if (iteratee(iterable[length], length, iterable) === false) {
+      break;
     }
-    while (length--) {
-      if (iterator(iterable[length], length, collection) === false) {
-        break;
-      }
-    }
-  } else {
-    baseForOwnRight(collection, iterator);
   }
   return collection;
 }

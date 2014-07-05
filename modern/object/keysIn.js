@@ -9,6 +9,7 @@
 import isArguments from './isArguments';
 import isArray from './isArray';
 import support from '../support';
+import toObject from '../internal/toObject';
 
 /**
  * Creates an array of the own and inherited enumerable property names of `object`.
@@ -28,13 +29,13 @@ import support from '../support';
  * Shape.prototype.z = 0;
  *
  * _.keysIn(new Shape);
- * // => ['x', 'y', 'z'] (property order is not guaranteed across environments)
+ * // => ['x', 'y', 'z'] (property order is not guaranteed)
  */
 function keysIn(object) {
   if (object == null) {
     return [];
   }
-  object = Object(object);
+  object = toObject(object);
 
   var length = object.length;
   length = (typeof length == 'number' && length > 0 &&

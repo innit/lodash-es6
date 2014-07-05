@@ -27,7 +27,7 @@ import keys from './keys';
  * Shape.prototype.z = 0;
  *
  * _.values(new Shape(2, 1));
- * // => [2, 1] (property order is not guaranteed across environments)
+ * // => [2, 1] (property order is not guaranteed)
  */
 function values(object) {
   return baseValues(object, keys);

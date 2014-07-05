@@ -9,12 +9,12 @@
 import isFunction from '../object/isFunction';
 
 /** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+var FUNC_ERROR_TEXT = 'Expected a function';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
-/** Native method shortcuts */
+/** Used to check objects for own properties */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
@@ -54,7 +54,7 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  */
 function memoize(func, resolver) {
   if (!isFunction(func) || (resolver && !isFunction(resolver))) {
-    throw new TypeError(funcErrorText);
+    throw new TypeError(FUNC_ERROR_TEXT);
   }
   var memoized = function() {
     var key = resolver ? resolver.apply(this, arguments) : arguments[0];

@@ -11,7 +11,7 @@ import cacheIndexOf from './cacheIndexOf';
 import createCache from './createCache';
 
 /**
- * The base implementation of `_.difference` that accepts a single array
+ * The base implementation of `_.difference` which accepts a single array
  * of values to exclude.
  *
  * @private
@@ -26,7 +26,7 @@ function baseDifference(array, values) {
   }
   var index = -1,
       indexOf = baseIndexOf,
-      prereq = indexOf === baseIndexOf,
+      prereq = indexOf == baseIndexOf,
       isLarge = prereq && createCache && values && values.length >= 200,
       isCommon = prereq && !isLarge,
       result = [],
@@ -40,7 +40,7 @@ function baseDifference(array, values) {
   while (++index < length) {
     var value = array[index];
 
-    if (isCommon) {
+    if (isCommon && value === value) {
       var valuesIndex = valuesLength;
       while (valuesIndex--) {
         if (values[valuesIndex] === value) {

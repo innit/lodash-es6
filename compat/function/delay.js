@@ -10,7 +10,7 @@ import isFunction from '../object/isFunction';
 import slice from '../array/slice';
 
 /** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+var FUNC_ERROR_TEXT = 'Expected a function';
 
 /**
  * Executes the `func` function after `wait` milliseconds. Additional arguments
@@ -30,7 +30,7 @@ var funcErrorText = 'Expected a function';
  */
 function delay(func, wait) {
   if (!isFunction(func)) {
-    throw new TypeError(funcErrorText);
+    throw new TypeError(FUNC_ERROR_TEXT);
   }
   var args = slice(arguments, 2);
   return setTimeout(function() { func.apply(undefined, args); }, wait);

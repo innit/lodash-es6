@@ -24,7 +24,7 @@ var whitespace = (
   '\u1680\u180E\u2000\u2001\u2002\u2003\u2004\u2005\u2006\u2007\u2008\u2009\u200a\u202f\u205f\u3000'
 );
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeParseInt = root.parseInt;
 
 /**
@@ -32,7 +32,7 @@ var nativeParseInt = root.parseInt;
  * `undefined` or `0`, a `radix` of `10` is used unless `value` is a hexadecimal,
  * in which case a `radix` of `16` is used.
  *
- * Note: This method avoids differences in native ES3 and ES5 `parseInt`
+ * **Note:** This method avoids differences in native ES3 and ES5 `parseInt`
  * implementations. See the [ES5 spec](http://es5.github.io/#E)
  * for more details.
  *
@@ -40,19 +40,27 @@ var nativeParseInt = root.parseInt;
  * @memberOf _
  * @category Utility
  * @param {string} value The value to parse.
- * @param {number} [radix] The radix used to interpret the value to parse.
+ * @param {number} [radix] The radix to interpret `value` by.
+ * @param- {Object} [guard] Enables use as a callback for functions like `_.map`.
  * @returns {number} Returns the converted integer.
  * @example
  *
  * _.parseInt('08');
  * // => 8
  */
-var parseInt = nativeParseInt(whitespace + '08') == 8 ? nativeParseInt : function(value, radix) {
-  // Firefox < 21 and Opera < 15 follow ES3 for `parseInt` and
-  // Chrome fails to trim leading <BOM> whitespace characters.
-  // See https://code.google.com/p/v8/issues/detail?id=3109
-  value = trim(value);
-  return nativeParseInt(value, +radix || (reHexPrefix.test(value) ? 16 : 10));
-};
+function parseInt(value, radix, guard) {
+  return nativeParseInt(value, guard ? 0 : radix);
+}
+// fallback for environments with pre-ES5 implementations
+if (nativeParseInt(whitespace + '08') != 8) {
+  parseInt = function(value, radix, guard) {
+    // Firefox < 21 and Opera < 15 follow ES3 for `parseInt` and
+    // Chrome fails to trim leading <BOM> whitespace characters.
+    // See https://code.google.com/p/v8/issues/detail?id=3109
+    value = trim(value);
+    radix = guard ? 0 : +radix;
+    return nativeParseInt(value, radix || (reHexPrefix.test(value) ? 16 : 10));
+  };
+}
 
 export default parseInt;

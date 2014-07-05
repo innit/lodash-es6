@@ -9,6 +9,13 @@
 import baseEach from './baseEach';
 
 /**
+ * Used as the maximum length of an array-like value.
+ * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
+ */
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
+
+/**
  * The base implementation of `_.invoke` which requires additional arguments
  * be provided as an array of arguments rather than individually.
  *
@@ -22,9 +29,12 @@ import baseEach from './baseEach';
 function baseInvoke(collection, methodName, args) {
   var index = -1,
       isFunc = typeof methodName == 'function',
-      length = collection && collection.length,
-      result = Array(length < 0 ? 0 : length >>> 0);
+      length = collection ? collection.length : 0,
+      result = [];
 
+  if (typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER) {
+    result.length = length;
+  }
   baseEach(collection, function(value) {
     var func = isFunc ? methodName : (value != null && value[methodName]);
     result[++index] = func ? func.apply(value, args) : undefined;

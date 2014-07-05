@@ -11,15 +11,15 @@ import baseForRight from '../internal/baseForRight';
 import keysIn from './keysIn';
 
 /**
- * This method is like `_.forIn` except that it iterates over elements of a
- * collection in the opposite order.
+ * This method is like `_.forIn` except that it iterates over properties of
+ * `object` in the opposite order.
  *
  * @static
  * @memberOf _
  * @category Object
  * @param {Object} object The object to iterate over.
- * @param {Function} [iterator=identity] The function called per iteration.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {Function} [iteratee=identity] The function called per iteration.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Object} Returns `object`.
  * @example
  *
@@ -35,9 +35,9 @@ import keysIn from './keysIn';
  * });
  * // => logs 'z', 'y', and 'x' assuming `_.forIn ` logs 'x', 'y', and 'z'
  */
-function forInRight(object, iterator, thisArg) {
-  iterator = baseCallback(iterator, thisArg, 3);
-  return baseForRight(object, iterator, keysIn);
+function forInRight(object, iteratee, thisArg) {
+  iteratee = baseCallback(iteratee, thisArg, 3);
+  return baseForRight(object, iteratee, keysIn);
 }
 
 export default forInRight;

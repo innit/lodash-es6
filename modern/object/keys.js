@@ -8,17 +8,18 @@
  */
 import isArguments from './isArguments';
 import isArray from './isArray';
-import isNative from '../internal/isNative';
+import isNative from './isNative';
 import keysIn from './keysIn';
 import support from '../support';
+import toObject from '../internal/toObject';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
-/** Native method shortcuts */
+/** Used to check objects for own properties */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeKeys = isNative(nativeKeys = Object.keys) && nativeKeys;
 
 /**
@@ -69,10 +70,10 @@ function shimKeys(object) {
  * Shape.prototype.z = 0;
  *
  * _.keys(new Shape);
- * // => ['x', 'y'] (property order is not guaranteed across environments)
+ * // => ['x', 'y'] (property order is not guaranteed)
  */
 var keys = !nativeKeys ? shimKeys : function(object) {
-  object = Object(object);
+  object = toObject(object);
 
   var Ctor = object.constructor,
       length = object.length;

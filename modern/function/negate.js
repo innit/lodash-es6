@@ -9,7 +9,7 @@
 import isFunction from '../object/isFunction';
 
 /** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+var FUNC_ERROR_TEXT = 'Expected a function';
 
 /**
  * Creates a function that negates the result of the predicate `func`. The
@@ -32,7 +32,7 @@ var funcErrorText = 'Expected a function';
  */
 function negate(predicate) {
   if (!isFunction(predicate)) {
-    throw new TypeError(funcErrorText);
+    throw new TypeError(FUNC_ERROR_TEXT);
   }
   return function() {
     return !predicate.apply(this, arguments);

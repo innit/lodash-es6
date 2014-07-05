@@ -6,23 +6,24 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseEach from '../internal/baseEach';
-import callback from '../utility/callback';
 import charAtCallback from '../internal/charAtCallback';
 import isArray from '../object/isArray';
 import isString from '../object/isString';
+import toIterable from '../internal/toIterable';
 
 /**
- * Retrieves the minimum value of a collection. If the collection is empty
- * or falsey `Infinity` is returned. If an iterator function is provided it
+ * Retrieves the minimum value of `collection`. If the collection is empty
+ * or falsey `Infinity` is returned. If an iteratee function is provided it
  * is executed for each value in the collection to generate the criterion by
- * which the value is ranked. The `iterator` is bound to `thisArg` and invoked
+ * which the value is ranked. The `iteratee` is bound to `thisArg` and invoked
  * with three arguments; (value, index, collection).
  *
- * If a property name is provided for `iterator` the created "_.pluck" style
+ * If a property name is provided for `iteratee` the created "_.pluck" style
  * callback returns the property value of the given element.
  *
- * If an object is provided for `iterator` the created "_.where" style callback
+ * If an object is provided for `iteratee` the created "_.where" style callback
  * returns `true` for elements that have the properties of the given object,
  * else `false`.
  *
@@ -30,10 +31,10 @@ import isString from '../object/isString';
  * @memberOf _
  * @category Collection
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function|Object|string} [iterator] The function called per iteration.
+ * @param {Function|Object|string} [iteratee] The function called per iteration.
  *  If a property name or object is provided it is used to create a "_.pluck"
  *  or "_.where" style callback respectively.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {*} Returns the minimum value.
  * @example
  *
@@ -55,32 +56,37 @@ import isString from '../object/isString';
  * _.min(characters, 'age');
  * // => { 'name': 'barney', 'age': 36 };
  */
-function min(collection, iterator, thisArg) {
+function min(collection, iteratee, thisArg) {
   var computed = Infinity,
       result = computed,
-      type = typeof iterator;
+      type = typeof iteratee;
 
   // enables use as a callback for functions like `_.map`
-  if ((type == 'number' || type == 'string') && thisArg && thisArg[iterator] === collection) {
-    iterator = null;
+  if ((type == 'number' || type == 'string') && thisArg && thisArg[iteratee] === collection) {
+    iteratee = null;
   }
-  if (iterator == null && isArray(collection)) {
+  var noIteratee = iteratee == null,
+      isArr = noIteratee && isArray(collection),
+      isStr = !isArr && isString(collection);
+
+  if (noIteratee && !isStr) {
     var index = -1,
-        length = collection.length;
+        iterable = toIterable(collection),
+        length = iterable.length;
 
     while (++index < length) {
-      var value = collection[index];
+      var value = iterable[index];
       if (value < result) {
         result = value;
       }
     }
   } else {
-    iterator = (iterator == null && isString(collection))
+    iteratee = (noIteratee && isStr)
       ? charAtCallback
-      : callback(iterator, thisArg, 3);
+      : baseCallback(iteratee, thisArg, 3);
 
     baseEach(collection, function(value, index, collection) {
-      var current = iterator(value, index, collection);
+      var current = iteratee(value, index, collection);
       if (current < computed || (current === Infinity && current === result)) {
         computed = current;
         result = value;

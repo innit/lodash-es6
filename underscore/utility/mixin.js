@@ -12,7 +12,7 @@ import isFunction from '../object/isFunction';
 /** Used for native method references */
 var arrayProto = Array.prototype;
 
-/** Native method shortcuts */
+/** Native method references */
 var push = arrayProto.push;
 
 /**
@@ -49,6 +49,10 @@ var push = arrayProto.push;
  * // => ['e']
  */
 function mixin(object, source) {
+  if (!source) {
+    source = object;
+    object = lodash;
+  }
   var index = -1,
       isFunc = isFunction(object),
       methodNames = functions(source),

@@ -8,6 +8,14 @@
  */
 import baseAt from '../internal/baseAt';
 import baseFlatten from '../internal/baseFlatten';
+import toIterable from '../internal/toIterable';
+
+/**
+ * Used as the maximum length of an array-like value.
+ * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
+ * for more details.
+ */
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
  * Creates an array of elements corresponding to the specified keys, or indexes,
@@ -18,8 +26,8 @@ import baseFlatten from '../internal/baseFlatten';
  * @memberOf _
  * @category Collection
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {...(number|number[]|string|string[])} [keys] The keys of elements
- *  to pick, specified as individual keys or arrays of keys.
+ * @param {...(number|number[]|string|string[])} [props] The property names
+ *  or indexes of elements to pick, specified individually or in arrays.
  * @returns {Array} Returns the new array of picked elements.
  * @example
  *
@@ -30,6 +38,11 @@ import baseFlatten from '../internal/baseFlatten';
  * // => ['fred', 'pebbles']
  */
 function at(collection) {
+  var length = collection ? collection.length : 0;
+
+  if (typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER) {
+    collection = toIterable(collection);
+  }
   return baseAt(collection, baseFlatten(arguments, false, false, 1));
 }
 

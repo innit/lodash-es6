@@ -18,6 +18,7 @@ import arrayEach from './internal/arrayEach';
 import baseAssign from './internal/baseAssign';
 import baseForOwn from './internal/baseForOwn';
 import baseFunctions from './internal/baseFunctions';
+import isObject from './object/isObject';
 import keys from './object/keys';
 import lodash from './chain/lodash';
 import lodashWrapper from './internal/lodashWrapper';
@@ -25,7 +26,7 @@ import mixin from './utility/mixin';
 import support from './support';
 
 /** Used as the semantic version number */
-var version = '3.0.0-pre';
+var VERSION = '3.0.0-pre';
 
 /** Used for native method references */
 var arrayProto = Array.prototype;
@@ -33,8 +34,13 @@ var arrayProto = Array.prototype;
 // wrap `_.mixin` so it works when provided only one argument
 mixin = (function(func) {
   return function(object, source, options) {
-    if (!source || (!options && !baseFunctions(source, keys).length)) {
-      if (options == null) {
+    var isObj = isObject(source),
+        noOpts = options == null,
+        props = noOpts && isObj && keys(source),
+        methodNames = props && baseFunctions(source, props);
+
+    if ((props && props.length && !methodNames.length) || (noOpts && !isObj)) {
+      if (noOpts) {
         options = source;
       }
       source = object;
@@ -48,6 +54,7 @@ mixin = (function(func) {
 lodash.after = functions.after;
 lodash.assign = objects.assign;
 lodash.at = collections.at;
+lodash.before = functions.before;
 lodash.bind = functions.bind;
 lodash.bindAll = functions.bindAll;
 lodash.bindKey = functions.bindKey;
@@ -60,6 +67,7 @@ lodash.constant = utilities.constant;
 lodash.countBy = collections.countBy;
 lodash.create = objects.create;
 lodash.curry = functions.curry;
+lodash.curryRight = functions.curryRight;
 lodash.debounce = functions.debounce;
 lodash.defaults = objects.defaults;
 lodash.defer = functions.defer;
@@ -71,6 +79,7 @@ lodash.dropRightWhile = arrays.dropRightWhile;
 lodash.dropWhile = arrays.dropWhile;
 lodash.filter = collections.filter;
 lodash.flatten = arrays.flatten;
+lodash.flattenDeep = arrays.flattenDeep;
 lodash.forEach = collections.forEach;
 lodash.forEachRight = collections.forEachRight;
 lodash.forIn = objects.forIn;
@@ -122,6 +131,7 @@ lodash.toArray = collections.toArray;
 lodash.transform = objects.transform;
 lodash.union = arrays.union;
 lodash.uniq = arrays.uniq;
+lodash.unzip = arrays.unzip;
 lodash.values = objects.values;
 lodash.valuesIn = objects.valuesIn;
 lodash.where = collections.where;
@@ -136,17 +146,18 @@ lodash.collect = collections.map;
 lodash.each = collections.forEach;
 lodash.eachRight = collections.forEachRight;
 lodash.extend = objects.assign;
+lodash.iteratee = utilities.callback;
 lodash.methods = objects.functions;
 lodash.object = arrays.zipObject;
 lodash.select = collections.filter;
 lodash.tail = arrays.rest;
 lodash.unique = arrays.uniq;
-lodash.unzip = arrays.zip;
 
 // add functions to `lodash.prototype`
 mixin(lodash, baseAssign({}, lodash));
 
 // add functions that return unwrapped values when chaining
+lodash.attempt = utilities.attempt;
 lodash.camelCase = strings.camelCase;
 lodash.capitalize = strings.capitalize;
 lodash.clone = objects.clone;
@@ -178,9 +189,10 @@ lodash.isError = objects.isError;
 lodash.isFinite = objects.isFinite;
 lodash.isFunction = objects.isFunction;
 lodash.isNaN = objects.isNaN;
+lodash.isNative = objects.isNative;
 lodash.isNull = objects.isNull;
 lodash.isNumber = objects.isNumber;
-lodash.isObject = objects.isObject;
+lodash.isObject = isObject;
 lodash.isPlainObject = objects.isPlainObject;
 lodash.isRegExp = objects.isRegExp;
 lodash.isString = objects.isString;
@@ -203,9 +215,10 @@ lodash.reduceRight = collections.reduceRight;
 lodash.repeat = strings.repeat;
 lodash.result = utilities.result;
 lodash.size = collections.size;
+lodash.snakeCase = strings.snakeCase;
 lodash.some = collections.some;
 lodash.sortedIndex = arrays.sortedIndex;
-lodash.snakeCase = strings.snakeCase;
+lodash.sortedLastIndex = arrays.sortedLastIndex;
 lodash.startsWith = strings.startsWith;
 lodash.template = strings.template;
 lodash.trim = strings.trim;
@@ -259,7 +272,7 @@ baseForOwn(lodash, function(func, methodName) {
  * @memberOf _
  * @type string
  */
-lodash.VERSION = version;
+lodash.VERSION = VERSION;
 
 lodash.support = support;
 (lodash.templateSettings = strings.templateSettings).imports._ = lodash;

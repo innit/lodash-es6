@@ -7,82 +7,20 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import arrayEach from './arrayEach';
-import baseAssign from './baseAssign';
 import baseForOwn from './baseForOwn';
-import cloneBuffer from './cloneBuffer';
-import isArguments from '../object/isArguments';
+import initArrayClone from './initArrayClone';
+import initObjectClone from './initObjectClone';
 import isArray from '../object/isArray';
-import isFunction from '../object/isFunction';
-import isNode from './isNode';
 import isObject from '../object/isObject';
-import root from './root';
-import slice from '../array/slice';
-import support from '../support';
 
-/** Used to match `RegExp` flags from their coerced string values */
-var reFlags = /\w*$/;
-
-/** `Object#toString` result shortcuts */
-var argsClass = '[object Arguments]',
-    arrayClass = '[object Array]',
-    boolClass = '[object Boolean]',
-    dateClass = '[object Date]',
-    errorClass = '[object Error]',
-    funcClass = '[object Function]',
-    mapClass = '[object Map]',
-    numberClass = '[object Number]',
-    objectClass = '[object Object]',
-    regexpClass = '[object RegExp]',
-    setClass = '[object Set]',
-    stringClass = '[object String]',
-    weakMapClass = '[object WeakMap]';
-
-var arrayBufferClass = '[object ArrayBuffer]',
-    float32Class = '[object Float32Array]',
-    float64Class = '[object Float64Array]',
-    int8Class = '[object Int8Array]',
-    int16Class = '[object Int16Array]',
-    int32Class = '[object Int32Array]',
-    uint8Class = '[object Uint8Array]',
-    uint8ClampedClass = '[object Uint8ClampedArray]',
-    uint16Class = '[object Uint16Array]',
-    uint32Class = '[object Uint32Array]';
-
-/** Used to identify object classifications that `_.clone` supports */
-var cloneableClasses = {};
-cloneableClasses[argsClass] = cloneableClasses[arrayClass] =
-cloneableClasses[arrayBufferClass] = cloneableClasses[boolClass] =
-cloneableClasses[dateClass] = cloneableClasses[float32Class] =
-cloneableClasses[float64Class] = cloneableClasses[int8Class] =
-cloneableClasses[int16Class] = cloneableClasses[int32Class] =
-cloneableClasses[numberClass] = cloneableClasses[objectClass] =
-cloneableClasses[regexpClass] = cloneableClasses[stringClass] =
-cloneableClasses[uint8Class] = cloneableClasses[uint8ClampedClass] =
-cloneableClasses[uint16Class] = cloneableClasses[uint32Class] = true;
-cloneableClasses[errorClass] =
-cloneableClasses[funcClass] = cloneableClasses[mapClass] =
-cloneableClasses[setClass] = cloneableClasses[weakMapClass] = false;
+/** `Object#toString` result references */
+var objectClass = '[object Object]';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
-
-/** Used to lookup a built-in constructor by [[Class]] */
-var ctorByClass = {};
-ctorByClass[float32Class] = root.Float32Array;
-ctorByClass[float64Class] = root.Float64Array;
-ctorByClass[int8Class] = root.Int8Array;
-ctorByClass[int16Class] = root.Int16Array;
-ctorByClass[int32Class] = root.Int32Array;
-ctorByClass[uint8Class] = root.Uint8Array;
-ctorByClass[uint8ClampedClass] = root.Uint8ClampedArray;
-ctorByClass[uint16Class] = root.Uint16Array;
-ctorByClass[uint32Class] = root.Uint32Array;
 
 /**
  * The base implementation of `_.clone` without support for argument juggling
@@ -101,77 +39,26 @@ function baseClone(value, isDeep, customizer, stackA, stackB) {
   if (typeof result != 'undefined') {
     return result;
   }
-  var isObj = isObject(value);
-  if (isObj) {
-    var className = toString.call(value);
-    if (!cloneableClasses[className] || (!support.nodeClass && isNode(value))) {
-      return value;
-    }
-    var Ctor = value.constructor;
-    if (className == objectClass && !(isFunction(Ctor) && (Ctor instanceof Ctor))) {
-      Ctor = Object;
-    }
-    switch (className) {
-      case arrayBufferClass:
-        return cloneBuffer(value);
-
-      case boolClass:
-      case dateClass:
-        return new Ctor(+value);
-
-      case float32Class: case float64Class:
-      case int8Class: case int16Class: case int32Class:
-      case uint8Class: case uint8ClampedClass: case uint16Class: case uint32Class:
-        // Safari 5 mobile incorrectly has `Object` as the constructor
-        if (Ctor instanceof Ctor) {
-          Ctor = ctorByClass[className];
-        }
-        return new Ctor(cloneBuffer(value.buffer));
-
-      case numberClass:
-      case stringClass:
-        return new Ctor(value);
-
-      case regexpClass:
-        result = Ctor(value.source, reFlags.exec(value));
-        result.lastIndex = value.lastIndex;
-        return result;
-    }
-  } else {
-    return value;
-  }
   var isArr = isArray(value);
-  if (isDeep) {
-    // check for circular references and return corresponding clone
-    stackA || (stackA = []);
-    stackB || (stackB = []);
-
-    var length = stackA.length;
-    while (length--) {
-      if (stackA[length] == value) {
-        return stackB[length];
-      }
-    }
-    result = isArr ? Ctor(value.length) : new Ctor;
+  result = value;
+  if (isArr) {
+    result = initArrayClone(value, isDeep);
+  } else if (isObject(value)) {
+    result = initObjectClone(value, isDeep);
+    value = (isDeep && toString.call(result) == objectClass) ? value : result;
   }
-  else {
-    result = isArr ? slice(value) : baseAssign({}, value);
-  }
-  if (className == argsClass || (!support.argsClass && isArguments(value))) {
-    result.length = value.length;
-  }
-  // add array properties assigned by `RegExp#exec`
-  else if (isArr) {
-    if (hasOwnProperty.call(value, 'index')) {
-      result.index = value.index;
-    }
-    if (hasOwnProperty.call(value, 'input')) {
-      result.input = value.input;
-    }
-  }
-  // exit for shallow clone
-  if (!isDeep) {
+  if (!isDeep || result === value) {
     return result;
+  }
+  // check for circular references and return corresponding clone
+  stackA || (stackA = []);
+  stackB || (stackB = []);
+
+  var length = stackA.length;
+  while (length--) {
+    if (stackA[length] == value) {
+      return stackB[length];
+    }
   }
   // add the source value to the stack of traversed objects
   // and associate it with its clone

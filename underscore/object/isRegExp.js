@@ -8,7 +8,7 @@
  */
 import isObject from './isObject';
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var regexpClass = '[object RegExp]';
 
 /** Used for native method references */
@@ -18,13 +18,13 @@ var objectProto = Object.prototype;
 var toString = objectProto.toString;
 
 /**
- * Checks if `value` is a `RegExp` object.
+ * Checks if `value` is classified as a `RegExp` object.
  *
  * @static
  * @memberOf _
  * @category Object
  * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a regexp object, else `false`.
+ * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
  * @example
  *
  * _.isRegExp(/abc/);

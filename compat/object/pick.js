@@ -6,9 +6,11 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseFlatten from '../internal/baseFlatten';
-import basePick from '../internal/basePick';
-import callback from '../utility/callback';
+import pickByArray from '../internal/pickByArray';
+import pickByCallback from '../internal/pickByCallback';
+import toObject from '../internal/toObject';
 
 /**
  * Creates a shallow clone of `object` composed of the specified properties.
@@ -41,9 +43,10 @@ function pick(object, predicate, thisArg) {
   if (object == null) {
     return {};
   }
-  return basePick(Object(object), typeof predicate == 'function'
-    ? callback(predicate, thisArg, 3)
-    : baseFlatten(arguments, false, false, 1));
+  var iterable = toObject(object);
+  return typeof predicate == 'function'
+    ? pickByCallback(iterable, baseCallback(predicate, thisArg, 3))
+    : pickByArray(iterable, baseFlatten(arguments, false, false, 1));
 }
 
 export default pick;

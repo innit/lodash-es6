@@ -13,14 +13,14 @@
  *
  * @private
  * @param {Array} array The array to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Array} Returns `array`.
  */
-function arrayEachRight(array, iterator) {
-  var length = array ? array.length : 0;
+function arrayEachRight(array, iteratee) {
+  var length = array.length;
 
   while (length--) {
-    if (iterator(array[length], length, array) === false) {
+    if (iteratee(array[length], length, array) === false) {
       break;
     }
   }

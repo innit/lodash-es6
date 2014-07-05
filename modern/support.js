@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from './internal/isNative';
+import isNative from './object/isNative';
 import root from './internal/root';
 
 /** Used to detect functions containing a `this` reference */
@@ -18,12 +18,11 @@ var objectProto = Object.prototype;
 /** Used to detect DOM support */
 var document = (document = root.window) && document.document;
 
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty,
-    propertyIsEnumerable = objectProto.propertyIsEnumerable;
+/** Native method references */
+var propertyIsEnumerable = objectProto.propertyIsEnumerable;
 
 /**
- * An object used to flag environments features.
+ * An object environment feature flags.
  *
  * @static
  * @memberOf _
@@ -32,8 +31,6 @@ var hasOwnProperty = objectProto.hasOwnProperty,
 var support = {};
 
 (function(x) {
-
-  for (var argsKey in arguments) { }
 
   /**
    * Detect if functions can be decompiled by `Function#toString`
@@ -66,6 +63,18 @@ var support = {};
   }
 
   /**
+   * Detect if the host objects are detectable (IE < 9).
+   *
+   * @memberOf _.support
+   * @type boolean
+   */
+  try {
+    support.hostObject = !({ 'toString': 0 } + '');
+  } catch(e) {
+    support.hostObject = false;
+  }
+
+  /**
    * Detect if `arguments` object indexes are non-enumerable.
    *
    * In Firefox < 4, IE < 9, PhantomJS, and Safari < 5.1 `arguments` object
@@ -78,8 +87,7 @@ var support = {};
    * @type boolean
    */
   try {
-    support.nonEnumArgs = !(argsKey == '1' && hasOwnProperty.call(arguments, argsKey) &&
-      propertyIsEnumerable.call(arguments, argsKey));
+    support.nonEnumArgs = !propertyIsEnumerable.call(arguments, 1);
   } catch(e) {
     support.nonEnumArgs = true;
   }

@@ -6,25 +6,21 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import basePartial from '../internal/basePartial';
 import createWrapper from '../internal/createWrapper';
+import replaceHolders from '../internal/replaceHolders';
 import slice from '../array/slice';
 
 /** Used to compose bitmasks for wrapper metadata */
 var BIND_FLAG = 1,
-    PARTIAL_FLAG = 16;
-
-/** Used as the semantic version number */
-var version = '3.0.0-pre';
-
-/** Used as the property name for wrapper metadata */
-var expando = '__lodash@' + version + '__';
+    PARTIAL_FLAG = 32;
 
 /**
  * Creates a function that invokes `func` with the `this` binding of `thisArg`
  * and prepends any additional `bind` arguments to those provided to the bound
  * function.
  *
- * Note: Unlike native `Function#bind` this method does not set the `length`
+ * **Note:** Unlike native `Function#bind` this method does not set the `length`
  * property of bound functions.
  *
  * @static
@@ -48,13 +44,13 @@ function bind(func, thisArg) {
   if (arguments.length < 3) {
     return createWrapper(func, BIND_FLAG, null, thisArg);
   }
-  if (func) {
-    var arity = func[expando] ? func[expando][2] : func.length,
-        partialArgs = slice(arguments, 2);
+  var args = slice(arguments, 2),
+      holders = replaceHolders(args, bind.placeholder);
 
-    arity -= partialArgs.length;
-  }
-  return createWrapper(func, BIND_FLAG | PARTIAL_FLAG, arity, thisArg, partialArgs);
+  return basePartial(func, BIND_FLAG | PARTIAL_FLAG, args, holders, thisArg);
 }
+
+// assign default placeholders
+bind.placeholder = {};
 
 export default bind;

@@ -8,6 +8,7 @@
  */
 import baseCallback from '../internal/baseCallback';
 import baseIsEqual from '../internal/baseIsEqual';
+import isStrictComparable from '../internal/isStrictComparable';
 
 /**
  * Performs a deep comparison between two values to determine if they are
@@ -16,9 +17,9 @@ import baseIsEqual from '../internal/baseIsEqual';
  * instead. The `customizer` is bound to `thisArg` and invoked with three
  * arguments; (value, other, key).
  *
- * Note: This method supports comparing arrays, booleans, `Date` objects,
+ * **Note:** This method supports comparing arrays, booleans, `Date` objects,
  * numbers, `Object` objects, regexes, and strings. Functions and DOM nodes
- * are **not** supported. A customizer function may be used to extend support
+ * are **not** supported. Provide a customizer function to extend support
  * for comparing other values.
  *
  * @static
@@ -50,23 +51,9 @@ import baseIsEqual from '../internal/baseIsEqual';
  */
 function isEqual(value, other, customizer, thisArg) {
   customizer = typeof customizer == 'function' && baseCallback(customizer, thisArg, 3);
-
-  if (!customizer) {
-    // exit early for identical values
-    if (value === other) {
-      // treat `-0` vs. `+0` as not equal
-      return value !== 0 || (1 / value == 1 / other);
-    }
-    var valType = typeof value,
-        othType = typeof other;
-
-    // exit early for unlike primitive values
-    if (value === value && (value == null || other == null ||
-        (valType != 'function' && valType != 'object' && othType != 'function' && othType != 'object'))) {
-      return false;
-    }
-  }
-  return baseIsEqual(value, other, customizer);
+  return (!customizer && isStrictComparable(value) && isStrictComparable(other))
+    ? value === other
+    : baseIsEqual(value, other, customizer);
 }
 
 export default isEqual;

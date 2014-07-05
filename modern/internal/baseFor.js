@@ -9,24 +9,24 @@
 
 /**
  * The base implementation of `baseForIn` and `baseForOwn` which iterates
- * over `object` properties returned by `keysFunc` executing `iterator` for
+ * over `object` properties returned by `keysFunc` executing `iteratee` for
  * each property. Iterator functions may exit iteration early by explicitly
  * returning `false`.
  *
  * @private
  * @param {Object} object The object to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @param {Function} keysFunc The function to get the keys of `object`.
  * @returns {Object} Returns `object`.
  */
-function baseFor(object, iterator, keysFunc) {
+function baseFor(object, iteratee, keysFunc) {
   var index = -1,
       props = keysFunc(object),
       length = props.length;
 
   while (++index < length) {
     var key = props[index];
-    if (iterator(object[key], key, object) === false) {
+    if (iteratee(object[key], key, object) === false) {
       break;
     }
   }

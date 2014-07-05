@@ -11,7 +11,7 @@ import isFunction from '../object/isFunction';
 import isObject from '../object/isObject';
 
 /** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+var FUNC_ERROR_TEXT = 'Expected a function';
 
 /** Used as an internal `_.debounce` options object by `_.throttle` */
 var debounceOptions = {
@@ -28,9 +28,12 @@ var debounceOptions = {
  * Subsequent calls to the throttled function return the result of the last
  * `func` call.
  *
- * Note: If `leading` and `trailing` options are `true`, `func` is called on
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is called on
  * the trailing edge of the timeout only if the the throttled function is
  * invoked more than once during the `wait` timeout.
+ *
+ * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+ * for details over the differences between `_.throttle` and `_.debounce`.
  *
  * @static
  * @memberOf _
@@ -60,7 +63,7 @@ function throttle(func, wait, options) {
       trailing = true;
 
   if (!isFunction(func)) {
-    throw new TypeError(funcErrorText);
+    throw new TypeError(FUNC_ERROR_TEXT);
   }
   if (options === false) {
     leading = false;
@@ -71,7 +74,6 @@ function throttle(func, wait, options) {
   debounceOptions.leading = leading;
   debounceOptions.maxWait = +wait;
   debounceOptions.trailing = trailing;
-
   return debounce(func, wait, debounceOptions);
 }
 

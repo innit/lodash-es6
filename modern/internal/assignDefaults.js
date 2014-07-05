@@ -16,7 +16,9 @@
  * @returns {*} Returns the value to assign to the destination object.
  */
 function assignDefaults(objectValue, sourceValue) {
-  return typeof objectValue == 'undefined' ? sourceValue : objectValue;
+  return typeof objectValue == 'undefined'
+    ? sourceValue
+    : objectValue;
 }
 
 export default assignDefaults;

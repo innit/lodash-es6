@@ -7,22 +7,23 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import baseForOwn from './baseForOwn';
+import toIterable from './toIterable';
 
 /** Used as the semantic version number */
-var version = '3.0.0-pre';
+var VERSION = '3.0.0-pre';
 
 /** Used as the property name for wrapper metadata */
-var expando = '__lodash@' + version + '__';
+var EXPANDO = '__lodash_' + VERSION.replace(/[-.]/g, '_') + '__';
 
 /** Used by methods to exit iteration */
-var breakIndicator = expando + 'breaker__';
+var breakIndicator = EXPANDO + 'breaker__';
 
 /**
- * Used as the maximum length of an array-like object.
+ * Used as the maximum length of an array-like value.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
  * The base implementation of `_.forEach` without support for callback
@@ -30,22 +31,21 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  *
  * @private
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Array|Object|string} Returns `collection`.
  */
-function baseEach(collection, iterator) {
+function baseEach(collection, iteratee) {
+  var length = collection ? collection.length : 0;
+  if (!(typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER)) {
+    return baseForOwn(collection, iteratee);
+  }
   var index = -1,
-      iterable = collection,
-      length = collection ? collection.length : 0;
+      iterable = toIterable(collection);
 
-  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-    while (++index < length) {
-      if (iterator(iterable[index], index, collection) === breakIndicator) {
-        break;
-      }
+  while (++index < length) {
+    if (iteratee(iterable[index], index, iterable) === breakIndicator) {
+      break;
     }
-  } else {
-    baseForOwn(collection, iterator);
   }
   return collection;
 }

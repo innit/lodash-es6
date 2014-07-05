@@ -6,14 +6,14 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from './baseCallback';
 import baseEach from './baseEach';
-import callback from '../utility/callback';
 import isArray from '../object/isArray';
 
 /**
  * Creates a function that aggregates a collection, creating an accumulator
  * object composed from the results of running each element in the collection
- * through `iterator`. The given setter function sets the keys and values of
+ * through `iteratee`. The given setter function sets the keys and values of
  * the accumulator object. If `initializer` is provided it is used to initialize
  * the accumulator object.
  *
@@ -23,9 +23,9 @@ import isArray from '../object/isArray';
  * @returns {Function} Returns the new aggregator function.
  */
 function createAggregator(setter, initializer) {
-  return function(collection, iterator, thisArg) {
+  return function(collection, iteratee, thisArg) {
     var result = initializer ? initializer() : {};
-    iterator = callback(iterator, thisArg, 3);
+    iteratee = baseCallback(iteratee, thisArg, 3);
 
     if (isArray(collection)) {
       var index = -1,
@@ -33,11 +33,11 @@ function createAggregator(setter, initializer) {
 
       while (++index < length) {
         var value = collection[index];
-        setter(result, value, iterator(value, index, collection), collection);
+        setter(result, value, iteratee(value, index, collection), collection);
       }
     } else {
       baseEach(collection, function(value, key, collection) {
-        setter(result, value, iterator(value, key, collection), collection);
+        setter(result, value, iteratee(value, key, collection), collection);
       });
     }
     return result;

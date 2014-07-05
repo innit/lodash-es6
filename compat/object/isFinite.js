@@ -6,17 +6,17 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from '../internal/isNative';
+import isNative from './isNative';
 import root from '../internal/root';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeIsFinite = root.isFinite,
     nativeNumIsFinite = isNative(nativeNumIsFinite = Number.isFinite) && nativeNumIsFinite;
 
 /**
- * Checks if `value` is a finite number.
+ * Checks if `value` is a finite primitive number.
  *
- * Note: This method is based on ES6 `Number.isFinite`. See the
+ * **Note:** This method is based on ES6 `Number.isFinite`. See the
  * [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-number.isfinite)
  * for more details.
  *
@@ -24,7 +24,7 @@ var nativeIsFinite = root.isFinite,
  * @memberOf _
  * @category Object
  * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is finite, else `false`.
+ * @returns {boolean} Returns `true` if `value` is a finite number, else `false`.
  * @example
  *
  * _.isFinite(10);

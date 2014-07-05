@@ -12,12 +12,12 @@ import baseEach from '../internal/baseEach';
 import isArray from '../object/isArray';
 
 /**
- * Iterates over elements of a collection executing `iterator` for each
- * element. The `iterator` is bound to `thisArg` and invoked with three arguments;
+ * Iterates over elements of `collection` executing `iteratee` for each
+ * element. The `iteratee` is bound to `thisArg` and invoked with three arguments;
  * (value, index|key, collection). Iterator functions may exit iteration early
  * by explicitly returning `false`.
  *
- * Note: As with other "Collections" methods, objects with a `length` property
+ * **Note:** As with other "Collections" methods, objects with a `length` property
  * are iterated like arrays. To avoid this behavior `_.forIn` or `_.forOwn`
  * may be used for object iteration.
  *
@@ -26,21 +26,21 @@ import isArray from '../object/isArray';
  * @alias each
  * @category Collection
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function} [iterator=identity] The function called per iteration.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {Function} [iteratee=identity] The function called per iteration.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Array|Object|string} Returns `collection`.
  * @example
  *
- * _([1, 2, 3]).forEach(function(n) { console.log(n); }).join(',');
- * // => logs each number and returns '1,2,3'
+ * _([1, 2, 3]).forEach(function(n) { console.log(n); });
+ * // => logs each value and returns the array
  *
- * _.forEach({ 'one': 1, 'two': 2, 'three': 3 }, function(n) { console.log(n); });
- * // => logs each number and returns the object (property order is not guaranteed across environments)
+ * _.forEach({ 'one': 1, 'two': 2, 'three': 3 }, function(n, key) { console.log(n, key); });
+ * // => logs each value-key pair and returns the object (property order is not guaranteed)
  */
-function forEach(collection, iterator, thisArg) {
-  return (typeof iterator == 'function' && typeof thisArg == 'undefined' && isArray(collection))
-    ? arrayEach(collection, iterator)
-    : baseEach(collection, baseCallback(iterator, thisArg, 3));
+function forEach(collection, iteratee, thisArg) {
+  return (typeof iteratee == 'function' && typeof thisArg == 'undefined' && isArray(collection))
+    ? arrayEach(collection, iteratee)
+    : baseEach(collection, baseCallback(iteratee, thisArg, 3));
 }
 
 export default forEach;

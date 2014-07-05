@@ -12,8 +12,12 @@ import isArguments from '../object/isArguments';
 import isArray from '../object/isArray';
 
 /**
- * Creates an array excluding all values of the provided arrays using strict
- * equality for comparisons, i.e. `===`.
+ * Creates an array excluding all values of the provided arrays using
+ * `SameValueZero` for equality comparisons.
+ *
+ * **Note:** `SameValueZero` is like strict equality, e.g. `===`, except that
+ * `NaN` matches `NaN`. See the [ES6 spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+ * for more details.
  *
  * @static
  * @memberOf _

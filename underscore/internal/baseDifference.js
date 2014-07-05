@@ -9,7 +9,7 @@
 import baseIndexOf from './baseIndexOf';
 
 /**
- * The base implementation of `_.difference` that accepts a single array
+ * The base implementation of `_.difference` which accepts a single array
  * of values to exclude.
  *
  * @private

@@ -10,15 +10,15 @@ import createAggregator from '../internal/createAggregator';
 
 /**
  * Creates an object composed of keys generated from the results of running
- * each element of the collection through `iterator`. The corresponding value
+ * each element of the collection through `iteratee`. The corresponding value
  * of each key is the last element responsible for generating the key. The
- * iterator function is bound to `thisArg` and invoked with three arguments;
+ * iteratee function is bound to `thisArg` and invoked with three arguments;
  * (value, index|key, collection).
  *
- * If a property name is provided for `iterator` the created "_.pluck" style
+ * If a property name is provided for `iteratee` the created "_.pluck" style
  * callback returns the property value of the given element.
  *
- * If an object is provided for `iterator` the created "_.where" style callback
+ * If an object is provided for `iteratee` the created "_.where" style callback
  * returns `true` for elements that have the properties of the given object,
  * else `false`.
  *
@@ -26,10 +26,10 @@ import createAggregator from '../internal/createAggregator';
  * @memberOf _
  * @category Collection
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function|Object|string} [iterator=identity] The function called
+ * @param {Function|Object|string} [iteratee=identity] The function called
  *  per iteration. If a property name or object is provided it is used to
  *  create a "_.pluck" or "_.where" style callback respectively.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Object} Returns the composed aggregate object.
  * @example
  *

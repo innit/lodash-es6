@@ -8,11 +8,11 @@
  */
 import slice from './slice';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeMax = Math.max;
 
 /**
- * Creates an array of elements split into groups the length of `chunkSize`.
+ * Creates an array of elements split into groups the length of `size`.
  * If `collection` can't be split evenly, the final chunk will be the remaining
  * elements.
  *
@@ -20,7 +20,7 @@ var nativeMax = Math.max;
  * @memberOf _
  * @category Array
  * @param {Array} array The array to process.
- * @param {numer} [chunkSize=1] The size of each chunk.
+ * @param {numer} [size=1] The length of each chunk.
  * @returns {Array} Returns the new array containing chunks.
  * @example
  *
@@ -30,14 +30,15 @@ var nativeMax = Math.max;
  * _.chunk(['a', 'b', 'c', 'd'], 3);
  * // => [['a', 'b', 'c'], ['d']]
  */
-function chunk(array, chunkSize) {
+function chunk(array, size) {
   var index = 0,
       length = array ? array.length : 0,
+      resIndex = -1,
       result = [];
 
-  chunkSize = nativeMax(+chunkSize || 1, 1);
+  size = typeof size == 'undefined' ? 1 : nativeMax(+size || 1, 1);
   while (index < length) {
-    result.push(slice(array, index, (index += chunkSize)));
+    result[++resIndex] = slice(array, index, (index += size));
   }
   return result;
 }

@@ -6,21 +6,47 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseEachRight from '../internal/baseEachRight';
-import callback from '../utility/callback';
+import baseReduce from '../internal/baseReduce';
+import isArray from '../object/isArray';
 
 /**
- * This method is like `_.reduce` except that it iterates over elements of a
- * collection from right to left.
+ * A specialized version of `_.reduceRight` for arrays without support for
+ * callback shorthands or `this` binding.
+ *
+ * @private
+ * @param {Array} array The array to iterate over.
+ * @param {Function} iteratee The function called per iteration.
+ * @param {*} [accumulator] The initial value.
+ * @param {boolean} [initFromArray=false] Specify using the last element of
+ *  `array` as the initial value.
+ * @returns {*} Returns the accumulated value.
+ */
+function arrayReduceRight(array, iteratee, accumulator, initFromArray) {
+  var length = array.length;
+
+  if (initFromArray && length) {
+    accumulator = array[--length];
+  }
+  while (length--) {
+    accumulator = iteratee(accumulator, array[length], length, array);
+  }
+  return accumulator;
+}
+
+/**
+ * This method is like `_.reduce` except that it iterates over elements of
+ * `collection` from right to left.
  *
  * @static
  * @memberOf _
  * @alias foldr
  * @category Collection
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function} [iterator=identity] The function called per iteration.
- * @param {*} [accumulator] Initial value of the accumulator.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {Function} [iteratee=identity] The function called per iteration.
+ * @param {*} [accumulator] The initial value.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {*} Returns the accumulated value.
  * @example
  *
@@ -28,16 +54,9 @@ import callback from '../utility/callback';
  * _.reduceRight(array, function(flattened, other) { return flattened.concat(other); }, []);
  * // => [4, 5, 2, 3, 0, 1]
  */
-function reduceRight(collection, iterator, accumulator, thisArg) {
-  var noaccum = arguments.length < 3;
-  iterator = callback(iterator, thisArg, 4);
-
-  baseEachRight(collection, function(value, index, collection) {
-    accumulator = noaccum
-      ? (noaccum = false, value)
-      : iterator(accumulator, value, index, collection);
-  });
-  return accumulator;
+function reduceRight(collection, iteratee, accumulator, thisArg) {
+  var func = isArray(collection) ? arrayReduceRight : baseReduce;
+  return func(collection, baseCallback(iteratee, thisArg, 4), accumulator, arguments.length < 3, baseEachRight);
 }
 
 export default reduceRight;

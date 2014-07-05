@@ -11,6 +11,7 @@ import isArguments from './isArguments';
 import isArray from './isArray';
 import isString from './isString';
 import support from '../support';
+import toObject from '../internal/toObject';
 
 /** Used to fix the JScript `[[DontEnum]]` bug */
 var shadowedProps = [
@@ -18,7 +19,7 @@ var shadowedProps = [
   'toLocaleString', 'toString', 'valueOf'
 ];
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var arrayClass = '[object Array]',
     boolClass = '[object Boolean]',
     dateClass = '[object Date]',
@@ -34,11 +35,11 @@ var errorProto = Error.prototype,
     objectProto = Object.prototype,
     stringProto = String.prototype;
 
+/** Used to check objects for own properties */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
 
 /** Used to avoid iterating over non-enumerable properties in IE < 9 */
 var nonEnumProps = {};
@@ -74,18 +75,18 @@ arrayEach(shadowedProps, function(key) {
  * Shape.prototype.z = 0;
  *
  * _.keysIn(new Shape);
- * // => ['x', 'y', 'z'] (property order is not guaranteed across environments)
+ * // => ['x', 'y', 'z'] (property order is not guaranteed)
  */
 function keysIn(object) {
   if (object == null) {
     return [];
   }
-  object = Object(object);
+  object = toObject(object);
 
   var length = object.length;
   length = (typeof length == 'number' && length > 0 &&
     (isArray(object) || (support.nonEnumStrings && isString(object)) ||
-      (support.nonEnumArgs && isArguments(object))) && length) >>> 0;
+      (support.nonEnumArgs && isArguments(object))) && length) || 0;
 
   var keyIndex,
       Ctor = object.constructor,
@@ -100,7 +101,7 @@ function keysIn(object) {
   while (++index < length) {
     result[index] = String(index);
   }
-  // Lo-Dash skips the `constructor` property when it infers it's iterating
+  // Lo-Dash skips the `constructor` property when it infers it is iterating
   // over a `prototype` object because IE < 9 can't set the `[[Enumerable]]`
   // attribute of an existing property and the `constructor` property of a
   // prototype defaults to non-enumerable.

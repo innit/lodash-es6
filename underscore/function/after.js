@@ -10,20 +10,19 @@ import isFunction from '../object/isFunction';
 import root from '../internal/root';
 
 /** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
+var FUNC_ERROR_TEXT = 'Expected a function';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeIsFinite = root.isFinite;
 
 /**
- * Creates a function that executes `func`, with the `this` binding and
- * arguments of the created function, only after being called `n` times.
+ * The opposite of `_.before`; this method creates a function that executes
+ * `func` only after it is called `n` times.
  *
  * @static
  * @memberOf _
  * @category Function
- * @param {number} n The number of times the function must be called before
- *  `func` is executed.
+ * @param {number} n The number of calls before `func` is executed.
  * @param {Function} func The function to restrict.
  * @returns {Function} Returns the new restricted function.
  * @example
@@ -31,17 +30,17 @@ var nativeIsFinite = root.isFinite;
  * var saves = ['profile', 'settings'];
  *
  * var done = _.after(saves.length, function() {
- *   console.log('Done saving!');
+ *   console.log('done saving!');
  * });
  *
  * _.forEach(saves, function(type) {
  *   asyncSave({ 'type': type, 'complete': done });
  * });
- * // => logs 'Done saving!', after all saves have completed
+ * // => logs 'done saving!' after all saves have completed
  */
 function after(n, func) {
   if (!isFunction(func)) {
-    throw new TypeError(funcErrorText);
+    throw new TypeError(FUNC_ERROR_TEXT);
   }
   n = nativeIsFinite(n = +n) ? n : 0;
   return function() {

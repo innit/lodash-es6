@@ -7,17 +7,17 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import arrayEach from '../internal/arrayEach';
+import baseCallback from '../internal/baseCallback';
 import baseCreate from '../internal/baseCreate';
 import baseForOwn from '../internal/baseForOwn';
-import callback from '../utility/callback';
 import isArrayLike from '../internal/isArrayLike';
 import isObject from './isObject';
 
 /**
  * An alternative to `_.reduce`; this method transforms `object` to a new
  * `accumulator` object which is the result of running each of its own
- * enumerable properties through `iterator`, with each execution potentially
- * mutating the `accumulator` object. The `iterator` is bound to `thisArg`
+ * enumerable properties through `iteratee`, with each execution potentially
+ * mutating the `accumulator` object. The `iteratee` is bound to `thisArg`
  * and invoked with four arguments; (accumulator, value, key, object). Iterator
  * functions may exit iteration early by explicitly returning `false`.
  *
@@ -25,9 +25,9 @@ import isObject from './isObject';
  * @memberOf _
  * @category Object
  * @param {Array|Object} object The object to iterate over.
- * @param {Function} [iterator=identity] The function called per iteration.
+ * @param {Function} [iteratee=identity] The function called per iteration.
  * @param {*} [accumulator] The custom accumulator value.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {*} Returns the accumulated value.
  * @example
  *
@@ -44,8 +44,9 @@ import isObject from './isObject';
  * });
  * // => { 'a': 3, 'b': 6, 'c': 9 }
  */
-function transform(object, iterator, accumulator, thisArg) {
+function transform(object, iteratee, accumulator, thisArg) {
   var isArr = isArrayLike(object);
+
   if (accumulator == null) {
     if (isArr) {
       accumulator = [];
@@ -57,10 +58,10 @@ function transform(object, iterator, accumulator, thisArg) {
       accumulator = baseCreate(proto);
     }
   }
-  if (iterator) {
-    iterator = callback(iterator, thisArg, 4);
+  if (iteratee) {
+    iteratee = baseCallback(iteratee, thisArg, 4);
     (isArr ? arrayEach : baseForOwn)(object, function(value, index, object) {
-      return iterator(accumulator, value, index, object);
+      return iteratee(accumulator, value, index, object);
     });
   }
   return accumulator;

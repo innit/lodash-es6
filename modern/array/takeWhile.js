@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import callback from '../utility/callback';
+import baseCallback from '../internal/baseCallback';
 import slice from './slice';
 
 /**
@@ -28,6 +28,7 @@ import slice from './slice';
  * @param {Array} array The array to query.
  * @param {Function|Object|string} [predicate=identity] The function called
  *  per element.
+ * @param {*} [thisArg] The `this` binding of `predicate`.
  * @returns {Array} Returns the slice of `array`.
  * @example
  *
@@ -52,8 +53,8 @@ function takeWhile(array, predicate, thisArg) {
   var index = -1,
       length = array ? array.length : 0;
 
-  predicate = callback(predicate, thisArg, 3);
-  while (++index < length && predicate(array[index], index, array)) { }
+  predicate = baseCallback(predicate, thisArg, 3);
+  while (++index < length && predicate(array[index], index, array)) {}
   return slice(array, 0, index);
 }
 

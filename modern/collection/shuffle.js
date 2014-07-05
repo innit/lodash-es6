@@ -6,8 +6,8 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import baseEach from '../internal/baseEach';
 import baseRandom from '../internal/baseRandom';
+import toIterable from '../internal/toIterable';
 
 /**
  * Creates an array of shuffled values, using a version of the Fisher-Yates
@@ -25,15 +25,19 @@ import baseRandom from '../internal/baseRandom';
  * // => [4, 1, 3, 2]
  */
 function shuffle(collection) {
-  var index = -1,
-      length = collection && collection.length,
-      result = Array(length < 0 ? 0 : length >>> 0);
+  collection = toIterable(collection);
 
-  baseEach(collection, function(value) {
-    var rand = baseRandom(0, ++index);
-    result[index] = result[rand];
-    result[rand] = value;
-  });
+  var index = -1,
+      length = collection.length,
+      result = Array(length);
+
+  while (++index < length) {
+    var rand = baseRandom(0, index);
+    if (index != rand) {
+      result[index] = result[rand];
+    }
+    result[rand] = collection[index];
+  }
   return result;
 }
 

@@ -18,10 +18,12 @@
  */
 function baseIndexOf(array, value, fromIndex) {
   var index = (fromIndex || 0) - 1,
-      length = array ? array.length : 0;
+      length = array ? array.length : 0,
+      isReflexive = value === value;
 
   while (++index < length) {
-    if (array[index] === value) {
+    var other = array[index];
+    if ((isReflexive ? other === value : other !== other)) {
       return index;
     }
   }

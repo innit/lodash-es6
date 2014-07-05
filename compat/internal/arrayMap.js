@@ -13,16 +13,16 @@
  *
  * @private
  * @param {Array} array The array to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Array} Returns the new mapped array.
  */
-function arrayMap(array, iterator) {
+function arrayMap(array, iteratee) {
   var index = -1,
-      length = array ? array.length >>> 0 : 0,
+      length = array.length,
       result = Array(length);
 
   while (++index < length) {
-    result[index] = iterator(array[index], index, array);
+    result[index] = iteratee(array[index], index, array);
   }
   return result;
 }

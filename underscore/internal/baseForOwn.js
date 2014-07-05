@@ -15,11 +15,11 @@ import keys from '../object/keys';
  *
  * @private
  * @param {Object} object The object to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Object} Returns `object`.
  */
-function baseForOwn(object, iterator) {
-  return baseFor(object, iterator, keys);
+function baseForOwn(object, iteratee) {
+  return baseFor(object, iteratee, keys);
 }
 
 export default baseForOwn;

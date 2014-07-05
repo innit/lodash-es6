@@ -6,12 +6,54 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseEach from '../internal/baseEach';
-import callback from '../utility/callback';
 import isArray from '../object/isArray';
 
 /**
- * Checks if the predicate returns truthy for **any** element of a collection.
+ * A specialized version of `_.some` for arrays without support for callback
+ * shorthands or `this` binding.
+ *
+ * @private
+ * @param {Array} array The array to iterate over.
+ * @param {Function} predicate The function called per iteration.
+ * @returns {boolean} Returns `true` if any element passed the predicate check,
+ *  else `false`.
+ */
+function arraySome(array, predicate) {
+  var index = -1,
+      length = array.length;
+
+  while (++index < length) {
+    if (predicate(array[index], index, array)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * The base implementation of `_.some` without support for callback shorthands
+ * or `this` binding.
+ *
+ * @private
+ * @param {Array|Object|string} collection The collection to iterate over.
+ * @param {Function} predicate The function called per iteration.
+ * @returns {boolean} Returns `true` if any element passed the predicate check,
+ *  else `false`.
+ */
+function baseSome(collection, predicate) {
+  var result;
+
+  baseEach(collection, function(value, index, collection) {
+    result = predicate(value, index, collection);
+    return !result;
+  });
+  return !!result;
+}
+
+/**
+ * Checks if the predicate returns truthy for **any** element of `collection`.
  * The function returns as soon as it finds a passing value and does not iterate
  * over the entire collection. The predicate is bound to `thisArg` and invoked
  * with three arguments; (value, index|key, collection).
@@ -53,27 +95,11 @@ import isArray from '../object/isArray';
  * // => false
  */
 function some(collection, predicate, thisArg) {
-  var result;
-
+  var func = isArray(collection) ? arraySome : baseSome;
   if (typeof predicate != 'function' || typeof thisArg != 'undefined') {
-    predicate = callback(predicate, thisArg, 3);
+    predicate = baseCallback(predicate, thisArg, 3);
   }
-  if (isArray(collection)) {
-    var index = -1,
-        length = collection.length;
-
-    while (++index < length) {
-      if (predicate(collection[index], index, collection)) {
-        return true;
-      }
-    }
-  } else {
-    baseEach(collection, function(value, index, collection) {
-      result = predicate(value, index, collection);
-      return !result;
-    });
-  }
-  return !!result;
+  return func(collection, predicate);
 }
 
 export default some;

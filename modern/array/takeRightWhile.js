@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import callback from '../utility/callback';
+import baseCallback from '../internal/baseCallback';
 import slice from './slice';
 
 /**
@@ -28,6 +28,7 @@ import slice from './slice';
  * @param {Array} array The array to query.
  * @param {Function|Object|string} [predicate=identity] The function called
  *  per element.
+ * @param {*} [thisArg] The `this` binding of `predicate`.
  * @returns {Array} Returns the slice of `array`.
  * @example
  *
@@ -50,14 +51,11 @@ import slice from './slice';
  */
 function takeRightWhile(array, predicate, thisArg) {
   var length = array ? array.length : 0,
-      index = length,
-      n = 0;
+      index = length;
 
-  predicate = callback(predicate, thisArg, 3);
-  while (index-- && predicate(array[index], index, array)) {
-    n++;
-  }
-  return slice(array, length - n);
+  predicate = baseCallback(predicate, thisArg, 3);
+  while (index-- && predicate(array[index], index, array)) {}
+  return slice(array, index + 1);
 }
 
 export default takeRightWhile;

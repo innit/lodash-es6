@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var argsClass = '[object Arguments]';
 
 /** Used for native method references */
@@ -17,7 +17,7 @@ var objectProto = Object.prototype;
 var toString = objectProto.toString;
 
 /**
- * Checks if `value` is an `arguments` object.
+ * Checks if `value` is classified as an `arguments` object.
  *
  * @static
  * @memberOf _

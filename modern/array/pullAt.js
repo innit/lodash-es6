@@ -13,7 +13,7 @@ import baseFlatten from '../internal/baseFlatten';
 /** Used for native method references */
 var arrayProto = Array.prototype;
 
-/** Native method shortcuts */
+/** Native method references */
 var splice = arrayProto.splice;
 
 /**
@@ -45,7 +45,7 @@ function basePullAt(array, indexes) {
  * returns an array of the removed elements. Indexes may be specified as an
  * array of indexes or as individual arguments.
  *
- * Note: Unlike `_.at`, this method mutates `array`.
+ * **Note:** Unlike `_.at`, this method mutates `array`.
  *
  * @static
  * @memberOf _

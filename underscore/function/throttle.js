@@ -10,9 +10,6 @@ import debounce from './debounce';
 import isFunction from '../object/isFunction';
 import isObject from '../object/isObject';
 
-/** Used as the TypeError message for "Functions" methods */
-var funcErrorText = 'Expected a function';
-
 /**
  * Creates a function that only calls the `func` function at most once per
  * every `wait` milliseconds. The created function comes with a `cancel` method
@@ -21,9 +18,12 @@ var funcErrorText = 'Expected a function';
  * Subsequent calls to the throttled function return the result of the last
  * `func` call.
  *
- * Note: If `leading` and `trailing` options are `true`, `func` is called on
+ * **Note:** If `leading` and `trailing` options are `true`, `func` is called on
  * the trailing edge of the timeout only if the the throttled function is
  * invoked more than once during the `wait` timeout.
+ *
+ * See [David Corbacho's article](http://drupalmotion.com/article/debounce-and-throttle-visual-explanation)
+ * for details over the differences between `_.throttle` and `_.debounce`.
  *
  * @static
  * @memberOf _

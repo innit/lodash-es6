@@ -6,19 +6,20 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import basePartial from '../internal/basePartial';
 import createWrapper from '../internal/createWrapper';
 import slice from '../array/slice';
 
 /** Used to compose bitmasks for wrapper metadata */
 var BIND_FLAG = 1,
-    PARTIAL_FLAG = 16;
+    PARTIAL_FLAG = 32;
 
 /**
  * Creates a function that invokes `func` with the `this` binding of `thisArg`
  * and prepends any additional `bind` arguments to those provided to the bound
  * function.
  *
- * Note: Unlike native `Function#bind` this method does not set the `length`
+ * **Note:** Unlike native `Function#bind` this method does not set the `length`
  * property of bound functions.
  *
  * @static
@@ -41,7 +42,10 @@ var BIND_FLAG = 1,
 function bind(func, thisArg) {
   return arguments.length < 3
     ? createWrapper(func, BIND_FLAG, null, thisArg)
-    : createWrapper(func, BIND_FLAG | PARTIAL_FLAG, null, thisArg, slice(arguments, 2));
+    : basePartial(func, BIND_FLAG | PARTIAL_FLAG, slice(arguments, 2), [], thisArg);
 }
+
+// assign default placeholders
+bind.placeholder = {};
 
 export default bind;

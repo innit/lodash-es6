@@ -6,10 +6,10 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import isNative from './isNative';
+import isNative from '../object/isNative';
 import root from './root';
 
-/** Native method shortcuts */
+/** Native method references */
 var Set = isNative(Set = root.Set) && Set;
 
 /**

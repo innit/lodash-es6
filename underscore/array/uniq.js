@@ -6,23 +6,56 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
+import baseIndexOf from '../internal/baseIndexOf';
 import baseUniq from '../internal/baseUniq';
-import callback from '../utility/callback';
 
 /**
- * Creates a duplicate-value-free version of an array using strict equality
- * for comparisons, i.e. `===`. Providing `true` for `isSorted` performs a
- * faster search algorithm for sorted arrays. If an iterator function is
- * provided it is executed for each value in the array to generate the criterion
- * by which uniqueness is computed. The `iterator` is bound to `thisArg` and
- * invoked with three arguments; (value, index, array).
+ * An implementation of `_.uniq` optimized for sorted arrays without support
+ * for callback shorthands and `this` binding.
  *
- * If a property name is provided for `iterator` the created "_.pluck" style
+ * @private
+ * @param {Array} array The array to inspect.
+ * @param {Function} [iteratee] The function called per iteration.
+ * @returns {Array} Returns the new duplicate-value-free array.
+ */
+function sortedUniq(array, iteratee) {
+  var seen,
+      index = -1,
+      length = array.length,
+      resIndex = -1,
+      result = [];
+
+  while (++index < length) {
+    var value = array[index],
+        computed = iteratee ? iteratee(value, index, array) : value;
+
+    if (!index || seen !== computed) {
+      seen = computed;
+      result[++resIndex] = value;
+    }
+  }
+  return result;
+}
+
+/**
+ * Creates a duplicate-value-free version of an array using `SameValueZero`
+ * for equality comparisons. Providing `true` for `isSorted` performs a faster
+ * search algorithm for sorted arrays. If an iteratee function is provided it
+ * is executed for each value in the array to generate the criterion by which
+ * uniqueness is computed. The `iteratee` is bound to `thisArg` and invoked
+ * with three arguments; (value, index, array).
+ *
+ * If a property name is provided for `iteratee` the created "_.pluck" style
  * callback returns the property value of the given element.
  *
- * If an object is provided for `iterator` the created "_.where" style callback
+ * If an object is provided for `iteratee` the created "_.where" style callback
  * returns `true` for elements that have the properties of the given object,
  * else `false`.
+ *
+ * **Note:** `SameValueZero` is like strict equality, e.g. `===`, except that
+ * `NaN` matches `NaN`. See the [ES6 spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+ * for more details.
  *
  * @static
  * @memberOf _
@@ -30,10 +63,10 @@ import callback from '../utility/callback';
  * @category Array
  * @param {Array} array The array to inspect.
  * @param {boolean} [isSorted=false] Specify the array is sorted.
- * @param {Function|Object|string} [iterator] The function called per iteration.
+ * @param {Function|Object|string} [iteratee] The function called per iteration.
  *  If a property name or object is provided it is used to create a "_.pluck"
  *  or "_.where" style callback respectively.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Array} Returns the new duplicate-value-free array.
  * @example
  *
@@ -44,7 +77,7 @@ import callback from '../utility/callback';
  * _.uniq([1, 1, 2], true);
  * // => [1, 2]
  *
- * // using an iterator function
+ * // using an iteratee function
  * _.uniq([1, 2.5, 1.5, 2], function(n) { return this.floor(n); }, Math);
  * // => [1, 2.5]
  *
@@ -52,7 +85,7 @@ import callback from '../utility/callback';
  * _.uniq([{ 'x': 1 }, { 'x': 2 }, { 'x': 1 }], 'x');
  * // => [{ 'x': 1 }, { 'x': 2 }]
  */
-function uniq(array, isSorted, iterator, thisArg) {
+function uniq(array, isSorted, iteratee, thisArg) {
   var length = array ? array.length : 0;
   if (!length) {
     return [];
@@ -60,19 +93,21 @@ function uniq(array, isSorted, iterator, thisArg) {
   // juggle arguments
   var type = typeof isSorted;
   if (type != 'boolean' && isSorted != null) {
-    thisArg = iterator;
-    iterator = isSorted;
+    thisArg = iteratee;
+    iteratee = isSorted;
     isSorted = false;
 
     // enables use as a callback for functions like `_.map`
-    if ((type == 'number' || type == 'string') && thisArg && thisArg[iterator] === array) {
-      iterator = null;
+    if ((type == 'number' || type == 'string') && thisArg && thisArg[iteratee] === array) {
+      iteratee = null;
     }
   }
-  if (iterator != null) {
-    iterator = callback(iterator, thisArg, 3);
+  if (iteratee != null) {
+    iteratee = baseCallback(iteratee, thisArg, 3);
   }
-  return baseUniq(array, isSorted, iterator);
+  return (isSorted && baseIndexOf == baseIndexOf)
+    ? sortedUniq(array, iteratee)
+    : baseUniq(array, iteratee);
 }
 
 export default uniq;

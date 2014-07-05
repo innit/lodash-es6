@@ -10,11 +10,11 @@
 /** Used for native method references */
 var arrayProto = Array.prototype;
 
-/** Native method shortcuts */
+/** Native method references */
 var splice = arrayProto.splice;
 
 /**
- * An object used to flag environments features.
+ * An object environment feature flags.
  *
  * @static
  * @memberOf _
@@ -40,6 +40,18 @@ var support = {};
    * @type boolean
    */
   support.spliceObjects = (splice.call(object, 0, 1), !object[0]);
+
+  /**
+   * Detect if the host objects are detectable (IE < 9).
+   *
+   * @memberOf _.support
+   * @type boolean
+   */
+  try {
+    support.hostObject = !({ 'toString': 0 } + '');
+  } catch(e) {
+    support.hostObject = false;
+  }
 }(0, 0));
 
 export default support;

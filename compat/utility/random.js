@@ -8,7 +8,7 @@
  */
 import baseRandom from '../internal/baseRandom';
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeMin = Math.min,
     nativeRandom = Math.random;
 
@@ -40,6 +40,11 @@ var nativeMin = Math.min,
  * // => a floating-point number between 1.2 and 5.2
  */
 function random(min, max, floating) {
+  // enables use as a callback for functions like `_.map`
+  var type = typeof max;
+  if ((type == 'number' || type == 'string') && floating && floating[max] === min) {
+    max = floating = null;
+  }
   var noMin = min == null,
       noMax = max == null;
 

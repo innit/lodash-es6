@@ -8,11 +8,13 @@
  */
 
 import after from './function/after';
+import before from './function/before';
 import bind from './function/bind';
 import bindAll from './function/bindAll';
 import bindKey from './function/bindKey';
 import compose from './function/compose';
 import curry from './function/curry';
+import curryRight from './function/curryRight';
 import debounce from './function/debounce';
 import defer from './function/defer';
 import delay from './function/delay';
@@ -26,11 +28,13 @@ import wrap from './function/wrap';
 
 export default {
   'after': after,
+  'before': before,
   'bind': bind,
   'bindAll': bindAll,
   'bindKey': bindKey,
   'compose': compose,
   'curry': curry,
+  'curryRight': curryRight,
   'debounce': debounce,
   'defer': defer,
   'delay': delay,

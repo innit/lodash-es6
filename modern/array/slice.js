@@ -6,14 +6,12 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeMax = Math.max;
+import baseSlice from '../internal/baseSlice';
 
 /**
  * Slices `array` from the `start` index up to, but not including, the `end` index.
  *
- * Note: This function is used instead of `Array#slice` to support node lists
+ * **Note:** This function is used instead of `Array#slice` to support node lists
  * in IE < 9 and to ensure dense arrays are returned.
  *
  * @static
@@ -30,21 +28,20 @@ function slice(array, start, end) {
 
   start = start == null ? 0 : (+start || 0);
   if (start < 0) {
-    start = nativeMax(length + start, 0);
-  } else if (start > length) {
-    start = length;
+    start = -start > length ? 0 : (length + start);
   }
-  end = typeof end == 'undefined' ? length : (+end || 0);
+  end = (typeof end == 'undefined' || end > length) ? length : (+end || 0);
   if (end < 0) {
-    end = nativeMax(length + end, 0);
-  } else if (end > length) {
-    end = length;
+    end += length;
+  }
+  if (end && end == length && !start) {
+    return baseSlice(array);
   }
   length = start > end ? 0 : (end - start);
 
   var result = Array(length);
   while (++index < length) {
-    result[index] = array[start + index];
+    result[index] = array[index + start];
   }
   return result;
 }

@@ -6,13 +6,13 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseEachRight from '../internal/baseEachRight';
 import baseFind from '../internal/baseFind';
-import callback from '../utility/callback';
 
 /**
- * This method is like `_.find` except that it iterates over elements of a
- * collection from right to left.
+ * This method is like `_.find` except that it iterates over elements of
+ * `collection` from right to left.
  *
  * @static
  * @memberOf _
@@ -29,7 +29,7 @@ import callback from '../utility/callback';
  * // => 3
  */
 function findLast(collection, predicate, thisArg) {
-  predicate = callback(predicate, thisArg, 3);
+  predicate = baseCallback(predicate, thisArg, 3);
   return baseFind(collection, predicate, baseEachRight);
 }
 

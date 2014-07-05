@@ -11,7 +11,7 @@
  * Checks if `value` is the language type of `Object`.
  * (e.g. arrays, functions, objects, regexes, `new Number(0)`, and `new String('')`)
  *
- * Note: See the [ES5 spec](http://es5.github.io/#x8) for more details.
+ * **Note:** See the [ES5 spec](http://es5.github.io/#x8) for more details.
  *
  * @static
  * @memberOf _

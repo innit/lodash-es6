@@ -16,18 +16,14 @@ import createCache from './createCache';
  *
  * @private
  * @param {Array} array The array to inspect.
- * @param {boolean} [isSorted=false] Specify the array is sorted.
- * @param {Function} [iterator] The function called per iteration.
+ * @param {Function} [iteratee] The function called per iteration.
  * @returns {Array} Returns the new duplicate-value-free array.
  */
-function baseUniq(array, isSorted, iterator) {
-  var length = array ? array.length : 0;
-  if (!length) {
-    return [];
-  }
+function baseUniq(array, iteratee) {
   var index = -1,
       indexOf = baseIndexOf,
-      prereq = !isSorted,
+      length = array.length,
+      prereq = indexOf == baseIndexOf,
       isLarge = prereq && createCache && length >= 200,
       isCommon = prereq && !isLarge,
       result = [];
@@ -36,33 +32,27 @@ function baseUniq(array, isSorted, iterator) {
     var seen = createCache();
     indexOf = cacheIndexOf;
   } else {
-    seen = (iterator && !isSorted) ? [] : result;
+    seen = iteratee ? [] : result;
   }
   outer:
   while (++index < length) {
     var value = array[index],
-        computed = iterator ? iterator(value, index, array) : value;
+        computed = iteratee ? iteratee(value, index, array) : value;
 
-    if (isCommon) {
+    if (isCommon && value === value) {
       var seenIndex = seen.length;
       while (seenIndex--) {
         if (seen[seenIndex] === computed) {
           continue outer;
         }
       }
-      if (iterator) {
+      if (iteratee) {
         seen.push(computed);
       }
       result.push(value);
     }
-    else if (isSorted) {
-      if (!index || seen !== computed) {
-        seen = computed;
-        result.push(value);
-      }
-    }
     else if (indexOf(seen, computed) < 0) {
-      if (iterator || isLarge) {
+      if (iteratee || isLarge) {
         seen.push(computed);
       }
       result.push(value);

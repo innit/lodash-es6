@@ -26,6 +26,7 @@ import isPlainObject from '../object/isPlainObject';
  */
 function baseMerge(object, source, customizer, stackA, stackB) {
   var isSrcArr = isArrayLike(source);
+
   (isSrcArr ? arrayEach : baseForOwn)(source, function(srcValue, key, source) {
     var isArr = srcValue && isArrayLike(srcValue),
         isObj = srcValue && isPlainObject(srcValue),
@@ -53,9 +54,9 @@ function baseMerge(object, source, customizer, stackA, stackB) {
       }
     }
     var result = customizer ? customizer(value, srcValue, key, object, source) : undefined,
-        isShallow = typeof result != 'undefined';
+        isDeep = typeof result == 'undefined';
 
-    if (!isShallow) {
+    if (isDeep) {
       result = isArr
         ? (isArray(value) ? value : [])
         : (isPlainObject(value) ? value : {});
@@ -66,7 +67,7 @@ function baseMerge(object, source, customizer, stackA, stackB) {
     stackB.push(result);
 
     // recursively merge objects and arrays (susceptible to call stack limits)
-    if (!isShallow) {
+    if (isDeep) {
       baseMerge(result, srcValue, customizer, stackA, stackB);
     }
     object[key] = result;

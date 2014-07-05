@@ -6,7 +6,7 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createWrapper from '../internal/createWrapper';
+import baseCurry from '../internal/baseCurry';
 
 /** Used to compose bitmasks for wrapper metadata */
 var CURRY_FLAG = 4;
@@ -18,7 +18,7 @@ var CURRY_FLAG = 4;
  * remaining `func` arguments, and so on. The arity of `func` can be specified
  * if `func.length` is not sufficient.
  *
- * Note: This method does not set the `length` property of curried functions.
+ * **Note:** This method does not set the `length` property of curried functions.
  *
  * @static
  * @memberOf _
@@ -29,23 +29,25 @@ var CURRY_FLAG = 4;
  * @example
  *
  * var curried = _.curry(function(a, b, c) {
- *   console.log(a + b + c);
+ *   console.log([a, b, c]);
  * });
  *
  * curried(1)(2)(3);
- * // => 6
+ * // => [1, 2, 3]
  *
  * curried(1, 2)(3);
- * // => 6
+ * // => [1, 2, 3]
  *
  * curried(1, 2, 3);
- * // => 6
+ * // => [1, 2, 3]
  */
 function curry(func, arity) {
-  if (typeof arity != 'number') {
-    arity = +arity || (func ? func.length : 0);
-  }
-  return createWrapper(func, CURRY_FLAG, arity);
+  var result = baseCurry(func, CURRY_FLAG, arity);
+  result.placeholder = curry.placeholder;
+  return result;
 }
+
+// assign default placeholders
+curry.placeholder = {};
 
 export default curry;

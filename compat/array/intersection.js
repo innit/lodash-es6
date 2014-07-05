@@ -14,7 +14,11 @@ import isArray from '../object/isArray';
 
 /**
  * Creates an array of unique values present in all provided arrays using
- * strict equality for comparisons, i.e. `===`.
+ * `SameValueZero` for equality comparisons.
+ *
+ * **Note:** `SameValueZero` is like strict equality, e.g. `===`, except that
+ * `NaN` matches `NaN`. See the [ES6 spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+ * for more details.
  *
  * @static
  * @memberOf _

@@ -24,6 +24,7 @@ import sortedIndex from './array/sortedIndex';
 import take from './array/take';
 import union from './array/union';
 import uniq from './array/uniq';
+import unzip from './array/unzip';
 import without from './array/without';
 import zip from './array/zip';
 import zipObject from './array/zipObject';
@@ -50,7 +51,7 @@ export default {
   'union': union,
   'uniq': uniq,
   'unique': uniq,
-  'unzip': zip,
+  'unzip': unzip,
   'without': without,
   'zip': zip,
   'zipObject': zipObject

@@ -6,14 +6,14 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseEach from '../internal/baseEach';
 import baseFind from '../internal/baseFind';
-import callback from '../utility/callback';
 import findIndex from '../array/findIndex';
 import isArray from '../object/isArray';
 
 /**
- * Iterates over elements of a collection, returning the first element that
+ * Iterates over elements of `collection`, returning the first element that
  * the predicate returns truthy for. The predicate is bound to `thisArg` and
  * invoked with three arguments; (value, index|key, collection).
  *
@@ -60,7 +60,7 @@ function find(collection, predicate, thisArg) {
     var index = findIndex(collection, predicate, thisArg);
     return index > -1 ? collection[index] : undefined;
   }
-  predicate = callback(predicate, thisArg, 3);
+  predicate = baseCallback(predicate, thisArg, 3);
   return baseFind(collection, predicate, baseEach);
 }
 

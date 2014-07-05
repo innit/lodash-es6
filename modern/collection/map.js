@@ -7,25 +7,19 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import arrayMap from '../internal/arrayMap';
-import baseEach from '../internal/baseEach';
-import callback from '../utility/callback';
-
-/**
- * Used as the maximum length of an array-like object.
- * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
- * for more details.
- */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+import baseCallback from '../internal/baseCallback';
+import baseMap from '../internal/baseMap';
+import isArray from '../object/isArray';
 
 /**
  * Creates an array of values by running each element in the collection through
- * `iterator`. The `iterator` is bound to `thisArg` and invoked with three
+ * `iteratee`. The `iteratee` is bound to `thisArg` and invoked with three
  * arguments; (value, index|key, collection).
  *
- * If a property name is provided for `iterator` the created "_.pluck" style
+ * If a property name is provided for `iteratee` the created "_.pluck" style
  * callback returns the property value of the given element.
  *
- * If an object is provided for `iterator` the created "_.where" style callback
+ * If an object is provided for `iteratee` the created "_.where" style callback
  * returns `true` for elements that have the properties of the given object,
  * else `false`.
  *
@@ -34,10 +28,10 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * @alias collect
  * @category Collection
  * @param {Array|Object|string} collection The collection to iterate over.
- * @param {Function|Object|string} [iterator=identity] The function called
+ * @param {Function|Object|string} [iteratee=identity] The function called
  *  per iteration. If a property name or object is provided it is used to
  *  create a "_.pluck" or "_.where" style callback respectively.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Array} Returns the new mapped array.
  * @example
  *
@@ -45,7 +39,7 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * // => [3, 6, 9]
  *
  * _.map({ 'one': 1, 'two': 2, 'three': 3 }, function(n) { return n * 3; });
- * // => [3, 6, 9] (property order is not guaranteed across environments)
+ * // => [3, 6, 9] (property order is not guaranteed)
  *
  * var characters = [
  *   { 'name': 'barney', 'age': 36 },
@@ -56,20 +50,11 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * _.map(characters, 'name');
  * // => ['barney', 'fred']
  */
-function map(collection, iterator, thisArg) {
-  var length = collection ? collection.length : 0;
-  iterator = callback(iterator, thisArg, 3);
+function map(collection, iteratee, thisArg) {
+  iteratee = baseCallback(iteratee, thisArg, 3);
 
-  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-    return arrayMap(collection, iterator);
-  }
-  var index = -1,
-      result = [];
-
-  baseEach(collection, function(value, key, collection) {
-    result[++index] = iterator(value, key, collection);
-  });
-  return result;
+  var func = isArray(collection) ? arrayMap : baseMap;
+  return func(collection, iteratee);
 }
 
 export default map;

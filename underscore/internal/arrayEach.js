@@ -8,13 +8,13 @@
  */
 
 /** Used as the semantic version number */
-var version = '3.0.0-pre';
+var VERSION = '3.0.0-pre';
 
 /** Used as the property name for wrapper metadata */
-var expando = '__lodash@' + version + '__';
+var EXPANDO = '__lodash_' + VERSION.replace(/[-.]/g, '_') + '__';
 
 /** Used by methods to exit iteration */
-var breakIndicator = expando + 'breaker__';
+var breakIndicator = EXPANDO + 'breaker__';
 
 /**
  * A specialized version of `_.forEach` for arrays without support for
@@ -22,15 +22,15 @@ var breakIndicator = expando + 'breaker__';
  *
  * @private
  * @param {Array} array The array to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @returns {Array} Returns `array`.
  */
-function arrayEach(array, iterator) {
+function arrayEach(array, iteratee) {
   var index = -1,
-      length = array ? array.length : 0;
+      length = array.length;
 
   while (++index < length) {
-    if (iterator(array[index], index, array) === breakIndicator) {
+    if (iteratee(array[index], index, array) === breakIndicator) {
       break;
     }
   }

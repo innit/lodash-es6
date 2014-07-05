@@ -7,12 +7,12 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import createWrapper from '../internal/createWrapper';
+import replaceHolders from '../internal/replaceHolders';
 import slice from '../array/slice';
 
 /** Used to compose bitmasks for wrapper metadata */
 var BIND_FLAG = 1,
-    BIND_KEY_FLAG = 2,
-    PARTIAL_FLAG = 16;
+    BIND_KEY_FLAG = 2;
 
 /**
  * Creates a function that invokes the method at `object[key]` and prepends
@@ -50,9 +50,17 @@ var BIND_FLAG = 1,
  * // => 'hiya fred!'
  */
 function bindKey(object, key) {
-  return arguments.length < 3
-    ? createWrapper(key, BIND_FLAG | BIND_KEY_FLAG, null, object)
-    : createWrapper(key, BIND_FLAG | BIND_KEY_FLAG | PARTIAL_FLAG, null, object, slice(arguments, 2));
+  var bitmask = BIND_FLAG | BIND_KEY_FLAG;
+  if (arguments.length > 2) {
+    var args = slice(arguments, 2),
+        holders = replaceHolders(args, bindKey.placeholder);
+  }
+  return args
+    ? createWrapper(key, bitmask, null, object, args, holders)
+    : createWrapper(key, bitmask, null, object);
 }
+
+// assign default placeholders
+bindKey.placeholder = {};
 
 export default bindKey;

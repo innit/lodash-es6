@@ -14,32 +14,22 @@ import baseIndexOf from './baseIndexOf';
  *
  * @private
  * @param {Array} array The array to inspect.
- * @param {boolean} [isSorted=false] Specify the array is sorted.
- * @param {Function} [iterator] The function called per iteration.
+ * @param {Function} [iteratee] The function called per iteration.
  * @returns {Array} Returns the new duplicate-value-free array.
  */
-function baseUniq(array, isSorted, iterator) {
-  var length = array ? array.length : 0;
-  if (!length) {
-    return [];
-  }
+function baseUniq(array, iteratee) {
   var index = -1,
       indexOf = baseIndexOf,
+      length = array.length,
       result = [],
-      seen = (iterator && !isSorted) ? [] : result;
+      seen = iteratee ? [] : result;
 
   while (++index < length) {
     var value = array[index],
-        computed = iterator ? iterator(value, index, array) : value;
+        computed = iteratee ? iteratee(value, index, array) : value;
 
-    if (isSorted) {
-      if (!index || seen !== computed) {
-        seen = computed;
-        result.push(value);
-      }
-    }
-    else if (indexOf(seen, computed) < 0) {
-      if (iterator) {
+    if (indexOf(seen, computed) < 0) {
+      if (iteratee) {
         seen.push(computed);
       }
       result.push(value);

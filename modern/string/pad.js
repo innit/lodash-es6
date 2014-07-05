@@ -9,11 +9,11 @@
 import createPad from '../internal/createPad';
 import root from '../internal/root';
 
-/** Native method shortcuts */
+/** Native method references */
 var ceil = Math.ceil,
     floor = Math.floor;
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
+/* Native method references for those with the same name as other `lodash` methods */
 var nativeIsFinite = root.isFinite;
 
 /**

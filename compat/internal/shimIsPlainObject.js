@@ -9,20 +9,20 @@
 import baseForIn from './baseForIn';
 import isArguments from '../object/isArguments';
 import isFunction from '../object/isFunction';
-import isNode from './isNode';
+import isHostObject from './isHostObject';
 import support from '../support';
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var objectClass = '[object Object]';
 
 /** Used for native method references */
 var objectProto = Object.prototype;
 
+/** Used to check objects for own properties */
+var hasOwnProperty = objectProto.hasOwnProperty;
+
 /** Used to resolve the internal `[[Class]]` of values */
 var toString = objectProto.toString;
-
-/** Native method shortcuts */
-var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * A fallback implementation of `_.isPlainObject` which checks if `value`
@@ -42,7 +42,7 @@ function shimIsPlainObject(value) {
       (!hasOwnProperty.call(value, 'constructor') &&
         (Ctor = value.constructor, isFunction(Ctor) && !(Ctor instanceof Ctor))) ||
       (!support.argsClass && isArguments(value)) ||
-      (!support.nodeClass && isNode(value))) {
+      (!support.nodeClass && isHostObject(value))) {
     return false;
   }
   // IE < 9 iterates inherited properties before own properties. If the first

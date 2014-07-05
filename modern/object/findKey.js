@@ -6,9 +6,9 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseFind from '../internal/baseFind';
 import baseForOwn from '../internal/baseForOwn';
-import callback from '../utility/callback';
 
 /**
  * This method is like `_.findIndex` except that it returns the key of the
@@ -41,7 +41,7 @@ import callback from '../utility/callback';
  * _.findKey(characters, function(chr) {
  *   return chr.age < 40;
  * });
- * // => 'barney' (property order is not guaranteed across environments)
+ * // => 'barney' (property order is not guaranteed)
  *
  * // using "_.where" callback shorthand
  * _.findKey(characters, { 'age': 1 });
@@ -52,7 +52,7 @@ import callback from '../utility/callback';
  * // => 'fred'
  */
 function findKey(object, predicate, thisArg) {
-  predicate = callback(predicate, thisArg, 3);
+  predicate = baseCallback(predicate, thisArg, 3);
   return baseFind(object, predicate, baseForOwn, true);
 }
 

@@ -6,18 +6,13 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import baseEach from '../internal/baseEach';
-import callback from '../utility/callback';
+import arrayFilter from '../internal/arrayFilter';
+import baseCallback from '../internal/baseCallback';
+import baseFilter from '../internal/baseFilter';
+import isArray from '../object/isArray';
 
 /**
- * Used as the maximum length of an array-like object.
- * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
- * for more details.
- */
-var maxSafeInteger = Math.pow(2, 53) - 1;
-
-/**
- * Iterates over elements of a collection returning an array of all elements
+ * Iterates over elements of `collection`, returning an array of all elements
  * the predicate returns truthy for. The predicate is bound to `thisArg` and
  * invoked with three arguments; (value, index|key, collection).
  *
@@ -57,27 +52,10 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * // => [{ 'name': 'barney', 'age': 36 }]
  */
 function filter(collection, predicate, thisArg) {
-  var result = [];
-  predicate = callback(predicate, thisArg, 3);
+  var func = isArray(collection) ? arrayFilter : baseFilter;
 
-  var index = -1,
-      length = collection ? collection.length : 0;
-
-  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-    while (++index < length) {
-      var value = collection[index];
-      if (predicate(value, index, collection)) {
-        result.push(value);
-      }
-    }
-  } else {
-    baseEach(collection, function(value, index, collection) {
-      if (predicate(value, index, collection)) {
-        result.push(value);
-      }
-    });
-  }
-  return result;
+  predicate = baseCallback(predicate, thisArg, 3);
+  return func(collection, predicate);
 }
 
 export default filter;

@@ -18,6 +18,7 @@ import findIndex from './array/findIndex';
 import findLastIndex from './array/findLastIndex';
 import first from './array/first';
 import flatten from './array/flatten';
+import flattenDeep from './array/flattenDeep';
 import indexOf from './array/indexOf';
 import initial from './array/initial';
 import intersection from './array/intersection';
@@ -29,12 +30,14 @@ import remove from './array/remove';
 import rest from './array/rest';
 import slice from './array/slice';
 import sortedIndex from './array/sortedIndex';
+import sortedLastIndex from './array/sortedLastIndex';
 import take from './array/take';
 import takeRight from './array/takeRight';
 import takeRightWhile from './array/takeRightWhile';
 import takeWhile from './array/takeWhile';
 import union from './array/union';
 import uniq from './array/uniq';
+import unzip from './array/unzip';
 import without from './array/without';
 import xor from './array/xor';
 import zip from './array/zip';
@@ -52,6 +55,7 @@ export default {
   'findLastIndex': findLastIndex,
   'first': first,
   'flatten': flatten,
+  'flattenDeep': flattenDeep,
   'head': first,
   'indexOf': indexOf,
   'initial': initial,
@@ -65,6 +69,7 @@ export default {
   'rest': rest,
   'slice': slice,
   'sortedIndex': sortedIndex,
+  'sortedLastIndex': sortedLastIndex,
   'tail': rest,
   'take': take,
   'takeRight': takeRight,
@@ -73,7 +78,7 @@ export default {
   'union': union,
   'uniq': uniq,
   'unique': uniq,
-  'unzip': zip,
+  'unzip': unzip,
   'without': without,
   'xor': xor,
   'zip': zip,

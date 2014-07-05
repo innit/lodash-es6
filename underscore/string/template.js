@@ -6,8 +6,10 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import attempt from '../utility/attempt';
 import defaults from '../object/defaults';
 import escape from './escape';
+import isError from '../object/isError';
 import templateSettings from './templateSettings';
 
 /** Used to ensure capturing order of template delimiters */
@@ -39,39 +41,13 @@ function escapeStringChar(chr) {
 }
 
 /**
- * Compiles a function from `source` using the `varNames` and `varValues`
- * pairs to import free variables into the compiled function. If `sourceURL`
- * is provided it is used as the sourceURL for the compiled function.
- *
- * @private
- * @param {string} source The source to compile.
- * @param {Array} varNames An array of free variable names.
- * @param {Array} varValues An array of free variable values.
- * @param {string} [sourceURL=''] The sourceURL of the source.
- * @returns {Function} Returns the compiled function.
- */
-function compileFunction(source, varNames, varValues, sourceURL) {
-  sourceURL = sourceURL ? ('\n/*\n//# sourceURL=' + sourceURL + '\n*/') : '';
-  try {
-    // provide the compiled function's source by its `toString` method or
-    // the `source` property as a convenience for inlining compiled templates
-    var result = Function(varNames, 'return ' + source + sourceURL).apply(undefined, varValues);
-    result.source = source;
-  } catch(e) {
-    e.source = source;
-    throw e;
-  }
-  return result;
-}
-
-/**
  * Creates a compiled template function that can interpolate data properties
  * in "interpolate" delimiters, HTML-escape interpolated data properties in
  * "escape" delimiters, and execute JavaScript in "evaluate" delimiters. Data
  * properties may be accessed as free variables in the template. If a setting
  * object is provided it overrides `_.templateSettings` for the template.
  *
- * Note: In the development build, `_.template` utilizes sourceURLs for easier debugging.
+ * **Note:** In the development build `_.template` utilizes sourceURLs for easier debugging.
  * See the [HTML5 Rocks article on sourcemaps](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/#toc-sourceurl)
  * for more details.
  *
@@ -92,6 +68,7 @@ function compileFunction(source, varNames, varValues, sourceURL) {
  * @param {RegExp} [options.interpolate] The "interpolate" delimiter.
  * @param {string} [options.sourceURL] The sourceURL of the template's compiled source.
  * @param {string} [options.variable] The data object variable name.
+ * @param- {Object} [otherOptions] Enables the legacy `options` param signature.
  * @returns {Function} Returns the compiled template function.
  * @example
  *
@@ -110,23 +87,28 @@ function compileFunction(source, varNames, varValues, sourceURL) {
  * compiled({ 'people': ['fred', 'barney'] });
  * // => '<li>fred</li><li>barney</li>'
  *
- * // using the ES6 delimiter as an alternative to the default "interpolate" delimiter
- * var compiled = _.template('hello ${ name }');
- * compiled({ 'name': 'pebbles' });
- * // => 'hello pebbles'
- *
  * // using the internal `print` function in "evaluate" delimiters
  * var compiled = _.template('<% print("hello " + name); %>!');
  * compiled({ 'name': 'barney' });
  * // => 'hello barney!'
  *
- * // using a custom template delimiters
+ * // using the ES6 delimiter as an alternative to the default "interpolate" delimiter
+ * var compiled = _.template('hello ${ name }');
+ * compiled({ 'name': 'pebbles' });
+ * // => 'hello pebbles'
+ *
+ * // using custom template delimiters
  * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
  * var compiled = _.template('hello {{ name }}!');
  * compiled({ 'name': 'mustache' });
  * // => 'hello mustache!'
  *
- * // using the `imports` option to import jQuery
+ * // using backslashes to treat delimiters as plain text
+ * var compiled = _.template('<%= "\\<%- value %\\>" %>');
+ * compiled({ 'value': 'ignored' });
+ * // => '<%- value %>'
+ *
+ * // using the `imports` option to import `jQuery` as `jq`
  * var text = '<% jq.each(people, function(name) { %><li><%- name %></li><% }); %>';
  * var compiled = _.template(text, { 'imports': { 'jq': jQuery } });
  * compiled({ 'people': ['fred', 'barney'] });
@@ -196,7 +178,14 @@ function template(string, data, options) {
     source +
     'return __p\n}';
 
-  var result = compileFunction(source, ['_'], [_]);
+  var result = attempt(function() {
+    return Function('_', 'return ' + source)(_);
+  });
+
+  result.source = source;
+  if (isError(result)) {
+    throw result;
+  }
   return data ? result(data) : result;
 }
 

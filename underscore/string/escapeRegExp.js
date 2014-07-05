@@ -29,7 +29,10 @@ var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g;
  * // => '\[lodash\]\(http://lodash\.com\)'
  */
 function escapeRegExp(string) {
-  return string == null ? '' : String(string).replace(reRegExpChars, '\\$&');
+  string = string == null ? '' : String(string);
+  return (reRegExpChars.lastIndex = 0, reRegExpChars.test(string))
+    ? string.replace(reRegExpChars, '\\$&')
+    : string;
 }
 
 export default escapeRegExp;

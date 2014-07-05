@@ -7,7 +7,9 @@
  * Available under MIT license <http://lodash.com/license>
  */
 import assign from '../object/assign';
+import attempt from '../utility/attempt';
 import escape from './escape';
+import isError from '../object/isError';
 import keys from '../object/keys';
 import reInterpolate from '../internal/reInterpolate';
 import templateSettings from './templateSettings';
@@ -56,13 +58,13 @@ function escapeStringChar(chr) {
 /** Used for native method references */
 var objectProto = Object.prototype;
 
-/** Native method shortcuts */
+/** Used to check objects for own properties */
 var hasOwnProperty = objectProto.hasOwnProperty;
 
 /**
  * Used by `_.template` to customize its `_.assign` use.
  *
- * Note: This method is like `assignDefaults` except that it ignores
+ * **Note:** This method is like `assignDefaults` except that it ignores
  * inherited property values when checking if a property is `undefined`.
  *
  * @private
@@ -73,35 +75,9 @@ var hasOwnProperty = objectProto.hasOwnProperty;
  * @returns {*} Returns the value to assign to the destination object.
  */
 function assignOwnDefaults(objectValue, sourceValue, key, object) {
-  return (!hasOwnProperty.call(object, key) || typeof objectValue == 'undefined')
+  return (typeof objectValue == 'undefined' || !hasOwnProperty.call(object, key))
     ? sourceValue
-    : objectValue
-}
-
-/**
- * Compiles a function from `source` using the `varNames` and `varValues`
- * pairs to import free variables into the compiled function. If `sourceURL`
- * is provided it is used as the sourceURL for the compiled function.
- *
- * @private
- * @param {string} source The source to compile.
- * @param {Array} varNames An array of free variable names.
- * @param {Array} varValues An array of free variable values.
- * @param {string} [sourceURL=''] The sourceURL of the source.
- * @returns {Function} Returns the compiled function.
- */
-function compileFunction(source, varNames, varValues, sourceURL) {
-  sourceURL = sourceURL ? ('\n/*\n//# sourceURL=' + sourceURL + '\n*/') : '';
-  try {
-    // provide the compiled function's source by its `toString` method or
-    // the `source` property as a convenience for inlining compiled templates
-    var result = Function(varNames, 'return ' + source + sourceURL).apply(undefined, varValues);
-    result.source = source;
-  } catch(e) {
-    e.source = source;
-    throw e;
-  }
-  return result;
+    : objectValue;
 }
 
 /**
@@ -111,7 +87,7 @@ function compileFunction(source, varNames, varValues, sourceURL) {
  * properties may be accessed as free variables in the template. If a setting
  * object is provided it overrides `_.templateSettings` for the template.
  *
- * Note: In the development build, `_.template` utilizes sourceURLs for easier debugging.
+ * **Note:** In the development build `_.template` utilizes sourceURLs for easier debugging.
  * See the [HTML5 Rocks article on sourcemaps](http://www.html5rocks.com/en/tutorials/developertools/sourcemaps/#toc-sourceurl)
  * for more details.
  *
@@ -132,6 +108,7 @@ function compileFunction(source, varNames, varValues, sourceURL) {
  * @param {RegExp} [options.interpolate] The "interpolate" delimiter.
  * @param {string} [options.sourceURL] The sourceURL of the template's compiled source.
  * @param {string} [options.variable] The data object variable name.
+ * @param- {Object} [otherOptions] Enables the legacy `options` param signature.
  * @returns {Function} Returns the compiled template function.
  * @example
  *
@@ -150,23 +127,28 @@ function compileFunction(source, varNames, varValues, sourceURL) {
  * compiled({ 'people': ['fred', 'barney'] });
  * // => '<li>fred</li><li>barney</li>'
  *
- * // using the ES6 delimiter as an alternative to the default "interpolate" delimiter
- * var compiled = _.template('hello ${ name }');
- * compiled({ 'name': 'pebbles' });
- * // => 'hello pebbles'
- *
  * // using the internal `print` function in "evaluate" delimiters
  * var compiled = _.template('<% print("hello " + name); %>!');
  * compiled({ 'name': 'barney' });
  * // => 'hello barney!'
  *
- * // using a custom template delimiters
+ * // using the ES6 delimiter as an alternative to the default "interpolate" delimiter
+ * var compiled = _.template('hello ${ name }');
+ * compiled({ 'name': 'pebbles' });
+ * // => 'hello pebbles'
+ *
+ * // using custom template delimiters
  * _.templateSettings.interpolate = /{{([\s\S]+?)}}/g;
  * var compiled = _.template('hello {{ name }}!');
  * compiled({ 'name': 'mustache' });
  * // => 'hello mustache!'
  *
- * // using the `imports` option to import jQuery
+ * // using backslashes to treat delimiters as plain text
+ * var compiled = _.template('<%= "\\<%- value %\\>" %>');
+ * compiled({ 'value': 'ignored' });
+ * // => '<%- value %>'
+ *
+ * // using the `imports` option to import `jQuery` as `jq`
  * var text = '<% jq.each(people, function(name) { %><li><%- name %></li><% }); %>';
  * var compiled = _.template(text, { 'imports': { 'jq': jQuery } });
  * compiled({ 'people': ['fred', 'barney'] });
@@ -194,13 +176,13 @@ function compileFunction(source, varNames, varValues, sourceURL) {
  *   };\
  * ');
  */
-function template(string, options) {
+function template(string, options, otherOptions) {
   // based on John Resig's `tmpl` implementation
   // http://ejohn.org/blog/javascript-micro-templating/
   // and Laura Doktorova's doT.js
   // https://github.com/olado/doT
   var settings = templateSettings.imports._.templateSettings || templateSettings;
-  options = assign({}, options, settings, assignOwnDefaults);
+  options = assign({}, otherOptions || options, settings, assignOwnDefaults);
   string = String(string == null ? '' : string);
 
   var imports = assign({}, options.imports, settings.imports, assignOwnDefaults),
@@ -278,7 +260,17 @@ function template(string, options) {
     source +
     'return __p\n}';
 
-  return compileFunction(source, importsKeys, importsValues);
+  var result = attempt(function() {
+    return Function(importsKeys, 'return ' + source).apply(undefined, importsValues);
+  });
+
+  // provide the compiled function's source by its `toString` method or
+  // the `source` property as a convenience for inlining compiled templates
+  result.source = source;
+  if (isError(result)) {
+    throw result;
+  }
+  return result;
 }
 
 export default template;

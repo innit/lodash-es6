@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-/** `Object#toString` result shortcuts */
+/** `Object#toString` result references */
 var numberClass = '[object Number]';
 
 /** Used for native method references */
@@ -17,16 +17,16 @@ var objectProto = Object.prototype;
 var toString = objectProto.toString;
 
 /**
- * Checks if `value` is a `Number` primitive or object.
+ * Checks if `value` is classified as a `Number` primitive or object.
  *
- * Note: `NaN` is considered a number. See the [ES5 spec](http://es5.github.io/#x8.5)
- * for more details.
+ * **Note:** To exclude `Infinity`, `-Infinity`, and `NaN`, which are classified
+ * as numbers, use the `_.isFinite` method.
  *
  * @static
  * @memberOf _
  * @category Object
  * @param {*} value The value to check.
- * @returns {boolean} Returns `true` if `value` is a number, else `false`.
+ * @returns {boolean} Returns `true` if `value` is correctly classified, else `false`.
  * @example
  *
  * _.isNumber(8.4);

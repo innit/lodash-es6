@@ -6,23 +6,18 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createWrapper from '../internal/createWrapper';
+import basePartial from '../internal/basePartial';
+import replaceHolders from '../internal/replaceHolders';
 import slice from '../array/slice';
 
 /** Used to compose bitmasks for wrapper metadata */
-var PARTIAL_RIGHT_FLAG = 32;
-
-/** Used as the semantic version number */
-var version = '3.0.0-pre';
-
-/** Used as the property name for wrapper metadata */
-var expando = '__lodash@' + version + '__';
+var PARTIAL_RIGHT_FLAG = 64;
 
 /**
  * This method is like `_.partial` except that partially applied arguments
  * are appended to those provided to the new function.
  *
- * Note: This method does not set the `length` property of partially applied
+ * **Note:** This method does not set the `length` property of partially applied
  * functions.
  *
  * @static
@@ -50,13 +45,13 @@ var expando = '__lodash@' + version + '__';
  * // => { 'a': { 'b': { 'c': 1, 'd': 2 } } }
  */
 function partialRight(func) {
-  if (func) {
-    var arity = func[expando] ? func[expando][2] : func.length,
-        partialRightArgs = slice(arguments, 1);
+  var args = slice(arguments, 1),
+      holders = replaceHolders(args, partialRight.placeholder);
 
-    arity -= partialRightArgs.length;
-  }
-  return createWrapper(func, PARTIAL_RIGHT_FLAG, arity, null, null, partialRightArgs);
+  return basePartial(func, PARTIAL_RIGHT_FLAG, args, holders);
 }
+
+// assign default placeholders
+partialRight.placeholder = {};
 
 export default partialRight;

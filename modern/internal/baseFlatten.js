@@ -23,7 +23,7 @@ import isArray from '../object/isArray';
 function baseFlatten(array, isDeep, isStrict, fromIndex) {
   var index = (fromIndex || 0) - 1,
       length = array.length,
-      resIndex = 0,
+      resIndex = -1,
       result = [];
 
   while (++index < length) {
@@ -40,10 +40,10 @@ function baseFlatten(array, isDeep, isStrict, fromIndex) {
 
       result.length += valLength;
       while (++valIndex < valLength) {
-        result[resIndex++] = value[valIndex];
+        result[++resIndex] = value[valIndex];
       }
     } else if (!isStrict) {
-      result[resIndex++] = value;
+      result[++resIndex] = value;
     }
   }
   return result;

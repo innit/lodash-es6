@@ -8,28 +8,27 @@
  */
 import baseIndexOf from '../internal/baseIndexOf';
 import isArray from '../object/isArray';
-import isNative from '../internal/isNative';
 import isString from '../object/isString';
 import values from '../object/values';
 
-/** Used for native method references */
-var stringProto = String.prototype;
-
 /**
- * Used as the maximum length of an array-like object.
+ * Used as the maximum length of an array-like value.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
-/* Native method shortcuts for methods with the same name as other `lodash` methods */
-var nativeContains = isNative(nativeContains = stringProto.contains) && nativeContains,
-    nativeMax = Math.max;
+/* Native method references for those with the same name as other `lodash` methods */
+var nativeMax = Math.max;
 
 /**
- * Checks if `value` is present in `collection` using strict equality for
- * comparisons, i.e. `===`. If `fromIndex` is negative, it is used as the
- * offset from the end of the collection.
+ * Checks if `value` is present in `collection` using  `SameValueZero` for
+ * equality comparisons. If `fromIndex` is negative, it is used as the offset
+ * from the end of the collection.
+ *
+ * **Note:** `SameValueZero` is like strict equality, e.g. `===`, except that
+ * `NaN` matches `NaN`. See the [ES6 spec](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-samevaluezero)
+ * for more details.
  *
  * @static
  * @memberOf _
@@ -55,7 +54,8 @@ var nativeContains = isNative(nativeContains = stringProto.contains) && nativeCo
  */
 function contains(collection, target, fromIndex) {
   var length = collection ? collection.length : 0;
-  if (!(typeof length == 'number' && length > -1 && length <= maxSafeInteger)) {
+
+  if (!(typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER)) {
     collection = values(collection);
     length = collection.length;
   }
@@ -64,16 +64,9 @@ function contains(collection, target, fromIndex) {
   } else {
     fromIndex = 0;
   }
-  if (typeof collection == 'string' || !isArray(collection) && isString(collection)) {
-    if (fromIndex >= length) {
-      return false;
-    }
-    return nativeContains
-      ? nativeContains.call(collection, target, fromIndex)
-      : collection.indexOf(target, fromIndex) > -1;
-  }
-  var indexOf = baseIndexOf;
-  return indexOf(collection, target, fromIndex) > -1;
+  return (typeof collection == 'string' || !isArray(collection) && isString(collection))
+    ? (fromIndex < length && collection.indexOf(target, fromIndex) > -1)
+    : (baseIndexOf(collection, target, fromIndex) > -1);
 }
 
 export default contains;

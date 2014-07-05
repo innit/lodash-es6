@@ -6,9 +6,9 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseFind from '../internal/baseFind';
 import baseForOwnRight from '../internal/baseForOwnRight';
-import callback from '../utility/callback';
 
 /**
  * This method is like `_.findKey` except that it iterates over elements of
@@ -52,7 +52,7 @@ import callback from '../utility/callback';
  * // => 'pebbles'
  */
 function findLastKey(object, predicate, thisArg) {
-  predicate = callback(predicate, thisArg, 3);
+  predicate = baseCallback(predicate, thisArg, 3);
   return baseFind(object, predicate, baseForOwnRight, true);
 }
 

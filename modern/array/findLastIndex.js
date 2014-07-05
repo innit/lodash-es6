@@ -6,11 +6,11 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import callback from '../utility/callback';
+import baseCallback from '../internal/baseCallback';
 
 /**
  * This method is like `_.findIndex` except that it iterates over elements
- * of a collection from right to left.
+ * of `collection` from right to left.
  *
  * If a property name is provided for `predicate` the created "_.pluck" style
  * callback returns the property value of the given element.
@@ -52,7 +52,7 @@ import callback from '../utility/callback';
 function findLastIndex(array, predicate, thisArg) {
   var length = array ? array.length : 0;
 
-  predicate = callback(predicate, thisArg, 3);
+  predicate = baseCallback(predicate, thisArg, 3);
   while (length--) {
     if (predicate(array[length], length, array)) {
       return length;

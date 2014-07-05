@@ -10,8 +10,8 @@ import baseCallback from '../internal/baseCallback';
 import baseForOwn from '../internal/baseForOwn';
 
 /**
- * Iterates over own enumerable properties of an object executing `iterator`
- * for each property. The `iterator` is bound to `thisArg` and invoked with
+ * Iterates over own enumerable properties of an object executing `iteratee`
+ * for each property. The `iteratee` is bound to `thisArg` and invoked with
  * three arguments; (value, key, object). Iterator functions may exit iteration
  * early by explicitly returning `false`.
  *
@@ -19,21 +19,21 @@ import baseForOwn from '../internal/baseForOwn';
  * @memberOf _
  * @category Object
  * @param {Object} object The object to iterate over.
- * @param {Function} [iterator=identity] The function called per iteration.
- * @param {*} [thisArg] The `this` binding of `iterator`.
+ * @param {Function} [iteratee=identity] The function called per iteration.
+ * @param {*} [thisArg] The `this` binding of `iteratee`.
  * @returns {Object} Returns `object`.
  * @example
  *
  * _.forOwn({ '0': 'zero', '1': 'one', 'length': 2 }, function(n, key) {
  *   console.log(key);
  * });
- * // => logs '0', '1', and 'length' (property order is not guaranteed across environments)
+ * // => logs '0', '1', and 'length' (property order is not guaranteed)
  */
-function forOwn(object, iterator, thisArg) {
-  if (typeof iterator != 'function' || typeof thisArg != 'undefined') {
-    iterator = baseCallback(iterator, thisArg, 3);
+function forOwn(object, iteratee, thisArg) {
+  if (typeof iteratee != 'function' || typeof thisArg != 'undefined') {
+    iteratee = baseCallback(iteratee, thisArg, 3);
   }
-  return baseForOwn(object, iterator);
+  return baseForOwn(object, iteratee);
 }
 
 export default forOwn;

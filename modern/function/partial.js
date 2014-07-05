@@ -6,24 +6,19 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import createWrapper from '../internal/createWrapper';
+import basePartial from '../internal/basePartial';
+import replaceHolders from '../internal/replaceHolders';
 import slice from '../array/slice';
 
 /** Used to compose bitmasks for wrapper metadata */
-var PARTIAL_FLAG = 16;
-
-/** Used as the semantic version number */
-var version = '3.0.0-pre';
-
-/** Used as the property name for wrapper metadata */
-var expando = '__lodash@' + version + '__';
+var PARTIAL_FLAG = 32;
 
 /**
  * Creates a function that invokes `func` with any additional `partial` arguments
  * prepended to those provided to the new function. This method is similar to
  * `_.bind` except it does **not** alter the `this` binding.
  *
- * Note: This method does not set the `length` property of partially applied
+ * **Note:** This method does not set the `length` property of partially applied
  * functions.
  *
  * @static
@@ -40,13 +35,13 @@ var expando = '__lodash@' + version + '__';
  * // => 'hello fred'
  */
 function partial(func) {
-  if (func) {
-    var arity = func[expando] ? func[expando][2] : func.length,
-        partialArgs = slice(arguments, 1);
+  var args = slice(arguments, 1),
+      holders = replaceHolders(args, partial.placeholder);
 
-    arity -= partialArgs.length;
-  }
-  return createWrapper(func, PARTIAL_FLAG, arity, null, partialArgs);
+  return basePartial(func, PARTIAL_FLAG, args, holders);
 }
+
+// assign default placeholders
+partial.placeholder = {};
 
 export default partial;

@@ -6,23 +6,23 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
-import baseForOwn from '../internal/baseForOwn';
 import isArguments from './isArguments';
 import isArray from './isArray';
 import isFunction from './isFunction';
 import isString from './isString';
+import keys from './keys';
 
 /**
- * Used as the maximum length of an array-like object.
+ * Used as the maximum length of an array-like value.
  * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
  * for more details.
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+var MAX_SAFE_INTEGER = Math.pow(2, 53) - 1;
 
 /**
  * Checks if a collection is empty. A value is considered empty unless it is
- * an array, array-like object, or string with a length greater than `0` or
- * an object with own enumerable properties.
+ * an array-like value with a length greater than `0` or an object with own
+ * enumerable properties.
  *
  * @static
  * @memberOf _
@@ -47,21 +47,16 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * // => false
  */
 function isEmpty(value) {
-  var result = true;
   if (value == null) {
-    return result;
+    return true;
   }
   var length = value.length;
-  if ((length > -1 && length <= maxSafeInteger) &&
+  if ((typeof length == 'number' && length > -1 && length <= MAX_SAFE_INTEGER) &&
       (isArray(value) || isString(value) || isArguments(value) ||
         (typeof value == 'object' && isFunction(value.splice)))) {
     return !length;
   }
-  baseForOwn(value, function() {
-    result = false;
-    return result;
-  });
-  return result;
+  return !keys(value).length;
 }
 
 export default isEmpty;

@@ -7,7 +7,7 @@
  * Available under MIT license <http://lodash.com/license>
  */
 
-import callback from './utility/callback';
+import attempt from './utility/attempt';
 import constant from './utility/constant';
 import identity from './utility/identity';
 import matches from './utility/matches';
@@ -22,7 +22,7 @@ import times from './utility/times';
 import uniqueId from './utility/uniqueId';
 
 export default {
-  'callback': callback,
+  'attempt': attempt,
   'constant': constant,
   'identity': identity,
   'matches': matches,

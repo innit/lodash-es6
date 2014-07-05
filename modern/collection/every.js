@@ -6,18 +6,54 @@
  * Copyright 2009-2014 Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
  * Available under MIT license <http://lodash.com/license>
  */
+import baseCallback from '../internal/baseCallback';
 import baseEach from '../internal/baseEach';
-import callback from '../utility/callback';
+import isArray from '../object/isArray';
 
 /**
- * Used as the maximum length of an array-like object.
- * See the [ES6 spec](http://people.mozilla.org/~jorendorff/es6-draft.html#sec-tolength)
- * for more details.
+ * A specialized version of `_.every` for arrays without support for callback
+ * shorthands or `this` binding.
+ *
+ * @private
+ * @param {Array} array The array to iterate over.
+ * @param {Function} predicate The function called per iteration.
+ * @returns {Array} Returns `true` if all elements passed the predicate check,
+ *  else `false`
  */
-var maxSafeInteger = Math.pow(2, 53) - 1;
+function arrayEvery(array, predicate) {
+  var index = -1,
+      length = array.length;
+
+  while (++index < length) {
+    if (!predicate(array[index], index, array)) {
+      return false;
+    }
+  }
+  return true;
+}
 
 /**
- * Checks if the predicate returns truthy for **all** elements of a collection.
+ * The base implementation of `_.every` without support for callback shorthands
+ * or `this` binding.
+ *
+ * @private
+ * @param {Array|Object|string} collection The collection to iterate over.
+ * @param {Function} predicate The function called per iteration.
+ * @returns {Array} Returns `true` if all elements passed the predicate check,
+ *  else `false`
+ */
+function baseEvery(collection, predicate) {
+  var result = true;
+
+  baseEach(collection, function(value, index, collection) {
+    result = !!predicate(value, index, collection);
+    return result;
+  });
+  return result;
+}
+
+/**
+ * Checks if the predicate returns truthy for **all** elements of `collection`.
  * The predicate is bound to `thisArg` and invoked with three arguments;
  * (value, index|key, collection).
  *
@@ -58,27 +94,11 @@ var maxSafeInteger = Math.pow(2, 53) - 1;
  * // => false
  */
 function every(collection, predicate, thisArg) {
-  var result = true;
-
+  var func = isArray(collection) ? arrayEvery : baseEvery;
   if (typeof predicate != 'function' || typeof thisArg != 'undefined') {
-    predicate = callback(predicate, thisArg, 3);
+    predicate = baseCallback(predicate, thisArg, 3);
   }
-  var index = -1,
-      length = collection ? collection.length : 0;
-
-  if (typeof length == 'number' && length > -1 && length <= maxSafeInteger) {
-    while (++index < length) {
-      if (!predicate(collection[index], index, collection)) {
-        return false;
-      }
-    }
-  } else {
-    baseEach(collection, function(value, index, collection) {
-      result = !!predicate(value, index, collection);
-      return result;
-    });
-  }
-  return result;
+  return func(collection, predicate);
 }
 
 export default every;

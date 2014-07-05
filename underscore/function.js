@@ -8,6 +8,7 @@
  */
 
 import after from './function/after';
+import before from './function/before';
 import bind from './function/bind';
 import bindAll from './function/bindAll';
 import compose from './function/compose';
@@ -15,7 +16,6 @@ import debounce from './function/debounce';
 import defer from './function/defer';
 import delay from './function/delay';
 import memoize from './function/memoize';
-import negate from './function/negate';
 import once from './function/once';
 import partial from './function/partial';
 import throttle from './function/throttle';
@@ -23,6 +23,7 @@ import wrap from './function/wrap';
 
 export default {
   'after': after,
+  'before': before,
   'bind': bind,
   'bindAll': bindAll,
   'compose': compose,
@@ -30,7 +31,6 @@ export default {
   'defer': defer,
   'delay': delay,
   'memoize': memoize,
-  'negate': negate,
   'once': once,
   'partial': partial,
   'throttle': throttle,

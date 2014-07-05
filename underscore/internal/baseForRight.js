@@ -8,13 +8,13 @@
  */
 
 /** Used as the semantic version number */
-var version = '3.0.0-pre';
+var VERSION = '3.0.0-pre';
 
 /** Used as the property name for wrapper metadata */
-var expando = '__lodash@' + version + '__';
+var EXPANDO = '__lodash_' + VERSION.replace(/[-.]/g, '_') + '__';
 
 /** Used by methods to exit iteration */
-var breakIndicator = expando + 'breaker__';
+var breakIndicator = EXPANDO + 'breaker__';
 
 /**
  * This function is like `baseFor` except that it iterates over properties
@@ -22,17 +22,17 @@ var breakIndicator = expando + 'breaker__';
  *
  * @private
  * @param {Object} object The object to iterate over.
- * @param {Function} iterator The function called per iteration.
+ * @param {Function} iteratee The function called per iteration.
  * @param {Function} keysFunc The function to get the keys of `object`.
  * @returns {Object} Returns `object`.
  */
-function baseForRight(object, iterator, keysFunc) {
+function baseForRight(object, iteratee, keysFunc) {
   var props = keysFunc(object),
       length = props.length;
 
   while (length--) {
     var key = props[length];
-    if (iterator(object[key], key, object) === breakIndicator) {
+    if (iteratee(object[key], key, object) === breakIndicator) {
       break;
     }
   }

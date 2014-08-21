@@ -1,5 +1,6 @@
 {
   "name": "lodash-es6",
+  "version": "0.0.0",
   "description": "lodash es6 build",
   "main": "src/index.js"
 }

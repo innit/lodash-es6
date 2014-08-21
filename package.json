@@ -1,0 +1,5 @@
+{
+  "name": "lodash-es6",
+  "description": "lodash es6 build",
+  "main": "src/index.js"
+}
